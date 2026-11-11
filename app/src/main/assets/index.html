@@ -595,6 +595,28 @@ html[data-theme="dark"] .heat i.l1{background:#5A2B33}html[data-theme="dark"] .h
 .pron-note{font-size:12px;color:var(--muted);margin-top:16px;line-height:1.4}
 .spk.mic-s{background:var(--nb);box-shadow:none;font-size:16px}
 
+
+/* --- Darajalar va grammatika --- */
+.lvtabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:560px;margin:0 auto 22px}
+.lvtab{position:relative;overflow:hidden;background:var(--paper);border:2px solid var(--cream-3);border-radius:16px;padding:10px 8px 14px;text-align:center;box-shadow:var(--shadow)}
+.lvtab b{display:block;font-family:'Fraunces',serif;font-size:22px;color:var(--navy)}
+.lvtab small{color:var(--muted);font-weight:700;font-size:12px}
+.lvtab i{position:absolute;left:0;bottom:0;height:5px;background:var(--coral);border-radius:0 4px 4px 0}
+.lvtab.on{border-color:var(--coral);box-shadow:0 0 0 3px var(--coral-soft)}
+.card.soon{text-align:center;max-width:620px;margin:0 auto}
+.card.soon .chips{margin-top:14px}
+.pnode.gram{--pn-bg:#2B4583;--pn-sh:#16264d}
+.pnode.gram.done,.pnode.gram.cur{--pn-bg:var(--coral);--pn-sh:#C9473A}
+.gprompt{font-size:26px !important}
+.gap{display:inline-block;min-width:60px;border-bottom:3px dashed var(--coral);color:var(--coral-d);padding:0 6px}
+.gap.ok{border-bottom-style:solid;border-color:var(--ok);color:var(--ok)}
+.gap.bad{border-bottom-style:solid;border-color:var(--bad);color:var(--bad);text-decoration:line-through}
+.qtype.ok{border-color:var(--ok);background:var(--ok-soft);color:var(--ok)}
+.qtype.bad{border-color:var(--bad);background:var(--bad-soft);color:var(--bad)}
+.gtheory h3{color:var(--navy);font-size:20px;margin-bottom:10px}
+.gtxt{font-size:16px;line-height:1.65;color:var(--ink)}
+.gtxt b{color:var(--coral-d)}
+
 @media (max-width:1050px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:860px){
   .app{display:block}
@@ -1969,6 +1991,898 @@ beige|beesh|bej (och jigarrang)
 bunt|bunt|rang-barang
 `}
 ];
+VOCAB = VOCAB.concat([
+{id:"a2feyl", lv:"A2", icon:"🏃", title:"Fe'llar (A2)", t:`
+akzeptieren|aktseptiiren|qabul qilmoq (ma'qullamoq)
+anbieten|anbiiten|taklif qilmoq (narsa)
+sich anmelden|zix anmelden|ro'yxatdan o'tmoq
+sich abmelden|zix apmelden|ro'yxatdan chiqmoq
+sich ärgern|zix ergern|jahli chiqmoq
+aufpassen|aufpassen|ehtiyot bo'lmoq
+aufräumen|aufroymen|yig'ishtirmoq
+aufwachen|aufvaxen|uyg'onmoq
+ausmachen|ausmaxen|o'chirmoq (chiroq, televizor)
+anmachen|anmaxen|yoqmoq (chiroq, televizor)
+aussehen|auszeeen|ko'rinmoq (tashqi ko'rinish)
+ausgehen|ausgeeen|ko'ngil ochishga chiqmoq
+auspacken|auspakken|ochmoq (o'ramdan chiqarmoq)
+backen|bakken|pishirmoq (non, pirog)
+baden|baaden|cho'milmoq
+bedeuten|bedoyten|anglatmoq
+beenden|beenden|tugatmoq
+begrüßen|begrüüsen|salomlashib kutib olmoq
+behalten|behalten|saqlab qolmoq
+beraten|beraaten|maslahat bermoq
+berichten|berixten|xabar qilmoq (hikoya qilib)
+beschreiben|beshrayben|tasvirlamoq
+sich beschweren|zix beshveeren|shikoyat qilmoq
+besichtigen|bezixtigen|tomosha qilib aylanmoq
+bestehen|beshteeen|(imtihondan) o'tmoq
+sich bewerben|zix beverben|(ishga) ariza bermoq
+bezahlen|betsaalen|haqini to'lamoq
+brennen|brennen|yonmoq
+diskutieren|diskutiiren|muhokama qilmoq
+drucken|drukken|chop etmoq
+einpacken|aynpakken|o'rab joylamoq
+einschlafen|aynshlaafen|uxlab qolmoq
+einziehen|ayntsiien|(yangi uyga) ko'chib kirmoq
+umziehen|umtsiien|ko'chib o'tmoq
+empfehlen|empfeelen|tavsiya qilmoq
+sich entschuldigen|zix entshuldigen|uzr so'ramoq
+erhalten|erhalten|olmoq (rasmiy)
+sich erkälten|zix erkelten|shamollab qolmoq
+erlauben|erlauben|ruxsat bermoq
+erledigen|erleedigen|(ishni) bitirib qo'ymoq
+erreichen|erraixen|erishmoq (yetib olmoq)
+fernsehen|fernzeeen|televizor ko'rmoq
+fotografieren|fotografiiren|suratga olmoq
+frühstücken|früüshtükken|nonushta qilmoq
+führen|füüren|boshqarmoq (olib bormoq)
+gratulieren|gratuliiren|tabriklamoq
+grillen|grillen|grilda pishirmoq
+gucken|gukken|qaramoq (so'zlashuvda)
+halten|halten|ushlamoq / to'xtamoq
+hassen|hassen|yomon ko'rmoq
+heizen|haytsen|isitmoq
+informieren|informiiren|ma'lumot bermoq
+sich interessieren für|zix interesiiren füür|...ga qiziqmoq
+joggen|djoggen|yengil yugurmoq (sport)
+kämpfen|kempfen|kurashmoq
+klappen|klappen|uddalanmoq (so'zl.)
+klingeln|klingeln|qo'ng'iroqni chalmoq
+klopfen|klopfen|taqillatmoq
+korrigieren|korigiiren|xatoni tuzatmoq
+sich kümmern um|zix kümmern um|...ga g'amxo'rlik qilmoq
+kündigen|kündigen|bekor qilmoq (shartnoma, ish)
+landen|landen|qo'nmoq
+liefern|liifern|yetkazib bermoq
+lösen|löözen|hal qilmoq (yechmoq)
+malen|maalen|bo'yoq bilan rasm chizmoq
+sich melden|zix melden|bog'lanmoq (xabar bermoq)
+sich merken|zix merken|yodda saqlamoq
+messen|messen|o'lchamoq
+mitbringen|mitbringen|o'zi bilan olib kelmoq
+mitmachen|mitmaxen|qatnashmoq
+nennen|nennen|nomlamoq
+notieren|notiiren|yozib qo'ymoq
+operieren|opeeriiren|jarrohlik qilmoq
+organisieren|organiziiren|tashkil qilmoq
+passen|passen|mos kelmoq (o'lcham)
+probieren|probiiren|tatib ko'rmoq
+prüfen|prüüfen|sinab tekshirmoq
+sich rasieren|zix raziiren|soqol olmoq
+raten|raaten|taxmin qilmoq (topmoq)
+rechnen|rexnen|hisoblamoq
+reden|reeden|gaplashmoq (so'zl.)
+rennen|rennen|chopmoq
+retten|retten|qutqarmoq
+sammeln|zammeln|yig'moq (kolleksiya)
+schaffen|shaffen|uddalamoq
+schauen|shauen|qaramoq
+scheinen|shaynen|charaqlamoq (quyosh)
+schneiden|shnayden|kesmoq
+schützen|shütsen|himoya qilmoq
+sich setzen|zix zetsen|o'tirib olmoq
+sich Sorgen machen|zix zorgen maxen|xavotirlanmoq
+spazieren gehen|shpatsiiren geeen|sayr qilmoq
+sterben|shterben|vafot etmoq
+stimmen|shtimmen|to'g'ri bo'lmoq
+stören|shtöören|bezovta qilmoq
+sich streiten|zix shtrayten|janjallashmoq
+surfen|zörfen|internetda kezmoq
+teilen|taylen|bo'lishmoq
+teilnehmen|taylneemen|ishtirok etmoq
+träumen|troymen|tush ko'rmoq / orzu qilmoq
+sich trennen|zix trennen|ajrashmoq
+überlegen|üüberleegen|o'ylab ko'rmoq
+überraschen|üüberrashen|hayratda qoldirmoq
+überweisen|üübervayzen|pul o'tkazmoq
+umarmen|umarmen|quchoqlamoq
+sich unterhalten|zix unterhalten|suhbatlashmoq
+unterrichten|unterrixten|dars bermoq
+untersuchen|unterzuuxen|ko'rikdan o'tkazmoq (shifokor)
+sich verabreden|zix ferabreeden|uchrashuvga kelishmoq
+sich verabschieden|zix ferapshiiden|xayrlashmoq
+verbessern|ferbessern|yaxshilamoq
+verbieten|ferbiiten|taqiqlamoq
+verbringen|ferbringen|(vaqt) o'tkazmoq
+vergleichen|ferglayxen|solishtirmoq
+sich verletzen|zix ferletsen|jarohatlanmoq
+sich verlieben|zix ferliiben|sevib qolmoq
+vermieten|fermiiten|ijaraga bermoq
+verpassen|ferpassen|(poyezdga) ulgurmay qolmoq
+verschieben|fershiiben|boshqa vaqtga surmoq
+versprechen|fershprexen|va'da bermoq
+sich verspäten|zix fershpeeten|kechikmoq
+vorbeikommen|forbaykommen|kirib o'tmoq
+vorschlagen|foorshlaagen|taklif kiritmoq
+wecken|vekken|uyg'otmoq
+wehtun|veetuun|og'rimoq
+wiegen|viigen|tortmoq (vazn)
+sich wundern|zix vundern|hayron bo'lmoq
+wünschen|vünshen|tilamoq
+zählen|tseelen|sanamoq
+zeichnen|tsayxnen|qalamda chizmoq
+zumachen|tsuumaxen|yopib qo'ymoq (so'zl.)
+aufmachen|aufmaxen|ochib qo'ymoq (so'zl.)
+zurückgeben|tsurükgeeben|qaytarib bermoq
+zurückkommen|tsurükkommen|qaytib kelmoq
+zurückrufen|tsurükruufen|qayta qo'ng'iroq qilmoq
+abgeben|apgeeben|topshirmoq
+abschließen|apshliisen|qulflamoq / yakunlamoq
+ankreuzen|ankroytsen|belgi qo'ymoq (✗)
+aussprechen|ausshprexen|talaffuz qilmoq
+aufschreiben|aufshrayben|yozib olmoq
+besorgen|bezorgen|topib kelmoq
+bestätigen|beshteetigen|tasdiqlamoq
+sich bewegen|zix beveegen|harakat qilmoq
+frieren|friiren|sovqotmoq
+sich gewöhnen an|zix gevöönen an|...ga ko'nikmoq
+lügen|lüügen|yolg'on gapirmoq
+nachdenken|naaxdenken|chuqur o'ylamoq
+springen|shpringen|sakramoq
+starten|shtarten|ishga tushirmoq
+steigen|shtaygen|ko'tarilmoq (narx)
+tauschen|taushen|ayirboshlamoq
+trainieren|treniiren|trenirovka qilmoq
+übernachten|üübernaxten|tunamoq
+verbinden|ferbinden|ulamoq (bog'lamoq)
+verlassen|ferlassen|tark etmoq
+vermissen|fermissen|sog'inmoq
+verreisen|ferrayzen|safarga jo'namoq
+verstecken|fershtekken|yashirmoq
+vertrauen|fertrauen|ishonch bildirmoq
+vorhaben|foorhaaben|niyat qilmoq
+vorlesen|foorleezen|ovoz chiqarib o'qib bermoq
+wandern|vandern|piyoda sayohat qilmoq
+zustimmen|tsuushtimmen|rozi bo'lmoq
+mischen|mishen|aralashtirmoq
+schälen|sheelen|po'chog'ini archmoq
+braten|braaten|qovurmoq
+husten|huusten|yo'talmoq
+niesen|niizen|aksirmoq
+bluten|bluuten|qon ketmoq
+umtauschen|umtaushen|(xaridni) almashtirmoq
+herunterladen|herunterlaaden|yuklab olmoq
+hochladen|hooxlaaden|internetga yuklamoq
+speichern|shpayxern|saqlamoq (faylni)
+löschen|lö'shen|o'chirib tashlamoq
+klicken|klikken|(sichqoncha bilan) bosmoq
+tippen|tippen|terib yozmoq
+chatten|chetten|chatda yozishmoq
+recyceln|riisaykeln|qayta ishlamoq
+`},
+{id:"a2sifat", lv:"A2", icon:"✨", title:"Sifatlar (A2)", t:`
+aktiv|aktiif|faol
+angenehm|angeneem|yoqimli (his)
+ängstlich|engstlix|qo'rqoq
+anstrengend|anshtrengent|charchatadigan (og'ir)
+ärgerlich|ergerlix|asabga tegadigan
+attraktiv|atraktiif|jozibali
+ausgezeichnet|ausgetsayxnet|a'lo
+beliebt|beliipt|ommabop
+berufstätig|beruufsteetix|ishlaydigan (kasbi bor)
+beschäftigt|besheftixt|ish bilan band
+bestimmt|beshtimt|shubhasiz
+blond|blont|sariq sochli
+dankbar|dankbaar|minnatdor
+deutlich|doytlix|aniq-ravshan
+direkt|direkt|to'g'ridan-to'g'ri
+doppelt|doppelt|ikki baravar
+dringend|dringent|shoshilinch
+eng|eng|tor (siqadigan)
+erfolgreich|erfolkrayx|muvaffaqiyatli
+erlaubt|erlaupt|ruxsat etilgan
+verboten|ferbooten|taqiqlangan
+ernst|ernst|jiddiy
+erwachsen|ervaksen|katta yoshli
+fantastisch|fantastish|fantastik
+fest|fest|mustahkam
+fit|fit|baquvvat (formada)
+fröhlich|fröölix|quvnoq
+früher|früüer|avvalgi (ilgari)
+gemütlich|gemüütlix|shinam
+getrennt|getrent|alohida
+günstig|günstix|qulay narxli
+geduldig|geduldix|sabrli
+ungeduldig|ungeduldix|sabrsiz
+geheim|gehaym|maxfiy
+geschieden|geshiiden|ajrashgan
+gestresst|geshtresst|stressda
+herzlich|hertslix|samimiy
+hilfsbereit|hilfsberayt|yordamga tayyor
+intelligent|inteligent|zukko
+international|internatsionaal|xalqaro
+jährlich|yeerlix|har yilgi
+täglich|teeklix|har kungi
+wöchentlich|vö'xentlix|haftalik
+monatlich|moonatlix|oylik (har oyda)
+komisch|koomish|g'alati (kulgili)
+kompliziert|komplitsiirt|chigal
+kreativ|kreatiif|ijodiy
+kühl|küül|salqin
+lieb|liip|aziz
+männlich|menlix|erkak jinsli
+weiblich|vayplix|ayol jinsli
+mutig|muutix|jasur
+negativ|neegatiif|salbiy
+positiv|poozitiif|ijobiy
+neugierig|noygiirix|qiziquvchan
+nötig|nöötix|zarur
+nützlich|nütslix|foydali
+öffentlich|ö'ffentlix|ommaviy (jamoat)
+ordentlich|ordentlix|tartibli
+privat|privaat|shaxsiy
+regelmäßig|reegelmeesix|muntazam
+romantisch|romantish|romantik
+rund|runt|dumaloq
+schlank|shlank|qomatdor
+selbstständig|zelpstshtendix|mustaqil
+seltsam|zeltzaam|g'aroyib
+sozial|zotsiaal|ijtimoiy
+sportlich|shportlix|sportchi (sportga oid)
+still|shtil|jim
+stolz|shtolts|faxrlangan
+streng|shtreng|qattiqqo'l
+sympathisch|zümpaatish|yoqimli (inson)
+technisch|texnish|texnik
+tief|tiif|chuqur
+tot|toot|o'lik
+treu|troy|sodiq
+typisch|tüüpish|o'ziga xos (tipik)
+überrascht|üüberrasht|hayratlangan
+übrig|üübrix|ortib qolgan
+unbedingt|unbedingt|albatta (shart)
+unglücklich|unglüklix|baxtsiz
+unhöflich|unhööflix|odobsiz
+verletzt|ferletst|jarohatlangan
+verliebt|ferliipt|oshiq (sevib qolgan)
+verrückt|ferrükt|telba
+vorsichtig|foorzixtix|ehtiyotkor
+wach|vax|uyg'oq
+wahr|vaar|rost (haqiqiy)
+wild|vilt|yovvoyi
+witzig|vitsix|hazilkash
+zuverlässig|tsuuferlesix|ishonchli
+zentral|tsentraal|markaziy
+eigen|aygen|o'z (shaxsiy)
+einzeln|ayntseln|yakka
+fein|fayn|nozik (mayin)
+furchtbar|furxtbaar|qo'rqinchli
+gesamt|gezamt|umumiy (jami)
+lebendig|lebendix|tirik
+plötzlich|plö'tslix|to'satdan
+schwanger|shvanger|homilador
+ehrlich|eerlix|halol
+einsam|aynzaam|tanho (yolg'izlikdan qiynalgan)
+eifersüchtig|ayferzüxtix|rashkchi
+enttäuscht|enttoysht|hafsalasi pir bo'lgan
+wütend|vüütent|g'azablangan
+aufgeregt|aufgereekt|hayajonlangan
+entspannt|entshpannt|xotirjam
+besorgt|bezorkt|xavotirda
+preiswert|prayzveert|arzon va sifatli
+reduziert|redutsiirt|chegirmali
+vegetarisch|vegetaarish|vegetarian
+roh|roo|xom
+mild|milt|yumshoq (ta'm)
+digital|digitaal|raqamli
+online|onlayn|onlayn
+`},
+{id:"a2ish", lv:"A2", icon:"💼", title:"Ish va karyera", t:`
+der Arbeitgeber|deer arbaytgeeber|ish beruvchi
+der Arbeitnehmer|deer arbaytneemer|yollanma xodim
+der Mitarbeiter|deer mitarbayter|xodim
+die Abteilung|di aptaylung|bo'lim
+das Unternehmen|das unterneemen|korxona
+die Branche|di branshe|soha
+der Betrieb|deer betriip|ishxona (zavod)
+die Konferenz|di konferents|konferensiya
+das Vorstellungsgespräch|das foorshtellungsgeshpreex|ish suhbati (intervyu)
+die Stellenanzeige|di shtellenantsayge|ish e'loni
+die Ausbildung|di ausbildung|kasbiy ta'lim
+das Praktikum|das praktikum|amaliyot
+der Praktikant|deer praktikant|amaliyotchi
+die Fähigkeit|di feeixkayt|qobiliyat
+der Lohn|deer loon|ish haqi (soatbay)
+die Überstunde|di üübershtunde|qo'shimcha ish soati
+die Teilzeit|di tayltsayt|yarim stavka
+die Vollzeit|di foltsayt|to'liq stavka
+die Arbeitszeit|di arbaytstsayt|ish vaqti
+die Schicht|di shixt|smena
+der Feierabend|deer fayeraabent|ish kunining oxiri
+die Krankmeldung|di krankmeldung|kasallik varaqasi
+die Kündigung|di kündigung|ishdan bo'shatish
+die Chefin|di shefin|boshliq (ayol)
+der Leiter|deer layter|rahbar
+das Team|das tiim|ish jamoasi
+die Präsentation|di prezentatsioon|taqdimot
+der Bericht|deer berixt|hisobot
+die Bestellung|di beshtellung|buyurtma
+die Lieferung|di liiferung|yetkazib berish
+das Ziel|das tsiil|maqsad
+der Erfolg|deer erfolk|muvaffaqiyat
+die Karriere|di kariere|martaba
+die Werkstatt|di verkshtat|ustaxona
+das Werkzeug|das verktsoyk|asbob
+die Maschine|di mashiine|stanok (mashina)
+das Material|das materiaal|material
+die Produktion|di produktsioon|ishlab chiqarish
+das Produkt|das produkt|mahsulot
+die Qualität|di kvaliteet|sifat
+die Kopie|di kopii|nusxa
+der Stempel|deer shtempel|muhr
+die Akte|di akte|ish hujjati (delo)
+der Schreibtisch|deer shrayptish|yozuv stoli
+die Sekretärin|di zekreteerin|kotiba
+der Kaufmann|deer kaufman|tijoratchi
+die Rente|di rente|pensiya
+das Arbeitsamt|das arbaytsamt|mehnat idorasi
+der Streik|deer shtrayk|ish tashlash
+die Geschäftsreise|di gesheftsrayze|xizmat safari
+die Firmenadresse|di firmenadresse|kompaniya manzili
+der Lastwagen|deer lastvaagen|yuk mashinasi
+`},
+{id:"a2uy", lv:"A2", icon:"🏠", title:"Uy-joy va ro'zg'or", t:`
+der Mieter|deer miiter|ijarachi
+die Nebenkosten|di neebenkosten|kommunal xarajatlar|pl
+die Kaution|di kautsioon|garov puli
+der Mietvertrag|deer miitfertraak|ijara shartnomasi
+die Anzeige|di antsayge|e'lon
+der Quadratmeter|deer kvadraatmeeter|kvadrat metr
+das Erdgeschoss|das eertgeshos|birinchi qavat
+der Keller|deer keller|yerto'la
+der Flur|deer fluur|dahliz (yo'lak)
+das Kinderzimmer|das kindertsimmer|bolalar xonasi
+das Arbeitszimmer|das arbaytstsimmer|ish xonasi
+die Terrasse|di terasse|terassa
+der Hof|deer hoof|ichki hovli
+die Garage|di garaaje|garaj
+der Hausmeister|deer hausmayster|uy xo'jaligi ustasi
+die Möbel|di mööbel|mebel|pl
+der Sessel|deer zessel|kreslo
+der Vorhang|deer foorhang|parda
+der Kleiderschrank|deer klaydershrank|kiyim shkafi
+die Bettwäsche|di betveshe|choyshab
+die Spülmaschine|di shpüülmashiine|idish yuvish mashinasi
+die Mikrowelle|di mikrovelle|mikroto'lqinli pech
+der Wasserkocher|deer vasserkoxer|elektr choynak
+die Kaffeemaschine|di kafeemashiine|kofe mashinasi
+der Staubsauger|deer shtaupzauger|chang yutgich
+das Bügeleisen|das büügelayzen|dazmol
+das Geschirr|das geshir|idish-tovoq
+die Schüssel|di shüssel|kosa
+der Deckel|deer dekkel|qopqoq
+die Mülltonne|di mültonne|axlat qutisi
+der Eimer|deer aymer|chelak
+der Besen|deer beezen|supurgi
+das Putzmittel|das putsmittel|tozalash vositasi
+die Wäsche|di veshe|kir (yuviladigan kiyim)
+der Haushalt|deer haushalt|ro'zg'or
+die Reparatur|di reparatuur|ta'mir
+das Schloss|das shlos|qulf / qasr
+die Klingel|di klingel|eshik qo'ng'irog'i
+der Briefkasten|deer briifkasten|pochta qutisi
+das Gas|das gaas|gaz
+der Wasserhahn|deer vasserhaan|jo'mrak
+die Badewanne|di baadevanne|vanna
+der Schalter|deer shalter|o'chirgich (kalit)
+der Umzug|deer umtsuuk|ko'chish
+das Zuhause|das tsuhauze|o'z uyi
+das Haustier|das haustiir|uy hayvoni
+die Pflanze|di pflantse|o'simlik
+das Hochhaus|das hooxhaus|ko'p qavatli uy
+das Einfamilienhaus|das aynfamiilienhaus|bir oilalik uy
+die Nachbarschaft|di naxbaarshaft|qo'shnichilik (mahalla)
+die Hausordnung|di hausordnung|uy tartib qoidalari
+die Ruhe|di ruue|tinchlik
+der Lärm|deer lerm|shovqin
+`},
+{id:"a2ovqat", lv:"A2", icon:"🍽️", title:"Ovqat va oshxona (A2)", t:`
+die Zutat|di tsuutaat|masalliq
+die Portion|di portsioon|porsiya
+die Vorspeise|di foorshpayze|zakuska (birinchi taom)
+die Hauptspeise|di hauptshpayze|asosiy taom
+die Nachspeise|di naaxshpayze|desert
+das Gericht|das gerixt|taom
+die Spezialität|di shpetsialiteet|o'ziga xos taom
+der Imbiss|deer imbis|fast-fud joyi
+die Kantine|di kantiine|ishxona oshxonasi
+die Metzgerei|di metsgeray|qassobxona
+das Lebensmittel|das leebensmittel|oziq-ovqat
+das Gewürz|das gevürts|ziravor
+der Essig|deer essix|sirka
+der Senf|deer zenf|xantal
+die Linsen|di linzen|yasmiq|pl
+der Quark|deer kvark|tvorog
+das Steak|das steek|steyk
+das Würstchen|das vürstxen|sosiska
+der Schinken|deer shinken|vetchina
+das Schnitzel|das shnitsel|shnitsel
+die Pommes|di pommes|kartoshka fri|pl
+die Süßigkeiten|di züüsixkayten|shirinliklar|pl
+der Keks|deer keeks|pechene
+die Torte|di torte|kremli tort
+das Müsli|das müüsli|myusli
+der Kakao|deer kakau|kakao
+der Sprudel|deer shpruudel|gazli suv
+das Leitungswasser|das laytungsvasser|vodoprovod suvi
+die Kanne|di kanne|choynak (idish)
+der Appetit|deer apetiit|ishtaha
+Guten Appetit!|guuten apetiit|Yoqimli ishtaha!
+das Besteck|das beshtek|vilka-pichoq to'plami
+die Bedienung|di bediinung|xizmat ko'rsatish
+die Getränkekarte|di getrenkekarte|ichimliklar menyusi
+der Pilaw|deer pilaaf|palov
+das Brötchen mit Butter|das bröötxen mit butter|sariyog'li bulochka
+die Kartoffelsuppe|di kartoffelzuppe|kartoshka sho'rva
+der Teig|deer tayk|xamir
+das Rezeptbuch|das retseptbuux|retseptlar kitobi
+`},
+{id:"a2shahar", lv:"A2", icon:"🚉", title:"Shahar va safar (A2)", t:`
+der Automat|deer automaat|avtomat
+die Monatskarte|di moonatskarte|oylik chipta
+die Rückfahrkarte|di rükfaarkarte|borib-kelish chiptasi
+die Durchsage|di durxzaage|e'lon (karnay orqali)
+der Anschluss|deer anshlus|ulanadigan reys
+die Verbindung|di ferbindung|qatnov (bog'lanish)
+der Zoll|deer tsol|bojxona
+das Handgepäck|das hantgepek|qo'l yuki
+das Reisebüro|das rayzebüroo|sayohat agentligi
+die Unterkunft|di unterkunft|turar joy
+die Jugendherberge|di yuugent-herberge|yoshlar mehmonxonasi
+die Pension|di pangzioon|kichik mehmonxona
+das Zelt|das tselt|chodir
+der Campingplatz|deer kempingplats|kemping
+die Aussicht|di auszixt|manzara (ko'rinish)
+das Denkmal|das denkmaal|haykal (yodgorlik)
+die Burg|di burk|qal'a
+der Turm|deer turm|minora
+der Dom|deer doom|sobor
+die Fußgängerzone|di fuusgengertsoone|piyodalar ko'chasi
+der Fußgänger|deer fuusgenger|piyoda yuruvchi
+der Bürgersteig|deer bürgershtayk|trotuar
+der Zebrastreifen|deer tseebrashtrayfen|piyodalar o'tish joyi
+die Umleitung|di umlaytung|aylanma yo'l
+die Baustelle|di baushtelle|qurilish maydoni
+die Panne|di panne|(mashina) buzilishi
+der Reifen|deer rayfen|shina
+der Motor|deer mootor|dvigatel
+das Lenkrad|das lenkraat|rul
+der Sicherheitsgurt|deer zixerhaytsgurt|xavfsizlik kamari
+die Geschwindigkeit|di geshvindixkayt|tezlik
+die Strafe|di shtraafe|jarima
+die Feuerwehr|di foyerveer|o't o'chiruvchilar
+der Notruf|deer nootruuf|favqulodda qo'ng'iroq
+das Amt|das amt|davlat idorasi
+die Behörde|di behöörde|davlat organi
+das Konsulat|das konzulaat|konsullik
+der Stadtteil|deer shtattayl|shahar tumani
+das Viertel|das fiirtel|shahar mavzesi
+die Gegend|di geegent|hudud (atrof)
+der Ort|deer ort|aholi punkti (joy)
+die Großstadt|di groosshtat|katta shahar
+die öffentlichen Verkehrsmittel|di ö'ffentlixen ferkeersmittel|jamoat transporti|pl
+die Endstation|di entshtatsioon|oxirgi bekat
+das Gate|das geyt|chiqish yo'lagi (aeroport)
+die Bordkarte|di bortkarte|bortga chiqish talonchasi
+die Abfahrtszeit|di apfaartstsayt|jo'nash vaqti
+der Ausflugsort|deer ausfluuksort|dam olish maskani
+`},
+{id:"a2xarid", lv:"A2", icon:"🏦", title:"Bank, pochta, xarid (A2)", t:`
+die Kontonummer|di kontonummer|hisob raqami
+die Überweisung|di üübervayzung|pul o'tkazmasi
+die Gebühr|di gebüür|yig'im (to'lov)
+der Kredit|deer kreditt|kredit
+die Schulden|di shulden|qarz|pl
+die Münze|di müntse|tanga
+der Schein|deer shayn|qog'oz pul
+das Kleingeld|das klayngelt|mayda pul
+das Portemonnaie|das portmonee|hamyon
+der Kassenbon|deer kassenbong|kassa cheki
+die Ware|di vaare|tovar
+das Sonderangebot|das zonderangeboot|maxsus aksiya
+die Umkleidekabine|di umklaydekabiine|kiyim almashtirish xonasi
+die Garantie|di garantii|kafolat
+das Kaufhaus|das kaufhaus|univermag
+der Flohmarkt|deer floomarkt|eski buyumlar bozori
+das Päckchen|das pekxen|kichik posilka
+der Absender|deer apzender|jo'natuvchi
+der Empfänger|deer empfenger|qabul qiluvchi
+die Postleitzahl|di postlayttsaal|pochta indeksi
+der Umschlag|deer umshlaak|konvert
+die Postkarte|di postkarte|otkritka
+der Antrag|deer antraak|rasmiy ariza
+die Anmeldung|di anmeldung|ro'yxatdan o'tish
+die Bescheinigung|di beshaynigung|ma'lumotnoma
+die Sprechstunde|di shprexshtunde|qabul soatlari
+die Geheimzahl|di gehaymtsaal|PIN-kod
+die Quittung für die Miete|di kvittung füür di miite|ijara kvitansiyasi
+die Rechnungsnummer|di rexnungsnummer|hisob-faktura raqami
+der Betrag|deer betraak|summa
+die Summe|di zumme|jami summa
+das Angebot der Woche|das angeboot deer voxe|hafta aksiyasi
+`},
+{id:"a2sogliq", lv:"A2", icon:"🏥", title:"Sog'liq (A2)", t:`
+der Hausarzt|deer hausartst|oilaviy shifokor
+der Facharzt|deer faxartst|mutaxassis shifokor
+das Wartezimmer|das vartetsimmer|kutish xonasi
+die Versichertenkarte|di ferzixertenkarte|sug'urta kartasi
+die Krankenkasse|di krankenkasse|tibbiy sug'urta kassasi
+die Untersuchung|di unterzuuxung|tibbiy ko'rik
+die Spritze|di shpritse|ukol
+die Salbe|di zalbe|malham
+die Tropfen|di tropfen|tomchi dori|pl
+der Verband|deer ferbant|bint (bog'lam)
+die Wunde|di vunde|yara
+die Operation|di operatsioon|operatsiya
+die Notaufnahme|di nootaufnaame|shoshilinch yordam bo'limi
+die Grippe|di grippe|gripp
+der Durchfall|deer durxfal|ich ketishi
+die Übelkeit|di üübelkayt|ko'ngil aynishi
+der Schwindel|deer shvindel|bosh aylanishi
+die Zahnschmerzen|di tsaanshmertsen|tish og'rig'i|pl
+die Halsschmerzen|di halsshmertsen|tomoq og'rig'i|pl
+die Rückenschmerzen|di rükkenshmertsen|bel og'rig'i|pl
+der Blutdruck|deer bluutdruk|qon bosimi
+das Gewicht|das gevixt|vazn
+die Brust|di brust|ko'krak
+die Lunge|di lunge|o'pka
+der Knochen|deer knoxen|suyak
+der Muskel|deer muskel|mushak
+die Zehe|di tsee-e|oyoq barmog'i
+der Daumen|deer daumen|bosh barmoq
+die Lippe|di lippe|lab
+die Zunge|di tsunge|til (a'zo)
+das Kinn|das kin|iyak
+die Stirn|di shtirn|peshona
+die Wange|di vange|yonoq
+der Ellbogen|deer elboogen|tirsak
+der Stress|deer shtres|stress
+die Erholung|di erhoolung|tiklanish (dam olish)
+die Diät|di diieet|parhez
+die Ernährung|di erneerung|ovqatlanish tartibi
+die Bewegung|di beveegung|jismoniy harakat
+der Termin beim Arzt|deer termiin baym artst|shifokor qabuli
+`},
+{id:"a2talim", lv:"A2", icon:"🎓", title:"Ta'lim (A2)", t:`
+die Grundschule|di gruntshuule|boshlang'ich maktab
+das Gymnasium|das gümnaazium|gimnaziya
+die Hochschule|di hooxshuule|oliy o'quv yurti
+das Studium|das shtuudium|oliy ta'lim
+das Semester|das zemester|semestr
+die Vorlesung|di foorleezung|ma'ruza
+das Seminar|das zeminaar|seminar
+der Professor|deer profesor|professor
+der Dozent|deer dotsent|oliygoh o'qituvchisi
+der Sprachkurs|deer shpraaxkurs|til kursi
+das Zertifikat|das tsertifikaat|sertifikat
+die Übung|di üübung|mashq
+das Wörterbuch|das vörterbuux|lug'at kitobi
+das Lehrbuch|das leerbuux|darslik
+der Stundenplan|deer shtundenplaan|dars jadvali
+die Tafel|di taafel|doska
+der Bleistift|deer blayshtift|oddiy qalam
+der Radiergummi|deer radiirgummi|o'chirg'ich
+die Grammatik|di grammatik|grammatika
+die Aussprache|di ausshpraaxe|talaffuz
+die Bedeutung|di bedoytung|ma'no
+das Thema|das teema|mavzu
+der Text|deer tekst|matn
+die Erklärung|di erkleerung|tushuntirish
+die Wiederholung|di viiderhoolung|takrorlash
+das Wissen|das vissen|bilim
+die Bildung|di bildung|ta'lim
+der Abschluss|deer apshlus|bitiruv (diplom)
+das Stipendium|das shtipendium|stipendiya (grant)
+der Mitschüler|deer mitshüüler|sinfdosh
+die Ferien|di feerien|maktab ta'tili|pl
+die Fremdsprache|di fremtshpraaxe|chet tili
+die Muttersprache|di muttershpraaxe|ona tili
+der Studienplatz|deer shtuudienplats|o'qishga qabul o'rni
+die Bewerbung um ein Stipendium|di beverbung um ayn shtipendium|grantga ariza
+`},
+{id:"a2bosh", lv:"A2", icon:"🎭", title:"Madaniyat va bo'sh vaqt (A2)", t:`
+die Ausstellung|di ausshtellung|ko'rgazma
+die Veranstaltung|di feranshtaltung|tadbir
+das Festival|das festival|festival
+das Fest|das fest|bayram (tantana)
+die Feier|di fayer|nishonlash marosimi
+die Einladung|di aynlaadung|taklifnoma
+der Eintritt|deer ayntrit|kirish (narxi)
+die Eintrittskarte|di ayntritskarte|kirish chiptasi
+die Vorstellung|di foorshtellung|spektakl
+der Schauspieler|deer shaushpiiler|aktyor
+der Sänger|deer zenger|xonanda
+die Band|di bent|musiqa guruhi
+das Instrument|das instrument|cholg'u asbobi
+die Gitarre|di gitarre|gitara
+das Klavier|das klaviir|pianino
+die Kunst|di kunst|san'at
+der Roman|deer romaan|roman
+die Geschichte|di geshixte|hikoya / tarix
+das Gedicht|das gedixt|she'r
+das Programm|das programm|dastur
+die Sendung|di zendung|teledastur
+die Nachrichten|di naaxrixten|yangiliklar|pl
+die Serie|di zeerie|serial
+der Krimi|deer krimi|detektiv film
+die Wanderung|di vanderung|piyoda sayohat
+das Picknick|das piknik|piknik
+der Sportler|deer shportler|sportchi
+der Trainer|deer treener|murabbiy
+der Sieg|deer ziik|g'alaba
+die Niederlage|di niiderlaage|mag'lubiyat
+der Ball|deer bal|to'p
+das Tennis|das tennis|tennis
+der Fan|deer fen|muxlis
+das Mitglied|das mitgliit|a'zo
+die Freizeitaktivität|di fraytsaytaktiviteet|bo'sh vaqt mashg'uloti
+`},
+{id:"a2his", lv:"A2", icon:"💗", title:"His-tuyg'u va munosabatlar", t:`
+das Gefühl|das gefüül|his-tuyg'u
+die Liebe|di liibe|muhabbat
+die Freude|di froyde|quvonch
+das Glück|das glük|baxt (omad)
+die Angst|di angst|qo'rquv
+die Sorge|di zorge|tashvish
+der Ärger|deer erger|norozilik (jahl)
+die Wut|di vuut|g'azab
+die Hoffnung|di hofnung|umid
+der Wunsch|deer vunsh|istak
+der Traum|deer traum|tush (orzu)
+die Lust|di lust|xohish
+die Laune|di laune|kayfiyat
+der Spaß|deer shpaas|zavq (qiziqarli vaqt)
+die Geduld|di gedult|sabr
+der Mut|deer muut|jasorat
+das Vertrauen|das fertrauen|ishonch
+die Beziehung|di betsiiung|munosabat
+die Freundschaft|di froyntshaft|do'stlik
+der Partner|deer partner|sherik (hamroh)
+die Ehe|di ee-e|nikoh
+der Streit|deer shtrayt|janjal
+die Entschuldigung|di entshuldigung|uzr
+der Kuss|deer kus|o'pich
+der Respekt|deer respekt|hurmat
+die Hilfe|di hilfe|yordam
+die Meinung|di maynung|fikr
+der Charakter|deer karakter|xarakter
+die Erinnerung|di erinnerung|esdalik
+die Überraschung|di üüberrashung|syurpriz
+das Lächeln|das lexeln|tabassum
+die Träne|di treene|ko'z yosh
+Keine Ahnung!|kayne aanung|Tasavvurim yo'q!
+Das macht nichts.|das maxt nixts|Hechqisi yo'q.
+Viel Glück!|fiil glük|Omad tilayman!
+Herzlichen Glückwunsch!|hertslixen glükvunsh|Chin qalbdan tabriklayman!
+Gute Besserung!|guute besserung|Tezroq tuzalib keting!
+Viel Spaß!|fiil shpaas|Maza qiling!
+`},
+{id:"a2tabiat", lv:"A2", icon:"🌍", title:"Tabiat va atrof-muhit (A2)", t:`
+die Umwelt|di umvelt|atrof-muhit
+das Klima|das kliima|iqlim
+die Jahreszeit|di yaarestsayt|fasl
+der Blitz|deer blits|chaqmoq
+der Donner|deer donner|guldurak
+der Sturm|deer shturm|bo'ron
+die Hitze|di hitse|jazirama
+die Kälte|di kelte|sovuqlik
+die Wettervorhersage|di vetterfoorheerzaage|ob-havo ma'lumoti
+der Regenbogen|deer reegenboogen|kamalak
+die Landschaft|di lantshaft|tabiat manzarasi
+das Tal|das taal|vodiy
+der Hügel|deer hüügel|tepalik
+der Gipfel|deer gipfel|cho'qqi
+das Ufer|das uufer|qirg'oq
+die Küste|di küste|dengiz sohili
+die Welle|di velle|to'lqin
+der Sand|deer zant|qum
+das Feld|das felt|dala
+die Wiese|di viize|o'tloq
+der Bauernhof|deer bauernhoof|ferma
+das Blatt|das blat|barg
+der Ast|deer ast|daraxt shoxi
+die Energie|di energii|energiya
+das Plastik|das plastik|plastmassa
+die Mülltrennung|di mültrennung|chiqindilarni saralash
+der Umweltschutz|deer umveltshuts|atrof-muhit muhofazasi
+der Planet|deer planeet|sayyora
+die Temperatur draußen|di temperatuur drausen|tashqi harorat
+`},
+{id:"a2media", lv:"A2", icon:"📱", title:"Aloqa va texnologiya", t:`
+das Smartphone|das smartfoon|smartfon
+der Akku|deer akku|akkumulyator
+die App|di ep|ilova (dastur)
+die SMS|di es-em-es|SMS
+der Anruf|deer anruuf|telefon qo'ng'irog'i
+der Anrufbeantworter|deer anruufbeantvorter|avtojavob qurilmasi
+das Netz|das nets|aloqa tarmog'i
+das WLAN|das veelaan|Wi-Fi
+der Benutzer|deer benutser|foydalanuvchi
+die Webseite|di vepzayte|veb-sayt
+der Link|deer link|havola
+die Datei|di datay|fayl
+der Ordner|deer ordner|papka
+der Bildschirm|deer biltshirm|ekran
+die Tastatur|di tastatuur|klaviatura
+das Tablet|das teblet|planshet
+die Kamera|di kamera|kamera
+die Zeitschrift|di tsaytshrift|jurnal
+das Radio|das raadio|radio
+der Artikel|deer artiikel|maqola
+die Information|di informatsioon|ma'lumot
+die Technik|di texnik|texnika
+das Gerät|das gereet|qurilma
+die Batterie|di bateriie|batareyka
+das Ladekabel|das laadekaabel|zaryad kabeli
+die Benachrichtigung|di benaxrixtigung|bildirishnoma
+`},
+{id:"a2kichik", lv:"A2", icon:"🔗", title:"Bog'lovchi va iboralar (A2)", t:`
+deshalb|deshalp|shuning uchun
+trotzdem|trotsdeem|shunga qaramay
+außerdem|ausserdeem|bundan tashqari
+zum Schluss|tsum shlus|oxirida
+seitdem|zaytdeem|o'shandan beri
+inzwischen|intsvishen|bu orada
+erst|eerst|endigina (faqat)
+sogar|zogaar|hatto
+nämlich|neemlix|aniqrog'i (chunki)
+entweder ... oder|entveeder ... ooder|yoki ... yoki
+weder ... noch|veeder ... nox|na ... na
+sowohl ... als auch|zoovool ... als aux|ham ... ham
+nicht nur ... sondern auch|nixt nuur ... zondern aux|nafaqat ... balki
+sondern|zondern|balki (aksincha)
+als|als|...dan (taqqoslash) / ...ganda
+obwohl|opvool|garchi
+während|veerent|davomida (...ayotganda)
+bevor|befoor|...dan oldin
+nachdem|naaxdeem|...dan keyin
+damit|damit|...sin deb (maqsad)
+falls|fals|mabodo
+pro|proo|har bir ...ga
+ziemlich|tsiimlix|ancha
+total|totaal|butunlay (so'zl.)
+völlig|fö'llix|mutlaqo
+wenigstens|veenixstens|hech bo'lmaganda
+mindestens|mindestens|kamida
+höchstens|hööxstens|ko'pi bilan
+kaum|kaum|zo'rg'a
+eher|eeer|ko'proq (aksincha)
+meistens|maystens|ko'pincha
+normalerweise|normaalervayze|odatda
+zum Glück|tsum glük|yaxshiyamki
+übrigens|üübrigens|aytgancha
+Na und?|naa unt|Xo'sh, nima bo'pti?
+Ach so!|ax zoo|Ha, tushundim!
+Na klar!|naa klaar|Albatta-da!
+Wie bitte?|vi bitte|Nima dedingiz?
+Ich habe keine Lust.|ix haabe kayne lust|Xohishim yo'q.
+Es tut mir leid.|es tuut miir layt|Afsusdaman.
+Das ist mir egal.|das ist miir egaal|Menga baribir.
+Das stimmt.|das shtimt|To'g'ri.
+Bis bald!|bis balt|Tez orada ko'rishguncha!
+Alles klar.|alles klaar|Hammasi tushunarli.
+Ich bin dran.|ix bin dran|Mening navbatim.
+Pass auf!|pas auf|Ehtiyot bo'l!
+`},
+{id:"a2kundalik", lv:"A2", icon:"🗓️", title:"Kundalik hayot va tushunchalar", t:`
+der Alltag|deer altaak|kundalik hayot
+der Tagesablauf|deer taagesaplauf|kun tartibi
+die Gewohnheit|di gevoonhayt|odat
+der Werktag|deer verktaak|ish kuni
+das Jahrzehnt|das yaartseent|o'n yillik
+das Jahrhundert|das yaarhundert|asr
+die Vergangenheit|di fergangenhayt|o'tmish
+die Gegenwart|di geegenvart|hozirgi davr
+die Zukunft|di tsuukunft|kelajak
+der Moment|deer moment|lahza
+der Augenblick|deer augenblik|bir zum
+der Anfang|deer anfang|boshlanish
+das Ende|das ende|oxir
+die Mitte|di mitte|o'rta
+die Hälfte|di helfte|yarmi
+die Dauer|di dauer|davomiylik
+die Frist|di frist|muddat
+der Geburtsort|deer geburtsort|tug'ilgan joy
+das Geburtsdatum|das geburtsdaatum|tug'ilgan sana
+der Familienstand|deer famiilienshtant|oilaviy holat
+die Staatsangehörigkeit|di shtaatsangehöörixkayt|fuqarolik
+der Wohnort|deer voonort|yashash joyi
+das Geschlecht|das geshlext|jins
+der Zettel|deer tsettel|qog'oz parchasi
+das Feuerzeug|das foyertsoyk|zajigalka
+die Kerze|di kertse|sham
+das Streichholz|das shtrayxholts|gugurt cho'pi
+die Schere|di sheere|qaychi
+der Kamm|deer kam|taroq
+die Bürste|di bürste|cho'tka
+die Creme|di kreem|krem
+das Parfüm|das parfüüm|atir
+der Wecker|deer vekker|budilnik
+die Verabredung|di ferabreedung|kelishilgan uchrashuv
+der Besuch|deer bezuux|tashrif
+die Gastfreundschaft|di gastfroyntshaft|mehmondo'stlik
+der Glückwunsch|deer glükvunsh|tabrik
+die Ordnung|di ordnung|tartib
+die Regel|di reegel|qoida
+die Möglichkeit|di mööklixkayt|imkoniyat
+die Gelegenheit|di geleegenhayt|qulay fursat
+der Grund|deer grunt|sabab
+der Vorteil|deer foortayl|afzallik
+der Nachteil|deer naaxtayl|kamchilik
+der Unterschied|deer untershiit|farq
+die Art|di aart|tur (xil)
+die Sache|di zaxe|narsa (ish)
+das Ding|das ding|buyum
+der Teil|deer tayl|qism
+die Menge|di menge|miqdor (olomon)
+die Zahl|di tsaal|son
+die Nummer|di nummer|tartib raqami
+die Form|di form|shakl
+der Inhalt|deer inhalt|mazmun
+der Fall|deer fal|holat (hodisa)
+die Situation|di zituatsioon|vaziyat
+die Lage|di laage|ahvol (joylashuv)
+das Leben|das leeben|hayot
+der Tod|deer toot|o'lim
+`},
+{id:"a2odam", lv:"A2", icon:"🧑‍🤝‍🧑", title:"Odamlar va tashqi ko'rinish", t:`
+die Person|di perzoon|shaxs
+der Bürger|deer bürger|fuqaro
+der Einwohner|deer aynvooner|yashovchi (aholi)
+die Bevölkerung|di befölkerung|aholi
+der Bekannte|deer bekante|tanish odam
+der Verwandte|deer ferfante|qarindosh
+der Schwager|deer shvaager|qayinaka (pochcha)
+die Schwägerin|di shveegerin|qayinsingil (kelinoyi)
+der Schwiegervater|deer shviigerfaater|qaynota
+die Schwiegermutter|di shviigermutter|qaynona
+der Neffe|deer neffe|jiyan (o'g'il)
+die Nichte|di nixte|jiyan (qiz)
+die Witwe|di vitve|beva ayol
+das Paar|das paar|juftlik (er-xotin)
+der Zwilling|deer tsviling|egizak
+die Jugend|di yuugent|yoshlik
+die Kindheit|di kinthayt|bolalik
+der Jugendliche|deer yuugentlixe|o'smir
+der Senior|deer zeenior|keksa odam
+das Aussehen|das auszeeen|tashqi ko'rinish
+die Figur|di figuur|qomat
+der Bart|deer bart|soqol
+die Glatze|di glatse|kal bosh
+die Locken|di lokken|jingalak soch|pl
+die Frisur|di frizuur|soch turmagi
+lockig|lokkix|jingalak
+glatt|glat|silliq (to'g'ri)
+blass|blas|rangi oqargan
+die Eigenschaft|di aygenshaft|xususiyat
+die Stimme|di shtimme|ovoz
+der Geschmack|deer geshmak|did (ta'm)
+die Mode|di moode|moda
+der Stil|deer shtiil|uslub
+`}
+]);
 /* matnli ro'yxatlarni massivga aylantirish: [nemischa, transkripsiya, o'zbekcha, ko'plik] */
 VOCAB.forEach(function(c){
   c.w = c.t.split('\n').map(function(s){ return s.trim(); }).filter(Boolean).map(function(s){ return s.split('|').map(function(x){ return x.trim(); }); });
@@ -2069,7 +2983,7 @@ var GRAMMAR = [
 var ALLW = [];
 VOCAB.forEach(function(c){
   c.w.forEach(function(x, i){
-    ALLW.push({id:c.id+i, cat:c.id, de:x[0], tr:x[1], uz:x[2], pl:!!x[3]});
+    ALLW.push({id:c.id+i, cat:c.id, de:x[0], tr:x[1], uz:x[2], pl:!!x[3], lv:c.lv||'A1'});
   });
 });
 function wordArt(w){ var m = /^(der|die|das) /.exec(w.de); return m ? m[1] : ''; }
@@ -2364,7 +3278,7 @@ function pickDistractors(correct, pool, key, n){
    ===================================================================== */
 var NAV = [
  ['home','🏠',"Bosh sahifa"],['stats','📊',"Statistika"],['sounds','🔤',"Talaffuz va alifbo"],['lessons','📘',"Mavzular (guide)"],['dialogs','💬',"Dialoglar"],
- ['numbers','🔢',"Sonlar"],['vocab','📚',"Lug'at"],['tests','📝',"Testlar"],['games','🎮',"So'z o'yinlari"],['grammar','🧩',"Mini grammatika"]
+ ['numbers','🔢',"Sonlar"],['vocab','📚',"Lug'at"],['tests','📝',"Testlar"],['games','🎮',"So'z o'yinlari"],['grammar','🧩',"Grammatika"]
 ];
 var current = {view:'home', p:null};
 var cleanups = [];
@@ -2395,7 +3309,7 @@ window.__back = function(){
   return false;
 };
 function navRoot(v){
-  var map={lesson:'lessons', dialog:'dialogs', quiz:'tests', flash:'vocab', game:'games', cert:'stats'};
+  var map={lesson:'lessons', dialog:'dialogs', quiz:'tests', flash:'vocab', game:'games', cert:'stats', gram:'grammar'};
   return map[v]||v;
 }
 function renderNav(){
@@ -2473,7 +3387,7 @@ VIEWS.lessons = function(){
     var d=state.lessons[l.id];
     h += '<button class="tile" data-act="go" data-v="lesson" data-p="'+l.id+'">'+(d?'<span class="tag ok done-badge">✓ '+d+'%</span>':'')+'<div class="emo">'+l.icon+'</div><b>'+esc(l.title)+'</b><small>'+esc(l.desc)+'</small><small style="color:var(--coral-d);font-weight:800;margin-top:4px">'+l.items.length+' ta ibora →</small></button>';
   });
-  h += '<button class="tile navy" data-act="go" data-v="grammar"><div class="emo">🧩</div><b>Mini grammatika</b><small>Faqat eng kerakli qoidalar — sein, haben, gap tartibi</small></button>';
+  h += '<button class="tile navy" data-act="go" data-v="grammar"><div class="emo">🧩</div><b>Grammatika A1–A2</b><small>Qoidalar, jadvallar, ovozli misollar va mashqlar</small></button>';
   h += '</div>';
   return h;
 };
@@ -3205,7 +4119,7 @@ function quizResultHtml(){
     '<h2 class="serif" style="color:var(--navy)">'+msg+'</h2><p class="muted">'+QZ.score+' / '+QZ.qs.length+' to\'g\'ri · +'+xp+' XP</p>'+
     (QZ.msgOk?'<div class="unlock-msg">'+esc(QZ.msgOk)+'</div>':'')+(QZ.msgBad?'<div class="fail-msg">'+esc(QZ.msgBad)+'</div>':'')+
     '<div class="toolbar mt" style="justify-content:center">';
-  if(QZ.cert) h += '<button class="btn btn-c" data-act="go" data-v="cert">📜 Sertifikatni olish</button>';
+  if(QZ.cert) h += '<button class="btn btn-c" data-act="go" data-v="cert" data-p="'+(QZ.cert==='A2'?'A2':'A1')+'">📜 Sertifikatni olish</button>';
   if(QZ.opts.nodeId || QZ.opts.placement) h += '<button class="btn btn-n" data-act="go" data-v="home">🗺️ Yo\'lda davom etish</button>';
   if(QZ.opts.retry) h += '<button class="btn '+(QZ.opts.nodeId?'btn-o':'btn-c')+'" data-act="qRetry">🔁 Qaytadan</button>';
   h += '<button class="btn btn-o" data-act="go" data-v="'+QZ.back[0]+'"'+(QZ.back[2]?' data-p="'+esc(QZ.back[2])+'"':'')+'>'+esc(QZ.back[1])+'</button></div>';
@@ -3252,9 +4166,9 @@ VIEWS.home = function(){
         '<div><h4>Kunlik maqsad</h4><div class="big">'+(gp>=1?'Bajarildi! ✅':Math.round(gp*100)+'%')+'</div><small>'+(gp>=1?'Ajoyib, ertaga ham davom eting':'Yana '+(goal-today)+' XP to\'plang')+'</small></div></div>'+
       '<div class="dcard"><span class="flame '+(state.lastDay===todayStr()?'':'off')+'">🔥</span><div><h4>Seriya</h4><div class="big"><span data-count="'+state.streak+'">'+state.streak+'</span> kun</div><small>Eng uzun: '+nz(state.bestStreak)+' kun</small></div></div>'+
       (nx ? '<div class="dcard cont"><div class="nic">'+nx.icon+'</div><div style="min-width:0"><h4>Keyingi qadam</h4><div class="big">'+esc(nx.title)+'</div><button class="btn" data-act="node" data-p="'+nx.id+'">Davom etish →</button></div></div>'
-          : '<div class="dcard cont"><div class="nic">👑</div><div><h4>Tabriklaymiz!</h4><div class="big">A1 tugatildi</div><button class="btn" data-act="go" data-v="cert">📜 Sertifikat</button></div></div>')+
+          : '<div class="dcard cont"><div class="nic">👑</div><div><h4>Tabriklaymiz!</h4><div class="big">A2 tugatildi</div><button class="btn" data-act="go" data-v="cert" data-p="A2">📜 Sertifikat</button></div></div>')+
     '</div>'+
-    '<h2 class="sec-t">🗺️ O\'rganish yo\'li</h2>'+pathHtml()+
+    '<h2 class="sec-t">🗺️ O\'rganish yo\'li</h2>'+pathTabsHtml()+
     '<div class="card mt2"><div class="tag">Bugungi ibora</div><div class="potd mt">'+spk(p.de)+spkSlow(p.de)+
       '<div><div class="de">'+esc(p.de)+'</div><div style="color:var(--coral-d);font-style:italic;font-weight:700">['+esc(p.tr)+']</div><div class="muted">'+esc(p.uz)+'</div></div></div></div>'+
     '<h2 class="sec-t">⚡ Tezkor mashqlar</h2><div class="grid g4">'+
@@ -3331,7 +4245,7 @@ VIEWS.stats = function(){
   /* yutuqlar */
   h += '<h2 class="sec-t">🏆 Yutuqlar <span class="tag n">'+achCount()+' / '+ACH.length+'</span></h2><div class="achs">'+
     ACH.map(function(a){ var on=!!state.ach[a[0]]; return '<div class="ach '+(on?'on':'off')+'"><div class="ai">'+a[1]+'</div><b>'+esc(a[2])+'</b><small>'+esc(a[3])+'</small>'+(on?'<small style="color:var(--sand);font-weight:800">'+esc(state.ach[a[0]])+'</small>':'')+'</div>'; }).join('')+'</div>';
-  if(nodeIsDone('final')) h += '<div class="mt2" style="text-align:center"><button class="btn btn-c" data-act="go" data-v="cert">📜 A1 sertifikatini ko\'rish</button></div>';
+  if(nodeIsDone('final')) h += '<div class="mt2 toolbar" style="justify-content:center"><button class="btn btn-c" data-act="go" data-v="cert" data-p="A1">📜 A1 sertifikati</button>'+(nodeIsDone('a2final')?'<button class="btn btn-n" data-act="go" data-v="cert" data-p="A2">📜 A2 sertifikati</button>':'')+'</div>';
   return h;
 };
 AFTER.stats = function(){
@@ -3893,6 +4807,720 @@ VIEWS.grammar = function(){
 };
 
 /* =====================================================================
+   A2 GRAMMATIKA DARSLARI
+   ex: [nemischa, o'zbekcha] misollar (ovozli)
+   drill: mashqlar — mc (variant tanlash; a — to'g'ri javob indeksi),
+          type (yozish; a — qabul qilinadigan javoblar), order (gap tuzish)
+   ===================================================================== */
+var GRAM = [
+{id:'g_perf1', lv:'A2', icon:'⏪', title:"O'tgan zamon (1): haben", de:"Perfekt mit haben",
+ desc:"Kecha nima qildingiz? — og'zaki nutqdagi asosiy o'tgan zamon",
+ theory:"Nemislar og'zaki nutqda o'tgan zamon uchun asosan <b>Perfekt</b> ishlatadi. Tuzilishi: <b>haben</b> (2-o'rinda) + <b>Partizip II</b> (gap oxirida).<br><br>Muntazam fe'llar: <b>ge- + o'zak + -t</b> → machen → <b>gemacht</b>, kaufen → <b>gekauft</b>, arbeiten → <b>gearbeitet</b>.<br><b>-ieren</b> bilan tugaydiganlar <b>ge-</b> olmaydi: studieren → studiert. <b>be-, ver-, er-</b> bilan boshlanganlar ham: bezahlen → bezahlt, verkaufen → verkauft.<br>Ko'p ishlatiladigan noto'g'ri fe'llar <b>-en</b> bilan tugaydi: essen → gegessen, sehen → gesehen.",
+ tables:[{h:["Infinitiv","Partizip II","Ma'nosi"], r:[["machen","gemacht","qildi"],["lernen","gelernt","o'rgandi"],["kaufen","gekauft","sotib oldi"],["arbeiten","gearbeitet","ishladi"],["studieren","studiert","o'qidi (oliygohda)"],["essen","gegessen","yedi"],["trinken","getrunken","ichdi"],["sehen","gesehen","ko'rdi"],["lesen","gelesen","o'qidi"],["schreiben","geschrieben","yozdi"],["sprechen","gesprochen","gapirdi"],["nehmen","genommen","oldi"],["finden","gefunden","topdi"],["schlafen","geschlafen","uxladi"]]}],
+ ex:[["Ich habe Deutsch gelernt.","Men nemis tilini o'rgandim."],["Wir haben Pizza gekauft.","Biz pitsa sotib oldik."],["Hast du gestern gearbeitet?","Kecha ishladingmi?"],["Er hat drei Jahre in Berlin gewohnt.","U uch yil Berlinda yashadi."],["Was hast du gegessen?","Nima yeding?"],["Ich habe den Film schon gesehen.","Men filmni allaqachon ko'rganman."]],
+ tip:"Savol berishda ham <b>haben</b> birinchi o'ringa chiqadi, Partizip esa doim oxirda qoladi: <b>Hast</b> du das Buch <b>gelesen</b>?",
+ drill:[
+  {t:'mc', q:"Ich ___ gestern Fußball gespielt.", o:["habe","bin","hat"], a:0, uz:"Kecha futbol o'ynadim."},
+  {t:'mc', q:"Wir haben Brot ___.", o:["gekauft","kaufen","gekaufen"], a:0, uz:"Biz non sotib oldik."},
+  {t:'mc', q:"Hast du die Hausaufgaben ___?", o:["gemacht","macht","machen"], a:0, uz:"Uy vazifasini qildingmi?"},
+  {t:'mc', q:"Sie hat Medizin ___.", o:["studiert","gestudiert","studieren"], a:0, uz:"U tibbiyotni o'qigan."},
+  {t:'mc', q:"Was hast du gestern ___?", o:["gegessen","geesst","essen"], a:0, uz:"Kecha nima yeding?"},
+  {t:'mc', q:"Er ___ das Buch gelesen.", o:["hat","habt","haben"], a:0, uz:"U kitobni o'qidi."},
+  {t:'mc', q:"Ich habe die Rechnung ___.", o:["bezahlt","gebezahlt","bezahlen"], a:0, uz:"Men hisobni to'ladim."},
+  {t:'type', q:"spielen → Partizip II: ___", a:["gespielt"]},
+  {t:'type', q:"trinken → Partizip II: ___", a:["getrunken"]},
+  {t:'type', q:"schreiben → Partizip II: ___", a:["geschrieben"]},
+  {t:'order', de:"Ich habe gestern Deutsch gelernt.", uz:"Men kecha nemis tilini o'rgandim."},
+  {t:'order', de:"Wir haben im Restaurant gegessen.", uz:"Biz restoranda ovqatlandik."},
+  {t:'order', de:"Hast du den Film gesehen?", uz:"Filmni ko'rdingmi?"}
+ ]},
+{id:'g_perf2', lv:'A2', icon:'🚶', title:"O'tgan zamon (2): sein", de:"Perfekt mit sein",
+ desc:"Harakat va o'zgarish fe'llari — ich bin gefahren",
+ theory:"Bir joydan boshqa joyga <b>harakat</b> yoki <b>holat o'zgarishini</b> bildiruvchi fe'llar Perfektda <b>sein</b> bilan keladi: ich <b>bin</b> gegangen, er <b>ist</b> gefahren.<br>Shuningdek: <b>sein → ist gewesen</b>, <b>bleiben → ist geblieben</b>, <b>passieren → ist passiert</b>, <b>werden → ist geworden</b>.<br><br><b>Ajraladigan fe'llarda</b> ge- o'rtaga kiradi: auf<b>ge</b>standen, an<b>ge</b>rufen, ein<b>ge</b>kauft.",
+ tables:[{h:["Infinitiv","Perfekt","Ma'nosi"], r:[["gehen","ist gegangen","bordi (piyoda)"],["kommen","ist gekommen","keldi"],["fahren","ist gefahren","bordi (transportda)"],["fliegen","ist geflogen","uchib ketdi"],["laufen","ist gelaufen","yugurdi"],["aufstehen","ist aufgestanden","turdi"],["einschlafen","ist eingeschlafen","uxlab qoldi"],["sein","ist gewesen","bo'ldi"],["bleiben","ist geblieben","qoldi"],["passieren","ist passiert","sodir bo'ldi"]]}],
+ ex:[["Ich bin nach Berlin gefahren.","Men Berlinga bordim."],["Wir sind ins Kino gegangen.","Biz kinoga bordik."],["Wann bist du aufgestanden?","Qachon turding?"],["Sie ist zu Hause geblieben.","U uyda qoldi."],["Was ist passiert?","Nima bo'ldi?"],["Ich habe meine Mutter angerufen.","Men onamga qo'ng'iroq qildim."]],
+ tip:"Esda saqlash usuli: <b>A nuqtadan B nuqtaga</b> harakat bo'lsa — <b>sein</b>. Qolgan hollarda — <b>haben</b>.",
+ drill:[
+  {t:'mc', q:"Ich ___ nach Hause gegangen.", o:["bin","habe","ist"], a:0, uz:"Men uyga bordim."},
+  {t:'mc', q:"Wir ___ mit dem Zug gefahren.", o:["sind","haben","seid"], a:0, uz:"Biz poyezdda bordik."},
+  {t:'mc', q:"Er ___ um 7 Uhr aufgestanden.", o:["ist","hat","sind"], a:0, uz:"U soat 7 da turdi."},
+  {t:'mc', q:"Sie ___ gestern Pizza gegessen.", o:["hat","ist","sind"], a:0, uz:"U kecha pitsa yedi."},
+  {t:'mc', q:"Wo ___ du gestern gewesen?", o:["bist","hast","ist"], a:0, uz:"Kecha qayerda eding?"},
+  {t:'mc', q:"Ich habe im Supermarkt ___.", o:["eingekauft","geeinkauft","einkaufte"], a:0, uz:"Supermarketda xarid qildim."},
+  {t:'mc', q:"Was ___ passiert?", o:["ist","hat","sind"], a:0, uz:"Nima bo'ldi?"},
+  {t:'type', q:"kommen → Er ist ___", a:["gekommen"]},
+  {t:'type', q:"fliegen → Wir sind nach Istanbul ___", a:["geflogen"]},
+  {t:'type', q:"anrufen → Partizip II: ___", a:["angerufen"]},
+  {t:'order', de:"Ich bin gestern ins Kino gegangen.", uz:"Men kecha kinoga bordim."},
+  {t:'order', de:"Wann bist du nach Deutschland gekommen?", uz:"Germaniyaga qachon kelding?"}
+ ]},
+{id:'g_prat', lv:'A2', icon:'📜', title:"O'tgan zamon (3): war, hatte", de:"Präteritum: sein, haben, Modalverben",
+ desc:"Ich war, ich hatte, ich konnte — eng ko'p ishlatiladigan shakllar",
+ theory:"<b>sein</b>, <b>haben</b> va modal fe'llar o'tgan zamonda odatda Perfekt emas, <b>Präteritum</b> shaklida aytiladi.<br>«Men kecha kasal edim» — <b>Ich war gestern krank</b> (Ich bin krank gewesen deyish ham mumkin, lekin kamroq ishlatiladi).<br>Modal fe'llar: können → <b>konnte</b>, müssen → <b>musste</b>, wollen → <b>wollte</b>, dürfen → <b>durfte</b>, sollen → <b>sollte</b>. Umlaut yo'qoladi!",
+ tables:[{h:["","sein","haben","können","müssen"], r:[["ich","war","hatte","konnte","musste"],["du","warst","hattest","konntest","musstest"],["er / sie / es","war","hatte","konnte","musste"],["wir","waren","hatten","konnten","mussten"],["ihr","wart","hattet","konntet","musstet"],["sie / Sie","waren","hatten","konnten","mussten"]]}],
+ ex:[["Ich war gestern krank.","Men kecha kasal edim."],["Wir hatten keine Zeit.","Bizning vaqtimiz yo'q edi."],["Er konnte nicht kommen.","U kela olmadi."],["Ich musste lange arbeiten.","Men uzoq ishlashim kerak edi."],["Wo warst du?","Qayerda eding?"],["Als Kind wollte ich Pilot werden.","Bolaligimda uchuvchi bo'lishni xohlardim."]],
+ tip:"<b>ich</b> va <b>er/sie</b> shakli Präteritumda doim bir xil: ich war — er war, ich konnte — sie konnte.",
+ drill:[
+  {t:'mc', q:"Gestern ___ ich sehr müde.", o:["war","bin","hatte"], a:0, uz:"Kecha men juda charchagan edim."},
+  {t:'mc', q:"Wir ___ keine Zeit.", o:["hatten","waren","haben"], a:0, uz:"Vaqtimiz yo'q edi."},
+  {t:'mc', q:"___ du gestern zu Hause?", o:["Warst","Hattest","Bist"], a:0, uz:"Kecha uyda edingmi?"},
+  {t:'mc', q:"Er ___ nicht kommen, er war krank.", o:["konnte","kann","könnt"], a:0, uz:"U kela olmadi, kasal edi."},
+  {t:'mc', q:"Ich ___ am Wochenende arbeiten.", o:["musste","muss","müsste"], a:0, uz:"Dam olish kunlari ishlashim kerak edi."},
+  {t:'mc', q:"Die Kinder ___ Hunger.", o:["hatten","hattet","hatte"], a:0, uz:"Bolalar och edi."},
+  {t:'mc', q:"Ihr ___ im Urlaub, oder?", o:["wart","seid","wartet"], a:0, uz:"Sizlar ta'tilda edingiz, to'g'rimi?"},
+  {t:'type', q:"sein → ich ___ (Präteritum)", a:["war"]},
+  {t:'type', q:"haben → wir ___ (Präteritum)", a:["hatten"]},
+  {t:'order', de:"Ich war letzte Woche in München.", uz:"Men o'tgan hafta Myunxenda edim."},
+  {t:'order', de:"Wir mussten lange warten.", uz:"Biz uzoq kutishga majbur bo'ldik."}
+ ]},
+{id:'g_akk', lv:'A2', icon:'🎯', title:"Akkusativ: kimni? nimani?", de:"Der Akkusativ",
+ desc:"den, einen, keinen, mich, dich, ihn",
+ theory:"To'ldiruvchi (<b>kimni? nimani?</b>) <b>Akkusativ</b>da keladi. Faqat <b>erkak jinsi</b> o'zgaradi: der → <b>den</b>, ein → <b>einen</b>, kein → <b>keinen</b>. die, das va ko'plik o'zgarmaydi.<br><br>Akkusativ talab qiladigan fe'llar: haben, brauchen, kaufen, suchen, sehen, nehmen, essen, trinken, besuchen, lieben, fragen, kennen. <b>Es gibt</b> ham Akkusativ bilan: Es gibt <b>einen</b> Park.",
+ tables:[{h:["","Nominativ","Akkusativ"], r:[["erkak (der)","der / ein / kein","den / einen / keinen"],["ayol (die)","die / eine","die / eine"],["o'rta (das)","das / ein","das / ein"],["ko'plik","die / –","die / –"]]},{h:["Nominativ","Akkusativ"], r:[["ich","mich"],["du","dich"],["er","ihn"],["sie","sie"],["es","es"],["wir","uns"],["ihr","euch"],["sie / Sie","sie / Sie"]]}],
+ ex:[["Ich habe einen Bruder.","Mening akam (ukam) bor."],["Ich suche den Bahnhof.","Men vokzalni qidiryapman."],["Wir brauchen keinen Tisch.","Bizga stol kerak emas."],["Ich liebe dich.","Men seni sevaman."],["Kennst du ihn?","Uni taniysanmi?"],["Es gibt hier einen Supermarkt.","Bu yerda supermarket bor."]],
+ tip:"Savol bering: <b>Wen?</b> (kimni?) yoki <b>Was?</b> (nimani?) — javobi Akkusativ bo'ladi.",
+ drill:[
+  {t:'mc', q:"Ich habe ___ Bruder.", o:["einen","ein","einem"], a:0, uz:"Mening akam bor."},
+  {t:'mc', q:"Ich suche ___ Bahnhof.", o:["den","der","dem"], a:0, uz:"Men vokzalni qidiryapman."},
+  {t:'mc', q:"Wir kaufen ___ Auto.", o:["ein","einen","eine"], a:0, uz:"Biz mashina sotib olamiz."},
+  {t:'mc', q:"Kennst du ___? (er)", o:["ihn","er","ihm"], a:0, uz:"Uni taniysanmi?"},
+  {t:'mc', q:"Ich sehe ___ Frau.", o:["die","den","der"], a:0, uz:"Men ayolni ko'ryapman."},
+  {t:'mc', q:"Er braucht ___ Computer.", o:["keinen","kein","keine"], a:0, uz:"Unga kompyuter kerak emas."},
+  {t:'mc', q:"Ich liebe ___. (du)", o:["dich","du","dir"], a:0, uz:"Men seni sevaman."},
+  {t:'mc', q:"Es gibt hier ___ Park.", o:["einen","ein","einem"], a:0, uz:"Bu yerda park bor."},
+  {t:'type', q:"der Tisch → Ich kaufe ___ Tisch.", a:["den"]},
+  {t:'type', q:"wir → Besuchst du ___ morgen?", a:["uns"]},
+  {t:'order', de:"Ich habe einen Hund und eine Katze.", uz:"Mening itim va mushugim bor."},
+  {t:'order', de:"Kannst du mich morgen anrufen?", uz:"Ertaga menga qo'ng'iroq qila olasanmi?"}
+ ]},
+{id:'g_dat', lv:'A2', icon:'🎁', title:"Dativ: kimga? nimaga?", de:"Der Dativ",
+ desc:"dem, der, einem, mir, dir, ihm",
+ theory:"<b>Dativ</b> — <b>kimga?</b> savoliga javob. der → <b>dem</b>, die → <b>der</b>, das → <b>dem</b>, ko'plik → <b>den</b> (+n: den Kinder<b>n</b>). ein → <b>einem</b>, eine → <b>einer</b>.<br><br>Dativ fe'llari: <b>helfen, danken, gefallen, gehören, antworten, gratulieren, schmecken</b>.<br>geben, schenken, zeigen: kimga (Dativ) + nimani (Akkusativ): Ich gebe <b>dem Kind</b> <b>einen Apfel</b>.",
+ tables:[{h:["","Dativ"], r:[["erkak (der)","dem / einem"],["ayol (die)","der / einer"],["o'rta (das)","dem / einem"],["ko'plik","den ...n"]]},{h:["Nominativ","Dativ"], r:[["ich","mir"],["du","dir"],["er","ihm"],["sie","ihr"],["es","ihm"],["wir","uns"],["ihr","euch"],["sie / Sie","ihnen / Ihnen"]]}],
+ ex:[["Ich helfe meiner Mutter.","Men onamga yordam beraman."],["Das Buch gehört mir.","Kitob meniki."],["Wie gefällt dir Berlin?","Berlin senga qanday yoqyapti?"],["Ich gebe dem Kind einen Apfel.","Men bolaga olma beraman."],["Kannst du mir helfen?","Menga yordam bera olasanmi?"],["Wir danken Ihnen.","Sizga minnatdormiz."]],
+ tip:"<b>Wie geht es dir?</b> — bu ham Dativ! Shuning uchun «Mir geht es gut» deyiladi.",
+ drill:[
+  {t:'mc', q:"Ich helfe ___ Mann.", o:["dem","den","der"], a:0, uz:"Men erkakka yordam beraman."},
+  {t:'mc', q:"Das Auto gehört ___ Frau.", o:["der","die","dem"], a:0, uz:"Mashina ayolga tegishli."},
+  {t:'mc', q:"Kannst du ___ helfen? (ich)", o:["mir","mich","ich"], a:0, uz:"Menga yordam bera olasanmi?"},
+  {t:'mc', q:"Wie geht es ___? (du)", o:["dir","dich","du"], a:0, uz:"Ahvoling qanday?"},
+  {t:'mc', q:"Ich schenke ___ Kind ein Buch.", o:["dem","den","das"], a:0, uz:"Men bolaga kitob sovg'a qilaman."},
+  {t:'mc', q:"Der Film gefällt ___. (wir)", o:["uns","unser","wir"], a:0, uz:"Film bizga yoqadi."},
+  {t:'mc', q:"Ich danke ___. (Sie)", o:["Ihnen","Sie","Ihr"], a:0, uz:"Sizga rahmat."},
+  {t:'mc', q:"Wir spielen mit den ___.", o:["Kindern","Kinder","Kinds"], a:0, uz:"Biz bolalar bilan o'ynaymiz."},
+  {t:'type', q:"er → Ich gebe ___ das Buch.", a:["ihm"]},
+  {t:'type', q:"sie (ayol) → Ich helfe ___.", a:["ihr"]},
+  {t:'order', de:"Ich zeige dir die Stadt.", uz:"Men senga shaharni ko'rsataman."},
+  {t:'order', de:"Das Essen schmeckt mir sehr gut.", uz:"Ovqat menga juda yoqyapti."}
+ ]},
+{id:'g_praep', lv:'A2', icon:'🔗', title:"Predloglar: Akk va Dat", de:"Präpositionen",
+ desc:"mit, bei, zu, aus, seit / für, ohne, durch",
+ theory:"Ba'zi predloglardan keyin <b>doim Dativ</b>: <b>aus, bei, mit, nach, seit, von, zu</b> (+ gegenüber).<br>Ba'zilaridan keyin <b>doim Akkusativ</b>: <b>durch, für, gegen, ohne, um</b>.<br><br>Qisqartmalar: zu dem → <b>zum</b>, zu der → <b>zur</b>, bei dem → <b>beim</b>, von dem → <b>vom</b>.",
+ tables:[{h:["Dativ bilan","Misol","Akkusativ bilan","Misol"], r:[["aus","aus der Schule","durch","durch den Park"],["bei","beim Arzt","für","für dich"],["mit","mit dem Bus","gegen","gegen die Wand"],["nach","nach dem Essen","ohne","ohne Zucker"],["seit","seit einem Jahr","um","um den Tisch"],["von","vom Bahnhof","",""],["zu","zum Arzt / zur Bank","",""]]}],
+ ex:[["Ich fahre mit dem Bus.","Men avtobusda boraman."],["Ich komme aus Usbekistan.","Men O'zbekistondanman."],["Ich wohne seit zwei Jahren hier.","Men bu yerda ikki yildan beri yashayman."],["Das Geschenk ist für dich.","Sovg'a sen uchun."],["Wir gehen durch den Park.","Biz park orqali o'tamiz."],["Ich gehe zum Arzt.","Men shifokorga boraman."]],
+ tip:"Yodlash uchun qofiya: Dativ — «<b>aus-bei-mit-nach-seit-von-zu</b>», Akkusativ — «<b>durch-für-gegen-ohne-um</b>».",
+ drill:[
+  {t:'mc', q:"Ich fahre ___ dem Bus.", o:["mit","für","durch"], a:0, uz:"Men avtobusda boraman."},
+  {t:'mc', q:"Das ist ein Geschenk ___ dich.", o:["für","mit","von"], a:0, uz:"Bu sen uchun sovg'a."},
+  {t:'mc', q:"Ich gehe ___ Arzt.", o:["zum","zur","zu den"], a:0, uz:"Men shifokorga boraman."},
+  {t:'mc', q:"Sie kommt ___ der Schule.", o:["aus","durch","für"], a:0, uz:"U maktabdan keladi."},
+  {t:'mc', q:"Ich wohne ___ drei Jahren in Taschkent.", o:["seit","für","um"], a:0, uz:"Uch yildan beri Toshkentda yashayman."},
+  {t:'mc', q:"Wir gehen ___ den Park.", o:["durch","mit","bei"], a:0, uz:"Biz park orqali o'tamiz."},
+  {t:'mc', q:"Er arbeitet ___ einer Bank.", o:["bei","für","um"], a:0, uz:"U bankda ishlaydi."},
+  {t:'mc', q:"Ich trinke Kaffee ___ Zucker.", o:["ohne","aus","zu"], a:0, uz:"Kofeni shakarsiz ichaman."},
+  {t:'type', q:"zu + die Apotheke → Ich gehe ___ Apotheke.", a:["zur"]},
+  {t:'type', q:"bei + dem Arzt → Ich bin ___ Arzt.", a:["beim"]},
+  {t:'order', de:"Ich fahre mit dem Fahrrad zur Arbeit.", uz:"Men ishga velosipedda boraman."},
+  {t:'order', de:"Seit wann wohnst du in Deutschland?", uz:"Qachondan beri Germaniyada yashaysan?"}
+ ]},
+{id:'g_wechsel', lv:'A2', icon:'📦', title:"Wo? yoki Wohin?", de:"Wechselpräpositionen",
+ desc:"in, an, auf, unter... — qayerda (Dativ) / qayerga (Akkusativ)",
+ theory:"9 ta predlog: <b>in, an, auf, über, unter, vor, hinter, neben, zwischen</b>.<br><b>Wo?</b> (qayerda — joy, harakatsiz) → <b>Dativ</b>: Ich bin <b>im</b> Büro.<br><b>Wohin?</b> (qayerga — harakat yo'nalishi) → <b>Akkusativ</b>: Ich gehe <b>ins</b> Büro.<br><br>Fe'l juftliklari: liegen (yotibdi) – <b>legen</b> (yotqizmoq); stehen – <b>stellen</b>; sitzen – <b>setzen</b>; hängen – hängen.<br>Qisqartmalar: in dem → <b>im</b>, in das → <b>ins</b>, an dem → <b>am</b>, an das → <b>ans</b>.",
+ tables:[{h:["Wo? (Dativ)","Wohin? (Akkusativ)"], r:[["Ich bin im Kino.","Ich gehe ins Kino."],["Das Buch liegt auf dem Tisch.","Ich lege das Buch auf den Tisch."],["Das Bild hängt an der Wand.","Ich hänge das Bild an die Wand."],["Die Katze sitzt unter dem Stuhl.","Die Katze läuft unter den Stuhl."]]}],
+ ex:[["Ich bin im Büro.","Men ofisdaman."],["Ich gehe ins Büro.","Men ofisga boraman."],["Das Buch liegt auf dem Tisch.","Kitob stol ustida yotibdi."],["Ich lege das Buch auf den Tisch.","Men kitobni stol ustiga qo'yaman."],["Das Bild hängt an der Wand.","Rasm devorda osilib turibdi."],["Wir fahren in die Stadt.","Biz shaharga boramiz."]],
+ tip:"<b>Wo</b> — <b>D</b>ativ (ikkalasida ham «o/a» tovushi), <b>Wohin</b> — <b>A</b>kkusativ. Savolni avval o'zingizga bering!",
+ drill:[
+  {t:'mc', q:"Ich bin ___ Kino. (Wo?)", o:["im","ins","in den"], a:0, uz:"Men kinodaman."},
+  {t:'mc', q:"Ich gehe ___ Kino. (Wohin?)", o:["ins","im","in dem"], a:0, uz:"Men kinoga boraman."},
+  {t:'mc', q:"Das Buch liegt auf ___ Tisch.", o:["dem","den","der"], a:0, uz:"Kitob stol ustida yotibdi."},
+  {t:'mc', q:"Ich lege das Buch auf ___ Tisch.", o:["den","dem","der"], a:0, uz:"Kitobni stol ustiga qo'yaman."},
+  {t:'mc', q:"Die Lampe hängt über ___ Sofa.", o:["dem","das","den"], a:0, uz:"Chiroq divan ustida osilib turibdi."},
+  {t:'mc', q:"Wir fahren in ___ Stadt.", o:["die","der","dem"], a:0, uz:"Biz shaharga boramiz."},
+  {t:'mc', q:"Die Katze sitzt unter ___ Stuhl.", o:["dem","den","der"], a:0, uz:"Mushuk stul tagida o'tiribdi."},
+  {t:'mc', q:"Ich stelle die Flasche in ___ Kühlschrank.", o:["den","dem","der"], a:0, uz:"Shishani muzlatkichga qo'yaman."},
+  {t:'type', q:"in + das → Wir gehen ___ Theater.", a:["ins"]},
+  {t:'type', q:"an + dem → Wir treffen uns ___ Bahnhof.", a:["am"]},
+  {t:'order', de:"Ich hänge das Bild an die Wand.", uz:"Men rasmni devorga osaman."},
+  {t:'order', de:"Die Kinder spielen im Garten.", uz:"Bolalar hovlida o'ynayapti."}
+ ]},
+{id:'g_modal', lv:'A2', icon:'💪', title:"Modal fe'llar", de:"Modalverben",
+ desc:"können, müssen, wollen, dürfen, sollen, möchten",
+ theory:"Modal fe'llar: <b>können</b> (qila olmoq), <b>müssen</b> (shart), <b>wollen</b> (xohlamoq), <b>dürfen</b> (ruxsat), <b>sollen</b> (kerak — boshqaning talabi), <b>möchten</b> (istardim).<br><b>ich</b> va <b>er/sie</b> shakli bir xil va qo'shimchasiz: ich kann — er kann.<br>Gap tuzilishi: modal fe'l <b>2-o'rinda</b>, asosiy fe'l <b>infinitivda gap oxirida</b>: Ich <b>muss</b> heute <b>arbeiten</b>.",
+ tables:[{h:["","können","müssen","wollen","dürfen","sollen"], r:[["ich","kann","muss","will","darf","soll"],["du","kannst","musst","willst","darfst","sollst"],["er / sie","kann","muss","will","darf","soll"],["wir","können","müssen","wollen","dürfen","sollen"],["ihr","könnt","müsst","wollt","dürft","sollt"],["sie / Sie","können","müssen","wollen","dürfen","sollen"]]}],
+ ex:[["Ich kann gut schwimmen.","Men yaxshi suza olaman."],["Du musst mehr schlafen.","Sen ko'proq uxlashing kerak."],["Wir wollen nach Deutschland fahren.","Biz Germaniyaga bormoqchimiz."],["Hier darf man nicht rauchen.","Bu yerda chekish mumkin emas."],["Der Arzt sagt, ich soll Tabletten nehmen.","Shifokor tabletka ichishim kerakligini aytyapti."],["Ich möchte einen Termin machen.","Men qabulga yozilmoqchiman."]],
+ tip:"<b>nicht müssen</b> — «shart emas», <b>nicht dürfen</b> — «mumkin emas». Farqiga e'tibor bering!",
+ drill:[
+  {t:'mc', q:"Ich ___ gut Deutsch sprechen.", o:["kann","kannst","können"], a:0, uz:"Men nemischa yaxshi gapira olaman."},
+  {t:'mc', q:"Du ___ jetzt nach Hause gehen.", o:["musst","muss","müssen"], a:0, uz:"Sen hozir uyga borishing kerak."},
+  {t:'mc', q:"Hier ___ man nicht parken.", o:["darf","dürfen","darfst"], a:0, uz:"Bu yerda mashina qo'yish mumkin emas."},
+  {t:'mc', q:"Wir ___ im Sommer nach Berlin fahren.", o:["wollen","will","wollt"], a:0, uz:"Yozda Berlinga bormoqchimiz."},
+  {t:'mc', q:"Er ___ heute lange arbeiten.", o:["muss","musst","müsst"], a:0, uz:"U bugun uzoq ishlashi kerak."},
+  {t:'mc', q:"___ du mir helfen?", o:["Kannst","Kann","Könnt"], a:0, uz:"Menga yordam bera olasanmi?"},
+  {t:'mc', q:"Ich ___ einen Kaffee, bitte.", o:["möchte","möchten","möchtest"], a:0, uz:"Bir kofe istardim."},
+  {t:'mc', q:"Ihr ___ leise sein!", o:["sollt","soll","sollen"], a:0, uz:"Sizlar jim bo'lishingiz kerak!"},
+  {t:'type', q:"können → wir ___", a:["können"]},
+  {t:'type', q:"wollen → du ___", a:["willst"]},
+  {t:'order', de:"Ich muss heute früh aufstehen.", uz:"Men bugun erta turishim kerak."},
+  {t:'order', de:"Kannst du mir bitte helfen?", uz:"Iltimos, menga yordam bera olasanmi?"}
+ ]},
+{id:'g_trenn', lv:'A2', icon:'✂️', title:"Ajraladigan fe'llar", de:"Trennbare Verben",
+ desc:"aufstehen → Ich stehe um 7 Uhr auf",
+ theory:"Old qo'shimchali fe'llar: <b>an-, auf-, aus-, ein-, mit-, zu-, ab-, zurück-, fern-, vor-</b>.<br>Hozirgi zamonda old qo'shimcha <b>gap oxiriga</b> ketadi: auf|stehen → Ich <b>stehe</b> um 7 Uhr <b>auf</b>.<br>Modal fe'l bilan — birga yoziladi: Ich muss früh <b>aufstehen</b>.<br>Perfektda <b>ge-</b> o'rtaga kiradi: auf<b>ge</b>standen, ein<b>ge</b>kauft.<br><br>Ajralmaydigan qo'shimchalar: <b>be-, ver-, er-, ent-, ge-, zer-</b> — bezahlen, verstehen.",
+ tables:[{h:["Infinitiv","Hozirgi zamon","Perfekt"], r:[["aufstehen","Ich stehe auf.","Ich bin aufgestanden."],["anrufen","Ich rufe dich an.","Ich habe dich angerufen."],["einkaufen","Wir kaufen ein.","Wir haben eingekauft."],["fernsehen","Er sieht fern.","Er hat ferngesehen."],["mitkommen","Kommst du mit?","Bist du mitgekommen?"],["abfahren","Der Zug fährt ab.","Der Zug ist abgefahren."]]}],
+ ex:[["Ich stehe jeden Tag um 6 Uhr auf.","Men har kuni soat 6 da turaman."],["Wann kommst du zurück?","Qachon qaytasan?"],["Ich rufe dich morgen an.","Ertaga senga qo'ng'iroq qilaman."],["Wir kaufen im Supermarkt ein.","Biz supermarketda xarid qilamiz."],["Der Zug fährt um 8 Uhr ab.","Poyezd soat 8 da jo'naydi."],["Machst du bitte das Fenster zu?","Derazani yopib qo'yasanmi?"]],
+ tip:"Lug'atda ajraladigan fe'llar ko'pincha <b>auf|stehen</b> kabi chiziqcha bilan ko'rsatiladi.",
+ drill:[
+  {t:'mc', q:"Ich rufe dich morgen ___.", o:["an","auf","ab"], a:0, uz:"Ertaga senga qo'ng'iroq qilaman."},
+  {t:'mc', q:"Wann ___ der Zug ab?", o:["fährt","abfährt","fahren"], a:0, uz:"Poyezd qachon jo'naydi?"},
+  {t:'mc', q:"Wir ___ heute im Supermarkt ein.", o:["kaufen","einkaufen","gekauft"], a:0, uz:"Bugun supermarketda xarid qilamiz."},
+  {t:'mc', q:"Ich muss morgen früh ___.", o:["aufstehen","stehe auf","aufstehe"], a:0, uz:"Ertaga erta turishim kerak."},
+  {t:'mc', q:"Kommst du mit? – Ja, ich komme ___.", o:["mit","an","zu"], a:0, uz:"Birga borasanmi? — Ha, boraman."},
+  {t:'mc', q:"Mach bitte das Fenster ___!", o:["zu","ab","an"], a:0, uz:"Iltimos, derazani yop!"},
+  {t:'mc', q:"Ich habe dich gestern ___.", o:["angerufen","geanruft","anrufte"], a:0, uz:"Kecha senga qo'ng'iroq qildim."},
+  {t:'mc', q:"Er ___ den Fernseher aus.", o:["macht","ausmacht","machen"], a:0, uz:"U televizorni o'chiradi."},
+  {t:'type', q:"fernsehen → Ich sehe am Abend ___.", a:["fern"]},
+  {t:'order', de:"Ich stehe jeden Morgen um sechs Uhr auf.", uz:"Men har kuni ertalab soat oltida turaman."},
+  {t:'order', de:"Wann kommst du nach Hause zurück?", uz:"Uyga qachon qaytasan?"}
+ ]},
+{id:'g_reflex', lv:'A2', icon:'🪞', title:"Qaytim fe'llar (sich)", de:"Reflexive Verben",
+ desc:"sich freuen, sich treffen, sich interessieren für",
+ theory:"Ba'zi fe'llar <b>sich</b> (o'zini) olmoshi bilan ishlatiladi: <b>sich freuen</b> (xursand bo'lmoq), <b>sich waschen</b>, <b>sich anziehen</b>, <b>sich treffen</b>, <b>sich setzen</b>, <b>sich beeilen</b>, <b>sich fühlen</b>.<br>Ko'pchiligi ma'lum predlog bilan keladi: sich freuen <b>auf</b> (kelajakdagi narsaga) / <b>über</b> (bo'lgan narsaga), sich interessieren <b>für</b>, sich erinnern <b>an</b>, sich ärgern <b>über</b>.",
+ tables:[{h:["Shaxs","Olmosh","Misol"], r:[["ich","mich","Ich freue mich."],["du","dich","Du freust dich."],["er / sie / es","sich","Er freut sich."],["wir","uns","Wir freuen uns."],["ihr","euch","Ihr freut euch."],["sie / Sie","sich","Sie freuen sich."]]}],
+ ex:[["Ich freue mich auf den Urlaub.","Ta'tilni intiqlik bilan kutyapman."],["Wir treffen uns um 8 Uhr.","Biz soat 8 da uchrashamiz."],["Er interessiert sich für Fußball.","U futbolga qiziqadi."],["Beeil dich!","Shoshil!"],["Wie fühlst du dich?","O'zingni qanday his qilyapsan?"],["Ich erinnere mich an meine Kindheit.","Bolaligimni eslayman."]],
+ tip:"<b>sich freuen auf</b> = intiqlik bilan kutmoq (hali bo'lmagan), <b>sich freuen über</b> = biror narsadan xursand bo'lmoq (bo'lib o'tgan).",
+ drill:[
+  {t:'mc', q:"Ich freue ___ auf das Wochenende.", o:["mich","mir","sich"], a:0, uz:"Dam olish kunlarini intiqlik bilan kutyapman."},
+  {t:'mc', q:"Wir treffen ___ vor dem Kino.", o:["uns","euch","sich"], a:0, uz:"Biz kino oldida uchrashamiz."},
+  {t:'mc', q:"Er interessiert sich ___ Musik.", o:["für","auf","an"], a:0, uz:"U musiqaga qiziqadi."},
+  {t:'mc', q:"Wie fühlst du ___?", o:["dich","dir","sich"], a:0, uz:"O'zingni qanday his qilyapsan?"},
+  {t:'mc', q:"Die Kinder waschen ___ die Hände.", o:["sich","sie","ihnen"], a:0, uz:"Bolalar qo'llarini yuvishyapti."},
+  {t:'mc', q:"Ich erinnere mich ___ dich.", o:["an","für","über"], a:0, uz:"Seni eslayman."},
+  {t:'mc', q:"Ihr müsst ___ beeilen!", o:["euch","uns","sich"], a:0, uz:"Sizlar shoshilishingiz kerak!"},
+  {t:'type', q:"Er setzt ___ auf den Stuhl.", a:["sich"]},
+  {t:'order', de:"Ich freue mich sehr auf den Urlaub.", uz:"Ta'tilni juda intiqlik bilan kutyapman."},
+  {t:'order', de:"Wir treffen uns morgen um acht Uhr.", uz:"Biz ertaga soat sakkizda uchrashamiz."}
+ ]},
+{id:'g_neben', lv:'A2', icon:'🧩', title:"Ergash gaplar: weil, dass, wenn", de:"Nebensätze",
+ desc:"Fe'l gap OXIRIGA ketadi!",
+ theory:"<b>weil</b> (chunki), <b>dass</b> (...ki), <b>wenn</b> (agar / qachonki), <b>ob</b> (...mi yo'qmi) — ergash gap boshlaydi va <b>fe'l gap oxiriga ketadi</b>:<br>Ich lerne Deutsch, <b>weil</b> ich in Deutschland arbeiten <b>möchte</b>.<br><br>Ergash gap oldin kelsa, bosh gapda fe'l <b>birinchi</b> turadi: <b>Wenn</b> ich Zeit habe, <b>komme</b> ich.<br><b>denn</b> ham «chunki», lekin gap tartibini o'zgartirmaydi: ..., <b>denn</b> ich <b>habe</b> keine Zeit.",
+ tables:[{h:["Bog'lovchi","Misol","Ma'nosi"], r:[["weil","..., weil ich krank bin.","chunki kasalman"],["dass","Ich weiß, dass du müde bist.","charchaganingni bilaman"],["wenn","Wenn es regnet, ...","agar yomg'ir yog'sa"],["ob","Ich weiß nicht, ob er kommt.","kelish-kelmasligini bilmayman"],["denn","..., denn ich habe keine Zeit.","chunki vaqtim yo'q"]]}],
+ ex:[["Ich bleibe zu Hause, weil ich krank bin.","Uyda qolaman, chunki kasalman."],["Ich weiß, dass du müde bist.","Charchaganingni bilaman."],["Wenn es regnet, nehme ich den Bus.","Yomg'ir yog'sa, avtobusga chiqaman."],["Ich glaube, dass er recht hat.","Menimcha, u haq."],["Weißt du, ob der Laden offen ist?","Do'kon ochiqmi-yo'qmi, bilasanmi?"],["Ich komme nicht, denn ich habe keine Zeit.","Kelmayman, chunki vaqtim yo'q."]],
+ tip:"Ergash gap oldidan doim <b>vergul</b> qo'yiladi: Ich weiß<b>,</b> dass ...",
+ drill:[
+  {t:'mc', q:"Ich komme nicht, weil ich krank ___.", o:["bin","sein","ist"], a:0, uz:"Kelmayman, chunki kasalman."},
+  {t:'mc', q:"Ich weiß, dass er in Berlin ___.", o:["wohnt","wohnen","wohnst"], a:0, uz:"Uning Berlinda yashashini bilaman."},
+  {t:'mc', q:"Wenn ich Zeit habe, ___ ich dich.", o:["besuche","besuchen","besuchst"], a:0, uz:"Vaqtim bo'lsa, seni ziyorat qilaman."},
+  {t:'mc', q:"Ich lerne Deutsch, ___ ich in Deutschland studieren möchte.", o:["weil","denn","aber"], a:0, uz:"Nemis tilini o'rganyapman, chunki Germaniyada o'qimoqchiman."},
+  {t:'mc', q:"Er sagt, ___ er morgen kommt.", o:["dass","ob","wenn"], a:0, uz:"U ertaga kelishini aytyapti."},
+  {t:'mc', q:"Weißt du, ___ der Bus pünktlich ist?", o:["ob","dass","weil"], a:0, uz:"Avtobus o'z vaqtida keladimi, bilasanmi?"},
+  {t:'mc', q:"___ es regnet, bleiben wir zu Hause.", o:["Wenn","Dass","Ob"], a:0, uz:"Yomg'ir yog'sa, uyda qolamiz."},
+  {t:'mc', q:"Ich bin müde, denn ich ___ schlecht geschlafen.", o:["habe","bin","hat"], a:0, uz:"Charchadim, chunki yomon uxladim."},
+  {t:'order', de:"Ich lerne Deutsch, weil ich in Deutschland arbeiten möchte.", uz:"Nemis tilini o'rganyapman, chunki Germaniyada ishlamoqchiman."},
+  {t:'order', de:"Wenn ich Zeit habe, besuche ich meine Eltern.", uz:"Vaqtim bo'lsa, ota-onamni ziyorat qilaman."},
+  {t:'order', de:"Ich glaube, dass er heute nicht kommt.", uz:"Menimcha, u bugun kelmaydi."}
+ ]},
+{id:'g_komp', lv:'A2', icon:'📏', title:"Taqqoslash: größer, am größten", de:"Komparativ und Superlativ",
+ desc:"schneller als..., so groß wie..., am besten",
+ theory:"<b>Qiyosiy daraja</b>: sifat + <b>-er</b> → schnell → schnell<b>er</b>.<br><b>Orttirma daraja</b>: <b>am</b> + sifat + <b>-sten</b> → am schnell<b>sten</b>.<br>Ko'p bir bo'g'inli sifatlarda <b>a, o, u → ä, ö, ü</b>: alt → <b>ä</b>lter, groß → gr<b>ö</b>ßer, jung → j<b>ü</b>nger.<br>Noto'g'ri shakllar: <b>gut → besser → am besten</b>; <b>viel → mehr → am meisten</b>; <b>gern → lieber → am liebsten</b>; hoch → höher.<br><br>«...dan» — <b>als</b>: Berlin ist größer <b>als</b> München. Tenglik — <b>so ... wie</b>: Ich bin <b>so</b> alt <b>wie</b> du.",
+ tables:[{h:["Sifat","Komparativ","Superlativ"], r:[["schnell","schneller","am schnellsten"],["billig","billiger","am billigsten"],["alt","älter","am ältesten"],["groß","größer","am größten"],["jung","jünger","am jüngsten"],["gut","besser","am besten"],["viel","mehr","am meisten"],["gern","lieber","am liebsten"]]}],
+ ex:[["Mein Bruder ist älter als ich.","Akam mendan katta."],["Der Zug ist schneller als der Bus.","Poyezd avtobusdan tezroq."],["Ich trinke lieber Tee als Kaffee.","Men kofedan ko'ra choyni afzal ko'raman."],["Das ist das beste Restaurant in der Stadt.","Bu shahardagi eng yaxshi restoran."],["Am liebsten esse ich Plov.","Eng yaxshi ko'rgan taomim — palov."],["Er ist so groß wie sein Vater.","U otasidek baland."]],
+ tip:"Ko'p xato: «größer <b>wie</b>» emas, «größer <b>als</b>»! <b>wie</b> faqat tenglikda: so groß <b>wie</b>.",
+ drill:[
+  {t:'mc', q:"Berlin ist größer ___ Hamburg.", o:["als","wie","dann"], a:0, uz:"Berlin Gamburgdan kattaroq."},
+  {t:'mc', q:"Ich bin so alt ___ du.", o:["wie","als","so"], a:0, uz:"Men sen bilan tengdoshman."},
+  {t:'mc', q:"Tee schmeckt mir ___ als Kaffee.", o:["besser","guter","am besten"], a:0, uz:"Choy menga kofedan ko'ra yaxshiroq yoqadi."},
+  {t:'mc', q:"Mein Bruder ist ___ als ich.", o:["älter","alter","ältest"], a:0, uz:"Akam mendan katta."},
+  {t:'mc', q:"Ich trinke am ___ Wasser.", o:["liebsten","lieber","gern"], a:0, uz:"Eng ko'p suvni yaxshi ko'rib ichaman."},
+  {t:'mc', q:"Das Flugzeug ist am ___.", o:["schnellsten","schneller","schnell"], a:0, uz:"Samolyot eng tezi."},
+  {t:'mc', q:"Hier ist es ___ als in Taschkent.", o:["kälter","kalter","kaltest"], a:0, uz:"Bu yerda Toshkentdan sovuqroq."},
+  {t:'type', q:"gut → besser → am ___", a:["besten"]},
+  {t:'type', q:"viel → ___ (Komparativ)", a:["mehr"]},
+  {t:'order', de:"Der Zug ist schneller als das Auto.", uz:"Poyezd mashinadan tezroq."}
+ ]},
+{id:'g_poss', lv:'A2', icon:'👜', title:"Egalik: mein, dein, sein, ihr", de:"Possessivartikel",
+ desc:"Meine Mutter, dein Bruder, unser Haus",
+ theory:"ich → <b>mein</b>, du → <b>dein</b>, er/es → <b>sein</b>, sie → <b>ihr</b>, wir → <b>unser</b>, ihr → <b>euer</b>, sie → <b>ihr</b>, Sie → <b>Ihr</b>.<br>Qo'shimchalari <b>ein</b> bilan bir xil: mein Vater, mein<b>e</b> Mutter, mein Kind, mein<b>e</b> Eltern.<br>Akkusativ: mein<b>en</b> Vater. Dativ: mein<b>em</b> Vater, mein<b>er</b> Mutter, mein<b>en</b> Eltern.",
+ tables:[{h:["","der (erkak)","die (ayol)","das (o'rta)","ko'plik"], r:[["Nominativ","mein","meine","mein","meine"],["Akkusativ","meinen","meine","mein","meine"],["Dativ","meinem","meiner","meinem","meinen"]]}],
+ ex:[["Das ist mein Bruder.","Bu mening akam."],["Wo ist deine Tasche?","Sumkang qayerda?"],["Er besucht seine Eltern.","U ota-onasini ziyorat qiladi."],["Sie wohnt mit ihrem Mann in Wien.","U eri bilan Venada yashaydi."],["Unser Lehrer ist sehr nett.","O'qituvchimiz juda mehribon."],["Ist das Ihr Auto?","Bu Sizning mashinangizmi?"]],
+ tip:"<b>sein</b> — erkakniki, <b>ihr</b> — ayolniki: Anna und <b>ihr</b> Bruder; Ali und <b>seine</b> Schwester.",
+ drill:[
+  {t:'mc', q:"Das ist ___ Schwester. (ich)", o:["meine","mein","meinen"], a:0, uz:"Bu mening singlim."},
+  {t:'mc', q:"Er liebt ___ Frau.", o:["seine","sein","ihre"], a:0, uz:"U xotinini sevadi."},
+  {t:'mc', q:"Sie besucht ___ Vater.", o:["ihren","ihr","ihrem"], a:0, uz:"U otasini ziyorat qiladi."},
+  {t:'mc', q:"Wir fahren mit ___ Auto.", o:["unserem","unser","unseren"], a:0, uz:"Biz mashinamizda boramiz."},
+  {t:'mc', q:"Ist das ___ Handy? (du)", o:["dein","deine","deinen"], a:0, uz:"Bu sening telefoningmi?"},
+  {t:'mc', q:"Ich helfe ___ Mutter.", o:["meiner","meine","meinem"], a:0, uz:"Onamga yordam beraman."},
+  {t:'mc', q:"Wie heißt ___ Hund? (ihr)", o:["euer","eure","euren"], a:0, uz:"Itlaringizning ismi nima?"},
+  {t:'mc', q:"Herr Müller, ist das ___ Koffer?", o:["Ihr","ihr","Ihre"], a:0, uz:"Myuller janoblari, bu Sizning chamadoningizmi?"},
+  {t:'type', q:"wir → ___ Haus ist groß.", a:["unser"]},
+  {t:'order', de:"Meine Eltern wohnen in Samarkand.", uz:"Ota-onam Samarqandda yashaydi."}
+ ]},
+{id:'g_imp', lv:'A2', icon:'📣', title:"Buyruq mayli", de:"Imperativ",
+ desc:"Komm! Kommt! Kommen Sie!",
+ theory:"<b>du</b> uchun: fe'l o'zagi, olmoshsiz: Komm! Mach! Geh! e → i o'zgarishi saqlanadi: nehmen → <b>Nimm!</b>, lesen → <b>Lies!</b>, sprechen → <b>Sprich!</b>. Umlaut esa yo'qoladi: fahren → <b>Fahr!</b><br><b>ihr</b> uchun: ihr shakli, olmoshsiz: <b>Kommt!</b> <b>Macht!</b><br><b>Sie</b> uchun: fe'l + Sie: <b>Kommen Sie!</b><br><b>sein</b>: Sei! — Seid! — Seien Sie!<br>Ajraladigan fe'llar: <b>Steh auf!</b> <b>Ruf mich an!</b>",
+ tables:[{h:["Infinitiv","du","ihr","Sie"], r:[["kommen","Komm!","Kommt!","Kommen Sie!"],["machen","Mach!","Macht!","Machen Sie!"],["nehmen","Nimm!","Nehmt!","Nehmen Sie!"],["lesen","Lies!","Lest!","Lesen Sie!"],["sein","Sei!","Seid!","Seien Sie!"],["aufstehen","Steh auf!","Steht auf!","Stehen Sie auf!"]]}],
+ ex:[["Komm bitte her!","Iltimos, bu yoqqa kel!"],["Mach das Fenster auf!","Derazani och!"],["Nehmen Sie Platz, bitte.","Marhamat, o'tiring."],["Seid leise, bitte!","Iltimos, jim bo'linglar!"],["Ruf mich morgen an!","Ertaga menga qo'ng'iroq qil!"],["Gehen Sie geradeaus.","To'g'riga yuring."]],
+ tip:"Xushmuomalalik uchun <b>bitte</b> qo'shing: <b>Hilf mir bitte!</b>",
+ drill:[
+  {t:'mc', q:"___ bitte langsam! (du, sprechen)", o:["Sprich","Sprechst","Sprecht"], a:0, uz:"Iltimos, sekin gapir!"},
+  {t:'mc', q:"___ Sie bitte Platz! (nehmen)", o:["Nehmen","Nimm","Nehmt"], a:0, uz:"Marhamat, o'tiring!"},
+  {t:'mc', q:"Kinder, ___ leise!", o:["seid","sei","sind"], a:0, uz:"Bolalar, jim bo'linglar!"},
+  {t:'mc', q:"___ mich morgen an! (du)", o:["Ruf","Rufst","Rufen"], a:0, uz:"Ertaga menga qo'ng'iroq qil!"},
+  {t:'mc', q:"___ nicht traurig! (du)", o:["Sei","Bist","Seid"], a:0, uz:"Xafa bo'lma!"},
+  {t:'mc', q:"___ das Buch! (du, lesen)", o:["Lies","Les","Liest"], a:0, uz:"Kitobni o'qi!"},
+  {t:'mc', q:"Bitte ___ Sie geradeaus.", o:["gehen","geh","geht"], a:0, uz:"Iltimos, to'g'riga yuring."},
+  {t:'type', q:"kommen → du: ___!", a:["komm"]},
+  {t:'order', de:"Mach bitte das Fenster zu!", uz:"Iltimos, derazani yop!"},
+  {t:'order', de:"Nehmen Sie bitte den Bus Nummer fünf.", uz:"Iltimos, 5-avtobusga chiqing."}
+ ]},
+{id:'g_adj', lv:'A2', icon:'🎨', title:"Sifat qo'shimchalari", de:"Adjektivdeklination",
+ desc:"ein neues Auto, der neue Lehrer, mit dem neuen Auto",
+ theory:"Ot oldidagi sifat qo'shimcha oladi.<br><b>der/die/das dan keyin</b> (aniq artikl): Nominativda <b>-e</b>: der neu<b>e</b> Lehrer, die neu<b>e</b> Lehrerin, das neu<b>e</b> Auto. Ko'plik, Dativ va erkak Akkusativda <b>-en</b>: den neu<b>en</b> Lehrer, mit dem neu<b>en</b> Auto.<br><b>ein/eine dan keyin</b>: sifat jinsni ko'rsatadi: ein neu<b>er</b> Lehrer, eine neu<b>e</b> Lehrerin, ein neu<b>es</b> Auto. Akkusativ (erkak): einen neu<b>en</b> Lehrer.<br>Dativda doim <b>-en</b>: mit einer gut<b>en</b> Freundin.",
+ tables:[{h:["","der","die","das","ko'plik"], r:[["Nominativ","der neue / ein neuer","die neue / eine neue","das neue / ein neues","die neuen"],["Akkusativ","den neuen / einen neuen","die neue / eine neue","das neue / ein neues","die neuen"],["Dativ","dem neuen / einem neuen","der neuen / einer neuen","dem neuen / einem neuen","den neuen"]]}],
+ ex:[["Das ist ein schönes Haus.","Bu chiroyli uy."],["Ich habe einen neuen Job.","Mening yangi ishim bor."],["Die kleine Katze schläft.","Kichkina mushuk uxlayapti."],["Wir wohnen in einer großen Stadt.","Biz katta shaharda yashaymiz."],["Er trägt ein weißes Hemd.","U oq ko'ylak kiygan."],["Ich suche eine billige Wohnung.","Men arzon kvartira qidiryapman."]],
+ tip:"Eng ko'p ishlatiladigan qoida: <b>Dativda va ko'plikda — doim -en</b>. Shundan boshlang!",
+ drill:[
+  {t:'mc', q:"Das ist ein ___ Auto.", o:["neues","neuer","neue"], a:0, uz:"Bu yangi mashina."},
+  {t:'mc', q:"Ich habe einen ___ Freund.", o:["guten","guter","gutes"], a:0, uz:"Mening yaxshi do'stim bor."},
+  {t:'mc', q:"Die ___ Frau ist meine Lehrerin.", o:["junge","junger","jungen"], a:0, uz:"Yosh ayol — mening o'qituvchim."},
+  {t:'mc', q:"Er wohnt in einer ___ Wohnung.", o:["kleinen","kleine","kleiner"], a:0, uz:"U kichik kvartirada yashaydi."},
+  {t:'mc', q:"Das ist ein ___ Tag!", o:["schöner","schönes","schönen"], a:0, uz:"Bu ajoyib kun!"},
+  {t:'mc', q:"Ich kaufe den ___ Computer.", o:["teuren","teure","teurer"], a:0, uz:"Men qimmat kompyuterni sotib olaman."},
+  {t:'mc', q:"Wir sprechen mit dem ___ Arzt.", o:["netten","nette","netter"], a:0, uz:"Biz mehribon shifokor bilan gaplashamiz."},
+  {t:'type', q:"gut → Das ist eine ___ Idee.", a:["gute"]},
+  {t:'order', de:"Ich suche eine billige Wohnung.", uz:"Men arzon kvartira qidiryapman."},
+  {t:'order', de:"Er hat einen neuen Job in Berlin.", uz:"Uning Berlinda yangi ishi bor."}
+ ]},
+{id:'g_futur', lv:'A2', icon:'🔮', title:"Kelasi zamon va rejalar", de:"Zukunft: Präsens und werden",
+ desc:"Morgen fahre ich... / Ich werde studieren",
+ theory:"Nemislar kelajak haqida ko'pincha <b>hozirgi zamon + vaqt so'zi</b> bilan gapiradi: <b>Morgen fahre ich</b> nach Berlin.<br>Aniq reja, va'da yoki bashorat uchun <b>werden + infinitiv</b> (gap oxirida): Ich <b>werde</b> Deutsch <b>lernen</b>.<br>werden: ich werde, du wirst, er wird, wir werden, ihr werdet, sie werden.<br>Vaqt iboralari: <b>nächste Woche</b>, <b>nächstes Jahr</b>, <b>übermorgen</b>, <b>in zwei Tagen</b>, <b>bald</b>.",
+ tables:[{h:["Shaxs","werden","Misol"], r:[["ich","werde","Ich werde dir helfen."],["du","wirst","Wirst du kommen?"],["er / sie / es","wird","Es wird regnen."],["wir","werden","Wir werden sehen."],["ihr","werdet","Ihr werdet es schaffen."],["sie / Sie","werden","Sie werden zufrieden sein."]]}],
+ ex:[["Morgen besuche ich meine Oma.","Ertaga buvimni ko'rgani boraman."],["Nächstes Jahr werde ich in Deutschland studieren.","Kelasi yil Germaniyada o'qiyman."],["Es wird morgen regnen.","Ertaga yomg'ir yog'adi."],["Wirst du mich anrufen?","Menga qo'ng'iroq qilasanmi?"],["In zwei Wochen haben wir Urlaub.","Ikki haftadan keyin ta'tilimiz boshlanadi."],["Ich werde dir helfen.","Senga yordam beraman."]],
+ tip:"<b>werden</b> yolg'iz kelsa «bo'lmoq» ma'nosini beradi: Ich <b>werde</b> Arzt — «Men shifokor bo'laman».",
+ drill:[
+  {t:'mc', q:"Ich ___ nächstes Jahr in Berlin studieren.", o:["werde","wird","werden"], a:0, uz:"Kelasi yil Berlinda o'qiyman."},
+  {t:'mc', q:"Es ___ morgen regnen.", o:["wird","werde","wirst"], a:0, uz:"Ertaga yomg'ir yog'adi."},
+  {t:'mc', q:"___ du mich anrufen?", o:["Wirst","Wird","Werdet"], a:0, uz:"Menga qo'ng'iroq qilasanmi?"},
+  {t:'mc', q:"Wir ___ im Sommer nach Wien fahren.", o:["werden","wird","werdet"], a:0, uz:"Yozda Venaga boramiz."},
+  {t:'mc', q:"Morgen ___ ich meine Eltern.", o:["besuche","besucht","werde"], a:0, uz:"Ertaga ota-onamni ziyorat qilaman."},
+  {t:'mc', q:"In zwei ___ habe ich Urlaub.", o:["Wochen","Woche","Wochenende"], a:0, uz:"Ikki haftadan keyin ta'tilim."},
+  {t:'mc', q:"Sie ___ bald einen neuen Job finden.", o:["wird","werde","werden"], a:0, uz:"U tez orada yangi ish topadi."},
+  {t:'type', q:"werden → er ___", a:["wird"]},
+  {t:'type', q:"werden → ihr ___", a:["werdet"]},
+  {t:'order', de:"Nächstes Jahr werde ich in Deutschland arbeiten.", uz:"Kelasi yil Germaniyada ishlayman."},
+  {t:'order', de:"Morgen fahre ich mit dem Zug nach Berlin.", uz:"Ertaga poyezdda Berlinga boraman."}
+ ]}
+];
+
+/* =====================================================================
+   DARAJALAR: A1 → A2 → B1, grammatika darslari va mashqlari
+   ===================================================================== */
+var GRAM_MAP = {}; GRAM.forEach(function(g){ GRAM_MAP[g.id]=g; });
+var LEVELS = [['A1',"Boshlang'ich"],['A2',"Elementar"],['B1',"O'rta"]];
+var B1_TOPICS = ["Konjunktiv II: würde, hätte, wäre, könnte","Passiv: Das Haus wird gebaut","Nisbiy gaplar: der Mann, der...","Präteritum: barcha fe'llar","Plusquamperfekt","Genitiv","als / wenn / bevor / nachdem / während","zu + Infinitiv, um ... zu, damit","Bilvosita savollar: ob, wann, wo...","Predlogli fe'llar va da-/wo- so'zlari","obwohl, trotzdem, deshalb","Sifat qo'shimchalari (to'liq)"];
+
+/* ---------- A2 bosqichlari ---------- */
+UNITS[3].nodes[0].certLv = 'A1';
+UNITS.forEach(function(u){ u.lv = u.lv || 'A1'; });
+function gNode(id){ var g=GRAM_MAP[id]; return {id:id, type:'grammar', icon:g.icon, title:g.title, desc:g.desc+'. Avval darsni o\'qing, keyin 10 ta mashq — o\'tish uchun 70%.', learn:['gram',id], pass:70}; }
+function vNode(cat){ var c=VOCAB.filter(function(x){ return x.id===cat; })[0]; return {id:'v_'+cat, type:'vocab', cat:cat, icon:c.icon, title:"So'zlar: "+c.title.replace(/ \(A2\)$/,''), desc:c.w.length+" ta so'z. Avval lug'atda ko'rib chiqing, keyin 12 ta savol — o'tish uchun 70%.", learn:['vocab',cat], pass:70}; }
+function eNode(id, title, gram, cats){ return {id:id, type:'exam', icon:'🏆', title:title, desc:"Bo'lim bo'yicha 15 ta aralash savol (grammatika va so'zlar). O'tish uchun 80% kerak.", spec:{gram:gram, cats:cats}, n:15, pass:80}; }
+var A2_UNITS = [
+ {id:'u5', no:5, lv:'A2', title:"O'tgan zamon", desc:"Kecha nima qildingiz? Perfekt va Präteritum", color:'#E2503F', nodes:[
+   gNode('g_perf1'), gNode('g_perf2'), gNode('g_prat'), vNode('a2kundalik'), vNode('a2feyl'), vNode('a2ovqat'),
+   eNode('exam5', "5-bo'lim imtihoni", ['g_perf1','g_perf2','g_prat'], ['a2kundalik','a2feyl','a2ovqat'])]},
+ {id:'u6', no:6, lv:'A2', title:"Kelishiklar va predloglar", desc:"Akkusativ, Dativ, Wo? / Wohin?", color:'#2B4583', nodes:[
+   gNode('g_akk'), gNode('g_dat'), gNode('g_praep'), gNode('g_wechsel'), vNode('a2uy'), vNode('a2shahar'), vNode('a2xarid'), vNode('a2sogliq'),
+   eNode('exam6', "6-bo'lim imtihoni", ['g_akk','g_dat','g_praep','g_wechsel'], ['a2uy','a2shahar','a2xarid','a2sogliq'])]},
+ {id:'u7', no:7, lv:'A2', title:"Gap qurilishi", desc:"Modal, ajraladigan, qaytim fe'llar va ergash gaplar", color:'#B8893F', nodes:[
+   gNode('g_modal'), gNode('g_trenn'), gNode('g_reflex'), gNode('g_neben'), vNode('a2ish'), vNode('a2talim'), vNode('a2media'), vNode('a2bosh'),
+   eNode('exam7', "7-bo'lim imtihoni", ['g_modal','g_trenn','g_reflex','g_neben'], ['a2ish','a2talim','a2media','a2bosh'])]},
+ {id:'u8', no:8, lv:'A2', title:"Tasvirlash va rejalar", desc:"Taqqoslash, egalik, buyruq, sifatlar, kelajak", color:'#1E3160', nodes:[
+   gNode('g_komp'), gNode('g_poss'), gNode('g_imp'), gNode('g_adj'), gNode('g_futur'), vNode('a2sifat'), vNode('a2his'), vNode('a2odam'), vNode('a2tabiat'), vNode('a2kichik'),
+   eNode('exam8', "8-bo'lim imtihoni", ['g_komp','g_poss','g_imp','g_adj','g_futur'], ['a2sifat','a2his','a2odam','a2tabiat','a2kichik'])]},
+ {id:'u9', no:9, lv:'A2', title:"A2 yakuniy imtihoni", desc:"A2 grammatikasi va so'zlari bo'yicha 30 ta savol", color:'#14213D', nodes:[
+   {id:'a2final', type:'final', certLv:'A2', icon:'👑', title:"A2 imtihoni", desc:"A2 bo'yicha 30 ta savol. 80% va undan yuqori natija — A2 sertifikati!",
+    spec:{gram:GRAM.map(function(g){ return g.id; }), cats:['a2feyl','a2sifat','a2kundalik','a2uy','a2shahar','a2ish','a2his','a2kichik']}, n:30, pass:80}]}
+];
+A2_UNITS.forEach(function(u){ UNITS.push(u); u.nodes.forEach(function(n){ n.unit=u; NODES.push(n); }); });
+function unitLabel(u){ return u.nodes.length===1 && u.nodes[0].type==='final' ? u.lv+' yakuniy' : u.no+'-bo\'lim'; }
+function lvNodes(lv){ return NODES.filter(function(n){ return n.unit.lv===lv; }); }
+function lvDone(lv){ return lvNodes(lv).filter(function(n){ return nodeIsDone(n.id); }).length; }
+
+/* ---------- Savollar: grammatika ---------- */
+function stripHint(s){ return String(s).replace(/\s*\([^)]*\)\s*$/,'').trim(); }
+function orderTokens(de){ return String(de).replace(/[.!?]+$/,'').split(/\s+/).map(function(t){ return t.replace(/,$/,''); }).filter(Boolean); }
+function qGram(d, gid, mcOnly){
+  if(d.t==='mc'){
+    var ans=d.o[d.a];
+    return {type:'gram', ask:"Bo'sh joyni to'ldiring", prompt:d.q, sub:d.uz||'', options:shuffle(d.o.slice()), answer:ans, say:stripHint(d.q.replace('___', ans)), mean:d.uz||'', gid:gid};
+  }
+  if(mcOnly) return null;
+  if(d.t==='type'){
+    var arrow = d.q.indexOf('→')>-1 && d.q.indexOf('___')>d.q.indexOf('→');
+    var full = d.q.split('→').pop().replace(/^[^:]*:\s*/, function(m){ return /Partizip|Präteritum|Komparativ/.test(m)?'':m; });
+    return {type:'gtype', kind:'type', ask:"To'g'ri shaklini yozing", prompt:d.q, answer:d.a[0], accept:d.a, say:stripHint(arrow ? full.replace('___', d.a[0]) : d.q.replace('___', d.a[0])), mean:'', gid:gid};
+  }
+  return {type:'gorder', kind:'order', ask:"So'zlardan nemischa gap tuzing", prompt:d.uz, tokens:orderTokens(d.de), answer:d.de, say:d.de, mean:d.uz, gid:gid};
+}
+function buildGrammarQuiz(gid, n){
+  var g=GRAM_MAP[gid];
+  var mc=g.drill.filter(function(d){ return d.t==='mc'; }), other=g.drill.filter(function(d){ return d.t!=='mc'; });
+  var pick = shuffle(mc).slice(0, Math.max(5, (n||10)-Math.min(other.length,4))).concat(shuffle(other).slice(0, Math.min(other.length,4)));
+  return shuffle(pick).slice(0, n||10).map(function(d){ return qGram(d, gid); });
+}
+function buildCatQuiz(cat, n){
+  var pool=ALLW.filter(function(w){ return w.cat===cat; });
+  var modes=['de2uz','uz2de','audio','art'];
+  return shuffle(pool).slice(0, Math.min(n||12, pool.length)).map(function(w,i){
+    var m=modes[i%4]; if(m==='art' && (!wordArt(w)||w.pl)) m='de2uz';
+    return qWord(w, m, pool);
+  });
+}
+/* Imtihonlar: lug'at, iboralar, sonlar, dialoglar va grammatika (faqat variantli savollar) */
+var _buildExamA1 = buildExam;
+buildExam = function(spec, n){
+  if(!spec.gram || !spec.gram.length) return _buildExamA1(spec, n);
+  var out=[], used={}, tries=0;
+  var gramN = Math.round(n*0.5);
+  var gl = spec.gram.slice(), i=0;
+  while(out.length<gramN && tries<n*20){
+    tries++;
+    var g=GRAM_MAP[gl[i%gl.length]]; i++;
+    var mcs=g.drill.filter(function(d){ return d.t==='mc'; });
+    var q=qGram(mcs[rnd(0,mcs.length-1)], g.id, true);
+    var key=q.say+'|'+q.answer; if(used[key]) continue; used[key]=1; out.push(q);
+  }
+  var rest = (spec.cats&&spec.cats.length) ? _buildExamA1({cats:spec.cats, lessons:spec.lessons, numbers:spec.numbers, dialogs:spec.dialogs, sound:spec.sound}, n-out.length) : [];
+  rest.forEach(function(q){ var key=q.say+'|'+q.answer; if(!used[key]){ used[key]=1; out.push(q); } });
+  /* yetmasa — grammatikadan to'ldiramiz */
+  tries=0;
+  while(out.length<n && tries<200){
+    tries++;
+    var g2=GRAM_MAP[spec.gram[rnd(0,spec.gram.length-1)]], m2=g2.drill.filter(function(d){ return d.t==='mc'; });
+    var q2=qGram(m2[rnd(0,m2.length-1)], g2.id, true), k2=q2.say+'|'+q2.answer;
+    if(!used[k2]){ used[k2]=1; out.push(q2); }
+  }
+  return shuffle(out).slice(0,n);
+};
+
+/* ---------- Bosqich testlari ---------- */
+startNodeTest = function(id, back){
+  var n=nodeById(id); if(!n) return;
+  var qs;
+  if(n.type==='lesson') qs=function(){ return buildLessonQuiz(id); };
+  else if(n.type==='sound') qs=function(){ return buildSoundQuiz(10); };
+  else if(n.type==='numbers') qs=function(){ return buildNumberQuiz(10); };
+  else if(n.type==='dialog') qs=function(){ return buildDialogQuiz(n.dialogs, 8); };
+  else if(n.type==='grammar') qs=function(){ return buildGrammarQuiz(id, 10); };
+  else if(n.type==='vocab') qs=function(){ return buildCatQuiz(n.cat, 12); };
+  else qs=function(){ return buildExam(n.spec, n.n); };
+  startQuiz(qs(), {title:n.title, back:back||['home','Bosh sahifa'], lessonId:n.type==='lesson'?id:null, nodeId:id, pass:n.pass, retry:qs,
+    onDone:function(pct){ return nodeFinished(n, pct); }});
+};
+var _nodeFinishedA1 = nodeFinished;
+nodeFinished = function(n, pct){
+  var b = _nodeFinishedA1(n, pct);
+  if(n.type==='final' && pct>=n.pass){ QZ.cert = n.certLv || 'A1'; if(n.certLv==='A2' && !state.flags.a2) state.flags.a2 = dayKey(); }
+  return b;
+};
+
+/* ---------- Daraja aniqlash testi (A1 + A2) ---------- */
+buildPlacement = function(){
+  var out=[];
+  [0,1,2].forEach(function(ui){ var sp=UNITS[ui].nodes[UNITS[ui].nodes.length-1].spec; buildExam(sp, 3).forEach(function(q){ q.unit=ui; out.push(q); }); });
+  [4,5,6].forEach(function(ui){ var sp=UNITS[ui].nodes[UNITS[ui].nodes.length-1].spec; buildExam(sp, 2).forEach(function(q){ q.unit=ui; out.push(q); }); });
+  return out;
+};
+applyPlacement = function(){
+  var per={}; QZ.qs.forEach(function(q,i){ if(QZ.res && QZ.res[i]) per[q.unit]=(per[q.unit]||0)+1; });
+  function openUnit(u){ u.nodes.forEach(function(n){ state.path[n.id]=Math.max(80, nz(state.path[n.id])); if(n.type==='lesson') state.lessons[n.id]=Math.max(80, nz(state.lessons[n.id])); }); }
+  var opened=0, a2=0;
+  for(var u=0; u<3; u++){ if(nz(per[u])>=2){ openUnit(UNITS[u]); opened++; } else break; }
+  if(opened===3){
+    openUnit(UNITS[3]);
+    for(var v=4; v<7; v++){ if(nz(per[v])>=2){ openUnit(UNITS[v]); a2++; } else break; }
+  }
+  if(!opened) QZ.msgOk = "🌱 Noldan boshlash eng to'g'ri yo'l — 1-bo'limdan boshlaymiz!";
+  else if(opened<3) QZ.msgOk = "🎯 Natija: A1 ning "+opened+" ta bo'limi sizga tanish — ular ochildi. "+(opened+1)+"-bo'limdan davom etasiz.";
+  else QZ.msgOk = "🎯 Ajoyib! A1 darajasini bilasiz"+(a2?" va A2 ning "+a2+" ta bo'limi ham tanish":"")+". O'rganish yo'lida keyingi bosqichdan davom etasiz.";
+  return 20;
+};
+
+/* ---------- Yo'l: darajalar bo'yicha ---------- */
+var pathLv = null;
+function curLevel(){ var c=currentNode(); return c ? c.unit.lv : 'A2'; }
+function pathTabsHtml(){
+  var lv = pathLv || curLevel();
+  var h='<div class="lvtabs">'+LEVELS.map(function(L){
+    var nodes=lvNodes(L[0]), done=lvDone(L[0]), soon=!nodes.length;
+    return '<button class="lvtab '+(lv===L[0]?'on':'')+'" data-act="pathLv" data-p="'+L[0]+'"><b>'+L[0]+'</b><small>'+(soon?'Tez orada':done+' / '+nodes.length)+'</small><i style="width:'+(soon?0:done/nodes.length*100)+'%"></i></button>';
+  }).join('')+'</div>';
+  if(lv==='B1') return h + '<div class="card soon"><div style="font-size:46px">🚧</div><h3 class="serif" style="color:var(--navy);font-size:22px">B1 darajasi tayyorlanmoqda</h3><p class="muted">Keyingi yangilanishda qo\'shiladi. A2 ni tugatib turing — B1 ochilganda shu yerdan davom etasiz.</p><div class="chips" style="justify-content:center">'+B1_TOPICS.map(function(t){ return '<span class="chip">'+esc(t)+'</span>'; }).join('')+'</div></div>';
+  if(lv==='A2' && !nodeIsDone('final') && lvDone('A2')===0) h += '<div class="tip n" style="max-width:560px;margin:0 auto 18px">🔒 A2 bosqichlari <b>A1 yakuniy imtihonidan</b> keyin ochiladi. Grammatika darslarini esa hozir ham o\'qishingiz mumkin — 🧩 <b>Grammatika</b> bo\'limida.</div>';
+  return h + pathHtml(lv);
+}
+pathHtml = function(lv){
+  lv = lv || curLevel();
+  var cur = currentNode(), h='<div class="path-wrap">', gi=0;
+  UNITS.filter(function(u){ return u.lv===lv; }).forEach(function(u){
+    h += '<div class="unit" style="--uc:'+u.color+'"><div><div class="ut">'+u.lv+' · '+unitLabel(u)+'</div><b>'+esc(u.title)+'</b><small>'+esc(u.desc)+'</small></div><div class="uprog">'+unitDone(u)+' / '+u.nodes.length+'</div></div>';
+    u.nodes.forEach(function(n){
+      var done=nodeIsDone(n.id), isCur=cur&&cur.id===n.id, lock=!done&&!isCur;
+      var cls='pnode'+(done?' done':'')+(isCur?' cur':'')+(lock?' lock':'')+((n.type==='exam')?' exam':'')+(n.type==='final'?' final':'')+(n.type==='grammar'?' gram':'');
+      var sc=nodeScore(n.id);
+      h += '<div class="prow'+(isCur?' cur-row':'')+'" style="--x:'+ZIG[gi%ZIG.length]+'"><div class="pin"><button class="'+cls+'" data-act="node" data-p="'+n.id+'" aria-label="'+esc(n.title)+'">'+
+        (isCur?'<span class="bubble">'+(sc>0?'DAVOM ETISH':'BOSHLASH')+'</span>':'')+n.icon+
+        (done?'<span class="pchk">✓</span>':'')+(lock?'<span class="plk">🔒</span>':'')+'</button>'+
+        '<div class="plabel">'+esc(n.title)+(sc>0?'<small>Eng yaxshi: '+sc+'%</small>':'')+'</div></div></div>';
+      gi++;
+    });
+  });
+  return h+'</div>';
+};
+openNode = function(id){
+  var n=nodeById(id); if(!n) return;
+  var done=nodeIsDone(id), unl=nodeUnlocked(id), sc=nodeScore(id);
+  var i=NODES.indexOf(n), prev=i>0?NODES[i-1]:null;
+  var big='nbig'+((n.type==='exam'||n.type==='final')?' exam':'')+(!unl?' lock':'');
+  var learnLbl = n.type==='grammar' ? '📖 Darsni o\'qish' : (n.type==='vocab' ? '📚 So\'zlarni ko\'rish' : '📖 Avval o\'rganish');
+  var h='<div class="nsheet"><div class="'+big+'">'+n.icon+'</div><div class="nunit">'+n.unit.lv+' · '+unitLabel(n.unit)+' · '+esc(n.unit.title)+'</div>'+
+    '<h2 class="serif" style="color:var(--navy)">'+esc(n.title)+'</h2><p>'+esc(n.desc)+'</p>'+
+    (done?'<span class="tag ok">✓ Tugatilgan · '+sc+'%</span>':(sc>0?'<span class="tag">Eng yaxshi natija: '+sc+'% · kerak: '+n.pass+'%</span>':(unl?'<span class="tag n">O\'tish uchun: '+n.pass+'%</span>':'')))+
+    '<div class="nbtns">';
+  if(!unl){
+    h += '<div class="fail-msg">🔒 Avval «'+esc(prev.title)+'» bosqichini tugating</div>';
+    if(n.learn) h += '<button class="btn btn-o" data-act="nodeLearn" data-p="'+n.id+'">'+learnLbl+'</button>';
+  } else {
+    if(n.learn && (n.type==='grammar' || n.type==='vocab') && !done) h += '<button class="btn btn-c" data-act="nodeLearn" data-p="'+n.id+'">'+learnLbl+'</button><button class="btn btn-o" data-act="nodeTest" data-p="'+n.id+'">📝 Testni boshlash</button>';
+    else {
+      h += '<button class="btn btn-c" data-act="nodeTest" data-p="'+n.id+'">'+(n.type==='exam'||n.type==='final'?'🏆 Imtihonni boshlash':'📝 Testni boshlash')+'</button>';
+      if(n.learn) h += '<button class="btn btn-o" data-act="nodeLearn" data-p="'+n.id+'">'+learnLbl+'</button>';
+    }
+  }
+  if(n.type==='final' && done) h += '<button class="btn btn-n" data-act="go" data-v="cert" data-p="'+(n.certLv||'A1')+'">📜 Sertifikatni ko\'rish</button>';
+  h += '</div></div>';
+  document.getElementById('modalBody').innerHTML=h;
+  document.getElementById('modal').classList.add('show');
+};
+
+/* ---------- Test dvigateli: yozish va gap tuzish savollari ---------- */
+function quizMark(ok, picked, el){
+  var q=QZ.qs[QZ.i];
+  QZ.picked=picked; QZ.answered=true; QZ.anim=false; QZ.lastOk=ok;
+  QZ.res = QZ.res || []; QZ.res[QZ.i] = ok;
+  state.answered = nz(state.answered)+1;
+  if(ok){
+    QZ.score++; state.correct = nz(state.correct)+1;
+    if(q.wid){ state.learned[q.wid]=1; if(state.wrong[q.wid]){ state.wrong[q.wid]--; if(state.wrong[q.wid]<=0) delete state.wrong[q.wid]; } }
+    SFX.play('ok');
+  } else {
+    QZ.wrong.push(q);
+    if(q.wid) state.wrong[q.wid] = nz(state.wrong[q.wid])+1;
+    SFX.play('bad');
+  }
+  if(q.wid && WMAP[q.wid]){ var c=WMAP[q.wid].cat, cs=state.cat[c]||[0,0]; cs[1]++; if(ok) cs[0]++; state.cat[c]=cs; }
+  if(q.gid){ var gs=state.cat['g:'+q.gid]||[0,0]; gs[1]++; if(ok) gs[0]++; state.cat['g:'+q.gid]=gs; }
+  render();
+  if(ok) gainXp(10, document.querySelector('.opt.right, .slots.ok, .qtype.ok')); else saveState();
+  if(q.type!=='de2uz' || !ok) say(q.say);
+}
+quizPick = function(el){
+  if(!QZ || QZ.answered) return;
+  var q=QZ.qs[QZ.i], o=q.options[parseInt(el.dataset.p,10)];
+  quizMark(o===q.answer, o, el);
+};
+function quizTypeCheck(){
+  if(!QZ || QZ.answered) return;
+  var q=QZ.qs[QZ.i], inp=document.getElementById('qIn'); if(!inp) return;
+  var v=inp.value.trim();
+  if(!v){ toast("Javobni yozing"); inp.focus(); return; }
+  var ok=(q.accept||[q.answer]).some(function(a){ return norm(a)===norm(v); });
+  quizMark(ok, v);
+}
+function ordState(){ if(!QZ.ord || QZ.ord.i!==QZ.i){ var q=QZ.qs[QZ.i], t=q.tokens.map(function(x,k){ return {t:x,k:k}; }), mix, tries=0; do { mix=shuffle(t); tries++; } while(tries<20 && mix.map(function(x){ return x.t; }).join(' ')===q.tokens.join(' ')); QZ.ord={i:QZ.i, tiles:mix, used:{}, ans:[]}; } return QZ.ord; }
+function ordCheck(){
+  var o=ordState(), q=QZ.qs[QZ.i];
+  if(o.ans.length!==o.tiles.length) return false;
+  var s=o.ans.map(function(ti){ return o.tiles[ti].t; }).join(' ');
+  quizMark(s===q.tokens.join(' '), s);
+  return true;
+}
+var _quizView = VIEWS.quiz;
+VIEWS.quiz = function(){
+  if(!QZ || QZ.done) return _quizView();
+  var q=QZ.qs[QZ.i];
+  if(q.kind!=='type' && q.kind!=='order' && q.type!=='gram') return _quizView();
+  var h = backBtn(QZ.back[0], QZ.back[1], QZ.back[2]) + '<div class="qwrap"><div class="qhead"><span>'+esc(QZ.title)+' · '+(QZ.i+1)+' / '+QZ.qs.length+'</span><span>✓ '+QZ.score+'</span></div><div class="pbar"><i style="width:'+(QZ.i/QZ.qs.length*100)+'%"></i></div>';
+  h += '<div class="qcard'+(QZ.anim&&!REDUCED?' qin':'')+'"><div class="ask">'+esc(q.ask)+'</div>';
+  var ok = QZ.answered && QZ.lastOk;
+  if(q.type==='gram'){
+    var filled = QZ.answered ? esc(q.prompt).replace('___', '<span class="gap '+(ok?'ok':'bad')+'">'+esc(QZ.picked)+'</span>') : esc(q.prompt).replace('___','<span class="gap">&nbsp;?&nbsp;</span>');
+    h += '<div class="prompt gprompt">'+filled+'</div>'+(q.sub?'<div class="sub">'+esc(q.sub)+'</div>':'');
+    h += '<div class="opts">';
+    q.options.forEach(function(o,k){
+      var cls=''; if(QZ.answered){ if(o===q.answer) cls='right'; else if(o===QZ.picked) cls='wrong'; }
+      h += '<button class="opt '+cls+'" data-act="qPick" data-p="'+k+'" '+(QZ.answered?'disabled':'')+'>'+esc(o)+'</button>';
+    });
+    h += '</div>';
+  } else if(q.kind==='type'){
+    h += '<div class="prompt gprompt">'+esc(q.prompt).replace('___','<span class="gap">&nbsp;?&nbsp;</span>')+'</div>';
+    h += '<input class="inp qtype '+(QZ.answered?(ok?'ok':'bad'):'')+'" id="qIn" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Javobni yozing..." style="max-width:340px;text-align:center;margin-top:16px" '+(QZ.answered?'disabled value="'+esc(QZ.picked)+'"':'')+'>';
+    if(!QZ.answered) h += '<div class="umls">'+['ä','ö','ü','ß'].map(function(c){ return '<button data-act="qIns" data-p="'+c+'">'+c+'</button>'; }).join('')+'</div><div class="mt"><button class="btn btn-c" data-act="qType">Tekshirish</button></div>';
+  } else {
+    var o=ordState();
+    h += '<div class="prompt" style="font-size:22px">'+esc(q.prompt)+'</div>';
+    h += '<div class="slots '+(QZ.answered?(ok?'ok':'bad'):'')+'">'+o.ans.map(function(ti,k){ return '<button class="lt w" data-act="qOrdBack" data-p="'+k+'" '+(QZ.answered?'disabled':'')+'>'+esc(o.tiles[ti].t)+'</button>'; }).join('')+'</div>';
+    if(!QZ.answered) h += '<div class="pool">'+o.tiles.map(function(t,k){ return '<button class="lt w '+(o.used[k]?'used':'')+'" data-act="qOrdPick" data-p="'+k+'">'+esc(t.t)+'</button>'; }).join('')+'</div>'+
+      '<div class="toolbar mt" style="justify-content:center"><button class="btn btn-o btn-s" data-act="qOrdClear">↺ Tozalash</button></div>';
+  }
+  h += '<div class="fb '+(QZ.answered?(ok?'ok':'bad'):'')+'">'+(QZ.answered?(ok?'✓ Barakalla! +10 XP':'✗ To\'g\'ri javob: <b>'+esc(q.answer)+'</b>'):'')+'</div>';
+  if(QZ.answered && q.say && (q.kind==='order' || q.type==='gram')) h += '<div class="ex-row" style="justify-content:center">'+spk(q.say,'sm')+'<span class="de">'+esc(q.say)+'</span></div>';
+  if(QZ.answered) h += '<button class="btn btn-n mt" data-act="qNext">'+(QZ.i<QZ.qs.length-1?'Keyingi →':'Natijani ko\'rish')+'</button>';
+  return h+'</div></div>';
+};
+var _quizAfter = AFTER.quiz;
+AFTER.quiz = function(){
+  _quizAfter();
+  if(QZ && !QZ.done && !QZ.answered){
+    var inp=document.getElementById('qIn');
+    if(inp){ inp.addEventListener('keydown', function(e){ if(e.key==='Enter') quizTypeCheck(); }); setTimeout(function(){ try{ inp.focus(); }catch(e){} }, 200); }
+  }
+};
+
+/* ---------- Grammatika sahifalari ---------- */
+var gramTab = null;
+VIEWS.grammar = function(p){
+  if(p) gramTab=p;
+  var tab = gramTab || (curLevel()==='A1' ? 'A1' : 'A2');
+  var h = pageHead("Grammatik", "Grammatika", "A1 dan B1 gacha — har bir mavzu tushuntirish, jadval, ovozli misollar va mashqlar bilan.");
+  h += '<div class="tabs" style="margin-bottom:20px">'+LEVELS.map(function(L){ return '<button class="'+(tab===L[0]?'on':'')+'" data-act="gramTab" data-p="'+L[0]+'">'+L[0]+' · '+L[1]+'</button>'; }).join('')+'</div>';
+  if(tab==='A1'){
+    h += '<div class="tip n" style="margin-bottom:16px">A1 — kundalik gapirish uchun eng zarur 9 ta qoida. Har bir misolni tinglang.</div><div class="grid g2">';
+    GRAMMAR.forEach(function(g){
+      h += '<div class="card"><h3 style="color:var(--navy);font-size:20px">'+g.t+'</h3><p class="muted" style="margin:8px 0 0">'+g.text+'</p>';
+      if(g.rows){ h += '<table class="gtbl"><tr><th>Nemischa</th><th>O\'zbekcha</th></tr>'+g.rows.map(function(r){ return '<tr><td class="de">'+spk(r[0].replace(' / ',', '),'sm')+' &nbsp;'+esc(r[0])+'</td><td>'+esc(r[1])+'</td></tr>'; }).join('')+'</table>'; }
+      if(g.ex){ h += '<div class="mt">'+g.ex.map(function(e){ return '<div class="ex-row">'+spk(e[0].replace(' — ',', '),'sm')+'<div><div class="de">'+esc(e[0])+'</div><div class="uz">'+esc(e[1])+'</div></div></div>'; }).join('')+'</div>'; }
+      h += '</div>';
+    });
+    return h+'</div>';
+  }
+  if(tab==='B1'){
+    return h+'<div class="card soon"><div style="font-size:46px">🚧</div><h3 class="serif" style="color:var(--navy);font-size:22px">B1 grammatikasi tayyorlanmoqda</h3><p class="muted">Keyingi yangilanishda quyidagi mavzular qo\'shiladi:</p><div class="chips" style="justify-content:center">'+B1_TOPICS.map(function(t){ return '<span class="chip">'+esc(t)+'</span>'; }).join('')+'</div></div>';
+  }
+  A2_UNITS.filter(function(u){ return u.nodes.some(function(n){ return n.type==='grammar'; }); }).forEach(function(u){
+    h += '<h2 class="sec-t">'+u.no+'-bo\'lim: '+esc(u.title)+'</h2><div class="grid g3">';
+    u.nodes.filter(function(n){ return n.type==='grammar'; }).forEach(function(n){
+      var g=GRAM_MAP[n.id], sc=nodeScore(n.id), done=nodeIsDone(n.id);
+      h += '<button class="tile" data-act="go" data-v="gram" data-p="'+g.id+'">'+(done?'<span class="tag ok done-badge">✓ '+sc+'%</span>':'')+'<div class="emo">'+g.icon+'</div><b>'+esc(g.title)+'</b><small><i>'+esc(g.de)+'</i></small><small>'+esc(g.desc)+'</small></button>';
+    });
+    h += '</div>';
+  });
+  return h;
+};
+VIEWS.gram = function(id){
+  var g=GRAM_MAP[id] || GRAM[0], idx=GRAM.indexOf(g), sc=nodeScore(g.id);
+  var h = backBtn('grammar','Grammatika', 'A2') + pageHead(g.icon+' '+g.lv+' · '+esc(g.de), esc(g.title), esc(g.desc),
+    '<button class="btn btn-c" data-act="gramTest" data-p="'+g.id+'">📝 Mashq qilish</button>');
+  h += '<div class="card gtheory"><h3 class="serif">📖 Qoida</h3><div class="gtxt">'+g.theory+'</div></div>';
+  (g.tables||[]).forEach(function(t){
+    h += '<div class="card mt" style="overflow-x:auto"><table class="gtbl"><tr>'+t.h.map(function(c){ return '<th>'+esc(c)+'</th>'; }).join('')+'</tr>'+
+      t.r.map(function(r){ return '<tr>'+r.map(function(c,k){ return '<td class="'+(k===0?'':'de')+'">'+esc(c)+'</td>'; }).join('')+'</tr>'; }).join('')+'</table></div>';
+  });
+  h += '<h2 class="sec-t">🔊 Misollar</h2>';
+  g.ex.forEach(function(e, k){
+    h += '<div class="phr"><div class="txt"><div class="de">'+esc(e[0])+'</div><div class="uz">'+esc(e[1])+'</div></div><div class="acts">'+spk(e[0])+spkSlow(e[0])+(PRON.supported()?'<button class="spk mic-s" data-act="gramPron" data-g="'+g.id+'" data-i="'+k+'" title="Talaffuzni tekshirish">🎤</button>':'')+'</div></div>';
+  });
+  if(g.tip) h += '<div class="tip mt">💡 '+g.tip+'</div>';
+  h += '<div class="card result mt2"><div style="font-size:42px">'+(nodeIsDone(g.id)?'✅':'📝')+'</div><h3 class="serif" style="color:var(--navy)">'+(nodeIsDone(g.id)?'Dars tugatilgan · '+sc+'%':'Qoidani mustahkamlang')+'</h3><p class="muted">10 ta mashq: variant tanlash, so\'z yozish va gap tuzish. O\'tish uchun 70%.</p><button class="btn btn-c" data-act="gramTest" data-p="'+g.id+'">📝 Mashqni boshlash</button></div>';
+  h += '<div class="mt2 toolbar" style="justify-content:space-between">'+
+    (idx>0?'<button class="btn btn-o" data-act="go" data-v="gram" data-p="'+GRAM[idx-1].id+'">← '+esc(GRAM[idx-1].title)+'</button>':'<span></span>')+
+    (idx<GRAM.length-1?'<button class="btn btn-o" data-act="go" data-v="gram" data-p="'+GRAM[idx+1].id+'">'+esc(GRAM[idx+1].title)+' →</button>':'<span></span>')+'</div>';
+  return h;
+};
+
+/* ---------- Lug'at: darajalar ---------- */
+var vocabLv = 'A1';
+var _vocabView = VIEWS.vocab;
+VIEWS.vocab = function(p){
+  if(p && p!=='all'){ var c=VOCAB.filter(function(x){ return x.id===p; })[0]; if(c){ vocabCat=p; vocabLv=c.lv||'A1'; vocabLimit=120; } }
+  var cats = VOCAB.filter(function(c){ return (c.lv||'A1')===vocabLv; });
+  var lvCount = ALLW.filter(function(w){ return w.lv===vocabLv; }).length;
+  var h = pageHead("Wortschatz", "Lug'at", ALLW.length+" ta so'z: A1 — "+ALLW.filter(function(w){ return w.lv==='A1'; }).length+", A2 — "+ALLW.filter(function(w){ return w.lv==='A2'; }).length+". Otlarni doim artikli bilan yodlang. ✓ — o'rganilgan so'zlar.",
+    '<button class="btn btn-c" data-act="startFlash">🃏 Kartochkalar</button>');
+  h += '<div class="tabs" style="margin-bottom:14px">'+LEVELS.map(function(L){ var n=ALLW.filter(function(w){ return w.lv===L[0]; }).length; return '<button class="'+(vocabLv===L[0]?'on':'')+'" data-act="vocabLv" data-p="'+L[0]+'">'+L[0]+' <small style="opacity:.7">'+(n?n:'tez orada')+'</small></button>'; }).join('')+'</div>';
+  if(!cats.length) return h+'<div class="card soon"><div style="font-size:46px">🚧</div><h3 class="serif" style="color:var(--navy)">B1 so\'zlari tayyorlanmoqda</h3><p class="muted">Keyingi yangilanishda qo\'shiladi.</p></div>';
+  h += '<div class="chips" style="margin-bottom:14px"><button class="chip '+(vocabCat==='all'?'on':'')+'" data-act="vcat" data-p="all">Hammasi ('+lvCount+')</button>'+
+    cats.map(function(c){ var tot=c.w.length, l=0; c.w.forEach(function(_,i){ if(state.learned[c.id+i]) l++; }); return '<button class="chip '+(vocabCat===c.id?'on':'')+'" data-act="vcat" data-p="'+c.id+'">'+c.icon+' '+esc(c.title)+' <span class="mini">'+l+'/'+tot+'</span></button>'; }).join('')+'</div>';
+  h += '<div class="toolbar" style="justify-content:space-between;margin-bottom:16px"><div class="search"><input class="inp" id="vsearch" placeholder="Qidirish: nemischa yoki o\'zbekcha" value="'+esc(vocabQ)+'" style="font-size:15px;padding-top:11px;padding-bottom:11px"></div>'+
+    '<div class="legend"><span><i style="background:var(--navy-3)"></i>der — erkak</span><span><i style="background:var(--coral)"></i>die — ayol</span><span><i style="background:var(--sand)"></i>das — o\'rta</span></div></div>';
+  h += '<div class="vlist" id="vlist">'+vocabListHtml()+'</div>';
+  return h;
+};
+vocabListHtml = function(){
+  var q=norm(vocabQ);
+  var list = ALLW.filter(function(w){ return (q ? true : w.lv===vocabLv) && (vocabCat==='all'||w.cat===vocabCat||q) && (!q || norm(w.de).indexOf(q)>-1 || norm(w.uz).indexOf(q)>-1); });
+  if(!list.length) return '<div class="empty">Hech narsa topilmadi</div>';
+  var total=list.length, more='';
+  if(total>vocabLimit){ list=list.slice(0,vocabLimit); more='<div style="grid-column:1/-1;text-align:center;padding:10px"><button class="btn btn-n" data-act="vmore">Yana ko\'rsatish ('+(total-vocabLimit)+' ta qoldi)</button></div>'; }
+  return list.map(function(w){
+    var a=wordArt(w);
+    return '<div class="vw '+a+'">'+spk(w.de,'sm')+'<div class="txt"><div class="de">'+artHtml(w.de)+(q&&w.lv!=='A1'?' <span class="tag n" style="font-size:10px;padding:2px 6px">'+w.lv+'</span>':'')+'</div><div class="tr">['+esc(w.tr)+']</div><div class="uz">'+esc(w.uz)+'</div></div>'+(state.learned[w.id]?'<span class="chk">✓</span>':'')+'</div>';
+  }).join('')+more;
+};
+
+/* ---------- Testlar: bo'limlar darajalar bo'yicha ---------- */
+var _testsView = VIEWS.tests;
+VIEWS.tests = function(){
+  var h=_testsView();
+  var opts = '<option value="all">📚 Barcha so\'zlar</option>'+LEVELS.map(function(L){
+    var cats=VOCAB.filter(function(c){ return (c.lv||'A1')===L[0]; });
+    if(!cats.length) return '';
+    return '<optgroup label="'+L[0]+' · '+L[1]+'">'+cats.map(function(c){ return '<option value="'+c.id+'" '+(TCFG.cat===c.id?'selected':'')+'>'+c.icon+' '+esc(c.title)+'</option>'; }).join('')+'</optgroup>';
+  }).join('');
+  h = h.replace(/<select class="sel" id="tCat">[\s\S]*?<\/select>/, '<select class="sel" id="tCat">'+opts+'</select>');
+  h += '<h2 class="sec-t">🧩 Grammatika mashqlari (A2)</h2><div class="grid g3">'+GRAM.map(function(g){ var sc=nodeScore(g.id); return '<button class="tile" data-act="gramTest" data-p="'+g.id+'">'+(nodeIsDone(g.id)?'<span class="tag ok done-badge">✓ '+sc+'%</span>':'')+'<div class="emo">'+g.icon+'</div><b>'+esc(g.title)+'</b><small>10 ta mashq</small></button>'; }).join('')+'</div>';
+  return h;
+};
+
+/* ---------- Sertifikat: daraja bo'yicha ---------- */
+var _certView = VIEWS.cert;
+VIEWS.cert = function(p){
+  var lv = p==='A2' ? 'A2' : 'A1';
+  if(lv==='A1') return _certView();
+  if(!nodeIsDone('a2final')){
+    return backBtn('home','Bosh sahifa')+'<div class="card result" style="max-width:520px;margin:20px auto"><div style="font-size:56px">🔒</div><h2 class="serif" style="color:var(--navy)">A2 sertifikati hali yopiq</h2><p class="muted">A2 bosqichlarini tugatib, A2 yakuniy imtihonidan 80% va undan yuqori natija oling.</p><button class="btn btn-c" data-act="go" data-v="home">🗺️ O\'rganish yo\'liga</button></div>';
+  }
+  var dt = state.flags.a2 || dayKey();
+  return backBtn('stats','Statistika')+'<div class="cert"><div class="ci">'+
+    '<div class="ct">SERTIFIKAT · ZERTIFIKAT</div><h1 class="serif">Deutsch Qadam</h1>'+
+    '<p style="margin-top:14px">Ushbu sertifikat</p><div class="cn">'+esc(state.name||'')+'</div>'+
+    '<p>nemis tilidan <b>A2 (elementar)</b> darajasidagi o\'quv dasturini tugatib, yakuniy imtihonni muvaffaqiyatli topshirgani uchun beriladi.</p>'+
+    '<div class="seal">A2</div>'+
+    '<div class="crow"><div><b>'+nodeScore('a2final')+'%</b>Imtihon natijasi</div><div><b>'+esc(dt)+'</b>Sana</div><div><b>'+learnedCount()+'</b>O\'rganilgan so\'z</div></div>'+
+    '<p style="margin-top:22px;font-size:12px">Ilova ichidagi sertifikat — rasmiy hujjat emas. · made by shoxrux</p>'+
+  '</div></div><p class="muted" style="text-align:center;margin-top:14px">📸 Sertifikatni ekran rasmiga olib, do\'stlaringizga ulashing!</p>';
+};
+
+/* ---------- Yangi yutuqlar ---------- */
+ACH.splice(7, 0,
+ ['a2','🏅',"A2 sertifikati","A2 yakuniy imtihonidan o'ting", function(){ return nodeIsDone('a2final'); }],
+ ['gram5','🧩',"Grammatika ustasi","5 ta A2 grammatika darsini tugating", function(){ return GRAM.filter(function(g){ return nodeIsDone(g.id); }).length>=5; }],
+ ['gramAll','📐',"Barcha qoidalar","16 ta A2 grammatika darsining hammasini tugating", function(){ return GRAM.every(function(g){ return nodeIsDone(g.id); }); }]
+);
+ACH.splice(ACH.length-2, 0, ['words1500','🌲',"1500 ta so'z","1500 ta so'zni o'rganing", function(){ return learnedCount()>=1500; }]);
+
+/* =====================================================================
    SOZLAMALAR (modal)
    ===================================================================== */
 function openSettings(){
@@ -4010,7 +5638,7 @@ var ACT = {
   npNext: function(){ NP.i++; if(NP.i>=NP.total){ NP.finished=true; addXp(NP.score*5); if(NP.score>=8) confetti(); render(); } else npNewQ(); },
   vcat: function(el){ vocabCat=el.dataset.p; vocabLimit=120; render(); },
   vmore: function(){ vocabLimit+=200; document.getElementById('vlist').innerHTML=vocabListHtml(); },
-  startFlash: function(){ var pool = vocabCat==='all'? ALLW : ALLW.filter(function(w){ return w.cat===vocabCat; }); var unk = pool.filter(function(w){ return !state.learned[w.id]; }); FC={deck:shuffle(unk.length?unk:pool).slice(0,20), flip:false}; go('flash'); },
+  startFlash: function(){ var pool = vocabCat==='all'? ALLW.filter(function(w){ return w.lv===vocabLv; }) : ALLW.filter(function(w){ return w.cat===vocabCat; }); var unk = pool.filter(function(w){ return !state.learned[w.id]; }); FC={deck:shuffle(unk.length?unk:pool).slice(0,20), flip:false}; go('flash'); },
   flip: function(){ FC.flip=!FC.flip; var el=document.getElementById('fc'); if(el) el.classList.toggle('flip', FC.flip); if(FC.flip) say(FC.deck[0].de); },
   fcKnow: function(){ var w=FC.deck.shift(); state.learned[w.id]=1; FC.flip=false; render(); gainXp(2); },
   fcAgain: function(){ var w=FC.deck.shift(); FC.deck.push(w); FC.flip=false; render(); },
@@ -4030,6 +5658,16 @@ var ACT = {
   pronNext: function(){ if(!G || !PR) return; G.scores.push(PR.res?PR.res.score:0); G.i++; PR=null; render(); window.scrollTo(0,0); },
   pronSkip: function(){ if(!G) return; PRON.stop(true); G.scores.push(0); G.i++; PR=null; render(); window.scrollTo(0,0); },
   micSettings: function(){ if(NATIVE && typeof window.AndroidTTS.openAppSettings==='function') window.AndroidTTS.openAppSettings(); },
+  pathLv: function(el){ pathLv=el.dataset.p; SFX.play('tap'); render(); var t=document.querySelector('.lvtabs'); if(t && t.scrollIntoView) t.scrollIntoView({block:'start'}); },
+  vocabLv: function(el){ vocabLv=el.dataset.p; vocabCat='all'; vocabLimit=120; render(); },
+  gramTab: function(el){ gramTab=el.dataset.p; render(); },
+  gramTest: function(el){ var g=GRAM_MAP[el.dataset.p]; startNodeTest(g.id, ['gram', g.title, g.id]); },
+  gramPron: function(el){ var g=GRAM_MAP[el.dataset.g], e=g.ex[+el.dataset.i]; openPron({de:e[0], tr:'', uz:e[1]}); },
+  qType: function(){ quizTypeCheck(); },
+  qIns: function(el){ var inp=document.getElementById('qIn'); if(!inp) return; var s0=inp.selectionStart==null?inp.value.length:inp.selectionStart, e0=inp.selectionEnd==null?s0:inp.selectionEnd; inp.value=inp.value.slice(0,s0)+el.dataset.p+inp.value.slice(e0); inp.focus(); try{ inp.setSelectionRange(s0+1,s0+1); }catch(x){} },
+  qOrdPick: function(el){ if(!QZ||QZ.answered) return; var o=ordState(), k=+el.dataset.p; if(o.used[k]) return; o.used[k]=1; o.ans.push(k); SFX.play('tap'); if(!ordCheck()) render(); },
+  qOrdBack: function(el){ if(!QZ||QZ.answered) return; var o=ordState(), k=+el.dataset.p, ti=o.ans[k]; o.ans.splice(k,1); delete o.used[ti]; render(); },
+  qOrdClear: function(){ if(!QZ||QZ.answered) return; var o=ordState(); o.ans=[]; o.used={}; render(); },
   celebClose: function(){ document.getElementById('celeb').classList.remove('show'); },
   setGoal: function(el){ state.goal=+el.dataset.p; saveState(); document.querySelectorAll('[data-act="setGoal"]').forEach(function(b){ b.classList.toggle('on', b.dataset.p===el.dataset.p); }); },
   setSfx: function(el){ state.settings.sfx = el.dataset.p==='on'; saveState(); document.querySelectorAll('[data-act="setSfx"]').forEach(function(b){ b.classList.toggle('on', b.dataset.p===el.dataset.p); }); if(state.settings.sfx) SFX.play('ok'); },
