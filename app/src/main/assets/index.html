@@ -1,0 +1,2878 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<base target="_top">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deutsch Qadam — Nemis tili</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#14213D; --navy-2:#1E3160; --navy-3:#2B4583; --navy-soft:#E4E8F2;
+  --cream:#FBF4E8; --cream-2:#F4E9D6; --cream-3:#EADBC1; --paper:#FFFCF6;
+  --coral:#FF6B5B; --coral-d:#E2503F; --coral-soft:#FFE3DE;
+  --sand:#B8893F; --sand-soft:#F5E6C8;
+  --ink:#14213D; --muted:#6A7186; --ok:#2F8F6B; --ok-soft:#DDF2E8; --bad:#D9443A; --bad-soft:#FBE1DE;
+  --r:18px; --shadow:0 6px 24px rgba(20,33,61,.08); --shadow-2:0 10px 34px rgba(20,33,61,.16);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:'Nunito',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--cream);color:var(--ink);font-size:16px;line-height:1.5;-webkit-tap-highlight-color:transparent}
+h1,h2,h3,.serif{font-family:'Fraunces',Georgia,serif;letter-spacing:-.01em;margin:0}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;font-size:inherit}
+input,select{font-family:inherit;font-size:16px}
+.app{display:flex;min-height:100vh}
+
+/* ---------- Sidebar ---------- */
+.side{width:250px;flex:0 0 250px;background:var(--navy);color:var(--cream);position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding:22px 14px;overflow-y:auto;z-index:40}
+.brand{display:flex;align-items:center;gap:10px;padding:4px 8px 22px}
+.brand-logo{width:42px;height:42px;border-radius:13px;background:var(--coral);display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:800;font-size:20px;color:#fff;box-shadow:0 6px 18px rgba(255,107,91,.4)}
+.brand b{font-family:'Fraunces',serif;font-size:20px;display:block;line-height:1.1}
+.brand small{color:#AEB8D3;font-size:12px}
+.nav{display:flex;flex-direction:column;gap:3px}
+.nav button{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:12px;color:#D4DBEC;font-weight:700;font-size:15px;text-align:left;transition:.15s}
+.nav button .ic{width:26px;text-align:center;font-size:18px}
+.nav button:hover{background:rgba(255,255,255,.07);color:#fff}
+.nav button.on{background:var(--coral);color:#fff;box-shadow:0 6px 16px rgba(255,107,91,.35)}
+.side-foot{margin-top:auto;padding:14px 8px 0;border-top:1px solid rgba(255,255,255,.08)}
+.xpbox{background:var(--navy-2);border-radius:14px;padding:12px 14px;font-size:13px;color:#C7CFE3}
+.xpbox b{color:#fff;font-size:18px;font-family:'Fraunces',serif}
+.setbtn{margin-top:10px;width:100%;padding:10px;border-radius:12px;background:rgba(255,255,255,.06);color:#D4DBEC;font-weight:700;font-size:14px}
+.setbtn:hover{background:rgba(255,255,255,.12)}
+
+/* ---------- Topbar (mobile) ---------- */
+.top{display:none;position:sticky;top:0;z-index:30;background:var(--navy);color:var(--cream);padding:10px 14px;align-items:center;gap:10px}
+.top .brand{padding:0}
+.top .brand-logo{width:36px;height:36px;font-size:17px}
+.burger{margin-left:auto;width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.08);font-size:20px;color:#fff}
+.scrim{display:none;position:fixed;inset:0;background:rgba(20,33,61,.45);z-index:35}
+
+/* ---------- Main ---------- */
+.main{flex:1;min-width:0;padding:30px 38px 90px;max-width:1180px}
+.page-h{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.page-h h1{font-size:34px;color:var(--navy)}
+.page-h p{margin:6px 0 0;color:var(--muted);max-width:620px}
+.crumb{font-size:13px;font-weight:800;color:var(--coral);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.back{display:inline-flex;align-items:center;gap:6px;font-weight:800;color:var(--navy-3);padding:6px 0;margin-bottom:6px}
+.back:hover{color:var(--coral)}
+
+.card{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);padding:22px;border:1px solid rgba(20,33,61,.05)}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.mt{margin-top:18px}.mt2{margin-top:28px}
+.muted{color:var(--muted)}
+.sec-t{font-size:22px;color:var(--navy);margin:30px 0 14px;display:flex;align-items:center;gap:10px}
+.sec-t:first-child{margin-top:0}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:14px;font-weight:800;font-size:15px;transition:.15s;white-space:nowrap}
+.btn-c{background:var(--coral);color:#fff;box-shadow:0 6px 16px rgba(255,107,91,.32)}
+.btn-c:hover{background:var(--coral-d);transform:translateY(-1px)}
+.btn-n{background:var(--navy);color:var(--cream)}
+.btn-n:hover{background:var(--navy-2)}
+.btn-o{background:transparent;border:2px solid var(--cream-3);color:var(--navy)}
+.btn-o:hover{border-color:var(--navy);}
+.btn-s{padding:8px 14px;font-size:14px;border-radius:11px}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+
+/* Speaker buttons */
+.spk{width:40px;height:40px;flex:0 0 40px;border-radius:50%;background:var(--coral);color:#fff;display:inline-grid;place-items:center;box-shadow:0 4px 12px rgba(255,107,91,.35);transition:.15s}
+.spk:hover{transform:scale(1.08);background:var(--coral-d)}
+.spk svg{width:19px;height:19px}
+.spk.sm{width:32px;height:32px;flex-basis:32px}.spk.sm svg{width:15px;height:15px}
+.spk.slow{background:var(--navy-soft);color:var(--navy);box-shadow:none;font-size:15px}
+.spk.slow:hover{background:var(--cream-3)}
+.spk.big{width:86px;height:86px;flex-basis:86px}.spk.big svg{width:38px;height:38px}
+.spk.playing{animation:pulse 1s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,107,91,.55)}70%{box-shadow:0 0 0 14px rgba(255,107,91,0)}100%{box-shadow:0 0 0 0 rgba(255,107,91,0)}}
+
+/* Hero */
+.hero{background:var(--navy);color:var(--cream);border-radius:26px;padding:34px;position:relative;overflow:hidden}
+.hero h1{font-size:40px;color:#fff}
+.hero p{color:#C7CFE3;max-width:520px;margin:10px 0 22px;font-size:17px}
+.hero .blob{position:absolute;border-radius:50%}
+.hero .b1{width:260px;height:260px;background:var(--coral);right:-70px;top:-90px;opacity:.9}
+.hero .b2{width:150px;height:150px;background:var(--cream);right:120px;bottom:-80px;opacity:.12}
+.hero .b3{width:70px;height:70px;background:var(--sand);right:70px;bottom:40px;opacity:.55}
+.hero > *{position:relative}
+.hero-flag{display:inline-flex;gap:0;border-radius:6px;overflow:hidden;margin-bottom:12px}
+.hero-flag i{width:26px;height:6px;display:block}
+.stats{display:flex;gap:12px;flex-wrap:wrap}
+.stat{background:rgba(255,255,255,.08);border-radius:14px;padding:10px 16px;min-width:110px}
+.stat b{display:block;font-family:'Fraunces',serif;font-size:24px;color:#fff}
+.stat span{font-size:13px;color:#AEB8D3}
+
+.potd{display:flex;align-items:center;gap:16px}
+.potd .de{font-family:'Fraunces',serif;font-size:24px;color:var(--navy);font-weight:700}
+.tag{display:inline-block;font-size:12px;font-weight:800;padding:4px 10px;border-radius:999px;background:var(--coral-soft);color:var(--coral-d);text-transform:uppercase;letter-spacing:.05em}
+.tag.n{background:var(--navy-soft);color:var(--navy-3)}
+.tag.ok{background:var(--ok-soft);color:var(--ok)}
+
+/* path */
+.path{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.step{background:var(--paper);border-radius:16px;padding:16px;text-align:left;box-shadow:var(--shadow);border:2px solid transparent;transition:.15s;display:flex;flex-direction:column;gap:6px}
+.step:hover{border-color:var(--coral);transform:translateY(-2px)}
+.step .num{width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px}
+.step.done .num{background:var(--ok)}
+.step b{font-size:16px}
+.step small{color:var(--muted)}
+
+.tile{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);padding:20px;text-align:left;transition:.18s;border:2px solid transparent;display:flex;flex-direction:column;gap:6px;position:relative}
+.tile:hover{transform:translateY(-3px);box-shadow:var(--shadow-2);border-color:var(--cream-3)}
+.tile .emo{font-size:30px;width:56px;height:56px;border-radius:16px;background:var(--cream-2);display:grid;place-items:center;margin-bottom:6px}
+.tile b{font-size:17px;color:var(--navy)}
+.tile small{color:var(--muted);font-size:14px}
+.tile .done-badge{position:absolute;top:14px;right:14px}
+.tile.navy{background:var(--navy);color:var(--cream)}
+.tile.navy b{color:#fff}.tile.navy small{color:#AEB8D3}.tile.navy .emo{background:rgba(255,255,255,.08)}
+.tile.coral{background:var(--coral);color:#fff}
+.tile.coral b{color:#fff}.tile.coral small{color:#FFE7E3}.tile.coral .emo{background:rgba(255,255,255,.18)}
+
+/* Phrase rows */
+.phr{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:14px;background:var(--paper);box-shadow:0 2px 10px rgba(20,33,61,.05);transition:.15s;border:2px solid transparent}
+.phr + .phr{margin-top:10px}
+.phr.active{border-color:var(--coral);background:#FFF6F3}
+.phr .txt{flex:1;min-width:0}
+.phr .de{font-weight:800;font-size:18px;color:var(--navy)}
+.phr .tr{font-size:14px;color:var(--coral-d);font-style:italic;font-weight:700}
+.phr .uz{font-size:15px;color:var(--muted)}
+.phr .acts{display:flex;gap:8px}
+.tip{background:var(--sand-soft);border-left:5px solid var(--sand);border-radius:14px;padding:14px 18px;color:#5B4418;font-size:15px}
+.tip b{color:#3F2E0D}
+.tip.n{background:var(--navy-soft);border-color:var(--navy-3);color:var(--navy)}
+.tip.c{background:var(--coral-soft);border-color:var(--coral);color:#7A2A20}
+
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+
+/* Alphabet */
+.abc{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:10px}
+.let{background:var(--paper);border-radius:16px;padding:14px 10px 12px;text-align:center;box-shadow:0 2px 10px rgba(20,33,61,.05);border:2px solid transparent;transition:.15s;position:relative}
+.let:hover{border-color:var(--coral)}
+.let .L{font-family:'Fraunces',serif;font-size:34px;font-weight:800;color:var(--navy);line-height:1}
+.let .L small{font-size:22px;color:var(--muted);margin-left:2px}
+.let .nm{font-size:13px;color:var(--coral-d);font-weight:800;margin-top:4px}
+.let .ex{font-size:13px;color:var(--muted);margin-top:2px}
+.let.special{background:var(--navy);}
+.let.special .L{color:#fff}.let.special .ex{color:#AEB8D3}.let.special .nm{color:#FF9D91}
+
+.snd{display:flex;gap:16px;align-items:flex-start}
+.snd .combo{min-width:78px;height:64px;border-radius:16px;background:var(--navy);color:#fff;display:grid;place-items:center;font-family:'Fraunces',serif;font-size:26px;font-weight:800;padding:0 10px}
+.snd .info{flex:1;min-width:0}
+.snd .say{font-weight:800;color:var(--coral-d)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border-radius:999px;background:var(--cream-2);font-weight:700;font-size:14px;color:var(--navy);transition:.15s}
+.chip:hover{background:var(--coral);color:#fff}
+.chip .mini{font-size:12px;opacity:.75;font-weight:600}
+.chip.on{background:var(--navy);color:#fff}
+
+/* Dialog */
+.dlg{display:flex;flex-direction:column;gap:12px}
+.bub{max-width:78%;padding:12px 16px;border-radius:18px;box-shadow:0 2px 10px rgba(20,33,61,.06);display:flex;gap:10px;align-items:flex-start;border:2px solid transparent}
+.bub.a{background:var(--paper);align-self:flex-start;border-bottom-left-radius:5px}
+.bub.b{background:var(--navy);color:var(--cream);align-self:flex-end;border-bottom-right-radius:5px}
+.bub.active{border-color:var(--coral)}
+.bub .who{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--coral)}
+.bub .de{font-weight:800;font-size:17px}
+.bub.a .de{color:var(--navy)}
+.bub .uz{font-size:14px;opacity:.75}
+.hide-uz .bub .uz{display:none}
+
+/* Numbers */
+.ngrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.nbox{background:var(--paper);border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 10px rgba(20,33,61,.05);text-align:left;border:2px solid transparent;transition:.15s}
+.nbox:hover{border-color:var(--coral)}
+.nbox .n{font-family:'Fraunces',serif;font-size:26px;font-weight:800;color:var(--coral);min-width:44px}
+.nbox .w{font-weight:800;color:var(--navy);font-size:15px;line-height:1.2}
+.nbox .t{font-size:12px;color:var(--muted)}
+.tabs{display:inline-flex;background:var(--cream-2);border-radius:14px;padding:4px;gap:4px;flex-wrap:wrap}
+.tabs button{padding:9px 16px;border-radius:11px;font-weight:800;color:var(--navy);font-size:14px}
+.tabs button.on{background:var(--navy);color:#fff}
+.inp{width:100%;padding:14px 16px;border-radius:14px;border:2px solid var(--cream-3);background:#fff;color:var(--navy);font-weight:700;font-size:18px;outline:none;transition:.15s}
+.inp:focus{border-color:var(--coral)}
+.conv-out{font-family:'Fraunces',serif;font-size:28px;font-weight:700;color:var(--navy);word-break:break-word}
+.breakdown{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.breakdown span{background:var(--cream-2);padding:5px 10px;border-radius:9px;font-weight:700;font-size:14px}
+.breakdown span.p{background:var(--coral-soft);color:var(--coral-d)}
+
+/* Vocab */
+.vlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.vw{background:var(--paper);border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 10px rgba(20,33,61,.05);border-left:5px solid var(--cream-3)}
+.vw.der{border-left-color:var(--navy-3)}.vw.die{border-left-color:var(--coral)}.vw.das{border-left-color:var(--sand)}
+.vw .txt{flex:1;min-width:0}
+.vw .de{font-weight:800;color:var(--navy);font-size:16px}
+.vw .tr{font-size:13px;color:var(--coral-d);font-style:italic;font-weight:700}
+.vw .uz{font-size:14px;color:var(--muted)}
+.vw .chk{font-size:14px;color:var(--ok);font-weight:800}
+.art{font-weight:800}
+.art.der{color:var(--navy-3)}.art.die{color:var(--coral-d)}.art.das{color:var(--sand)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;font-weight:700}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:4px;margin-right:6px;vertical-align:-1px}
+
+/* flashcard */
+.fc-wrap{perspective:1200px;max-width:520px;margin:0 auto}
+.fc{position:relative;height:300px;transform-style:preserve-3d;transition:transform .55s;cursor:pointer}
+.fc.flip{transform:rotateY(180deg)}
+.fc .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;box-shadow:var(--shadow-2)}
+.fc .front{background:var(--navy);color:#fff}
+.fc .back{background:var(--paper);transform:rotateY(180deg);color:var(--navy)}
+.fc .big{font-family:'Fraunces',serif;font-size:36px;font-weight:800;line-height:1.15}
+.fc .hint{font-size:13px;opacity:.6;margin-top:14px}
+.fc .tr{color:var(--coral);font-style:italic;font-weight:700;margin-top:8px}
+.fc-ctrl{display:flex;gap:12px;justify-content:center;margin-top:20px;flex-wrap:wrap}
+
+/* Quiz */
+.qwrap{max-width:720px;margin:0 auto}
+.pbar{height:10px;background:var(--cream-2);border-radius:999px;overflow:hidden}
+.pbar i{display:block;height:100%;background:linear-gradient(90deg,var(--coral),#FF8F7F);border-radius:999px;transition:width .3s}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-weight:800;color:var(--muted);font-size:14px}
+.qcard{background:var(--paper);border-radius:24px;box-shadow:var(--shadow-2);padding:30px;text-align:center;margin-top:16px}
+.qcard .ask{font-size:14px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.qcard .prompt{font-family:'Fraunces',serif;font-size:34px;font-weight:800;color:var(--navy);margin:14px 0 6px;line-height:1.2;word-break:break-word}
+.qcard .sub{color:var(--muted)}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+.opt{padding:16px;border-radius:16px;background:var(--cream);border:2px solid var(--cream-3);font-weight:800;color:var(--navy);font-size:16px;transition:.15s;text-align:center;min-height:62px}
+.opt:hover:not(:disabled){border-color:var(--navy);background:#fff}
+.opt.right{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.fb{margin-top:18px;font-weight:800;min-height:26px}
+.fb.ok{color:var(--ok)}.fb.bad{color:var(--bad)}
+.result{text-align:center}
+.result .score{font-family:'Fraunces',serif;font-size:64px;font-weight:800;color:var(--coral);line-height:1}
+.ring{width:150px;height:150px;border-radius:50%;margin:0 auto 14px;display:grid;place-items:center}
+.ring > div{width:118px;height:118px;border-radius:50%;background:var(--paper);display:grid;place-items:center;font-family:'Fraunces',serif;font-size:34px;font-weight:800;color:var(--navy)}
+.review{text-align:left;margin-top:20px}
+.review .r{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:var(--bad-soft);margin-top:8px}
+.review .r b{color:var(--navy)}
+
+.cfg label{font-weight:800;color:var(--navy);display:block;margin-bottom:8px}
+.cfg .row{margin-bottom:20px}
+.sel{appearance:none;-webkit-appearance:none;width:100%;padding:12px 14px;border-radius:13px;border:2px solid var(--cream-3);background:#fff;color:var(--navy);font-weight:700;outline:none}
+.sel:focus{border-color:var(--coral)}
+.modes{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.mode{padding:14px;border-radius:16px;border:2px solid var(--cream-3);background:#fff;text-align:left;transition:.15s}
+.mode b{display:block;color:var(--navy)}
+.mode small{color:var(--muted);font-size:13px}
+.mode.on{border-color:var(--coral);background:#FFF6F3;box-shadow:0 0 0 3px var(--coral-soft)}
+.mode .e{font-size:22px}
+
+/* Games */
+.gtop{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.pill{background:var(--navy);color:#fff;border-radius:999px;padding:7px 14px;font-weight:800;font-size:14px}
+.pill.c{background:var(--coral)}
+.mem{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:720px;margin:0 auto}
+.mc{aspect-ratio:1/.8;perspective:800px}
+.mc .in{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .45s}
+.mc.open .in,.mc.got .in{transform:rotateY(180deg)}
+.mc .f,.mc .b{position:absolute;inset:0;border-radius:16px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:grid;place-items:center;padding:8px;text-align:center}
+.mc .f{background:var(--navy);color:var(--coral);font-family:'Fraunces',serif;font-size:30px;font-weight:800;box-shadow:var(--shadow)}
+.mc .f::after{content:'?'}
+.mc .b{background:var(--paper);transform:rotateY(180deg);font-weight:800;color:var(--navy);font-size:15px;box-shadow:var(--shadow);border:2px solid var(--cream-3);word-break:break-word}
+.mc .b.de{color:var(--coral-d)}
+.mc.got .b{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.mc.shake .in{animation:shake .4s}
+@keyframes shake{0%,100%{transform:rotateY(180deg) translateX(0)}25%{transform:rotateY(180deg) translateX(-6px)}75%{transform:rotateY(180deg) translateX(6px)}}
+
+.slots{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;min-height:62px;padding:12px;border-radius:16px;background:var(--cream);border:2px dashed var(--cream-3);margin-top:18px}
+.slots.ok{border-color:var(--ok);background:var(--ok-soft)}
+.slots.bad{border-color:var(--bad);background:var(--bad-soft)}
+.pool{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:16px}
+.lt{min-width:46px;height:50px;padding:0 14px;border-radius:13px;background:var(--navy);color:#fff;font-weight:800;font-size:20px;box-shadow:0 4px 0 #0B1428;transition:.1s}
+.lt:active{transform:translateY(3px);box-shadow:0 1px 0 #0B1428}
+.lt.w{font-size:17px}
+.lt.used{visibility:hidden}
+.slots .lt{background:var(--coral);box-shadow:0 4px 0 var(--coral-d)}
+.umls{display:flex;gap:8px;justify-content:center;margin-top:10px}
+.umls button{width:46px;height:42px;border-radius:11px;background:var(--cream-2);font-weight:800;font-size:18px;color:var(--navy)}
+.umls button:hover{background:var(--coral);color:#fff}
+.tf{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+.tf button{padding:20px;border-radius:18px;font-weight:800;font-size:18px;color:#fff}
+.tf .y{background:var(--ok)}.tf .n{background:var(--bad)}
+.timer{font-family:'Fraunces',serif;font-size:40px;font-weight:800;color:var(--coral)}
+
+/* Grammar */
+.gtbl{width:100%;border-collapse:separate;border-spacing:0;margin-top:10px;overflow:hidden;border-radius:14px}
+.gtbl th{background:var(--navy);color:#fff;text-align:left;padding:10px 14px;font-size:14px}
+.gtbl td{padding:10px 14px;border-bottom:1px solid var(--cream-2);background:#fff}
+.gtbl tr:last-child td{border-bottom:none}
+.gtbl td.de{font-weight:800;color:var(--navy)}
+.gtbl td .spk{vertical-align:middle}
+.ex-row{display:flex;align-items:center;gap:10px;padding:8px 0}
+.ex-row .de{font-weight:800;color:var(--navy)}
+.ex-row .uz{color:var(--muted);font-size:14px}
+
+/* misc */
+.search{position:relative;max-width:360px;flex:1}
+.search input{padding-left:42px}
+.search::before{content:'🔎';position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:16px}
+.voice-warn{display:flex;gap:12px;align-items:center}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;padding:12px 20px;border-radius:14px;font-weight:700;box-shadow:var(--shadow-2);opacity:0;transition:.25s;z-index:100;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.modal-bg{position:fixed;inset:0;background:rgba(20,33,61,.5);z-index:90;display:none;align-items:center;justify-content:center;padding:16px}
+.modal-bg.show{display:flex}
+.modal{background:var(--paper);border-radius:24px;padding:26px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-2)}
+.modal h2{color:var(--navy);font-size:24px;margin-bottom:16px}
+.range{width:100%;accent-color:var(--coral)}
+.made{position:fixed;right:16px;bottom:14px;z-index:80;background:var(--navy);color:var(--cream);padding:8px 14px 8px 12px;border-radius:999px;font-size:13px;font-weight:800;letter-spacing:.02em;box-shadow:0 6px 18px rgba(20,33,61,.28);display:flex;align-items:center;gap:8px;pointer-events:none;user-select:none}
+.made i{width:8px;height:8px;border-radius:50%;background:var(--coral);display:block;box-shadow:0 0 0 3px rgba(255,107,91,.25)}
+.made b{color:var(--coral)}
+.empty{text-align:center;padding:30px;color:var(--muted)}
+.confetti{position:fixed;top:-10px;width:10px;height:14px;z-index:95;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(105vh) rotate(720deg)}}
+
+@media (max-width:1050px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:860px){
+  .app{display:block}
+  .side{position:fixed;left:0;top:0;transform:translateX(-105%);transition:transform .25s;box-shadow:var(--shadow-2)}
+  .side.open{transform:none}
+  .scrim.open{display:block}
+  .top{display:flex}
+  .main{padding:20px 16px 90px}
+  .page-h h1{font-size:28px}
+  .hero{padding:26px 22px}.hero h1{font-size:32px}
+  .hero .b2,.hero .b3{display:none}.hero .b1{width:180px;height:180px;right:-70px;top:-70px}
+  .stat{min-width:0;flex:1 1 40%}
+  .made{right:10px;bottom:10px;font-size:12px;padding:6px 12px 6px 10px}
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .opts{grid-template-columns:1fr}
+  .qcard{padding:22px 16px}.qcard .prompt{font-size:28px}
+  .mem{grid-template-columns:repeat(3,1fr);gap:8px}
+  .mc .b{font-size:13px}
+  .phr{padding:12px}
+  .phr .de{font-size:16px}
+  .bub{max-width:92%}
+  .fc{height:260px}.fc .big{font-size:30px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side" id="side">
+    <div class="brand">
+      <div class="brand-logo">D</div>
+      <div><b>Deutsch Qadam</b><small>Nemis tili · kundalik muloqot</small></div>
+    </div>
+    <nav class="nav" id="nav"></nav>
+    <div class="side-foot">
+      <div class="xpbox" id="xpbox"></div>
+      <button class="setbtn" data-act="openSettings">⚙️ Ovoz sozlamalari</button>
+    </div>
+  </aside>
+  <div class="scrim" id="scrim" data-act="closeDrawer"></div>
+  <div style="flex:1;min-width:0">
+    <header class="top">
+      <div class="brand"><div class="brand-logo">D</div><div><b>Deutsch Qadam</b></div></div>
+      <button class="burger" data-act="openDrawer" aria-label="Menyu">☰</button>
+    </header>
+    <main class="main" id="main"></main>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal"><div class="modal" id="modalBody"></div></div>
+<div class="toast" id="toast"></div>
+<div class="made"><i></i>made by <b>shoxrux</b></div>
+
+<script>
+/* =====================================================================
+   MA'LUMOTLAR
+   Transkripsiya qoidasi: ikki marta yozilgan unli (aa, ee, ii, oo, uu) — cho'zib aytiladi.
+   ===================================================================== */
+
+var LESSONS = [
+{id:"salom", icon:"👋", title:"Salomlashish va xayrlashish", desc:"Kun davomida salomlashish, ahvol so'rash, xayrlashish",
+ tip:"<b>Sie</b> — «Siz» (rasmiy), <b>du</b> — «sen» (do'stona). Notanish odamlar, sotuvchi, ofitsiant bilan doim <b>Sie</b> ishlating. Do'stlar va tengdoshlar bilan — <b>du</b>.",
+ items:[
+  {de:"Hallo!", tr:"hallo", uz:"Salom!"},
+  {de:"Guten Morgen!", tr:"guuten morgen", uz:"Xayrli tong! (soat 11 gacha)"},
+  {de:"Guten Tag!", tr:"guuten taak", uz:"Xayrli kun! (rasmiy salom)"},
+  {de:"Guten Abend!", tr:"guuten aabent", uz:"Xayrli kech!"},
+  {de:"Gute Nacht!", tr:"guute naxt", uz:"Xayrli tun! (uxlashdan oldin)"},
+  {de:"Wie geht es Ihnen?", tr:"vi geet es iinen", uz:"Ahvolingiz qanday? (rasmiy)"},
+  {de:"Wie geht's?", tr:"vi geets", uz:"Qalaysan? / Ishlar qalay?"},
+  {de:"Gut, danke. Und Ihnen?", tr:"guut, danke. unt iinen", uz:"Yaxshi, rahmat. O'zingizchi?"},
+  {de:"Sehr gut!", tr:"zeer guut", uz:"Juda yaxshi!"},
+  {de:"Es geht.", tr:"es geet", uz:"Yomon emas. / O'rtacha."},
+  {de:"Danke schön!", tr:"danke shöön", uz:"Katta rahmat!"},
+  {de:"Bitte schön!", tr:"bitte shöön", uz:"Arzimaydi! / Marhamat!"},
+  {de:"Entschuldigung!", tr:"entshuldigung", uz:"Kechirasiz!"},
+  {de:"Ja. Nein.", tr:"yaa. nayn.", uz:"Ha. Yo'q."},
+  {de:"Tschüss!", tr:"chüs", uz:"Xayr! (do'stona)"},
+  {de:"Auf Wiedersehen!", tr:"auf viiderzeeen", uz:"Ko'rishguncha! (rasmiy)"},
+  {de:"Bis später!", tr:"bis shpeeter", uz:"Keyinroq ko'rishamiz!"},
+  {de:"Bis morgen!", tr:"bis morgen", uz:"Ertagacha!"},
+  {de:"Schönen Tag noch!", tr:"shöönen taak nox", uz:"Kuningiz yaxshi o'tsin!"}
+ ]},
+{id:"tanish", icon:"🙋", title:"O'zimni tanishtirish", desc:"Ism, yosh, qayerdanligi, kasbi, qaysi tillarni bilishi",
+ tip:"Fe'l <b>ich</b> (men) bilan kelganda odatda <b>-e</b> bilan tugaydi: ich wohn<b>e</b>, ich komm<b>e</b>, ich lern<b>e</b>, ich arbeit<b>e</b>. «Men ...man» — <b>Ich bin ...</b>",
+ items:[
+  {de:"Ich heiße Shoxrux.", tr:"ix hayse shoxrux", uz:"Mening ismim Shoxrux."},
+  {de:"Mein Name ist Shoxrux.", tr:"mayn naame ist shoxrux", uz:"Mening ismim Shoxrux. (rasmiyroq)"},
+  {de:"Wie heißen Sie?", tr:"vi haysen zii", uz:"Ismingiz nima?"},
+  {de:"Wie heißt du?", tr:"vi hayst duu", uz:"Isming nima?"},
+  {de:"Freut mich!", tr:"froyt mix", uz:"Tanishganimdan xursandman!"},
+  {de:"Ich komme aus Usbekistan.", tr:"ix komme aus usbeekistaan", uz:"Men O'zbekistondanman."},
+  {de:"Woher kommen Sie?", tr:"vooheer kommen zii", uz:"Qayerdansiz?"},
+  {de:"Ich wohne in Taschkent.", tr:"ix voone in tashkent", uz:"Men Toshkentda yashayman."},
+  {de:"Wo wohnen Sie?", tr:"voo voonen zii", uz:"Qayerda yashaysiz?"},
+  {de:"Ich bin fünfundzwanzig Jahre alt.", tr:"ix bin fünfunttsvantsix yaare alt", uz:"Men 25 yoshdaman."},
+  {de:"Wie alt sind Sie?", tr:"vi alt zint zii", uz:"Necha yoshdasiz?"},
+  {de:"Ich bin Buchhalter.", tr:"ix bin buuxhalter", uz:"Men buxgalterman."},
+  {de:"Ich arbeite in einem Bildungszentrum.", tr:"ix arbayte in aynem bildungstsentrum", uz:"Men o'quv markazida ishlayman."},
+  {de:"Was sind Sie von Beruf?", tr:"vas zint zii fon beruuf", uz:"Kasbingiz nima?"},
+  {de:"Ich spreche Usbekisch und Russisch.", tr:"ix shprexe usbeekish unt russish", uz:"Men o'zbek va rus tilida gaplashaman."},
+  {de:"Ich spreche ein bisschen Deutsch.", tr:"ix shprexe ayn bisxen doych", uz:"Men biroz nemischa gapiraman."},
+  {de:"Ich lerne Deutsch.", tr:"ix lerne doych", uz:"Men nemis tilini o'rganyapman."},
+  {de:"Ich bin verheiratet.", tr:"ix bin ferhayraatet", uz:"Men uylanganman / turmush qurganman."},
+  {de:"Mein Hobby ist Fußball.", tr:"mayn hobi ist fuusbal", uz:"Mening sevimli mashg'ulotim — futbol."}
+ ]},
+{id:"yordam", icon:"🆘", title:"Tushunmaganda va yordam kerak bo'lganda", desc:"Eng foydali «qutqaruvchi» iboralar",
+ tip:"Agar nemis tilida tushunmasangiz, xijolat bo'lmang: <b>Langsam, bitte!</b> (Sekinroq, iltimos) va <b>Noch einmal, bitte!</b> (Yana bir marta) — nemislar bunga odatlangan.",
+ items:[
+  {de:"Ich verstehe nicht.", tr:"ix fershteee nixt", uz:"Tushunmayapman."},
+  {de:"Langsam, bitte.", tr:"langzaam, bitte", uz:"Sekinroq, iltimos."},
+  {de:"Noch einmal, bitte.", tr:"nox aynmaal, bitte", uz:"Yana bir marta, iltimos."},
+  {de:"Sprechen Sie Englisch?", tr:"shprexen zii english", uz:"Inglizcha gapirasizmi?"},
+  {de:"Was bedeutet das?", tr:"vas bedoytet das", uz:"Bu nimani anglatadi?"},
+  {de:"Wie sagt man das auf Deutsch?", tr:"vi zaakt man das auf doych", uz:"Buni nemischa qanday aytiladi?"},
+  {de:"Ich weiß nicht.", tr:"ix vays nixt", uz:"Bilmayman."},
+  {de:"Kein Problem.", tr:"kayn probleem", uz:"Muammo yo'q."},
+  {de:"Können Sie mir helfen?", tr:"kö'nnen zii miir helfen", uz:"Menga yordam bera olasizmi?"},
+  {de:"Einen Moment, bitte.", tr:"aynen moment, bitte", uz:"Bir daqiqa, iltimos."},
+  {de:"Wo ist die Toilette?", tr:"voo ist di toalette", uz:"Hojatxona qayerda?"},
+  {de:"Ich brauche einen Arzt.", tr:"ix brauxe aynen artst", uz:"Menga shifokor kerak."},
+  {de:"Rufen Sie die Polizei!", tr:"ruufen zii di politsay", uz:"Politsiyani chaqiring!"},
+  {de:"Hilfe!", tr:"hilfe", uz:"Yordam bering!"}
+ ]},
+{id:"sorash", icon:"🧭", title:"Yo'l so'rash", desc:"Vokzal, metro, dorixona, mehmonxonani qanday topish",
+ tip:"«...ga» ma'nosida: <b>zum</b> — der/das so'zlar uchun (zum Bahnhof, zum Hotel), <b>zur</b> — die so'zlar uchun (zur Bank, zur Apotheke). Savolni doim <b>Entschuldigung, ...</b> bilan boshlang — bu odobli.",
+ items:[
+  {de:"Entschuldigung, wo ist der Bahnhof?", tr:"entshuldigung, voo ist deer baanhoof", uz:"Kechirasiz, vokzal qayerda?"},
+  {de:"Wie komme ich zum Bahnhof?", tr:"vi komme ix tsum baanhoof", uz:"Vokzalga qanday borsam bo'ladi?"},
+  {de:"Wie komme ich zur U-Bahn?", tr:"vi komme ix tsuur uu-baan", uz:"Metroga qanday boraman?"},
+  {de:"Wo ist die Haltestelle?", tr:"voo ist di halteshtelle", uz:"Bekat qayerda?"},
+  {de:"Gibt es hier eine Apotheke?", tr:"gipt es hiir ayne apoteeke", uz:"Bu yerda dorixona bormi?"},
+  {de:"Ich suche das Hotel Adler.", tr:"ix zuuxe das hotel aadler", uz:"Men «Adler» mehmonxonasini qidiryapman."},
+  {de:"Ist es weit?", tr:"ist es vayt", uz:"Uzoqmi?"},
+  {de:"Ist es in der Nähe?", tr:"ist es in deer nee-e", uz:"Yaqin atrofdami?"},
+  {de:"Wie weit ist es?", tr:"vi vayt ist es", uz:"Qancha uzoqlikda?"},
+  {de:"Kann ich zu Fuß gehen?", tr:"kan ix tsu fuus geeen", uz:"Piyoda borsam bo'ladimi?"},
+  {de:"Welcher Bus fährt zum Zentrum?", tr:"velxer bus feert tsum tsentrum", uz:"Qaysi avtobus markazga boradi?"},
+  {de:"Wo kann ich ein Ticket kaufen?", tr:"voo kan ix ayn tiket kaufen", uz:"Chiptani qayerdan sotib olsam bo'ladi?"},
+  {de:"Können Sie es mir auf der Karte zeigen?", tr:"kö'nnen zii es miir auf deer karte tsaygen", uz:"Xaritada ko'rsatib bera olasizmi?"},
+  {de:"Ich habe mich verlaufen.", tr:"ix haabe mix ferlaufen", uz:"Men adashib qoldim."},
+  {de:"Vielen Dank für Ihre Hilfe!", tr:"fiilen dank füür iire hilfe", uz:"Yordamingiz uchun katta rahmat!"}
+ ]},
+{id:"korsatish", icon:"🗺️", title:"Yo'l ko'rsatish", desc:"To'g'riga, chapga, o'ngga, chorrahada, qarshisida...",
+ tip:"Yo'l ko'rsatganda buyruq shakli: fe'l + <b>Sie</b>. <b>Gehen Sie</b> geradeaus (To'g'riga yuring). <b>Biegen Sie</b> links <b>ab</b> (Chapga buriling) — <b>ab</b> gap oxiriga o'tadi.",
+ items:[
+  {de:"Gehen Sie geradeaus.", tr:"geeen zii geraade-aus", uz:"To'g'riga yuring."},
+  {de:"Gehen Sie nach links.", tr:"geeen zii naax links", uz:"Chap tomonga yuring."},
+  {de:"Gehen Sie nach rechts.", tr:"geeen zii naax rexts", uz:"O'ng tomonga yuring."},
+  {de:"Biegen Sie links ab.", tr:"biigen zii links ap", uz:"Chapga buriling."},
+  {de:"Biegen Sie rechts ab.", tr:"biigen zii rexts ap", uz:"O'ngga buriling."},
+  {de:"Die erste Straße links.", tr:"di eerste shtraase links", uz:"Birinchi ko'chadan chapga."},
+  {de:"Die zweite Straße rechts.", tr:"di tsvayte shtraase rexts", uz:"Ikkinchi ko'chadan o'ngga."},
+  {de:"An der Ampel links.", tr:"an deer ampel links", uz:"Svetoforda chapga."},
+  {de:"An der Kreuzung rechts.", tr:"an deer kroytsung rexts", uz:"Chorrahada o'ngga."},
+  {de:"Gehen Sie über die Brücke.", tr:"geeen zii üüber di brüke", uz:"Ko'prikdan o'ting."},
+  {de:"Es ist gegenüber der Bank.", tr:"es ist geegenüüber deer bank", uz:"U bank qarshisida."},
+  {de:"Es ist neben dem Supermarkt.", tr:"es ist neeben deem zuupermarkt", uz:"U supermarket yonida."},
+  {de:"Es ist hinter dem Park.", tr:"es ist hinter deem park", uz:"U park orqasida."},
+  {de:"Es ist da drüben.", tr:"es ist daa drüüben", uz:"U ana u yerda (narigi tomonda)."},
+  {de:"Etwa fünf Minuten zu Fuß.", tr:"etva fünf minuuten tsu fuus", uz:"Piyoda taxminan besh daqiqa."},
+  {de:"Nehmen Sie den Bus Nummer zwei.", tr:"neemen zii deen bus nummer tsvay", uz:"2-raqamli avtobusga chiqing."},
+  {de:"Tut mir leid, ich bin nicht von hier.", tr:"tuut miir layt, ix bin nixt fon hiir", uz:"Kechirasiz, men bu yerlik emasman."}
+ ]},
+{id:"kafe", icon:"☕", title:"Kafe va do'konda", desc:"Buyurtma berish, narx so'rash, to'lash",
+ tip:"Buyurtma berishning eng oson usuli: <b>Ich möchte ...</b> (Men ... istardim) yoki shunchaki narsa nomi + <b>bitte</b>: «Einen Tee, bitte».",
+ items:[
+  {de:"Ich möchte einen Kaffee, bitte.", tr:"ix mö'xte aynen kafee, bitte", uz:"Bitta kofe istardim, iltimos."},
+  {de:"Einen Tee, bitte.", tr:"aynen tee, bitte", uz:"Bitta choy, iltimos."},
+  {de:"Ein Wasser, bitte.", tr:"ayn vasser, bitte", uz:"Bitta suv, iltimos."},
+  {de:"Die Speisekarte, bitte.", tr:"di shpayzekarte, bitte", uz:"Menyuni bering, iltimos."},
+  {de:"Was kostet das?", tr:"vas kostet das", uz:"Bu qancha turadi?"},
+  {de:"Das ist zu teuer.", tr:"das ist tsu toyer", uz:"Bu juda qimmat."},
+  {de:"Ich nehme das.", tr:"ix neeme das", uz:"Buni olaman."},
+  {de:"Haben Sie Wasser?", tr:"haaben zii vasser", uz:"Sizda suv bormi?"},
+  {de:"Ich esse kein Schweinefleisch.", tr:"ix esse kayn shvaynefleysh", uz:"Men cho'chqa go'shti yemayman."},
+  {de:"Ist das halal?", tr:"ist das halaal", uz:"Bu halolmi?"},
+  {de:"Die Rechnung, bitte.", tr:"di rexnung, bitte", uz:"Hisobni keltiring, iltimos."},
+  {de:"Kann ich mit Karte zahlen?", tr:"kan ix mit karte tsaalen", uz:"Karta bilan to'lasam bo'ladimi?"},
+  {de:"Ich zahle bar.", tr:"ix tsaale baar", uz:"Naqd to'layman."},
+  {de:"Stimmt so.", tr:"shtimt zoo", uz:"Qaytimi kerak emas."},
+  {de:"Das war sehr lecker!", tr:"das vaar zeer lekker", uz:"Juda mazali bo'ldi!"}
+ ]},
+{id:"vaqt", icon:"⏰", title:"Vaqt va kunlar", desc:"Soat necha, qachon, bugun-ertaga",
+ tip:"Diqqat! <b>halb vier</b> — «to'rtning yarmi», ya'ni <b>3:30</b> (to'rt emas!). <b>Viertel nach zwei</b> — 2:15, <b>Viertel vor fünf</b> — 4:45.",
+ items:[
+  {de:"Wie spät ist es?", tr:"vi shpeet ist es", uz:"Soat necha?"},
+  {de:"Es ist drei Uhr.", tr:"es ist dray uur", uz:"Soat uch."},
+  {de:"Es ist halb vier.", tr:"es ist halp fiir", uz:"Soat uch yarim (3:30)."},
+  {de:"Es ist Viertel nach zwei.", tr:"es ist fiirtel naax tsvay", uz:"Ikkidan o'n besh daqiqa o'tdi (2:15)."},
+  {de:"Es ist Viertel vor fünf.", tr:"es ist fiirtel foor fünf", uz:"Beshga o'n besh daqiqa bor (4:45)."},
+  {de:"Um wie viel Uhr?", tr:"um vi fiil uur", uz:"Soat nechada?"},
+  {de:"Um acht Uhr.", tr:"um axt uur", uz:"Soat sakkizda."},
+  {de:"Wann?", tr:"van", uz:"Qachon?"},
+  {de:"Heute habe ich Zeit.", tr:"hoyte haabe ix tsayt", uz:"Bugun vaqtim bor."},
+  {de:"Morgen arbeite ich.", tr:"morgen arbayte ix", uz:"Ertaga ishlayman."},
+  {de:"Welcher Tag ist heute?", tr:"velxer taak ist hoyte", uz:"Bugun qaysi kun?"},
+  {de:"Heute ist Montag.", tr:"hoyte ist moontaak", uz:"Bugun dushanba."},
+  {de:"Bis Freitag!", tr:"bis fraytaak", uz:"Jumagacha!"}
+ ]}
+];
+
+var DIALOGS = [
+{id:"d1", icon:"🤝", title:"Tanishuv", desc:"Ikki kishi birinchi marta tanishmoqda", lines:[
+ {s:"A", de:"Hallo! Ich heiße Anna. Wie heißt du?", uz:"Salom! Mening ismim Anna. Isming nima?"},
+ {s:"B", de:"Hallo Anna! Ich heiße Shoxrux.", uz:"Salom, Anna! Mening ismim Shoxrux."},
+ {s:"A", de:"Freut mich! Woher kommst du?", uz:"Tanishganimdan xursandman! Qayerdansan?"},
+ {s:"B", de:"Ich komme aus Usbekistan, aus Taschkent. Und du?", uz:"Men O'zbekistondanman, Toshkentdan. Senchi?"},
+ {s:"A", de:"Ich komme aus Berlin. Was machst du hier?", uz:"Men Berlindanman. Bu yerda nima qilyapsan?"},
+ {s:"B", de:"Ich lerne Deutsch und arbeite als Buchhalter.", uz:"Nemis tilini o'rganyapman va buxgalter bo'lib ishlayman."},
+ {s:"A", de:"Toll! Dein Deutsch ist schon gut.", uz:"Zo'r! Nemis tiling allaqachon yaxshi."},
+ {s:"B", de:"Danke! Freut mich auch.", uz:"Rahmat! Men ham xursandman."}
+]},
+{id:"d2", icon:"🚉", title:"Vokzalga yo'l so'rash", desc:"Ko'chada o'tkinchidan yo'l so'rash", lines:[
+ {s:"A", de:"Entschuldigung, wie komme ich zum Bahnhof?", uz:"Kechirasiz, vokzalga qanday borsam bo'ladi?"},
+ {s:"B", de:"Gehen Sie hier geradeaus und dann an der Ampel links.", uz:"Bu yerdan to'g'riga yuring, keyin svetoforda chapga."},
+ {s:"A", de:"Ist es weit?", uz:"Uzoqmi?"},
+ {s:"B", de:"Nein, etwa zehn Minuten zu Fuß.", uz:"Yo'q, piyoda taxminan o'n daqiqa."},
+ {s:"B", de:"Der Bahnhof ist neben dem Supermarkt.", uz:"Vokzal supermarket yonida."},
+ {s:"A", de:"Vielen Dank!", uz:"Katta rahmat!"},
+ {s:"B", de:"Bitte schön. Gute Reise!", uz:"Arzimaydi. Oq yo'l!"}
+]},
+{id:"d3", icon:"☕", title:"Kafeda", desc:"Ofitsiant bilan suhbat va to'lov", lines:[
+ {s:"A", de:"Guten Tag! Was möchten Sie?", uz:"Xayrli kun! Nima istaysiz?"},
+ {s:"B", de:"Einen Tee und ein Stück Kuchen, bitte.", uz:"Bitta choy va bir bo'lak pirog, iltimos."},
+ {s:"A", de:"Gerne. Noch etwas?", uz:"Mamnuniyat bilan. Yana biror narsa?"},
+ {s:"B", de:"Nein, danke. Das ist alles.", uz:"Yo'q, rahmat. Hammasi shu."},
+ {s:"B", de:"Die Rechnung, bitte.", uz:"Hisobni keltiring, iltimos."},
+ {s:"A", de:"Das macht sechs Euro fünfzig.", uz:"Jami olti yevro ellik sent."},
+ {s:"B", de:"Kann ich mit Karte zahlen?", uz:"Karta bilan to'lasam bo'ladimi?"},
+ {s:"A", de:"Ja, natürlich.", uz:"Ha, albatta."},
+ {s:"B", de:"Danke, tschüss!", uz:"Rahmat, xayr!"}
+]},
+{id:"d4", icon:"🚌", title:"Avtobus bekatida", desc:"Qaysi avtobus kerakligini aniqlash", lines:[
+ {s:"A", de:"Entschuldigung, welcher Bus fährt zum Flughafen?", uz:"Kechirasiz, qaysi avtobus aeroportga boradi?"},
+ {s:"B", de:"Der Bus Nummer fünf.", uz:"5-raqamli avtobus."},
+ {s:"A", de:"Wo ist die Haltestelle?", uz:"Bekat qayerda?"},
+ {s:"B", de:"Da drüben, gegenüber der Apotheke.", uz:"Ana u yerda, dorixona qarshisida."},
+ {s:"A", de:"Wo kann ich ein Ticket kaufen?", uz:"Chiptani qayerdan olsam bo'ladi?"},
+ {s:"B", de:"Im Bus, beim Fahrer.", uz:"Avtobusning ichida, haydovchidan."},
+ {s:"A", de:"Super, danke schön!", uz:"Zo'r, katta rahmat!"}
+]},
+{id:"d5", icon:"🛒", title:"Do'konda", desc:"Narx so'rash va xarid qilish", lines:[
+ {s:"A", de:"Guten Morgen! Kann ich Ihnen helfen?", uz:"Xayrli tong! Sizga yordam bera olamanmi?"},
+ {s:"B", de:"Ja, bitte. Was kostet das Brot?", uz:"Ha, iltimos. Non qancha turadi?"},
+ {s:"A", de:"Zwei Euro zwanzig.", uz:"Ikki yevro yigirma sent."},
+ {s:"B", de:"Und haben Sie auch Milch?", uz:"Sizda sut ham bormi?"},
+ {s:"A", de:"Ja, dort hinten rechts.", uz:"Ha, ana u orqada, o'ng tomonda."},
+ {s:"B", de:"Gut, ich nehme das Brot und eine Milch.", uz:"Yaxshi, non va bitta sut olaman."},
+ {s:"A", de:"Das macht drei Euro dreißig.", uz:"Jami uch yevro o'ttiz sent."},
+ {s:"B", de:"Bitte schön. Schönen Tag noch!", uz:"Marhamat. Kuningiz yaxshi o'tsin!"}
+]}
+];
+
+var VOCAB = [
+{id:"olmosh", icon:"🙋", title:"Olmoshlar va savol so'zlari", t:`
+ich|ix|men
+du|duu|sen
+er|eer|u (erkak)
+sie|zii|u (ayol) / ular
+es|es|u (narsa)
+wir|viir|biz
+ihr|iir|sizlar
+Sie|zii|Siz (hurmat)
+mein|mayn|mening
+dein|dayn|sening
+unser|unzer|bizning
+Ihr|iir|Sizning
+mich|mix|meni
+mir|miir|menga
+dich|dix|seni
+dir|diir|senga
+uns|uns|bizni / bizga
+wer|veer|kim
+was|vas|nima
+wo|voo|qayerda
+woher|vooheer|qayerdan
+wohin|voohin|qayerga
+wann|van|qachon
+wie|vii|qanday
+wie viel|vi fiil|qancha
+warum|vaarum|nega
+welcher|velxer|qaysi
+dieser|diizer|bu (shu)
+alle|alle|hamma
+jeder|yeeder|har bir
+etwas|etvas|biror narsa
+nichts|nixts|hech narsa
+jemand|yeemant|kimdir
+niemand|niimant|hech kim
+man|man|(umumiy shaxs) odam
+selbst|zelpst|o'zi
+`},
+{id:"ravish", icon:"🔗", title:"Kichik so'zlar (ravish, bog'lovchi)", t:`
+ja|yaa|ha
+nein|nayn|yo'q
+nicht|nixt|emas
+kein|kayn|hech qanday (yo'q)
+bitte|bitte|iltimos / marhamat
+danke|danke|rahmat
+und|unt|va
+oder|ooder|yoki
+aber|aaber|lekin
+weil|vayl|chunki
+dass|das|...ki (bog'lovchi)
+wenn|ven|agar / qachonki
+ob|op|...mi yo'qmi
+denn|den|axir (chunki)
+also|alzo|demak
+dann|dan|keyin (so'ngra)
+danach|daanaax|shundan keyin
+zuerst|tsueerst|avval
+sehr|zeer|juda
+viel|fiil|ko'p
+wenig|veenix|oz
+mehr|meer|ko'proq
+genug|genuuk|yetarli
+auch|aux|ham
+nur|nuur|faqat
+schon|shoon|allaqachon
+noch|nox|hali / yana
+wieder|viider|yana (qaytadan)
+immer|immer|doim
+oft|oft|tez-tez
+manchmal|manxmaal|ba'zan
+nie|nii|hech qachon
+selten|zelten|kamdan-kam
+gern|gern|mamnuniyat bilan
+vielleicht|fiilayxt|balki
+natürlich|natüürlix|albatta
+wirklich|virklix|haqiqatan
+genau|genau|aynan
+fast|fast|deyarli
+ungefähr|ungefeer|taxminan
+zusammen|tsuzammen|birga
+sofort|zofort|darhol
+vorher|foorheer|oldin
+nachher|naaxheer|keyinchalik
+endlich|entlix|nihoyat
+leider|layder|afsuski
+hoffentlich|hoffentlix|umid qilamanki
+zum Beispiel|tsum bayshpiil|masalan
+eigentlich|aygentlix|aslida
+besonders|bezonders|ayniqsa
+so|zoo|shunday
+los|loos|ketdik! / boshla!
+okay|okee|mayli / xo'p
+klar|klaar|tushunarli
+`},
+{id:"feyl", icon:"🏃", title:"Kerakli fe'llar", t:`
+sein|zayn|bo'lmoq
+haben|haaben|ega bo'lmoq (...i bor)
+gehen|geeen|bormoq (piyoda)
+kommen|kommen|kelmoq
+fahren|faaren|(transportda) bormoq
+wohnen|voonen|yashamoq
+arbeiten|arbayten|ishlamoq
+sprechen|shprexen|gapirmoq
+lernen|lernen|o'rganmoq
+verstehen|fershteeen|tushunmoq
+essen|essen|yemoq
+trinken|trinken|ichmoq
+kaufen|kaufen|sotib olmoq
+suchen|zuuxen|qidirmoq
+brauchen|brauxen|...ga muhtoj bo'lmoq
+sehen|zeeen|ko'rmoq
+sagen|zaagen|aytmoq
+helfen|helfen|yordam bermoq
+machen|maxen|qilmoq
+wissen|vissen|bilmoq
+werden|veerden|bo'lib qolmoq (aylanmoq)
+können|kö'nnen|...a olmoq
+müssen|müssen|...ishi shart
+wollen|vollen|xohlamoq
+sollen|zollen|...ishi kerak
+dürfen|dürfen|ruxsat bo'lmoq
+mögen|möögen|yoqtirmoq
+möchten|mö'xten|istamoq (xushmuomala)
+geben|geeben|bermoq
+nehmen|neemen|olmoq
+finden|finden|topmoq
+bringen|bringen|olib kelmoq
+holen|hoolen|borib olib kelmoq
+kennen|kennen|tanimoq
+denken|denken|o'ylamoq
+glauben|glauben|ishonmoq / deb o'ylamoq
+heißen|haysen|...deb atalmoq
+fragen|fraagen|so'ramoq
+antworten|antvorten|javob bermoq
+hören|höören|eshitmoq
+zuhören|tsuuhöören|tinglamoq
+lesen|leezen|o'qimoq
+schreiben|shrayben|yozmoq
+spielen|shpiilen|o'ynamoq
+schlafen|shlaafen|uxlamoq
+aufstehen|aufshteeen|o'rnidan turmoq
+liegen|liigen|yotmoq
+sitzen|zitsen|o'tirmoq
+stehen|shteeen|turmoq
+warten|varten|kutmoq
+bleiben|blayben|qolmoq
+leben|leeben|hayot kechirmoq
+lieben|liiben|sevmoq
+gefallen|gefallen|yoqmoq
+zahlen|tsaalen|to'lamoq
+kosten|kosten|turmoq (narxi)
+verkaufen|ferkaufen|sotmoq
+bestellen|beshtellen|buyurtma bermoq
+öffnen|ö'ffnen|ochmoq
+schließen|shliisen|yopmoq
+beginnen|beginnen|boshlamoq
+anfangen|anfangen|boshlab yubormoq
+aufhören|aufhöören|to'xtatmoq
+zeigen|tsaygen|ko'rsatmoq
+erklären|erkleeren|tushuntirmoq
+wiederholen|viiderhoolen|takrorlamoq
+üben|üüben|mashq qilmoq
+studieren|shtudiiren|(oliygohda) o'qimoq
+übersetzen|üüberzetsen|tarjima qilmoq
+buchstabieren|buuxshtabiiren|harflab aytmoq
+reisen|rayzen|sayohat qilmoq
+fliegen|fliigen|uchmoq
+laufen|laufen|yugurmoq / yurmoq
+schwimmen|shvimmen|suzmoq
+tanzen|tantsen|raqs tushmoq
+singen|zingen|qo'shiq aytmoq
+kochen|koxen|ovqat pishirmoq
+waschen|vashen|yuvmoq
+putzen|putsen|tozalamoq
+duschen|duushen|dush qabul qilmoq
+anrufen|anruufen|qo'ng'iroq qilmoq
+telefonieren|telefoniiren|telefonda gaplashmoq
+schicken|shikken|jo'natmoq
+bekommen|bekommen|olmoq (qabul qilmoq)
+benutzen|benutsen|foydalanmoq
+treffen|treffen|uchrashmoq
+kennenlernen|kennenlernen|tanishmoq
+besuchen|bezuuxen|tashrif buyurmoq
+einladen|aynlaaden|taklif qilmoq
+feiern|fayern|nishonlamoq
+danken|danken|minnatdorchilik bildirmoq
+entschuldigen|entshuldigen|kechirmoq
+vergessen|fergessen|unutmoq
+erinnern|erinnern|eslatmoq
+verlieren|ferliiren|yo'qotmoq
+gewinnen|gevinnen|yutmoq
+mieten|miiten|ijaraga olmoq
+wechseln|vekseln|almashtirmoq
+tragen|traagen|ko'tarmoq / kiyib yurmoq
+anziehen|antsiien|kiyinmoq
+ausziehen|austsiien|yechinmoq
+fühlen|füülen|his qilmoq
+lachen|laxen|kulmoq
+weinen|vaynen|yig'lamoq
+gehören|gehöören|...ga tegishli bo'lmoq
+passieren|pasiiren|sodir bo'lmoq
+versuchen|ferzuuxen|urinib ko'rmoq
+erzählen|ertseelen|hikoya qilmoq
+bitten|bitten|iltimos qilmoq
+rufen|ruufen|chaqirmoq
+legen|leegen|yotqizib qo'ymoq
+stellen|shtellen|tik qo'ymoq
+hängen|hengen|osmoq
+ziehen|tsiien|tortmoq
+drücken|drükken|bosmoq / itarmoq
+tun|tuun|bajarmoq
+lassen|lassen|qoldirmoq / qo'yib bermoq
+fallen|fallen|yiqilmoq
+werfen|verfen|otmoq / tashlamoq
+reparieren|repariiren|ta'mirlamoq
+verdienen|ferdiinen|pul ishlab topmoq
+sparen|shpaaren|tejamoq
+ausgeben|ausgeeben|sarflamoq
+leihen|layen|qarzga bermoq / olmoq
+mitkommen|mitkommen|birga bormoq
+mitnehmen|mitneemen|o'zi bilan olib ketmoq
+einkaufen|aynkaufen|xarid qilmoq
+abholen|aphoolen|kutib olmoq (olib ketmoq)
+ankommen|ankommen|yetib kelmoq
+abfahren|apfaaren|jo'nab ketmoq
+einsteigen|aynshtaygen|(transportga) chiqmoq
+aussteigen|ausshtaygen|(transportdan) tushmoq
+umsteigen|umshtaygen|(transportni) almashtirmoq
+parken|parken|mashina qo'ymoq
+rauchen|rauxen|chekmoq
+heiraten|hayraaten|turmush qurmoq
+meinen|maynen|nazarda tutmoq
+hoffen|hoffen|umid qilmoq
+planen|plaanen|rejalashtirmoq
+kontrollieren|kontroliiren|nazorat qilmoq
+buchen|buuxen|bron qilmoq
+reservieren|rezerviiren|oldindan band qilmoq
+packen|pakken|(sumkani) yig'moq
+vorstellen|foorshtellen|tanishtirmoq
+lächeln|lexeln|jilmaymoq
+schmecken|shmekken|ta'mi yoqmoq
+riechen|riixen|hidlamoq
+schenken|shenken|sovg'a qilmoq
+wählen|veelen|tanlamoq
+entscheiden|entshayden|qaror qilmoq
+vorbereiten|foorberayten|tayyorlamoq
+ändern|endern|o'zgartirmoq
+bauen|bauen|qurmoq
+fehlen|feelen|yetishmaslik
+dauern|dauern|davom etmoq (vaqt olmoq)
+funktionieren|funktsioniiren|ishlamoq (qurilma)
+ausfüllen|ausfüllen|to'ldirmoq (blanka)
+unterschreiben|untershrayben|imzolamoq
+sich freuen|zix froyen|xursand bo'lmoq
+sich beeilen|zix beaylen|shoshilmoq
+sich ausruhen|zix ausruuen|dam olmoq
+`},
+{id:"sifat", icon:"✨", title:"Sifatlar", t:`
+gut|guut|yaxshi
+schlecht|shlext|yomon
+groß|groos|katta
+klein|klayn|kichik
+neu|noy|yangi
+alt|alt|eski / qari
+teuer|toyer|qimmat
+billig|billix|arzon
+schön|shöön|chiroyli
+schnell|shnel|tez
+langsam|langzaam|sekin
+warm|varm|iliq
+kalt|kalt|sovuq
+heiß|hays|issiq
+müde|müüde|charchagan
+lecker|lekker|mazali
+jung|yung|yosh
+lang|lang|uzun
+kurz|kurts|qisqa
+hoch|hoox|baland
+niedrig|niidrix|past
+breit|brayt|keng
+schmal|shmaal|tor
+dick|dik|semiz / qalin
+dünn|dün|ozg'in / yupqa
+schwer|shveer|og'ir / qiyin
+leicht|layxt|yengil / oson
+einfach|aynfax|sodda
+schwierig|shviirix|murakkab
+richtig|rixtix|to'g'ri
+falsch|falsh|noto'g'ri
+wichtig|vixtix|muhim
+interessant|interesant|qiziqarli
+langweilig|langvaylix|zerikarli
+lustig|lustix|kulgili
+traurig|traurix|g'amgin
+glücklich|glüklix|baxtli
+froh|froo|xursand
+böse|bööze|jahldor / yovuz
+nett|net|mehribon
+freundlich|froyntlix|xushmuomala
+höflich|hööflix|odobli
+ruhig|ruuix|tinch
+laut|laut|shovqinli
+leise|layze|sokin (past ovozli)
+sauber|zauber|toza
+schmutzig|shmutsix|iflos
+voll|fol|to'la
+leer|leer|bo'sh
+offen|offen|ochiq
+geschlossen|geshlossen|yopiq
+frei|fray|bo'sh (ozod)
+besetzt|bezetst|band
+fertig|fertix|tayyor
+bereit|berayt|shay
+krank|krank|kasal
+gesund|gezunt|sog'lom
+stark|shtark|kuchli
+schwach|shvax|kuchsiz
+reich|rayx|boy
+arm|arm|kambag'al
+nass|nas|ho'l
+trocken|trokken|quruq
+süß|züüs|shirin
+sauer|zauer|nordon
+salzig|zaltsix|sho'r
+scharf|sharf|achchiq (o'tkir)
+bitter|bitter|taxir
+frisch|frish|yangi (barra)
+kaputt|kaput|buzuq
+modern|modern|zamonaviy
+bequem|bekveem|qulay
+praktisch|praktish|amaliy
+möglich|mööklix|mumkin
+unmöglich|unmööklix|imkonsiz
+sicher|zixer|xavfsiz / aniq
+gefährlich|gefeerlix|xavfli
+pünktlich|pünktlix|o'z vaqtida
+fleißig|flaysix|tirishqoq
+faul|faul|dangasa
+klug|kluuk|aqlli
+dumm|dum|ahmoq
+berühmt|berüümt|mashhur
+bekannt|bekant|taniqli
+fremd|fremt|begona
+allein|alayn|yolg'iz
+verheiratet|ferhayraatet|uylangan / turmushga chiqqan
+ledig|leedix|bo'ydoq
+nervös|nervöös|asabiy
+zufrieden|tsufriiden|mamnun
+hungrig|hungrix|och
+durstig|durstix|chanqagan
+satt|zat|to'q
+kostenlos|kostenloos|bepul
+gleich|glayx|bir xil
+anders|anders|boshqacha
+verschieden|fershiiden|turli xil
+nächste|neekste|keyingi
+letzte|letste|oxirgi / o'tgan
+erste|eerste|birinchi
+ganz|gants|butun
+halb|halp|yarim
+toll|tol|zo'r
+super|zuuper|super (juda yaxshi)
+wunderbar|vunderbaar|ajoyib
+perfekt|perfekt|mukammal
+schrecklich|shreklix|dahshatli
+hübsch|hübsh|yoqimtoy
+hässlich|heslix|xunuk
+fern|fern|olis
+weich|vayx|yumshoq
+hart|hart|qattiq
+spannend|shpannent|hayajonli
+normal|normaal|odatiy
+`},
+{id:"oila", icon:"👨‍👩‍👧", title:"Oila va odamlar", t:`
+der Vater|deer faater|ota
+die Mutter|di mutter|ona
+der Bruder|deer bruuder|aka / uka
+die Schwester|di shvester|opa / singil
+der Sohn|deer zoon|o'g'il
+die Tochter|di toxter|qiz (farzand)
+die Eltern|di eltern|ota-ona (ko'plik)|pl
+das Kind|das kint|bola
+die Familie|di famiilie|oila
+der Mann|deer man|erkak / er
+die Frau|di frau|ayol / xotin
+der Freund|deer froynt|do'st (erkak)
+die Freundin|di froyndin|do'st (ayol)
+der Nachbar|deer naxbaar|qo'shni
+die Geschwister|di geshvister|aka-uka, opa-singil (ko'plik)|pl
+der Großvater|deer groosfaater|bobo
+die Großmutter|di groosmutter|buvi
+die Großeltern|di groos-eltern|bobo-buvi (ko'plik)|pl
+der Opa|deer oopa|bobojon
+die Oma|di ooma|buvijon
+der Onkel|deer onkel|amaki / tog'a
+die Tante|di tante|amma / xola
+der Cousin|deer kuzeng|amakivachcha (o'g'il)
+die Cousine|di kuziine|amakivachcha (qiz)
+der Enkel|deer enkel|nevara (o'g'il)
+die Enkelin|di enkelin|nevara (qiz)
+der Ehemann|deer ee-eman|er (turmush o'rtoq)
+die Ehefrau|di ee-efrau|xotin (turmush o'rtoq)
+das Baby|das beebi|chaqaloq
+der Junge|deer yunge|o'g'il bola
+das Mädchen|das meetxen|qiz bola
+der Mensch|deer mensh|inson
+die Leute|di loyte|odamlar (ko'plik)|pl
+der Gast|deer gast|mehmon
+der Kollege|deer kolleege|hamkasb (erkak)
+die Kollegin|di kolleegin|hamkasb (ayol)
+der Chef|deer shef|boshliq
+der Herr|deer her|janob
+die Dame|di daame|xonim
+die Hochzeit|di hoxtsayt|to'y
+der Geburtstag|deer geburtstaak|tug'ilgan kun
+der Name|deer naame|ism
+der Vorname|deer foornaame|ism (shaxsiy)
+der Nachname|deer naaxnaame|familiya
+das Alter|das alter|yosh (necha yosh)
+`},
+{id:"joy", icon:"🏙️", title:"Shahar va joylar", t:`
+der Bahnhof|deer baanhoof|vokzal
+der Flughafen|deer fluukhaafen|aeroport
+die Haltestelle|di halteshtelle|bekat
+die U-Bahn|di uu-baan|metro
+der Bus|deer bus|avtobus
+das Taxi|das taksi|taksi
+die Straße|di shtraase|ko'cha
+die Bank|di bank|bank
+die Apotheke|di apoteeke|dorixona
+das Krankenhaus|das krankenhaus|kasalxona
+das Hotel|das hotel|mehmonxona
+das Restaurant|das restorang|restoran
+der Supermarkt|deer zuupermarkt|supermarket
+der Park|deer park|bog' / park
+die Brücke|di brüke|ko'prik
+die Ampel|di ampel|svetofor
+die Kreuzung|di kroytsung|chorraha
+die Polizei|di politsay|politsiya
+die Post|di post|pochta
+die Moschee|di moshee|masjid
+die Toilette|di toalette|hojatxona
+die Stadt|di shtat|shahar
+das Zentrum|das tsentrum|markaz
+die Schule|di shuule|maktab
+die Universität|di universiteet|universitet
+die Bibliothek|di bibliyoteek|kutubxona
+das Kino|das kiino|kinoteatr
+das Theater|das teaater|teatr
+das Museum|das muzeeum|muzey
+das Geschäft|das gesheft|do'kon
+der Laden|deer laaden|kichik do'kon
+der Markt|deer markt|bozor
+die Bäckerei|di bekeray|novvoyxona
+das Café|das kafee|kafe
+die Kirche|di kirxe|cherkov
+das Rathaus|das raathaus|shahar hokimiyati
+die Botschaft|di bootshaft|elchixona
+das Büro|das büroo|ofis
+die Firma|di firma|firma / kompaniya
+die Fabrik|di fabriik|zavod
+der Platz|deer plats|maydon / joy
+der Parkplatz|deer parkplats|avtoturargoh
+die Tankstelle|di tankshtelle|yoqilg'i quyish shoxobchasi
+das Gebäude|das geboyde|bino
+die Ecke|di ekke|burchak
+die Hauptstraße|di hauptshtraase|bosh ko'cha
+der Weg|deer veek|yo'l
+die Adresse|di adresse|manzil
+das Dorf|das dorf|qishloq
+das Land|das lant|mamlakat
+die Hauptstadt|di hauptshtat|poytaxt
+das Stadion|das shtaadion|stadion
+das Schwimmbad|das shvimbaat|basseyn
+der Zoo|deer tsoo|hayvonot bog'i
+der Friseur|deer frizöör|sartarosh
+der Kiosk|deer kiosk|kiosk
+das Einkaufszentrum|das aynkaufstsentrum|savdo markazi
+der Eingang|deer ayngang|kirish
+der Ausgang|deer ausgang|chiqish
+die Grenze|di grentse|chegara
+die Praxis|di praksis|shifokor qabulxonasi
+der Spielplatz|deer shpiilplats|bolalar maydonchasi
+`},
+{id:"yonalish", icon:"🧭", title:"Yo'nalish va predloglar", t:`
+links|links|chapga / chapda
+rechts|rexts|o'ngga / o'ngda
+geradeaus|geraade-aus|to'g'riga
+hier|hiir|bu yerda
+dort|dort|u yerda
+nah|naa|yaqin
+weit|vayt|uzoq
+neben|neeben|yonida
+hinter|hinter|orqasida
+vor|foor|oldida
+gegenüber|geegenüüber|qarshisida
+zwischen|tsvishen|o'rtasida
+oben|ooben|tepada
+unten|unten|pastda
+da|daa|mana / u yerda
+drüben|drüüben|narigi tomonda
+vorne|forne|oldinda
+hinten|hinten|orqada
+draußen|drausen|tashqarida
+drinnen|drinnen|ichkarida
+in der Nähe|in deer nee-e|yaqin atrofda
+überall|üüberal|hamma joyda
+nirgends|nirgents|hech qayerda
+irgendwo|irgentvoo|qayerdadir
+zurück|tsurük|orqaga
+weiter|vayter|davom etib (oldinga)
+an|an|yonida / ...da
+auf|auf|ustida
+in|in|ichida
+unter|unter|ostida
+über|üüber|ustidan / orqali
+nach|naax|...ga (shaharga) / keyin
+zu|tsuu|...ga (kishiga, joyga)
+von|fon|...dan
+aus|aus|...dan (ichidan)
+bei|bay|...nikida / yonida
+mit|mit|bilan
+ohne|oone|...siz
+für|füür|uchun
+gegen|geegen|qarshi
+durch|durx|orqali (ichidan o'tib)
+bis|bis|...gacha
+um|um|atrofida / soat ...da
+ab|ap|...dan boshlab
+der Norden|deer norden|shimol
+der Süden|deer züüden|janub
+der Osten|deer osten|sharq
+der Westen|deer vesten|g'arb
+die Seite|di zayte|tomon / sahifa
+die Richtung|di rixtung|yo'nalish
+`},
+{id:"transport", icon:"🚆", title:"Transport va safar", t:`
+das Auto|das auto|avtomobil
+der Zug|deer tsuuk|poyezd
+das Flugzeug|das fluuktsoyk|samolyot
+die Straßenbahn|di shtraasenbaan|tramvay
+das Fahrrad|das faarraat|velosiped
+das Motorrad|das mootorraat|mototsikl
+das Schiff|das shif|kema
+die Fahrkarte|di faarkarte|yo'l chiptasi
+das Ticket|das tiket|chipta
+der Fahrplan|deer faarplaan|qatnov jadvali
+die Abfahrt|di apfaart|jo'nash
+die Ankunft|di ankunft|yetib kelish
+das Gleis|das glays|yo'l (platforma raqami)
+der Bahnsteig|deer baanshtayk|perron
+die Verspätung|di fershpeetung|kechikish
+die Reise|di rayze|sayohat
+der Koffer|deer koffer|chamadon
+das Gepäck|das gepek|yuk (bagaj)
+die Tasche|di tashe|sumka
+der Rucksack|deer rukzak|ryukzak
+der Schlüssel|deer shlüssel|kalit
+die Rezeption|di retseptsioon|qabulxona (resepshn)
+die Reservierung|di rezerviirung|bron
+das Einzelzimmer|das ayntseltsimmer|bir kishilik xona
+das Doppelzimmer|das doppeltsimmer|ikki kishilik xona
+der Tourist|deer turist|sayyoh
+der Stadtplan|deer shtatplaan|shahar xaritasi
+die Sehenswürdigkeit|di zeeensvürdixkayt|diqqatga sazovor joy
+der Ausflug|deer ausfluuk|ekskursiya (sayr)
+der Verkehr|deer ferkeer|yo'l harakati
+der Stau|deer shtau|tirbandlik
+die Autobahn|di autobaan|avtomagistral
+der Führerschein|deer füürershayn|haydovchilik guvohnomasi
+das Benzin|das bentsiin|benzin
+die Linie|di liinie|yo'nalish (marshrut)
+die Station|di shtatsioon|bekat (metro)
+der Flug|deer fluuk|parvoz
+der Abflug|deer apfluuk|uchib ketish
+die Landung|di landung|qo'nish
+der Sitzplatz|deer zitsplats|o'rindiq
+der Fahrgast|deer faargast|yo'lovchi
+`},
+{id:"ovqat", icon:"🍞", title:"Ovqat va ichimliklar", t:`
+das Brot|das broot|non
+das Wasser|das vasser|suv
+der Kaffee|deer kafee|kofe
+der Tee|deer tee|choy
+die Milch|di milx|sut
+das Fleisch|das flaysh|go'sht
+das Hähnchen|das heenxen|tovuq go'shti
+der Reis|deer rays|guruch
+das Ei|das ay|tuxum
+der Käse|deer keeze|pishloq
+der Apfel|deer apfel|olma
+das Obst|das oopst|meva
+das Gemüse|das gemüüze|sabzavot
+der Saft|deer zaft|sharbat
+der Zucker|deer tsukker|shakar
+das Salz|das zalts|tuz
+die Suppe|di zuppe|sho'rva
+der Kuchen|deer kuuxen|pirog / tort
+das Brötchen|das bröötxen|bulochka
+die Butter|di butter|sariyog'
+der Joghurt|deer yoogurt|yogurt
+die Wurst|di vurst|kolbasa
+der Fisch|deer fish|baliq
+das Rindfleisch|das rintflaysh|mol go'shti
+das Lammfleisch|das lamflaysh|qo'y go'shti
+das Hackfleisch|das hakflaysh|qiyma
+die Nudeln|di nuudeln|makaron (ko'plik)|pl
+die Kartoffel|di kartoffel|kartoshka
+der Salat|deer zalaat|salat
+die Soße|di zoose|sous
+das Öl|das ööl|o'simlik yog'i
+der Pfeffer|deer pfeffer|murch
+der Honig|deer hoonix|asal
+die Marmelade|di marmelaade|murabbo
+die Schokolade|di shokolaade|shokolad
+das Eis|das ays|muzqaymoq / muz
+die Pizza|di pitsa|pitsa
+die Sahne|di zaane|qaymoq
+das Mehl|das meel|un
+das Frühstück|das früüshtük|nonushta
+das Mittagessen|das mittaakessen|tushlik
+das Abendessen|das aabentessen|kechki ovqat
+das Essen|das essen|ovqat
+die Mahlzeit|di maaltsayt|ovqatlanish
+das Getränk|das getrenk|ichimlik
+das Mineralwasser|das mineraalvasser|mineral suv
+die Limonade|di limonaade|limonad
+die Cola|di koola|kola
+der Hunger|deer hunger|ochlik
+der Durst|deer durst|chanqoq
+die Speisekarte|di shpayzekarte|menyu
+die Rechnung|di rexnung|hisob (chek)
+das Trinkgeld|das trinkgelt|choychaqa
+der Teller|deer teller|tarelka
+die Tasse|di tasse|chashka
+das Glas|das glaas|stakan
+die Flasche|di flashe|butilka
+der Löffel|deer lö'ffel|qoshiq
+die Gabel|di gaabel|vilka
+das Messer|das messer|pichoq
+die Serviette|di zervyette|salfetka
+`},
+{id:"meva", icon:"🍎", title:"Meva va sabzavotlar", t:`
+die Banane|di banaane|banan
+die Orange|di oronshe|apelsin
+die Birne|di birne|nok
+die Traube|di traube|uzum
+die Erdbeere|di eertbeere|qulupnay
+die Kirsche|di kirshe|gilos
+die Aprikose|di aprikooze|o'rik
+der Pfirsich|deer pfirzix|shaftoli
+die Melone|di meloone|qovun
+die Wassermelone|di vassermeloone|tarvuz
+die Zitrone|di tsitroone|limon
+die Pflaume|di pflaume|olxo'ri
+der Granatapfel|deer granaatapfel|anor
+die Nuss|di nus|yong'oq
+die Rosine|di roziine|mayiz
+die Dattel|di dattel|xurmo
+die Feige|di fayge|anjir
+die Tomate|di tomaate|pomidor
+die Gurke|di gurke|bodring
+die Zwiebel|di tsviibel|piyoz
+der Knoblauch|deer knooplaux|sarimsoq
+die Karotte|di karotte|sabzi
+der Kohl|deer kool|karam
+die Paprika|di paprika|bulg'or qalampiri
+die Aubergine|di oberjiine|baqlajon
+der Kürbis|deer kürbis|qovoq
+die Bohne|di boone|loviya
+die Erbse|di erpse|ko'k no'xat
+der Pilz|deer pilts|qo'ziqorin
+`},
+{id:"uy", icon:"🏠", title:"Uy va jihozlar", t:`
+das Haus|das haus|uy
+die Wohnung|di voonung|kvartira
+das Zimmer|das tsimmer|xona
+die Küche|di küxe|oshxona
+das Bad|das baat|vannaxona
+das Schlafzimmer|das shlaaftsimmer|yotoqxona
+das Wohnzimmer|das voontsimmer|mehmonxona (xona)
+der Balkon|deer balkon|balkon
+der Garten|deer garten|hovli (bog')
+die Tür|di tüür|eshik
+das Fenster|das fenster|deraza
+die Treppe|di treppe|zinapoya
+der Aufzug|deer auftsuuk|lift
+der Stock|deer shtok|qavat
+die Wand|di vant|devor
+der Boden|deer booden|pol
+die Decke|di dekke|ship / adyol
+das Dach|das dax|tom
+der Tisch|deer tish|stol
+der Stuhl|deer shtuul|stul
+das Bett|das bet|karavot
+das Sofa|das zoofa|divan
+der Schrank|deer shrank|shkaf
+das Regal|das regaal|javon
+die Lampe|di lampe|chiroq
+das Licht|das lixt|yorug'lik
+der Teppich|deer teppix|gilam
+der Spiegel|deer shpiigel|ko'zgu
+das Kissen|das kissen|yostiq
+der Kühlschrank|deer küülshrank|muzlatkich
+der Herd|deer heert|plita
+der Ofen|deer oofen|duxovka (pech)
+die Waschmaschine|di vashmashiine|kir yuvish mashinasi
+der Fernseher|deer fernzeeer|televizor
+die Heizung|di haytsung|isitish (batareya)
+die Klimaanlage|di kliima-anlaage|konditsioner
+die Dusche|di duushe|dush
+das Waschbecken|das vashbekken|rakovina
+das Handtuch|das hanttuux|sochiq
+die Seife|di zayfe|sovun
+die Zahnbürste|di tsaanbürste|tish cho'tkasi
+die Zahnpasta|di tsaanpasta|tish pastasi
+der Müll|deer mül|axlat
+der Topf|deer topf|qozon (kastryul)
+die Pfanne|di pfanne|tova
+das Foto|das footo|surat (foto)
+das Bild|das bilt|rasm
+die Steckdose|di shtekdooze|rozetka
+der Strom|deer shtroom|elektr toki
+der Vermieter|deer fermiiter|uy egasi (ijaraga beruvchi)
+`},
+{id:"tana", icon:"🩺", title:"Tana va salomatlik", t:`
+der Körper|deer körper|tana
+der Kopf|deer kopf|bosh
+das Gesicht|das gezixt|yuz
+das Auge|das auge|ko'z
+das Ohr|das oor|quloq
+die Nase|di naaze|burun
+der Mund|deer munt|og'iz
+der Zahn|deer tsaan|tish
+das Haar|das haar|soch
+der Hals|deer hals|bo'yin / tomoq
+die Schulter|di shulter|yelka
+der Arm|deer arm|qo'l (bilak)
+die Hand|di hant|qo'l (kaft)
+der Finger|deer finger|barmoq
+der Bauch|deer baux|qorin
+der Rücken|deer rükken|bel (orqa)
+das Bein|das bayn|oyoq
+der Fuß|deer fuus|oyoq panjasi
+das Knie|das knii|tizza
+das Herz|das herts|yurak
+der Magen|deer maagen|oshqozon
+die Haut|di haut|teri
+das Blut|das bluut|qon
+die Gesundheit|di gezunthayt|sog'liq
+die Krankheit|di krankhayt|kasallik
+der Schmerz|deer shmerts|og'riq
+die Kopfschmerzen|di kopfshmertsen|bosh og'rig'i (ko'plik)|pl
+die Bauchschmerzen|di bauxshmertsen|qorin og'rig'i (ko'plik)|pl
+das Fieber|das fiiber|isitma
+die Erkältung|di erkeltung|shamollash
+der Husten|deer huusten|yo'tal
+der Schnupfen|deer shnupfen|tumov
+die Allergie|di alergii|allergiya
+das Medikament|das medikament|dori
+die Tablette|di tablette|tabletka
+das Rezept|das retsept|retsept
+die Verletzung|di ferletsung|jarohat
+der Unfall|deer unfal|baxtsiz hodisa
+der Notarzt|deer nootartst|tez yordam shifokori
+der Krankenwagen|deer krankenvaagen|tez yordam mashinasi
+das Pflaster|das pflaster|plastir
+die Brille|di brille|ko'zoynak
+`},
+{id:"kiyim", icon:"👕", title:"Kiyim-kechak", t:`
+die Kleidung|di klaydung|kiyim
+das Hemd|das hemt|ko'ylak (erkaklar)
+das T-Shirt|das tii-shört|futbolka
+die Hose|di hooze|shim
+die Jeans|di jiins|jinsi shim
+das Kleid|das klayt|ko'ylak (ayollar)
+der Rock|deer rok|yubka
+die Jacke|di yakke|kurtka
+der Mantel|deer mantel|palto
+der Pullover|deer pulloover|sviter
+der Anzug|deer antsuuk|kostyum
+die Schuhe|di shuue|poyabzal (ko'plik)|pl
+die Stiefel|di shtiifel|etik (ko'plik)|pl
+die Socken|di zokken|paypoq (ko'plik)|pl
+die Mütze|di mütse|shapka
+der Hut|deer huut|shlyapa
+der Schal|deer shaal|sharf
+die Handschuhe|di hantshuue|qo'lqop (ko'plik)|pl
+der Gürtel|deer gürtel|kamar
+die Krawatte|di kravatte|galstuk
+der Regenschirm|deer reegenshirm|soyabon
+der Ring|deer ring|uzuk
+die Unterwäsche|di unterveshe|ichki kiyim
+der Schlafanzug|deer shlaafantsuuk|pijama
+das Kopftuch|das kopftuux|ro'mol
+`},
+{id:"xarid", icon:"💶", title:"Xarid, pul va hujjatlar", t:`
+das Geld|das gelt|pul
+der Euro|deer oyro|yevro
+der Cent|deer sent|sent
+der Preis|deer prays|narx
+die Kasse|di kasse|kassa
+die Karte|di karte|karta / xarita
+das Bargeld|das baargelt|naqd pul
+die Kreditkarte|di kreditkarte|kredit karta
+der Geldautomat|deer geltautomaat|bankomat
+das Konto|das konto|bank hisobi
+die Quittung|di kvittung|kvitansiya (chek)
+das Angebot|das angeboot|taklif (aksiya)
+der Rabatt|deer rabat|chegirma
+die Tüte|di tüüte|paket (xalta)
+die Größe|di grööse|o'lcham
+das Stück|das shtük|dona / bo'lak
+das Kilo|das kiilo|kilogramm
+der Liter|deer liiter|litr
+die Packung|di pakkung|qadoq
+die Dose|di dooze|banka (konserva)
+das Paket|das pakeet|posilka
+der Brief|deer briif|xat
+die Briefmarke|di briifmarke|pochta markasi
+das Geschenk|das geshenk|sovg'a
+die Öffnungszeiten|di ö'ffnungstsayten|ish vaqti (do'kon) (ko'plik)|pl
+geöffnet|geö'ffnet|ochiq (ishlayapti)
+der Kunde|deer kunde|mijoz
+die Werbung|di verbung|reklama
+die Miete|di miite|ijara haqi
+die Steuer|di shtoyer|soliq
+die Versicherung|di ferzixerung|sug'urta
+der Ausweis|deer ausvays|shaxsiy guvohnoma (ID)
+der Pass|deer pas|pasport
+das Visum|das viizum|viza
+die Telefonnummer|di telefoonnummer|telefon raqami
+das Handy|das hendi|mobil telefon
+das Ladegerät|das laadegereet|zaryadlovchi
+die SIM-Karte|di zim-karte|SIM-karta
+`},
+{id:"ish", icon:"💼", title:"Ish va o'qish", t:`
+die Arbeit|di arbayt|ish
+der Job|deer djob|ish o'rni
+die Stelle|di shtelle|lavozim
+das Gehalt|das gehalt|maosh
+der Vertrag|deer fertraak|shartnoma
+die Besprechung|di beshprexung|majlis
+der Termin|deer termiin|belgilangan uchrashuv
+das Projekt|das proyekt|loyiha
+die Aufgabe|di aufgaabe|vazifa
+das Problem|das probleem|muammo
+die Lösung|di löözung|yechim
+der Computer|deer kompyuuter|kompyuter
+der Laptop|deer leptop|noutbuk
+der Drucker|deer drukker|printer
+das Dokument|das dokument|hujjat
+das Formular|das formulaar|blanka (ariza shakli)
+die Unterschrift|di untershrift|imzo
+das Papier|das papiir|qog'oz
+der Stift|deer shtift|qalam
+der Kugelschreiber|deer kuugelshrayber|sharikli ruchka
+das Heft|das heft|daftar
+das Buch|das buux|kitob
+die E-Mail|di ii-meyl|elektron xat
+das Internet|das internet|internet
+das Passwort|das pasvort|parol
+die Nachricht|di naaxrixt|xabar
+die Frage|di fraage|savol
+die Antwort|di antvort|javob
+die Prüfung|di prüüfung|imtihon
+der Test|deer test|test
+der Kurs|deer kurs|kurs
+die Klasse|di klasse|sinf
+der Unterricht|deer unterrixt|mashg'ulot (dars)
+die Lektion|di lektsioon|dars (bo'lim)
+die Hausaufgabe|di hausaufgaabe|uy vazifasi
+die Note|di noote|baho
+das Wort|das vort|so'z
+der Satz|deer zats|gap
+die Sprache|di shpraaxe|til
+das Beispiel|das bayshpiil|misol
+die Pause|di pauze|tanaffus
+das Zeugnis|das tsoygnis|attestat (guvohnoma)
+die Erfahrung|di erfaarung|tajriba
+die Bewerbung|di beverbung|ishga ariza
+der Lebenslauf|deer leebenslauf|rezyume
+das Gespräch|das geshpreex|suhbat
+der Fehler|deer feeler|xato
+das Ergebnis|das ergeepnis|natija
+die Idee|di idee|g'oya
+die Liste|di liste|ro'yxat
+`},
+{id:"kasb", icon:"👷", title:"Kasblar", t:`
+der Lehrer|deer leerer|o'qituvchi
+der Arzt|deer artst|shifokor
+der Student|deer shtudent|talaba
+der Ingenieur|deer inshenyöör|muhandis
+der Buchhalter|deer buuxhalter|buxgalter
+der Fahrer|deer faarer|haydovchi
+der Verkäufer|deer ferkoyfer|sotuvchi
+der Koch|deer kox|oshpaz
+der Polizist|deer politsist|politsiyachi
+der Kellner|deer kellner|ofitsiant
+die Lehrerin|di leererin|o'qituvchi (ayol)
+die Ärztin|di eertstin|shifokor (ayol)
+die Studentin|di shtudentin|talaba (qiz)
+der Schüler|deer shüüler|o'quvchi
+die Schülerin|di shüülerin|o'quvchi (qiz)
+die Krankenschwester|di krankenshvester|hamshira
+der Zahnarzt|deer tsaanartst|tish shifokori
+der Apotheker|deer apoteeker|farmatsevt
+der Programmierer|deer programiirer|dasturchi
+der Manager|deer menejer|menejer
+der Direktor|deer direktor|direktor
+der Sekretär|deer zekreteer|kotib
+der Anwalt|deer anvalt|advokat
+der Bauer|deer bauer|dehqon
+der Bäcker|deer bekker|novvoy
+der Handwerker|deer hantverker|usta
+der Elektriker|deer eelektriker|elektrik
+der Mechaniker|deer mexaaniker|mexanik
+der Journalist|deer jurnalist|jurnalist
+der Künstler|deer künstler|san'atkor
+der Musiker|deer muuziker|musiqachi
+der Soldat|deer zoldaat|askar
+der Pilot|deer piloot|uchuvchi
+der Kassierer|deer kasiirer|kassir
+der Unternehmer|deer unterneemer|tadbirkor
+der Beamte|deer beamte|davlat xizmatchisi
+der Arbeiter|deer arbayter|ishchi
+der Rentner|deer rentner|nafaqaxo'r
+arbeitslos|arbaytsloos|ishsiz
+der Beruf|deer beruuf|kasb
+`},
+{id:"kun", icon:"📅", title:"Vaqt, kunlar, oylar", t:`
+der Montag|deer moontaak|dushanba
+der Dienstag|deer diinstaak|seshanba
+der Mittwoch|deer mitvox|chorshanba
+der Donnerstag|deer donnerstaak|payshanba
+der Freitag|deer fraytaak|juma
+der Samstag|deer zamstaak|shanba
+der Sonntag|deer zontaak|yakshanba
+heute|hoyte|bugun
+morgen|morgen|ertaga
+gestern|gestern|kecha
+jetzt|yetst|hozir
+später|shpeeter|keyinroq
+der Tag|deer taak|kun
+die Woche|di voxe|hafta
+der Monat|deer moonat|oy (30 kun)
+das Jahr|das yaar|yil
+die Uhr|di uur|soat (asbob)
+das Wochenende|das voxenende|dam olish kunlari
+der Morgen|deer morgen|ertalab
+der Vormittag|deer foormittaak|tushdan oldin
+der Mittag|deer mittaak|tush payti
+der Nachmittag|deer naaxmittaak|tushdan keyin
+der Abend|deer aabent|kechqurun
+die Nacht|di naxt|tun
+die Stunde|di shtunde|soat (60 daqiqa)
+die Minute|di minuute|daqiqa
+die Sekunde|di zekunde|soniya
+die Zeit|di tsayt|vaqt
+die Uhrzeit|di uurtsayt|soat (vaqt)
+das Datum|das daatum|sana
+der Kalender|deer kalender|kalendar
+der Januar|deer yanuar|yanvar
+der Februar|deer februar|fevral
+der März|deer merts|mart
+der April|deer april|aprel
+der Mai|deer may|may
+der Juni|deer yuuni|iyun
+der Juli|deer yuuli|iyul
+der August|deer august|avgust
+der September|deer zeptember|sentyabr
+der Oktober|deer oktoober|oktyabr
+der November|deer november|noyabr
+der Dezember|deer detsember|dekabr
+der Frühling|deer früüling|bahor
+der Sommer|deer zommer|yoz
+der Herbst|deer herpst|kuz
+der Winter|deer vinter|qish
+übermorgen|üübermorgen|indinga
+vorgestern|foorgestern|o'tgan kuni
+bald|balt|tez orada
+früh|früü|erta
+spät|shpeet|kech
+der Feiertag|deer fayertaak|bayram kuni
+der Urlaub|deer uurlaup|ta'til
+`},
+{id:"tabiat", icon:"🌦️", title:"Ob-havo va tabiat", t:`
+das Wetter|das vetter|ob-havo
+die Sonne|di zonne|quyosh
+der Regen|deer reegen|yomg'ir
+der Schnee|deer shnee|qor
+der Wind|deer vint|shamol
+die Wolke|di volke|bulut
+der Nebel|deer neebel|tuman
+das Gewitter|das gevitter|momaqaldiroq
+der Himmel|deer himmel|osmon
+der Mond|deer moont|oy (osmondagi)
+der Stern|deer shtern|yulduz
+die Temperatur|di temperatuur|harorat
+der Grad|deer graat|daraja
+es regnet|es reegnet|yomg'ir yog'yapti
+es schneit|es shnayt|qor yog'yapti
+sonnig|zonnix|quyoshli
+bewölkt|bevölkt|bulutli
+windig|vindix|shamolli
+die Natur|di natuur|tabiat
+der Baum|deer baum|daraxt
+die Blume|di bluume|gul
+das Gras|das graas|o't (maysa)
+der Wald|deer valt|o'rmon
+der Berg|deer berk|tog'
+der Fluss|deer flus|daryo
+der See|deer zee|ko'l
+das Meer|das meer|dengiz
+der Strand|deer shtrant|plyaj
+die Insel|di inzel|orol
+die Wüste|di vüüste|cho'l
+das Feuer|das foyer|olov
+die Luft|di luft|havo
+die Erde|di eerde|yer
+der Stein|deer shtayn|tosh
+`},
+{id:"hayvon", icon:"🐾", title:"Hayvonlar", t:`
+das Tier|das tiir|hayvon
+der Hund|deer hunt|it
+die Katze|di katse|mushuk
+das Pferd|das pfeert|ot
+die Kuh|di kuu|sigir
+das Schaf|das shaaf|qo'y
+die Ziege|di tsiige|echki
+das Huhn|das huun|tovuq
+der Vogel|deer foogel|qush
+die Maus|di maus|sichqon
+der Bär|deer beer|ayiq
+der Löwe|deer lööve|sher
+der Wolf|deer volf|bo'ri
+der Fuchs|deer fuks|tulki
+der Esel|deer eezel|eshak
+das Kamel|das kameel|tuya
+der Affe|deer affe|maymun
+der Elefant|deer elefant|fil
+die Schlange|di shlange|ilon
+die Biene|di biine|asalari
+die Fliege|di fliige|pashsha
+die Mücke|di mükke|chivin
+der Hase|deer haaze|quyon
+`},
+{id:"sport", icon:"⚽", title:"Bo'sh vaqt va sport", t:`
+die Freizeit|di fraytsayt|bo'sh vaqt
+das Hobby|das hobi|sevimli mashg'ulot
+der Sport|deer shport|sport
+der Fußball|deer fuusbal|futbol
+das Spiel|das shpiil|o'yin
+die Mannschaft|di manshaft|jamoa
+das Tor|das toor|darvoza / gol
+die Musik|di muziik|musiqa
+das Lied|das liit|qo'shiq
+der Film|deer film|film
+die Zeitung|di tsaytung|gazeta
+das Konzert|das kontsert|konsert
+die Party|di paarti|ziyofat (bazm)
+das Fitnessstudio|das fitnesshtuudio|sport zal
+das Schach|das shax|shaxmat
+der Spaziergang|deer shpatsiirgang|piyoda sayr
+das Video|das viideo|video
+das Training|das treening|mashg'ulot (trening)
+der Verein|deer ferayn|klub (jamiyat)
+`},
+{id:"mamlakat", icon:"🌍", title:"Mamlakatlar va tillar", t:`
+Deutschland|doychlant|Germaniya
+Österreich|öösterayx|Avstriya
+die Schweiz|di shvayts|Shveytsariya
+Usbekistan|usbeekistaan|O'zbekiston
+Russland|ruslant|Rossiya
+die Türkei|di türkay|Turkiya
+England|englant|Angliya
+Amerika|ameerika|Amerika
+China|xiina|Xitoy
+Frankreich|frankrayx|Fransiya
+Italien|itaalien|Italiya
+Polen|poolen|Polsha
+Ungarn|ungarn|Vengriya
+Kasachstan|kazaxstaan|Qozog'iston
+Europa|oyroopa|Yevropa
+Asien|aazien|Osiyo
+Deutsch|doych|nemis tili
+Englisch|english|ingliz tili
+Russisch|russish|rus tili
+Usbekisch|usbeekish|o'zbek tili
+Türkisch|türkish|turk tili
+der Deutsche|deer doyche|nemis (erkak)
+der Ausländer|deer auslender|chet ellik
+die Heimat|di haymaat|vatan
+die Welt|di velt|dunyo
+das Ausland|das auslant|chet el
+`},
+{id:"rang", icon:"🎨", title:"Ranglar", t:`
+rot|root|qizil
+blau|blau|ko'k
+grün|grüün|yashil
+gelb|gelp|sariq
+schwarz|shvarts|qora
+weiß|vays|oq
+grau|grau|kulrang
+braun|braun|jigarrang
+rosa|rooza|pushti
+orange|oronshe|to'q sariq
+die Farbe|di farbe|rang
+hell|hel|och (rang)
+dunkel|dunkel|to'q (rang)
+lila|liila|binafsha
+beige|beesh|bej (och jigarrang)
+bunt|bunt|rang-barang
+`}
+];
+/* matnli ro'yxatlarni massivga aylantirish: [nemischa, transkripsiya, o'zbekcha, ko'plik] */
+VOCAB.forEach(function(c){
+  c.w = c.t.split('\n').map(function(s){ return s.trim(); }).filter(Boolean).map(function(s){ return s.split('|').map(function(x){ return x.trim(); }); });
+  delete c.t;
+});
+
+var ALPHABET = [
+ ["A","aa","A","Apfel","olma"],["B","bee","Be","Ball","to'p"],["C","tsee","Ze","Café","kafe"],["D","dee","De","Dach","tom"],
+ ["E","ee","E","Esel","eshak"],["F","ef","Ef","Fisch","baliq"],["G","gee","Ge","Garten","bog'"],["H","haa","Ha","Haus","uy"],
+ ["I","ii","I","Igel","tipratikan"],["J","yot","Jot","Jahr","yil"],["K","kaa","Ka","Katze","mushuk"],["L","el","El","Löwe","sher"],
+ ["M","em","Em","Mutter","ona"],["N","en","En","Nase","burun"],["O","oo","O","Obst","meva"],["P","pee","Pe","Papier","qog'oz"],
+ ["Q","kuu","Ku","Qualität","sifat"],["R","er","Er","Rose","atirgul"],["S","es","Es","Sonne","quyosh"],["T","tee","Te","Tisch","stol"],
+ ["U","uu","U","Uhr","soat"],["V","fau","Vau","Vogel","qush"],["W","vee","We","Wasser","suv"],["X","iks","Ix","Xylofon","ksilofon"],
+ ["Y","üpsilon","Ypsilon","Yoga","yoga"],["Z","tset","Zett","Zug","poyezd"],
+ ["Ä","e (ochiq)","Ä","Käse","pishloq",1],["Ö","ö","Ö","Öl","yog'",1],["Ü","ü","Ü","Übung","mashq",1],["ß","es-tset","Eszett","Straße","ko'cha",1]
+];
+
+var SOUNDS = [
+ {c:"ei", s:"ay", d:"Doim «ay» deb o'qiladi — «e-i» emas!", ex:[["mein","mayn"],["nein","nayn"],["drei","dray"],["heißen","haysen"]]},
+ {c:"ie", s:"ii", d:"Cho'ziq «i». «ei» bilan adashtirmang: vier (to'rt) — «fiir».", ex:[["vier","fiir"],["wie","vi"],["Liebe","liibe"],["sieben","ziiben"]]},
+ {c:"eu / äu", s:"oy", d:"Ikkalasi ham «oy» deb o'qiladi.", ex:[["heute","hoyte"],["Deutsch","doych"],["neu","noy"],["Häuser","hoyzer"]]},
+ {c:"au", s:"au", d:"O'zbekcha «au» kabi, birga tez aytiladi.", ex:[["Haus","haus"],["Frau","frau"],["blau","blau"],["kaufen","kaufen"]]},
+ {c:"sch", s:"sh", d:"Uch harf — bitta «sh» tovushi.", ex:[["Schule","shuule"],["Tisch","tish"],["schön","shöön"],["Schwester","shvester"]]},
+ {c:"sp / st", s:"shp / sht", d:"So'z (yoki bo'g'in) boshida «shp», «sht» bo'ladi.", ex:[["sprechen","shprexen"],["Straße","shtraase"],["Stadt","shtat"],["spät","shpeet"]]},
+ {c:"ch ①", s:"x (qattiq)", d:"a, o, u, au dan keyin — o'zbekcha «x» kabi qattiq.", ex:[["acht","axt"],["Buch","buux"],["noch","nox"],["auch","aux"]]},
+ {c:"ch ②", s:"x' (yumshoq)", d:"e, i, ä, ö, ü dan keyin — yumshoq, «sh» va «x» oralig'idagi tovush (til oldinga, havo chiqarib).", ex:[["ich","ix"],["nicht","nixt"],["Milch","milx"],["sprechen","shprexen"]]},
+ {c:"w", s:"v", d:"Nemischa W — har doim «v».", ex:[["Wasser","vasser"],["wie","vi"],["wo","voo"],["Wetter","vetter"]]},
+ {c:"v", s:"f", d:"Ko'pchilik nemis so'zlarida V — «f» deb o'qiladi.", ex:[["Vater","faater"],["vier","fiir"],["viel","fiil"],["Vogel","foogel"]]},
+ {c:"z", s:"ts", d:"Z — doim «ts».", ex:[["zehn","tseen"],["Zeit","tsayt"],["Zug","tsuuk"],["Pizza","pitsa"]]},
+ {c:"j", s:"y", d:"J — «y» kabi.", ex:[["ja","yaa"],["Jahr","yaar"],["jetzt","yetst"],["Juli","yuuli"]]},
+ {c:"s", s:"z / s", d:"Unli oldidan «z», so'z oxirida «s».", ex:[["Sonne","zonne"],["sieben","ziiben"],["Haus","haus"],["Bus","bus"]]},
+ {c:"ß", s:"s", d:"«Eszett» — qattiq, cho'ziq «s». Yozuvda «ss» bilan almashtirsa bo'ladi.", ex:[["Straße","shtraase"],["groß","groos"],["heißen","haysen"],["weiß","vays"]]},
+ {c:"ä", s:"e", d:"O'zbekcha ochiq «e» ga yaqin.", ex:[["Käse","keeze"],["spät","shpeet"],["Mädchen","meetxen"],["Äpfel","epfel"]]},
+ {c:"ö", s:"ö", d:"«e» deb ayting, lekin lablarni «o» kabi dumaloqlang.", ex:[["schön","shöön"],["Öl","ööl"],["hören","höören"],["können","kö'nnen"]]},
+ {c:"ü", s:"ü", d:"«i» deb ayting, lekin lablarni «u» kabi cho'chaytiring.", ex:[["über","üüber"],["fünf","fünf"],["Tür","tüür"],["müde","müüde"]]},
+ {c:"h", s:"(jim)", d:"Unlidan keyingi «h» o'qilmaydi — faqat unlini cho'zadi.", ex:[["Jahr","yaar"],["gehen","geeen"],["Uhr","uur"],["Bahnhof","baanhoof"]]},
+ {c:"-er", s:"≈ a", d:"So'z oxiridagi «-er» yengil, «a» ga yaqin aytiladi.", ex:[["Vater","faater"],["Lehrer","leerer"],["Wasser","vasser"],["aber","aaber"]]},
+ {c:"-b -d -g", s:"p t k", d:"So'z oxirida jarangsizlashadi: b→p, d→t, g→k.", ex:[["halb","halp"],["Abend","aabent"],["Tag","taak"],["Hund","hunt"]]},
+ {c:"-ig", s:"ix'", d:"So'z oxiridagi «-ig» yumshoq «ix» kabi.", ex:[["zwanzig","tsvantsix"],["billig","billix"],["richtig","rixtix"],["wenig","veenix"]]},
+ {c:"r", s:"r (tomoq)", d:"Nemischa «r» tomoqdan, fransuzcha kabi chiqadi. O'zbekcha «r» ham tushuniladi — xavotir olmang.", ex:[["rot","root"],["Rose","rooze"],["drei","dray"],["Brot","broot"]]}
+];
+
+var GRAMMAR = [
+{t:"1. Kishilik olmoshlari", text:"Gapning egasi. <b>Sie</b> (katta harf bilan) — rasmiy «Siz».", rows:[
+ ["ich","men"],["du","sen"],["er / sie / es","u (erkak / ayol / narsa)"],["wir","biz"],["ihr","sizlar (do'stona)"],["sie","ular"],["Sie","Siz (rasmiy)"]]},
+{t:"2. sein — bo'lmoq", text:"Eng muhim fe'l. «Men ...man», «U ...dir» ma'nosida.", rows:[
+ ["ich bin","men ...man"],["du bist","sen ...san"],["er / sie ist","u ...dir"],["wir sind","biz ...miz"],["ihr seid","sizlar ...siz"],["sie / Sie sind","ular ...dir / Siz ...siz"]],
+ ex:[["Ich bin müde.","Men charchaganman."],["Sind Sie Lehrer?","Siz o'qituvchimisiz?"]]},
+{t:"3. haben — ega bo'lmoq", text:"«Menda ... bor» ma'nosida.", rows:[
+ ["ich habe","menda bor"],["du hast","senda bor"],["er / sie hat","unda bor"],["wir haben","bizda bor"],["ihr habt","sizlarda bor"],["sie / Sie haben","ularda / Sizda bor"]],
+ ex:[["Ich habe Zeit.","Mening vaqtim bor."],["Haben Sie Wasser?","Sizda suv bormi?"]]},
+{t:"4. Oddiy fe'l qo'shimchalari", text:"Fe'lning o'zagi + qo'shimcha. Misol: <b>wohnen</b> (yashamoq) → o'zak <b>wohn-</b>", rows:[
+ ["ich wohne","-e"],["du wohnst","-st"],["er / sie wohnt","-t"],["wir wohnen","-en"],["ihr wohnt","-t"],["sie / Sie wohnen","-en"]],
+ ex:[["Ich wohne in Taschkent.","Men Toshkentda yashayman."],["Wo wohnst du?","Qayerda yashaysan?"]]},
+{t:"5. Savol so'zlari (W-so'zlar)", text:"Hammasi <b>W</b> harfi bilan boshlanadi va «v» deb o'qiladi.", rows:[
+ ["Wer?","Kim?"],["Was?","Nima?"],["Wo?","Qayerda?"],["Woher?","Qayerdan?"],["Wohin?","Qayerga?"],["Wann?","Qachon?"],["Wie?","Qanday?"],["Wie viel?","Qancha?"],["Warum?","Nega?"],["Welcher?","Qaysi?"]]},
+{t:"6. Gap tartibi — fe'l 2-o'rinda!", text:"O'zbek tilida fe'l oxirida keladi, nemis tilida esa <b>fe'l doim ikkinchi o'rinda</b> turadi. Savolda (ha/yo'q savoli) fe'l <b>birinchi</b> o'ringa chiqadi.", ex:[
+ ["Ich wohne in Taschkent.","Men Toshkentda yashayman. (fe'l — 2-o'rinda)"],["Heute arbeite ich.","Bugun ishlayman. (Heute 1-o'rinda, fe'l baribir 2-o'rinda)"],
+ ["Wo wohnen Sie?","Qayerda yashaysiz? (W-so'z + fe'l)"],["Sprechen Sie Deutsch?","Nemischa gapirasizmi? (fe'l boshida)"]]},
+{t:"7. Inkor: nicht va kein", text:"<b>nicht</b> — fe'l va sifatni inkor qiladi. <b>kein / keine</b> — otni inkor qiladi («hech qanday ... yo'q»).", ex:[
+ ["Ich verstehe nicht.","Men tushunmayman."],["Das ist nicht teuer.","Bu qimmat emas."],["Ich habe kein Geld.","Menda pul yo'q."],["Ich habe keine Zeit.","Mening vaqtim yo'q."]]},
+{t:"8. Artikllar: der, die, das", text:"Har bir otning «jinsi» bor: <b class='art der'>der</b> (erkak), <b class='art die'>die</b> (ayol), <b class='art das'>das</b> (o'rta). Qoida yo'q deyarli — shuning uchun so'zni <b>doim artikl bilan</b> yodlang. Ko'plikda hammasi <b class='art die'>die</b>. «Bitta» = <b>ein</b> (der/das), <b>eine</b> (die).", ex:[
+ ["der Bahnhof — ein Bahnhof","vokzal — bitta vokzal"],["die Bank — eine Bank","bank — bitta bank"],["das Hotel — ein Hotel","mehmonxona — bitta mehmonxona"]]},
+{t:"9. Xushmuomalalik: möchte va können", text:"<b>Ich möchte</b> — «istardim» (odobli iltimos). <b>Können Sie ...?</b> — «...a olasizmi?». Ikkinchi fe'l gap oxiriga ketadi.", ex:[
+ ["Ich möchte einen Kaffee.","Bir kofe istardim."],["Ich möchte zum Bahnhof gehen.","Vokzalga bormoqchiman."],["Können Sie mir helfen?","Menga yordam bera olasizmi?"],["Kann ich mit Karte zahlen?","Karta bilan to'lay olamanmi?"]]}
+];
+
+/* ---------- So'zlar ro'yxatini tekislash ---------- */
+var ALLW = [];
+VOCAB.forEach(function(c){
+  c.w.forEach(function(x, i){
+    ALLW.push({id:c.id+i, cat:c.id, de:x[0], tr:x[1], uz:x[2], pl:!!x[3]});
+  });
+});
+function wordArt(w){ var m = /^(der|die|das) /.exec(w.de); return m ? m[1] : ''; }
+function wordBare(w){ var a = wordArt(w); return a ? w.de.slice(a.length+1) : w.de; }
+
+/* =====================================================================
+   SONLAR
+   ===================================================================== */
+var ONES = ["null","eins","zwei","drei","vier","fünf","sechs","sieben","acht","neun","zehn","elf","zwölf","dreizehn","vierzehn","fünfzehn","sechzehn","siebzehn","achtzehn","neunzehn"];
+var TENS = ["","","zwanzig","dreißig","vierzig","fünfzig","sechzig","siebzig","achtzig","neunzig"];
+var ONES_TR = ["nul","ayns","tsvay","dray","fiir","fünf","zeks","ziiben","axt","noyn","tseen","elf","tsvölf","draytseen","fiirtseen","fünftseen","zextseen","ziiptseen","axtseen","noyntseen"];
+var TENS_TR = {20:"tsvantsix",30:"draysix",40:"fiirtsix",50:"fünftsix",60:"zextsix",70:"ziiptsix",80:"axtsix",90:"noyntsix",100:"hundert",1000:"tauzent"};
+
+function u100(n, fin){
+  if(n===0) return '';
+  if(n===1) return fin ? 'eins' : 'ein';
+  if(n<20) return ONES[n];
+  var t=Math.floor(n/10), u=n%10;
+  if(u===0) return TENS[t];
+  return (u===1?'ein':ONES[u])+'und'+TENS[t];
+}
+function u1000(n, fin){
+  var h=Math.floor(n/100), r=n%100, s='';
+  if(h>0) s += (h===1?'ein':ONES[h])+'hundert';
+  if(r>0) s += u100(r, fin);
+  return s;
+}
+function numDe(n){
+  n = Math.floor(n);
+  if(n===0) return 'null';
+  if(n===1000000) return 'eine Million';
+  var th=Math.floor(n/1000), r=n%1000, s='';
+  if(th>0) s += u1000(th,false)+'tausend';
+  if(r>0) s += u1000(r,true);
+  return s;
+}
+
+/* =====================================================================
+   HOLAT (progress) va saqlash
+   ===================================================================== */
+var LS_KEY = 'deutschQadam_v1';
+var state = {xp:0, streak:0, lastDay:'', learned:{}, lessons:{}, best:{}, settings:{engine:'auto', rate:0.9, voice:''}, ts:0};
+var HAS_GAS = (typeof google!=='undefined' && google.script && google.script.run);
+var saveTimer = null;
+
+function applyState(o){
+  if(!o || typeof o!=='object') return;
+  state.xp = +o.xp||0; state.streak=+o.streak||0; state.lastDay=o.lastDay||'';
+  state.learned = o.lp ? unpackLearned(o.lp) : (o.learned||{}); state.lessons=o.lessons||{}; state.best=o.best||{};
+  state.settings = Object.assign({engine:'auto', rate:0.9, voice:''}, o.settings||{});
+  state.ts = +o.ts||0;
+}
+/* O'rganilgan so'zlarni ixcham saqlash (har bo'lim uchun bit-maska, hex) */
+function packLearned(){
+  var o={};
+  VOCAB.forEach(function(c){
+    var hex='', any=false;
+    for(var i=0;i<c.w.length;i+=4){ var v=0; for(var b=0;b<4;b++){ if(state.learned[c.id+(i+b)]){ v|=(1<<b); any=true; } } hex+=v.toString(16); }
+    if(any) o[c.id]=hex.replace(/0+$/,'');
+  });
+  return o;
+}
+function unpackLearned(o){
+  var r={};
+  for(var cat in o){ var hex=String(o[cat]||''); for(var j=0;j<hex.length;j++){ var v=parseInt(hex[j],16)||0; for(var b=0;b<4;b++){ if(v&(1<<b)) r[cat+(j*4+b)]=1; } } }
+  return r;
+}
+function loadState(cb){
+  var local=null;
+  try{ local = JSON.parse(localStorage.getItem(LS_KEY)||'null'); }catch(e){}
+  if(local) applyState(local);
+  if(HAS_GAS){
+    try{
+      google.script.run.withSuccessHandler(function(s){
+        if(s){ try{ var srv=JSON.parse(s); if(!local || (+srv.ts||0) > (+local.ts||0)){ applyState(srv); cb(true); return; } }catch(e){} }
+        cb(false);
+      }).withFailureHandler(function(){ cb(false); }).getProgress();
+    }catch(e){ cb(false); }
+  } else cb(false);
+}
+function saveState(){
+  state.ts = Date.now();
+  var o = {}; for(var k in state) if(k!=='learned') o[k]=state[k];
+  o.lp = packLearned();
+  var j = JSON.stringify(o);
+  try{ localStorage.setItem(LS_KEY, j); }catch(e){}
+  if(HAS_GAS){
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function(){ try{ google.script.run.saveProgress(j); }catch(e){} }, 1200);
+  }
+  renderXp();
+}
+function todayStr(){ var d=new Date(); return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate(); }
+function touchDay(){
+  var t=todayStr();
+  if(state.lastDay===t) return;
+  var y=new Date(); y.setDate(y.getDate()-1);
+  var ys=y.getFullYear()+'-'+(y.getMonth()+1)+'-'+y.getDate();
+  state.streak = (state.lastDay===ys) ? state.streak+1 : 1;
+  state.lastDay=t;
+}
+function addXp(n){ touchDay(); state.xp += n; saveState(); }
+function learnedCount(){ var c=0; for(var k in state.learned) if(state.learned[k]) c++; return c; }
+function lessonsDone(){ var c=0; LESSONS.forEach(function(l){ if(state.lessons[l.id]) c++; }); return c; }
+
+/* =====================================================================
+   OVOZ (Text-to-Speech)
+   ===================================================================== */
+/* Android ilova ichida ishlayotgan bo'lsa — telefonning o'z ovoz tizimi (AndroidTTS ko'prigi) */
+var NATIVE = (typeof window.AndroidTTS !== 'undefined' && window.AndroidTTS);
+var TTS = {
+  ok: ('speechSynthesis' in window) && typeof SpeechSynthesisUtterance!=='undefined',
+  deVoices: [], voice: null, cur: null, audio: null, seq: 0, seqTok: null, ready:false, _cbs:{},
+  /* 0 — tayyorlanmoqda, 1 — nemischa ovoz bor, 2 — nemischa ovoz o'rnatilmagan, 3 — ovoz tizimi yo'q, -1 — Android emas */
+  nativeStatus: function(){ if(!NATIVE) return -1; try{ return +window.AndroidTTS.status(); }catch(e){ return 3; } },
+  init: function(){
+    var self=this;
+    if(NATIVE){
+      var tries=0, last=-2;
+      var poll=function(){
+        var st=self.nativeStatus(); tries++;
+        if(st!==last){ last=st; if(current && current.view==='home') render(); }
+        if(st===0 && tries<40) setTimeout(poll, 400);
+      };
+      poll();
+    }
+    if(!this.ok){ this.ready=true; if(current && current.view==='home') render(); return; }
+    var load=function(){
+      var all = [];
+      try{ all = speechSynthesis.getVoices() || []; }catch(e){}
+      self.deVoices = all.filter(function(v){ return /^de([-_]|$)/i.test(v.lang||''); });
+      self.pick();
+      var wasReady = self.ready; self.ready = true;
+      if(current && current.view==='home' && (!wasReady || self.deVoices.length)) render();
+    };
+    try{ if(speechSynthesis.addEventListener) speechSynthesis.addEventListener('voiceschanged', load); else speechSynthesis.onvoiceschanged = load; }catch(e){ speechSynthesis.onvoiceschanged = load; }
+    load(); setTimeout(load, 900); setTimeout(load, 2500);
+  },
+  pick: function(){
+    var want = state.settings.voice, v=null, list=this.deVoices;
+    if(want) v = list.filter(function(x){ return x.name===want; })[0];
+    if(!v) v = list.filter(function(x){ return /de-DE/i.test(x.lang) && /google/i.test(x.name); })[0];
+    if(!v) v = list.filter(function(x){ return /de-DE/i.test(x.lang); })[0];
+    if(!v) v = list[0];
+    this.voice = v || null;
+  },
+  /* qaysi ovoz manbai ishlatiladi: 'native' | 'browser' | 'google' */
+  mode: function(){
+    var e = state.settings.engine, ns = this.nativeStatus();
+    if(e==='google') return 'google';
+    if(ns===1 || ns===0) return 'native';
+    if(this.ok && this.voice) return 'browser';
+    if(e==='browser' && this.ok) return 'browser';
+    return 'google';
+  },
+  useGoogle: function(){ return this.mode()==='google'; },
+  /* faqat joriy ovozni to'xtatadi */
+  _halt: function(){
+    this.seq++;
+    try{ if(this.ok) speechSynthesis.cancel(); }catch(e){}
+    if(NATIVE){ try{ window.AndroidTTS.stop(); }catch(e){} }
+    if(this.audio){ try{ this.audio.pause(); }catch(e){} this.audio=null; }
+    document.querySelectorAll('.spk.playing').forEach(function(b){ b.classList.remove('playing'); });
+  },
+  /* hammasini (ketma-ketlikni ham) to'xtatadi */
+  stop: function(){
+    if(this.seqTok){ this.seqTok.stopped=true; this.seqTok=null; }
+    this._halt();
+  },
+  _speak: function(text, opt){
+    opt = opt||{};
+    var self=this; this._halt(); var my=this.seq;
+    var done = function(){ if(my!==self.seq) return; if(opt.btn) opt.btn.classList.remove('playing'); if(opt.onend) opt.onend(); };
+    if(opt.btn) opt.btn.classList.add('playing');
+    var m = this.mode();
+    if(m==='google'){ this._google(text, opt.slow, done, my); return; }
+    if(m==='native'){
+      var id='u'+my;
+      self._cbs[id]=done;
+      try{ window.AndroidTTS.speak(String(text), opt.slow ? 0.6 : (+state.settings.rate||0.9), opt.pitch||1, id); }
+      catch(e){ delete self._cbs[id]; done(); }
+      return;
+    }
+    setTimeout(function(){
+      if(my!==self.seq) return;
+      try{
+        var u = new SpeechSynthesisUtterance(text);
+        u.lang = (self.voice && self.voice.lang) || 'de-DE';
+        if(self.voice) u.voice = self.voice;
+        if(opt.voice) u.voice = opt.voice;
+        u.rate = opt.slow ? 0.55 : (+state.settings.rate||0.9);
+        u.pitch = opt.pitch || 1;
+        u.onend = done; u.onerror = done;
+        self.cur = u; /* Chrome'da GC muammosiga qarshi */
+        speechSynthesis.speak(u);
+      }catch(e){ done(); }
+    }, 60);
+  },
+  _google: function(text, slow, done, my){
+    var self=this;
+    var url = 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=de&ttsspeed='+(slow?'0.35':'1')+'&q='+encodeURIComponent(String(text).slice(0,190));
+    var a = new Audio(url);
+    this.audio = a;
+    a.onended = done;
+    a.onerror = function(){ if(my!==self.seq) return; toast("Ovoz yuklanmadi. Internetni yoki ⚙️ sozlamalarni tekshiring."); done(); };
+    try{ if(!slow) a.playbackRate = Math.max(0.6, Math.min(1.2, (+state.settings.rate||0.9)+0.1)); }catch(e){}
+    var p = a.play(); if(p && p.catch) p.catch(function(){ done(); });
+  },
+  speakOne: function(text, opt){ this.stop(); this._speak(text, opt); },
+  /* ketma-ket o'qish (dialog, mavzu, alifbo) */
+  sequence: function(items, onEach, onDone){
+    var self=this; this.stop();
+    var tok={stopped:false}; this.seqTok=tok; var i=0;
+    var second = this.deVoices.filter(function(v){ return self.voice && v.name!==self.voice.name && /de-DE/i.test(v.lang); })[0];
+    var next = function(){
+      if(tok.stopped) return;
+      if(i>=items.length){ if(self.seqTok===tok) self.seqTok=null; onEach(-1); if(onDone) onDone(); return; }
+      var it=items[i]; onEach(i); i++;
+      var o={onend:function(){ if(!tok.stopped) setTimeout(next, 450); }};
+      if(it.b){ if(second && self.mode()==='browser') o.voice=second; else o.pitch=0.78; }
+      self._speak(it.text, o);
+    };
+    next();
+  }
+};
+function say(text, btn, slow){ TTS.speakOne(text, {btn:btn, slow:slow}); }
+/* Android tomoni gap tugaganda shu funksiyani chaqiradi */
+window.__ttsDone = function(id){ var f=TTS._cbs[id]; if(f){ delete TTS._cbs[id]; f(); } };
+
+/* =====================================================================
+   YORDAMCHI FUNKSIYALAR
+   ===================================================================== */
+function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function rnd(a,b){ return a+Math.floor(Math.random()*(b-a+1)); }
+function norm(s){ return String(s||'').toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').replace(/[.,!?;:¿¡"«»]/g,'').replace(/\s+/g,' ').trim(); }
+var SPK_SVG = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 4V5L7 9H3z"/><path d="M16.5 12a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/><path d="M14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z" opacity=".7"/></svg>';
+function spk(text, cls){ return '<button class="spk '+(cls||'')+'" data-act="say" data-say="'+esc(text)+'" title="Tinglash">'+SPK_SVG+'</button>'; }
+function spkSlow(text, cls){ return '<button class="spk slow '+(cls||'')+'" data-act="sayslow" data-say="'+esc(text)+'" title="Sekin tinglash">🐢</button>'; }
+function artHtml(de){
+  var m=/^(der|die|das) (.*)$/.exec(de);
+  return m ? '<span class="art '+m[1]+'">'+m[1]+'</span> '+esc(m[2]) : esc(de);
+}
+function toast(msg){ var t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toast._t); toast._t=setTimeout(function(){ t.classList.remove('show'); }, 2600); }
+function confetti(){
+  var cols=['#FF6B5B','#14213D','#F4E9D6','#B8893F','#FF9D91'];
+  for(var i=0;i<46;i++){
+    var c=document.createElement('div'); c.className='confetti';
+    c.style.left=Math.random()*100+'vw'; c.style.background=cols[i%cols.length];
+    c.style.animationDuration=(1.6+Math.random()*1.6)+'s'; c.style.animationDelay=(Math.random()*0.4)+'s';
+    c.style.borderRadius = Math.random()>.5?'50%':'2px';
+    document.body.appendChild(c); (function(el){ setTimeout(function(){ el.remove(); }, 3800); })(c);
+  }
+}
+function pickDistractors(correct, pool, key, n){
+  var seen={}; seen[correct[key]]=1; var out=[];
+  var p = shuffle(pool);
+  for(var i=0;i<p.length && out.length<n;i++){ var v=p[i][key]; if(!seen[v]){ seen[v]=1; out.push(v); } }
+  if(out.length<n){
+    var p2 = shuffle(ALLW);
+    for(var j=0;j<p2.length && out.length<n;j++){ var v2=p2[j][key]; if(!seen[v2]){ seen[v2]=1; out.push(v2); } }
+  }
+  return out;
+}
+
+/* =====================================================================
+   NAVIGATSIYA
+   ===================================================================== */
+var NAV = [
+ ['home','🏠',"Bosh sahifa"],['sounds','🔤',"Talaffuz va alifbo"],['lessons','📘',"Mavzular (guide)"],['dialogs','💬',"Dialoglar"],
+ ['numbers','🔢',"Sonlar"],['vocab','📚',"Lug'at"],['tests','📝',"Testlar"],['games','🎮',"So'z o'yinlari"],['grammar','🧩',"Mini grammatika"]
+];
+var current = {view:'home', p:null};
+var cleanups = [];
+function cleanup(){ cleanups.forEach(function(f){ try{f();}catch(e){} }); cleanups=[]; }
+var HIST = [];
+function go(view, p, noPush){
+  if(!noPush && (current.view!==view || current.p!==p)){ HIST.push({view:current.view, p:current.p}); if(HIST.length>40) HIST.shift(); }
+  TTS.stop(); cleanup(); if(view==='game') G=null; current={view:view, p:p}; render(); window.scrollTo(0,0); closeDrawer();
+}
+/* Android "Orqaga" tugmasi: true — ilova ichida orqaga qaytildi, false — ilovadan chiqish */
+window.__back = function(){
+  var m=document.getElementById('modal');
+  if(m && m.classList.contains('show')){ closeModal(); return true; }
+  if(document.getElementById('side').classList.contains('open')){ closeDrawer(); return true; }
+  if(HIST.length){ var h=HIST.pop(); go(h.view, h.p, true); return true; }
+  if(current.view!=='home'){ go('home', null, true); return true; }
+  return false;
+};
+function navRoot(v){
+  var map={lesson:'lessons', dialog:'dialogs', quiz:'tests', flash:'vocab', game:'games'};
+  return map[v]||v;
+}
+function renderNav(){
+  var root=navRoot(current.view);
+  document.getElementById('nav').innerHTML = NAV.map(function(n){
+    return '<button class="'+(root===n[0]?'on':'')+'" data-act="go" data-v="'+n[0]+'"><span class="ic">'+n[1]+'</span>'+n[2]+'</button>';
+  }).join('');
+}
+function renderXp(){
+  var el=document.getElementById('xpbox'); if(!el) return;
+  el.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center"><div><b>'+state.xp+'</b> XP</div><div>🔥 <b>'+state.streak+'</b> kun</div></div>'+
+    '<div style="margin-top:6px">📚 '+learnedCount()+' / '+ALLW.length+" so'z · ✅ "+lessonsDone()+'/'+LESSONS.length+' dars</div>';
+}
+function render(){
+  var v = VIEWS[current.view] || VIEWS.home;
+  document.getElementById('main').innerHTML = v(current.p);
+  renderNav(); renderXp();
+  if(AFTER[current.view]) AFTER[current.view](current.p);
+}
+function openDrawer(){ document.getElementById('side').classList.add('open'); document.getElementById('scrim').classList.add('open'); }
+function closeDrawer(){ document.getElementById('side').classList.remove('open'); document.getElementById('scrim').classList.remove('open'); }
+function pageHead(crumb, title, desc, right){
+  return '<div class="page-h"><div><div class="crumb">'+crumb+'</div><h1>'+title+'</h1>'+(desc?'<p>'+desc+'</p>':'')+'</div>'+(right||'')+'</div>';
+}
+function backBtn(v, label, p){ return '<button class="back" data-act="go" data-v="'+v+'"'+(p?' data-p="'+esc(p)+'"':'')+'>← '+label+'</button>'; }
+
+/* =====================================================================
+   SAHIFALAR
+   ===================================================================== */
+var VIEWS = {}, AFTER = {};
+
+/* ---------- Bosh sahifa ---------- */
+var PATH = [
+ ['sounds',null,"Talaffuz","Alifbo va asosiy tovushlar"],
+ ['lesson','salom',"Salomlashish","Hallo! Wie geht's?"],
+ ['lesson','tanish',"O'zimni tanishtirish","Ich heiße..."],
+ ['numbers',null,"Sonlar","0 dan 1 000 000 gacha"],
+ ['lesson','yordam',"Yordam so'rash","Ich verstehe nicht"],
+ ['lesson','sorash',"Yo'l so'rash","Wo ist...?"],
+ ['lesson','korsatish',"Yo'l ko'rsatish","links, rechts, geradeaus"],
+ ['dialogs',null,"Dialoglar","Jonli suhbatlarni tinglang"]
+];
+function allPhrases(){ var a=[]; LESSONS.forEach(function(l){ l.items.forEach(function(it){ a.push(it); }); }); return a; }
+VIEWS.home = function(){
+  var ph = allPhrases(); var d=new Date(); var idx=(d.getFullYear()*372+d.getMonth()*31+d.getDate())%ph.length; var p=ph[idx];
+  var voiceNote = '', ns = TTS.nativeStatus();
+  if(ns===2){
+    voiceNote = '<div class="tip c mt voice-warn"><span style="font-size:24px">🔊</span><div>Telefoningizda <b>nemischa ovoz</b> o\'rnatilmagan. Hozircha internet orqali Google ovozi ishlatiladi. Internetsiz ishlashi uchun nemischa ovozni bir marta yuklab oling.<div class="mt"><button class="btn btn-c btn-s" data-act="installVoice">⬇️ Nemischa ovozni o\'rnatish</button></div></div></div>';
+  } else if(ns===3){
+    voiceNote = '<div class="tip n mt voice-warn"><span style="font-size:24px">🔊</span><div>Telefonda ovoz tizimi topilmadi — <b>Google ovozi</b> ishlatiladi (internet kerak). Play Market\'dan «Google Text-to-Speech» (Matnni nutqqa aylantirish) ilovasini o\'rnatsangiz, internetsiz ham ishlaydi.</div></div>';
+  } else if(ns===-1 && TTS.ready && TTS.useGoogle() && state.settings.engine==='auto'){
+    voiceNote = '<div class="tip n mt voice-warn"><span style="font-size:24px">🔊</span><div>Qurilmangizda nemischa ovoz topilmadi — shuning uchun <b>Google ovozi</b> ishlatiladi (internet kerak). Agar ovoz chiqmasa, ⚙️ <b>Ovoz sozlamalari</b>ni oching.</div></div>';
+  }
+  var h = '<div class="hero"><i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i>'+
+    '<div class="hero-flag"><i style="background:#111"></i><i style="background:#D9443A"></i><i style="background:#F2C230"></i></div>'+
+    '<h1>Hallo! Willkommen 👋</h1><p>Nemis tilida o\'zingizni tanishtirish, yo\'l so\'rash va kundalik muloqot qilishni qadamba-qadam o\'rganing. Har bir ibora ovoz bilan.</p>'+
+    '<div class="stats">'+
+      '<div class="stat"><b>'+state.xp+'</b><span>XP ball</span></div>'+
+      '<div class="stat"><b>🔥 '+state.streak+'</b><span>kunlik seriya</span></div>'+
+      '<div class="stat"><b>'+learnedCount()+'</b><span>o\'rganilgan so\'z</span></div>'+
+      '<div class="stat"><b>'+lessonsDone()+'/'+LESSONS.length+'</b><span>tugatilgan dars</span></div>'+
+    '</div></div>'+ voiceNote +
+    '<div class="card mt2"><div class="tag">Bugungi ibora</div><div class="potd mt">'+spk(p.de)+spkSlow(p.de)+
+      '<div><div class="de">'+esc(p.de)+'</div><div style="color:var(--coral-d);font-style:italic;font-weight:700">['+esc(p.tr)+']</div><div class="muted">'+esc(p.uz)+'</div></div></div></div>'+
+    '<h2 class="sec-t">🛤️ O\'rganish yo\'li</h2><div class="path">'+
+    PATH.map(function(s,i){
+      var done = s[0]==='lesson' ? !!state.lessons[s[1]] : false;
+      return '<button class="step '+(done?'done':'')+'" data-act="go" data-v="'+s[0]+'"'+(s[1]?' data-p="'+s[1]+'"':'')+'><div class="num">'+(done?'✓':(i+1))+'</div><b>'+s[2]+'</b><small>'+esc(s[3])+'</small></button>';
+    }).join('')+'</div>'+
+    '<h2 class="sec-t">⚡ Tezkor mashqlar</h2><div class="grid g4">'+
+      '<button class="tile coral" data-act="go" data-v="tests"><div class="emo">📝</div><b>Lug\'at testi</b><small>4 xil rejim</small></button>'+
+      '<button class="tile navy" data-act="go" data-v="game" data-p="memory"><div class="emo">🃏</div><b>Juftlikni top</b><small>Xotira o\'yini</small></button>'+
+      '<button class="tile" data-act="go" data-v="game" data-p="dictation"><div class="emo">🎧</div><b>Eshit va yoz</b><small>Diktant</small></button>'+
+      '<button class="tile" data-act="go" data-v="numbers" data-p="practice"><div class="emo">🔢</div><b>Sonlar mashqi</b><small>Eshitib toping</small></button>'+
+    '</div>';
+  return h;
+};
+
+/* ---------- Talaffuz ---------- */
+VIEWS.sounds = function(){
+  var h = pageHead('Talaffuz', "Alifbo va tovushlar", "Nemis tilida so'zlar asosan yozilganidek o'qiladi — faqat bir nechta qoidani bilish kifoya. Har bir harf va misolni bosib tinglang.");
+  h += '<div class="tip n"><b>Transkripsiya qanday o\'qiladi:</b> ikki marta yozilgan unli (<b>aa, ee, ii, oo, uu</b>) — cho\'zib aytiladi. <b>ö</b> va <b>ü</b> — maxsus tovushlar (pastda tushuntirilgan). <b>x</b> — o\'zbekcha «x». Tinglash tugmalari: '+SPK_SVG.replace('<svg','<svg style="width:16px;height:16px;vertical-align:-3px;color:var(--coral)"')+' oddiy, 🐢 sekin.</div>';
+  h += '<h2 class="sec-t">🔤 Alifbo (Das Alphabet)</h2><div class="abc">';
+  ALPHABET.forEach(function(a){
+    h += '<div class="let '+(a[5]?'special':'')+'"><button style="width:100%" data-act="say" data-say="'+esc(a[2])+'"><div class="L">'+a[0]+(a[0]!=='ß'?'<small>'+a[0].toLowerCase()+'</small>':'')+'</div><div class="nm">['+esc(a[1])+']</div></button>'+
+      '<button class="ex" style="width:100%" data-act="say" data-say="'+esc(a[3])+'">▸ <b>'+esc(a[3])+'</b> — '+esc(a[4])+'</button></div>';
+  });
+  h += '</div><div class="mt toolbar"><button class="btn btn-n btn-s" data-act="abcAll">▶ Butun alifboni tinglash</button><button class="btn btn-o btn-s" data-act="stop">⏹ To\'xtatish</button></div>';
+  h += '<h2 class="sec-t">🗣️ Asosiy o\'qish qoidalari</h2><div class="grid g2">';
+  SOUNDS.forEach(function(s){
+    h += '<div class="card snd"><div class="combo">'+esc(s.c)+'</div><div class="info"><div>O\'qilishi: <span class="say">«'+esc(s.s)+'»</span></div><div class="muted" style="font-size:14px">'+esc(s.d)+'</div><div class="chips">'+
+      s.ex.map(function(e){ return '<button class="chip" data-act="say" data-say="'+esc(e[0])+'">🔊 '+esc(e[0])+' <span class="mini">['+esc(e[1])+']</span></button>'; }).join('')+'</div></div></div>';
+  });
+  h += '</div>';
+  return h;
+};
+
+/* ---------- Mavzular ---------- */
+VIEWS.lessons = function(){
+  var h = pageHead('Guide', "Mavzular", "Kundalik hayotda eng ko'p kerak bo'ladigan iboralar. Har bir mavzuni tinglang, takrorlang va mini-testdan o'ting (70%+ — dars tugatildi).");
+  h += '<div class="grid g3">';
+  LESSONS.forEach(function(l){
+    var d=state.lessons[l.id];
+    h += '<button class="tile" data-act="go" data-v="lesson" data-p="'+l.id+'">'+(d?'<span class="tag ok done-badge">✓ '+d+'%</span>':'')+'<div class="emo">'+l.icon+'</div><b>'+esc(l.title)+'</b><small>'+esc(l.desc)+'</small><small style="color:var(--coral-d);font-weight:800;margin-top:4px">'+l.items.length+' ta ibora →</small></button>';
+  });
+  h += '<button class="tile navy" data-act="go" data-v="grammar"><div class="emo">🧩</div><b>Mini grammatika</b><small>Faqat eng kerakli qoidalar — sein, haben, gap tartibi</small></button>';
+  h += '</div>';
+  return h;
+};
+VIEWS.lesson = function(id){
+  var l = LESSONS.filter(function(x){ return x.id===id; })[0] || LESSONS[0];
+  var i = LESSONS.indexOf(l);
+  var h = backBtn('lessons',"Mavzular") + pageHead(l.icon+' Mavzu '+(i+1), esc(l.title), esc(l.desc),
+    '<div class="toolbar"><button class="btn btn-n" data-act="playLesson">▶ Hammasini tinglash</button><button class="btn btn-c" data-act="lessonQuiz" data-p="'+l.id+'">📝 Mini test</button></div>');
+  h += '<div class="tip">💡 '+l.tip+'</div><div class="mt" id="phrases">';
+  l.items.forEach(function(it, k){
+    h += '<div class="phr" id="ph'+k+'"><div class="txt"><div class="de">'+esc(it.de)+'</div><div class="tr">['+esc(it.tr)+']</div><div class="uz">'+esc(it.uz)+'</div></div><div class="acts">'+spk(it.de)+spkSlow(it.de)+'</div></div>';
+  });
+  h += '</div><div class="mt2 toolbar" style="justify-content:space-between">'+
+    (i>0?'<button class="btn btn-o" data-act="go" data-v="lesson" data-p="'+LESSONS[i-1].id+'">← '+esc(LESSONS[i-1].title)+'</button>':'<span></span>')+
+    '<button class="btn btn-c" data-act="lessonQuiz" data-p="'+l.id+'">📝 Mini testdan o\'tish</button>'+
+    (i<LESSONS.length-1?'<button class="btn btn-o" data-act="go" data-v="lesson" data-p="'+LESSONS[i+1].id+'">'+esc(LESSONS[i+1].title)+' →</button>':'<span></span>')+'</div>';
+  return h;
+};
+
+/* ---------- Dialoglar ---------- */
+VIEWS.dialogs = function(){
+  var h = pageHead('Jonli nutq', "Dialoglar", "Haqiqiy vaziyatlardagi qisqa suhbatlar. Avval tinglang, keyin tarjimani yashirib o'zingiz tushunishga harakat qiling.");
+  h += '<div class="grid g3">';
+  DIALOGS.forEach(function(d){
+    h += '<button class="tile" data-act="go" data-v="dialog" data-p="'+d.id+'"><div class="emo">'+d.icon+'</div><b>'+esc(d.title)+'</b><small>'+esc(d.desc)+'</small><small style="color:var(--coral-d);font-weight:800;margin-top:4px">'+d.lines.length+' ta replika →</small></button>';
+  });
+  return h+'</div>';
+};
+VIEWS.dialog = function(id){
+  var d = DIALOGS.filter(function(x){ return x.id===id; })[0] || DIALOGS[0];
+  var h = backBtn('dialogs',"Dialoglar") + pageHead(d.icon+' Dialog', esc(d.title), esc(d.desc),
+    '<div class="toolbar"><button class="btn btn-c" data-act="playDialog">▶ Butun dialog</button><button class="btn btn-o" data-act="stop">⏹</button><button class="btn btn-o" data-act="toggleUz">👁 Tarjima</button></div>');
+  h += '<div class="card"><div class="dlg" id="dlg">';
+  d.lines.forEach(function(ln, k){
+    h += '<div class="bub '+(ln.s==='A'?'a':'b')+'" id="bl'+k+'">'+spk(ln.de,'sm')+'<div><div class="who">'+(ln.s==='A'?'A':'B')+'</div><div class="de">'+esc(ln.de)+'</div><div class="uz">'+esc(ln.uz)+'</div></div></div>';
+  });
+  h += '</div></div><div class="tip n mt">🎭 <b>Rol o\'ynang:</b> dialogni tinglang, keyin har bir replikani ovoz chiqarib takrorlang. Tarjimani yashirib, ma\'nosini eslashga urining.</div>';
+  return h;
+};
+
+/* ---------- Sonlar ---------- */
+var numTab = 'learn';
+VIEWS.numbers = function(p){
+  if(p) numTab = p;
+  var h = pageHead('Zahlen', "Sonlar", "Narx, soat, telefon raqami, yosh — sonlarsiz kundalik muloqot bo'lmaydi.",
+    '<div class="tabs"><button class="'+(numTab==='learn'?'on':'')+'" data-act="numTab" data-p="learn">📖 O\'rganish</button><button class="'+(numTab==='conv'?'on':'')+'" data-act="numTab" data-p="conv">🧮 Son yasagich</button><button class="'+(numTab==='practice'?'on':'')+'" data-act="numTab" data-p="practice">🎯 Mashq</button></div>');
+  if(numTab==='learn'){
+    h += '<div class="tip c">⚠️ <b>Eng muhim qoida:</b> 21 dan 99 gacha sonlarda <b>birlar avval</b> aytiladi: 21 = <b>ein-und-zwanzig</b> («bir va yigirma»), 45 = <b>fünf-und-vierzig</b> («besh va qirq»). Telefon raqamlarini odatda raqamma-raqam aytishadi.</div>';
+    h += '<h2 class="sec-t">0 — 20</h2><div class="ngrid">';
+    for(var i=0;i<=20;i++){ var w=numDe(i); h += '<button class="nbox" data-act="say" data-say="'+esc(w)+'"><div class="n">'+i+'</div><div><div class="w">'+w+'</div><div class="t">['+(i<20?ONES_TR[i]:TENS_TR[20])+']</div></div></button>'; }
+    h += '</div><h2 class="sec-t">O\'nliklar</h2><div class="ngrid">';
+    [30,40,50,60,70,80,90,100,1000].forEach(function(n){ var w=n===100?'hundert':(n===1000?'tausend':numDe(n)); h += '<button class="nbox" data-act="say" data-say="'+esc(w)+'"><div class="n">'+n+'</div><div><div class="w">'+w+'</div><div class="t">['+TENS_TR[n]+']</div></div></button>'; });
+    h += '</div><div class="tip mt">💡 Diqqat qiling: <b>dreißig</b> (30) — «ß» bilan, <b>sechzehn / sechzig</b> — «s» tushib qoladi, <b>siebzehn / siebzig</b> — «en» tushib qoladi.</div>';
+    h += '<h2 class="sec-t">Misollar</h2><div class="ngrid">';
+    [21,25,33,47,58,64,76,99,101,150,365,999,2026,10000].forEach(function(n){ var w=numDe(n); h += '<button class="nbox" data-act="say" data-say="'+esc(w)+'"><div class="n" style="font-size:20px;min-width:56px">'+n+'</div><div><div class="w" style="word-break:break-all">'+w+'</div></div></button>'; });
+    h += '</div><h2 class="sec-t">Kundalik hayotda</h2><div class="grid g2">';
+    [["Das kostet zwei Euro fünfzig.","Bu 2,50 yevro turadi."],["Meine Telefonnummer ist null, eins, sieben, drei...","Telefon raqamim 0-1-7-3..."],["Ich bin dreißig Jahre alt.","Men 30 yoshdaman."],["Der Bus Nummer vierundzwanzig.","24-raqamli avtobus."],["neunzehnhundertneunzig","1990-yil (2000 gacha yillar «yuzlik»lar bilan o'qiladi)"],["zweitausendsechsundzwanzig","2026-yil"]].forEach(function(e){
+      h += '<div class="phr" style="margin:0">'+spk(e[0])+'<div class="txt"><div class="de" style="font-size:16px">'+esc(e[0])+'</div><div class="uz">'+esc(e[1])+'</div></div></div>';
+    });
+    h += '</div>';
+  } else if(numTab==='conv'){
+    h += '<div class="card" style="max-width:760px"><label style="font-weight:800;color:var(--navy)">Istalgan sonni kiriting (0 — 1 000 000):</label>'+
+      '<div class="toolbar mt"><input class="inp" id="numIn" type="number" min="0" max="1000000" inputmode="numeric" placeholder="masalan: 1985" style="flex:1;min-width:160px"><button class="btn btn-c" data-act="numSay">🔊 Tinglash</button><button class="btn btn-o" data-act="numRand">🎲</button></div>'+
+      '<div class="mt2"><div class="muted" style="font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em">Nemischa:</div><div class="conv-out" id="numOut">—</div><div class="breakdown" id="numBd"></div></div></div>';
+  } else {
+    h += numPracticeHtml();
+  }
+  return h;
+};
+AFTER.numbers = function(){
+  if(numTab==='conv'){
+    var inp=document.getElementById('numIn');
+    inp.addEventListener('input', updateConv);
+    inp.addEventListener('keydown', function(e){ if(e.key==='Enter') doNumSay(); });
+    inp.focus();
+  }
+  if(numTab==='practice') afterNumPractice();
+};
+function breakdown(n){
+  var parts=[];
+  var th=Math.floor(n/1000), r=n%1000;
+  function sub(x, fin){
+    var out=[]; var h=Math.floor(x/100), rr=x%100;
+    if(h>0) out.push({t:(h===1?'ein':ONES[h])+'hundert', u:h+'×100'});
+    if(rr>0){
+      if(rr<20) out.push({t:(rr===1&&!fin)?'ein':ONES[rr], u:String(rr)});
+      else { var t=Math.floor(rr/10), u=rr%10; if(u>0){ out.push({t:u===1?'ein':ONES[u], u:String(u), p:1}); out.push({t:'und',u:'va'}); } out.push({t:TENS[t], u:String(t*10), p:u>0?1:0}); }
+    }
+    return out;
+  }
+  if(th>0){ parts = parts.concat(sub(th,false)); parts.push({t:'tausend',u:'×1000'}); }
+  if(r>0) parts = parts.concat(sub(r,true));
+  return parts;
+}
+function updateConv(){
+  var v=document.getElementById('numIn').value, out=document.getElementById('numOut'), bd=document.getElementById('numBd');
+  if(v===''){ out.textContent='—'; bd.innerHTML=''; return; }
+  var n=parseInt(v,10);
+  if(isNaN(n)||n<0||n>1000000){ out.textContent="0 dan 1 000 000 gacha son kiriting"; bd.innerHTML=''; return; }
+  out.textContent = numDe(n);
+  bd.innerHTML = (n>0 && n<1000000) ? breakdown(n).map(function(x){ return '<span class="'+(x.p?'p':'')+'">'+esc(x.t)+' <small class="muted">('+esc(x.u)+')</small></span>'; }).join('') : '';
+}
+function doNumSay(btn){
+  var v=document.getElementById('numIn').value; var n=parseInt(v,10);
+  if(isNaN(n)||n<0||n>1000000){ toast("Avval to'g'ri son kiriting"); return; }
+  say(numDe(n), btn);
+}
+
+/* Sonlar mashqi */
+var NP = null;
+var NPCFG = {mode:'listen', level:'a'};
+var NLEVELS = {a:[0,20,"0–20"], b:[21,100,"21–100"], c:[100,1000,"100–1000"], d:[1000,9999,"1000–9999"]};
+function numPracticeHtml(){
+  if(!NP || NP.finished){
+    var r = NP && NP.finished ? '<div class="card result" style="max-width:560px;margin:0 auto 20px"><div class="score">'+NP.score+'/'+NP.total+'</div><p class="muted">Natija · +'+(NP.score*5)+' XP</p></div>' : '';
+    var lv = NPCFG.level, md = NPCFG.mode;
+    return r+'<div class="card cfg" style="max-width:760px"><div class="row"><label>Rejim</label><div class="modes">'+
+      '<button class="mode '+(md==='listen'?'on':'')+'" data-act="npMode" data-p="listen"><div class="e">🎧</div><b>Eshit va yoz</b><small>Sonni eshitib, raqam bilan yozing</small></button>'+
+      '<button class="mode '+(md==='read'?'on':'')+'" data-act="npMode" data-p="read"><div class="e">👀</div><b>O\'qi va tanla</b><small>Nemischa yozilgan sonni toping</small></button></div></div>'+
+      '<div class="row"><label>Daraja</label><div class="modes">'+
+      Object.keys(NLEVELS).map(function(k){ return '<button class="mode '+(lv===k?'on':'')+'" data-act="npLevel" data-p="'+k+'"><b>'+NLEVELS[k][2]+'</b></button>'; }).join('')+
+      '</div></div><button class="btn btn-c" data-act="npStart">▶ Boshlash (10 ta savol)</button></div>';
+  }
+  var n=NP.cur;
+  var h='<div class="qwrap"><div class="qhead"><span>'+(NP.i+1)+' / '+NP.total+'</span><span>✓ '+NP.score+'</span></div><div class="pbar"><i style="width:'+(NP.i/NP.total*100)+'%"></i></div><div class="qcard">';
+  if(NP.mode==='listen'){
+    h += '<div class="ask">Eshiting va raqam bilan yozing</div><div style="margin:22px 0">'+'<button class="spk big" data-act="npPlay">'+SPK_SVG+'</button> <button class="spk slow" data-act="npPlaySlow" style="vertical-align:bottom">🐢</button></div>'+
+      '<input class="inp" id="npIn" type="number" inputmode="numeric" placeholder="Raqamni yozing" style="max-width:280px;text-align:center" '+(NP.answered?'disabled':'')+'>'+
+      '<div class="mt"><button class="btn btn-c" data-act="npCheck" '+(NP.answered?'style="display:none"':'')+'>Tekshirish</button></div>';
+  } else {
+    h += '<div class="ask">Bu qaysi son?</div><div class="prompt" style="font-size:28px">'+esc(numDe(n))+'</div><div>'+spk(numDe(n),'sm')+'</div><div class="opts">'+
+      NP.opts.map(function(o){ var cls=''; if(NP.answered){ if(o===n) cls='right'; else if(o===NP.picked) cls='wrong'; } return '<button class="opt '+cls+'" data-act="npPick" data-p="'+o+'" '+(NP.answered?'disabled':'')+'>'+o+'</button>'; }).join('')+'</div>';
+  }
+  h += '<div class="fb '+(NP.answered?(NP.lastOk?'ok':'bad'):'')+'">'+(NP.answered?(NP.lastOk?'✓ To\'g\'ri! ':'✗ To\'g\'ri javob: ')+'<b>'+n+'</b> — '+esc(numDe(n)):'')+'</div>'+
+    (NP.answered?'<button class="btn btn-n mt" data-act="npNext">Keyingi →</button>':'')+'</div></div>';
+  return h;
+}
+function afterNumPractice(){
+  if(NP && !NP.finished && NP.mode==='listen'){
+    var inp=document.getElementById('npIn');
+    if(inp && !NP.answered){ inp.focus(); inp.addEventListener('keydown', function(e){ if(e.key==='Enter') npCheck(); }); }
+  }
+}
+function npNewQ(){
+  var L=NLEVELS[NP.level]; var n;
+  do { n=rnd(L[0],L[1]); } while(NP.used[n] && Object.keys(NP.used).length < (L[1]-L[0]));
+  NP.used[n]=1; NP.cur=n; NP.answered=false; NP.picked=null;
+  if(NP.mode==='read'){
+    var set={}; set[n]=1; var opts=[n];
+    var s=String(n);
+    if(s.length===2 && s[0]!==s[1]){ var rv=parseInt(s[1]+s[0],10); if(!set[rv]){ set[rv]=1; opts.push(rv); } }
+    var tries=0;
+    while(opts.length<4 && tries<200){ tries++; var c = Math.random()<.5 ? n+rnd(-12,12) : rnd(L[0],L[1]); if(c>=0 && !set[c]){ set[c]=1; opts.push(c); } }
+    NP.opts=shuffle(opts);
+  }
+  render();
+  if(NP.mode==='listen'){ var np0=NP; setTimeout(function(){ if(NP===np0 && NP.cur===n && current.view==='numbers') say(numDe(n)); }, 250); }
+}
+function npAnswer(ok){
+  NP.answered=true; NP.lastOk=ok; if(ok){ NP.score++; } render();
+  if(NP.mode==='read' || !ok) say(numDe(NP.cur));
+}
+function npCheck(){
+  if(!NP||NP.answered) return;
+  var v=document.getElementById('npIn').value;
+  if(v===''){ toast("Raqamni yozing"); return; }
+  npAnswer(parseInt(v,10)===NP.cur);
+}
+
+/* ---------- Lug'at ---------- */
+var vocabCat = 'all', vocabQ = '', vocabLimit = 120;
+VIEWS.vocab = function(){
+  var h = pageHead("Wortschatz", "Lug'at", ALLW.length+" ta eng kerakli so'z, "+VOCAB.length+" ta bo'limda. Otlarni doim artikli bilan yodlang. ✓ — o'rganilgan so'zlar.",
+    '<button class="btn btn-c" data-act="startFlash">🃏 Kartochkalar</button>');
+  h += '<div class="chips" style="margin-bottom:14px"><button class="chip '+(vocabCat==='all'?'on':'')+'" data-act="vcat" data-p="all">Hammasi</button>'+
+    VOCAB.map(function(c){ var tot=c.w.length, l=0; c.w.forEach(function(_,i){ if(state.learned[c.id+i]) l++; }); return '<button class="chip '+(vocabCat===c.id?'on':'')+'" data-act="vcat" data-p="'+c.id+'">'+c.icon+' '+esc(c.title)+' <span class="mini">'+l+'/'+tot+'</span></button>'; }).join('')+'</div>';
+  h += '<div class="toolbar" style="justify-content:space-between;margin-bottom:16px"><div class="search"><input class="inp" id="vsearch" placeholder="Qidirish: nemischa yoki o\'zbekcha" value="'+esc(vocabQ)+'" style="font-size:15px;padding-top:11px;padding-bottom:11px"></div>'+
+    '<div class="legend"><span><i style="background:var(--navy-3)"></i>der — erkak</span><span><i style="background:var(--coral)"></i>die — ayol</span><span><i style="background:var(--sand)"></i>das — o\'rta</span></div></div>';
+  h += '<div class="vlist" id="vlist">'+vocabListHtml()+'</div>';
+  return h;
+};
+function vocabListHtml(){
+  var q=norm(vocabQ);
+  var list = ALLW.filter(function(w){ return (vocabCat==='all'||w.cat===vocabCat) && (!q || norm(w.de).indexOf(q)>-1 || norm(w.uz).indexOf(q)>-1); });
+  if(!list.length) return '<div class="empty">Hech narsa topilmadi</div>';
+  var total=list.length, more='';
+  if(total>vocabLimit){ list=list.slice(0,vocabLimit); more='<div style="grid-column:1/-1;text-align:center;padding:10px"><button class="btn btn-n" data-act="vmore">Yana ko\'rsatish ('+(total-vocabLimit)+' ta qoldi)</button></div>'; }
+  return list.map(function(w){
+    var a=wordArt(w);
+    return '<div class="vw '+a+'">'+spk(w.de,'sm')+'<div class="txt"><div class="de">'+artHtml(w.de)+'</div><div class="tr">['+esc(w.tr)+']</div><div class="uz">'+esc(w.uz)+'</div></div>'+(state.learned[w.id]?'<span class="chk">✓</span>':'')+'</div>';
+  }).join('')+more;
+}
+AFTER.vocab = function(){
+  var s=document.getElementById('vsearch');
+  s.addEventListener('input', function(){ vocabQ=s.value; vocabLimit=120; document.getElementById('vlist').innerHTML=vocabListHtml(); });
+};
+
+/* Kartochkalar */
+var FC = null;
+VIEWS.flash = function(){
+  if(!FC || !FC.deck.length){
+    var cat=VOCAB.filter(function(c){ return c.id===vocabCat; })[0];
+    return backBtn('vocab',"Lug'at")+'<div class="card result" style="max-width:520px;margin:30px auto"><div style="font-size:60px">🎉</div><h2 class="serif" style="color:var(--navy)">Ajoyib!</h2><p class="muted">'+(cat?esc(cat.title)+' bo\'limidagi ':'')+'kartochkalar tugadi. Bilgan so\'zlaringiz ✓ bilan belgilandi.</p><div class="toolbar" style="justify-content:center"><button class="btn btn-c" data-act="startFlash">🔁 Qaytadan</button><button class="btn btn-o" data-act="go" data-v="tests">📝 Testga o\'tish</button></div></div>';
+  }
+  var w=FC.deck[0];
+  var cat = vocabCat==='all' ? "Barcha so'zlar" : VOCAB.filter(function(c){ return c.id===vocabCat; })[0].title;
+  var h = backBtn('vocab',"Lug'at") + pageHead('Kartochkalar', esc(cat), "Kartochkani bosib aylantiring. «Bilaman» — so'z o'rganilganlar qatoriga qo'shiladi, «Yana» — keyinroq qaytadi.",
+    '<div class="pill c">Qoldi: '+FC.deck.length+'</div>');
+  h += '<div class="fc-wrap"><div class="fc '+(FC.flip?'flip':'')+'" id="fc" data-act="flip">'+
+    '<div class="face front"><div class="big">'+esc(w.uz)+'</div><div class="hint">Nemischasini eslang · bosib aylantiring</div></div>'+
+    '<div class="face back"><div class="big">'+artHtml(w.de)+'</div><div class="tr">['+esc(w.tr)+']</div><div class="muted mt">'+esc(w.uz)+'</div><div class="mt">'+spk(w.de)+' '+spkSlow(w.de)+'</div></div>'+
+  '</div><div class="fc-ctrl"><button class="btn btn-o" data-act="fcAgain">🔁 Yana</button><button class="btn btn-n" data-act="flip">↻ Aylantirish</button><button class="btn btn-c" data-act="fcKnow">✓ Bilaman</button></div></div>';
+  return h;
+};
+
+/* ---------- Testlar ---------- */
+var TCFG = {mode:'de2uz', cat:'all', n:10};
+var QMODES = [
+ ['de2uz','🇩🇪→🇺🇿',"Nemischa → O'zbekcha","So'zni ko'rib, tarjimasini toping"],
+ ['uz2de','🇺🇿→🇩🇪',"O'zbekcha → Nemischa","Tarjimadan nemischa so'zni toping"],
+ ['audio','🎧',"Eshitib top","Faqat ovoz — ma'nosini toping"],
+ ['art','🏷️',"der / die / das","Otning artiklini toping"]
+];
+VIEWS.tests = function(){
+  var h = pageHead('Testlar', "Lug'at testlari", "Rejim va bo'limni tanlang. Har bir to'g'ri javob +10 XP va so'z «o'rganilgan»lar qatoriga qo'shiladi.");
+  h += '<div class="card cfg"><div class="row"><label>1. Test rejimi</label><div class="modes">'+
+    QMODES.map(function(m){ return '<button class="mode '+(TCFG.mode===m[0]?'on':'')+'" data-act="tMode" data-p="'+m[0]+'"><div class="e">'+m[1]+'</div><b>'+m[2]+'</b><small>'+m[3]+'</small></button>'; }).join('')+'</div></div>'+
+    '<div class="grid g2"><div class="row"><label>2. Bo\'lim</label><select class="sel" id="tCat"><option value="all">📚 Barcha so\'zlar</option>'+
+    VOCAB.map(function(c){ return '<option value="'+c.id+'" '+(TCFG.cat===c.id?'selected':'')+'>'+c.icon+' '+esc(c.title)+'</option>'; }).join('')+'</select></div>'+
+    '<div class="row"><label>3. Savollar soni</label><select class="sel" id="tN">'+[10,15,20].map(function(n){ return '<option '+(TCFG.n===n?'selected':'')+'>'+n+'</option>'; }).join('')+'</select></div></div>'+
+    '<button class="btn btn-c" data-act="tStart">▶ Testni boshlash</button></div>';
+  h += '<h2 class="sec-t">📘 Mavzular bo\'yicha mini testlar</h2><div class="grid g3">';
+  LESSONS.forEach(function(l){ var d=state.lessons[l.id]; h += '<button class="tile" data-act="lessonQuiz" data-p="'+l.id+'">'+(d?'<span class="tag ok done-badge">✓ '+d+'%</span>':'')+'<div class="emo">'+l.icon+'</div><b>'+esc(l.title)+'</b><small>Iboralar tarjimasi · 8 savol</small></button>'; });
+  return h+'</div>';
+};
+AFTER.tests = function(){
+  document.getElementById('tCat').addEventListener('change', function(e){ TCFG.cat=e.target.value; });
+  document.getElementById('tN').addEventListener('change', function(e){ TCFG.n=parseInt(e.target.value,10); });
+};
+function buildVocabQuiz(){
+  var pool = TCFG.cat==='all' ? ALLW : ALLW.filter(function(w){ return w.cat===TCFG.cat; });
+  if(TCFG.mode==='art'){
+    pool = pool.filter(function(w){ return wordArt(w) && !w.pl; });
+    if(pool.length<4) pool = ALLW.filter(function(w){ return wordArt(w) && !w.pl; });
+  }
+  var catPool = pool;
+  var picked = shuffle(pool).slice(0, Math.min(TCFG.n, pool.length));
+  return picked.map(function(w){
+    if(TCFG.mode==='art'){ var a=wordArt(w); return {type:'art', ask:"Artiklini tanlang", prompt:wordBare(w), sub:w.uz, options:['der','die','das'], answer:a, say:w.de, reveal:w.de, wid:w.id}; }
+    if(TCFG.mode==='de2uz'){ return {type:'de2uz', ask:"Tarjimasini toping", prompt:w.de, sub:'['+w.tr+']', options:shuffle([w.uz].concat(pickDistractors(w,catPool,'uz',3))), answer:w.uz, say:w.de, autoSay:true, wid:w.id}; }
+    if(TCFG.mode==='uz2de'){ return {type:'uz2de', ask:"Nemischasini toping", prompt:w.uz, sub:'', options:shuffle([w.de].concat(pickDistractors(w,catPool,'de',3))), answer:w.de, say:w.de, wid:w.id}; }
+    return {type:'audio', ask:"Eshiting va ma'nosini toping", prompt:'', sub:'', options:shuffle([w.uz].concat(pickDistractors(w,catPool,'uz',3))), answer:w.uz, say:w.de, autoSay:true, reveal:w.de+'  ['+w.tr+']', wid:w.id};
+  });
+}
+function buildLessonQuiz(id){
+  var l=LESSONS.filter(function(x){ return x.id===id; })[0];
+  var others = allPhrases();
+  var items = shuffle(l.items).slice(0, 8);
+  return items.map(function(it, k){
+    var rev = k%2===1;
+    var pool = shuffle(l.items.filter(function(x){ return x!==it; })).concat(shuffle(others));
+    var seen={}, opts=[];
+    var key = rev ? 'de' : 'uz';
+    seen[it[key]]=1;
+    for(var i=0;i<pool.length && opts.length<3;i++){ if(!seen[pool[i][key]]){ seen[pool[i][key]]=1; opts.push(pool[i][key]); } }
+    if(rev) return {type:'uz2de', ask:"Nemischasini toping", prompt:it.uz, sub:'', options:shuffle([it.de].concat(opts)), answer:it.de, say:it.de};
+    return {type:'de2uz', ask:"Tarjimasini toping", prompt:it.de, sub:'['+it.tr+']', options:shuffle([it.uz].concat(opts)), answer:it.uz, say:it.de, autoSay:true};
+  });
+}
+var QZ = null;
+function startQuiz(qs, title, back, lessonId){
+  QZ = {qs:qs, i:0, score:0, wrong:[], answered:false, picked:null, title:title, back:back, lessonId:lessonId||null, done:false};
+  go('quiz');
+}
+VIEWS.quiz = function(){
+  if(!QZ) return VIEWS.tests();
+  if(QZ.done) return quizResultHtml();
+  var q=QZ.qs[QZ.i];
+  var h = backBtn(QZ.back[0], QZ.back[1], QZ.lessonId) + '<div class="qwrap"><div class="qhead"><span>'+esc(QZ.title)+' · '+(QZ.i+1)+' / '+QZ.qs.length+'</span><span>✓ '+QZ.score+'</span></div><div class="pbar"><i style="width:'+(QZ.i/QZ.qs.length*100)+'%"></i></div>';
+  h += '<div class="qcard"><div class="ask">'+esc(q.ask)+'</div>';
+  if(q.type==='audio'){
+    h += '<div style="margin:22px 0 8px"><button class="spk big" data-act="say" data-say="'+esc(q.say)+'">'+SPK_SVG+'</button> '+spkSlow(q.say)+'</div>';
+    if(QZ.answered) h += '<div class="prompt" style="font-size:24px">'+esc(q.reveal)+'</div>';
+  } else if(q.type==='art'){
+    h += '<div class="prompt"><span class="muted">___ </span>'+esc(q.prompt)+'</div><div class="sub">'+esc(q.sub)+'</div>';
+  } else {
+    h += '<div class="prompt">'+(q.type==='de2uz'?artHtml(q.prompt):esc(q.prompt))+'</div>'+(q.sub?'<div class="sub" style="color:var(--coral-d);font-style:italic;font-weight:700">'+esc(q.sub)+'</div>':'');
+    if(q.type==='de2uz') h += '<div class="mt">'+spk(q.say,'sm')+'</div>';
+  }
+  h += '<div class="opts" '+(q.type==='art'?'style="grid-template-columns:repeat(3,1fr)"':'')+'>';
+  q.options.forEach(function(o, k){
+    var cls=''; if(QZ.answered){ if(o===q.answer) cls='right'; else if(o===QZ.picked) cls='wrong'; }
+    h += '<button class="opt '+cls+'" data-act="qPick" data-p="'+k+'" '+(QZ.answered?'disabled':'')+'>'+(q.type==='art'?'<span class="art '+o+'" style="font-size:20px">'+o+'</span>':(q.type==='uz2de'?artHtml(o):esc(o)))+'</button>';
+  });
+  h += '</div><div class="fb '+(QZ.answered?(QZ.picked===q.answer?'ok':'bad'):'')+'">'+(QZ.answered?(QZ.picked===q.answer?'✓ Barakalla! +10 XP':'✗ Noto\'g\'ri. To\'g\'ri javob: '+esc(q.answer)):'')+
+    (QZ.answered && q.type==='art' ? '<div class="mt" style="color:var(--navy)">'+artHtml(q.reveal)+' — '+esc(q.sub)+'</div>' : '')+'</div>'+
+    (QZ.answered?'<button class="btn btn-n mt" data-act="qNext">'+(QZ.i<QZ.qs.length-1?'Keyingi →':'Natijani ko\'rish')+'</button>':'')+'</div></div>';
+  return h;
+};
+AFTER.quiz = function(){
+  if(QZ && !QZ.done && !QZ.answered && !QZ.spoken){
+    var q=QZ.qs[QZ.i]; QZ.spoken=true;
+    if(q.autoSay){ var qz0=QZ, i0=QZ.i; setTimeout(function(){ if(QZ===qz0 && QZ.i===i0 && current.view==='quiz') say(q.say); }, 250); }
+  }
+};
+function quizResultHtml(){
+  var pct=Math.round(QZ.score/QZ.qs.length*100);
+  var msg = pct>=90?"Zo'r natija! 🏆":pct>=70?"Yaxshi! Davom eting 💪":pct>=50?"Yomon emas, yana mashq qiling 🙂":"Mavzuni yana bir bor takrorlang 📘";
+  var h = backBtn(QZ.back[0], QZ.back[1], QZ.lessonId) + '<div class="card result qwrap"><div class="ring" style="background:conic-gradient(var(--coral) '+pct*3.6+'deg, var(--cream-2) 0)"><div>'+pct+'%</div></div>'+
+    '<h2 class="serif" style="color:var(--navy)">'+msg+'</h2><p class="muted">'+QZ.score+' / '+QZ.qs.length+' to\'g\'ri · +'+(QZ.score*10+(QZ.lessonId&&pct>=70?30:0))+' XP'+(QZ.lessonId&&pct>=70?' (dars tugatildi ✅)':'')+'</p>'+
+    '<div class="toolbar" style="justify-content:center"><button class="btn btn-c" data-act="qRetry">🔁 Qaytadan</button><button class="btn btn-o" data-act="go" data-v="'+QZ.back[0]+'"'+(QZ.lessonId?' data-p="'+QZ.lessonId+'"':'')+'>'+esc(QZ.back[1])+'</button></div>';
+  if(QZ.wrong.length){
+    h += '<div class="review"><b style="color:var(--navy)">Xatolar ustida ishlash:</b>'+QZ.wrong.map(function(q){ return '<div class="r">'+spk(q.say,'sm')+'<div><b>'+artHtml(q.say)+'</b> <span class="muted">— '+esc(q.type==='uz2de'?q.prompt:(q.type==='art'?q.sub:q.answer))+'</span></div></div>'; }).join('')+'</div>';
+  }
+  return h+'</div>';
+}
+
+/* ---------- O'yinlar ---------- */
+var GAMES = [
+ ['memory','🃏',"Juftlikni top","Nemischa so'z va tarjimasini juftlang"],
+ ['scramble','🔀',"So'z yig'ish","Aralashgan harflardan so'zni tuzing"],
+ ['sentence','🧱',"Gap tuzish","So'zlarni to'g'ri tartibda joylang"],
+ ['dictation','🎧',"Eshit va yoz","Eshitgan so'zingizni yozing"],
+ ['speed','⚡',"60 soniya","To'g'ri yoki noto'g'ri? Tez javob bering"]
+];
+VIEWS.games = function(){
+  var h = pageHead("Spiele", "So'z o'yinlari", "O'ynab o'rganing! Har bir o'yinda eng yaxshi natijangiz saqlanadi.");
+  h += '<div class="grid g3">';
+  GAMES.forEach(function(g,i){
+    var b=state.best[g[0]];
+    h += '<button class="tile '+(i===0?'coral':(i===4?'navy':''))+'" data-act="go" data-v="game" data-p="'+g[0]+'"><div class="emo">'+g[1]+'</div><b>'+g[2]+'</b><small>'+g[3]+'</small>'+(b!=null?'<small style="font-weight:800;margin-top:4px">🏆 Rekord: '+b+'</small>':'')+'</button>';
+  });
+  return h+'</div>';
+};
+var G = null;
+function setBest(game, score){ var b=state.best[game]; var isNew = (b==null || score>b); if(isNew) state.best[game]=score; return isNew; }
+function gameOverHtml(title, scoreText, xp, isNew, extra){
+  return '<div class="card result" style="max-width:560px;margin:10px auto"><div style="font-size:56px">'+(isNew?'🏆':'🎉')+'</div><h2 class="serif" style="color:var(--navy)">'+title+'</h2>'+
+    '<div class="score" style="margin:10px 0">'+scoreText+'</div><p class="muted">+'+xp+' XP'+(isNew?' · Yangi rekord!':'')+'</p>'+(extra||'')+
+    '<div class="toolbar" style="justify-content:center"><button class="btn btn-c" data-act="gRestart">🔁 Yana o\'ynash</button><button class="btn btn-o" data-act="go" data-v="games">Boshqa o\'yinlar</button></div></div>';
+}
+VIEWS.game = function(id){
+  if(!G || G.id!==id) initGame(id);
+  var meta = GAMES.filter(function(g){ return g[0]===id; })[0];
+  var h = backBtn('games',"O'yinlar") + pageHead(meta[1]+" O'yin", meta[2], meta[3]);
+  return h + GAME_VIEW[id]();
+};
+AFTER.game = function(id){ if(GAME_AFTER[id]) GAME_AFTER[id](); };
+var GAME_VIEW = {}, GAME_AFTER = {};
+function initGame(id){
+  G = {id:id};
+  if(id==='memory'){
+    var cats = VOCAB.filter(function(c){ return c.w.length>=6; });
+    var cat = G.cat || cats[rnd(0,cats.length-1)].id;
+    var ws = shuffle(ALLW.filter(function(w){ return w.cat===cat; })).slice(0,6);
+    var cards=[]; ws.forEach(function(w){ cards.push({wid:w.id, t:w.de, de:1}); cards.push({wid:w.id, t:w.uz, de:0}); });
+    G.cat=cat; G.cards=shuffle(cards); G.open=[]; G.got={}; G.moves=0; G.start=Date.now(); G.lock=false; G.over=false;
+  }
+  if(id==='scramble'){
+    G.list = shuffle(ALLW.filter(function(w){ var b=wordBare(w); return /^[A-Za-zÄÖÜäöüß]{3,9}$/.test(b); })).slice(0,8);
+    G.i=0; G.score=0; scrSetup();
+  }
+  if(id==='sentence'){
+    G.list = shuffle(allPhrases().filter(function(p){ var n=p.de.split(' ').length; return n>=3 && n<=7 && p.de.indexOf('/')<0; })).slice(0,6);
+    G.i=0; G.score=0; senSetup();
+  }
+  if(id==='dictation'){
+    G.list = shuffle(ALLW.filter(function(w){ var b=wordBare(w); return b.length>=3 && b.length<=11 && b.indexOf('-')<0; })).slice(0,10);
+    G.i=0; G.score=0; G.answered=false;
+  }
+  if(id==='speed'){ G.started=false; G.over=false; G.score=0; G.wrongN=0; G.left=60; }
+}
+function restartGame(){ var id=G.id, cat=null; G=null; initGame(id); render(); }
+
+/* Memory */
+GAME_VIEW.memory = function(){
+  var cat=VOCAB.filter(function(c){ return c.id===G.cat; })[0];
+  if(G.over){
+    var sc=Math.max(10, 100-(G.moves-6)*6); var isNew=setBest('memory',sc);
+    if(!G.xpGiven){ G.xpGiven=1; addXp(Math.round(sc/5)); if(isNew) confetti(); }
+    return gameOverHtml("Hammasi topildi!", sc+' ball', Math.round(sc/5), isNew, '<p class="muted">'+G.moves+' ta urinish · '+Math.round((G.end-G.start)/1000)+' soniya</p>');
+  }
+  var h = '<div class="gtop"><div class="pill">'+cat.icon+' '+esc(cat.title)+'</div><div class="toolbar"><div class="pill c">Urinishlar: '+G.moves+'</div><button class="btn btn-o btn-s" data-act="gRestart">🔀 Boshqa so\'zlar</button></div></div><div class="mem">';
+  G.cards.forEach(function(c,k){
+    var open = G.open.indexOf(k)>-1, got=G.got[c.wid];
+    h += '<button class="mc '+(open?'open':'')+(got?' got':'')+'" id="mc'+k+'" data-act="memFlip" data-p="'+k+'"><div class="in"><div class="f"></div><div class="b '+(c.de?'de':'')+'">'+(c.de?artHtml(c.t):esc(c.t))+'</div></div></button>';
+  });
+  return h+'</div>';
+};
+function memFlip(k){
+  if(G.lock || G.open.indexOf(k)>-1) return;
+  var c=G.cards[k]; if(G.got[c.wid]) return;
+  G.open.push(k);
+  document.getElementById('mc'+k).classList.add('open');
+  if(c.de) say(c.t);
+  if(G.open.length===2){
+    G.moves++; G.lock=true;
+    var a=G.cards[G.open[0]], b=G.cards[G.open[1]];
+    if(a.wid===b.wid && a.de!==b.de){
+      setTimeout(function(){
+        G.got[a.wid]=1; state.learned[a.wid]=1; G.open=[]; G.lock=false;
+        if(Object.keys(G.got).length===6){ G.over=true; G.end=Date.now(); saveState(); }
+        render();
+      }, 450);
+    } else {
+      setTimeout(function(){
+        G.open.forEach(function(i){ var el=document.getElementById('mc'+i); if(el) el.classList.add('shake'); });
+      }, 350);
+      setTimeout(function(){ G.open=[]; G.lock=false; render(); }, 1100);
+    }
+  }
+}
+
+/* Scramble */
+function scrSetup(){
+  var w=G.list[G.i]; var word=wordBare(w);
+  var letters=word.split('');
+  var mix; var t=0;
+  do { mix=shuffle(letters.map(function(ch,i){ return {ch:ch, i:i}; })); t++; } while(mix.map(function(x){return x.ch;}).join('')===word && t<20);
+  G.word=word; G.w=w; G.tiles=mix; G.used={}; G.ans=[]; G.status=''; G.hints=0;
+}
+GAME_VIEW.scramble = function(){
+  if(G.i>=G.list.length){
+    var isNew=setBest('scramble',G.score); if(!G.xpGiven){ G.xpGiven=1; addXp(G.score*8); if(isNew&&G.score>0) confetti(); }
+    return gameOverHtml("O'yin tugadi!", G.score+' / '+G.list.length, G.score*8, isNew);
+  }
+  var w=G.w, a=wordArt(w);
+  var h='<div class="qwrap"><div class="qhead"><span>'+(G.i+1)+' / '+G.list.length+'</span><span>✓ '+G.score+'</span></div><div class="pbar"><i style="width:'+(G.i/G.list.length*100)+'%"></i></div>'+
+    '<div class="qcard"><div class="ask">Harflardan so\'z tuzing</div><div class="prompt" style="font-size:28px">'+esc(w.uz)+'</div>'+(a?'<div class="sub">Artikli: <span class="art '+a+'">'+a+'</span></div>':'')+
+    '<div class="mt">'+spk(w.de,'sm')+' <span class="muted" style="font-size:13px">ovozli yordam</span></div>'+
+    '<div class="slots '+G.status+'">'+G.ans.map(function(ti, k){ return '<button class="lt" data-act="scrBack" data-p="'+k+'">'+esc(G.tiles[ti].ch)+'</button>'; }).join('')+'</div>'+
+    '<div class="pool">'+G.tiles.map(function(t,k){ return '<button class="lt '+(G.used[k]?'used':'')+'" data-act="scrPick" data-p="'+k+'">'+esc(t.ch)+'</button>'; }).join('')+'</div>'+
+    '<div class="fb '+(G.status==='ok'?'ok':(G.status==='bad'?'bad':''))+'">'+(G.status==='ok'?'✓ To\'g\'ri! '+artHtml(w.de):(G.status==='bad'?'✗ Yana urinib ko\'ring':''))+'</div>'+
+    '<div class="toolbar mt" style="justify-content:center">'+(G.status==='ok'?'<button class="btn btn-n" data-act="scrNext">Keyingi →</button>':'<button class="btn btn-o btn-s" data-act="scrClear">↺ Tozalash</button><button class="btn btn-o btn-s" data-act="scrHint">💡 Yordam</button><button class="btn btn-o btn-s" data-act="scrSkip">O\'tkazib yuborish →</button>')+'</div></div></div>';
+  return h;
+};
+function scrCheck(){
+  if(G.ans.length!==G.tiles.length) return;
+  var s=G.ans.map(function(ti){ return G.tiles[ti].ch; }).join('');
+  if(s===G.word){ G.status='ok'; if(G.hints<2){ G.score++; } state.learned[G.w.id]=1; saveState(); say(G.w.de); }
+  else G.status='bad';
+}
+function scrHint(){
+  /* to'g'ri prefiksni qoldirib, keyingi to'g'ri harfni qo'yadi */
+  var cur=G.ans.map(function(ti){ return G.tiles[ti].ch; }).join('');
+  var k=0; while(k<G.ans.length && cur[k]===G.word[k]) k++;
+  var keep=G.ans.slice(0,k); G.used={}; keep.forEach(function(ti){ G.used[ti]=1; }); G.ans=keep;
+  if(k>=G.word.length) return;
+  var need=G.word[k];
+  for(var i=0;i<G.tiles.length;i++){ if(!G.used[i] && G.tiles[i].ch===need){ G.used[i]=1; G.ans.push(i); break; } }
+  G.hints++; G.status=''; scrCheck();
+}
+
+/* Sentence */
+function senSetup(){
+  var p=G.list[G.i];
+  var toks=p.de.replace(/[.!?]+$/,'').split(' ').map(function(t){ return t.replace(/,$/,''); });
+  var mix, t=0;
+  do { mix=shuffle(toks.map(function(x,i){ return {t:x, i:i}; })); t++; } while(mix.map(function(x){return x.t;}).join(' ')===toks.join(' ') && t<20);
+  G.p=p; G.toks=toks; G.tiles=mix; G.used={}; G.ans=[]; G.status='';
+}
+GAME_VIEW.sentence = function(){
+  if(G.i>=G.list.length){
+    var isNew=setBest('sentence',G.score); if(!G.xpGiven){ G.xpGiven=1; addXp(G.score*10); if(isNew&&G.score>0) confetti(); }
+    return gameOverHtml("Gaplar tuzildi!", G.score+' / '+G.list.length, G.score*10, isNew);
+  }
+  var h='<div class="qwrap"><div class="qhead"><span>'+(G.i+1)+' / '+G.list.length+'</span><span>✓ '+G.score+'</span></div><div class="pbar"><i style="width:'+(G.i/G.list.length*100)+'%"></i></div>'+
+    '<div class="qcard"><div class="ask">Nemischa gapni tuzing</div><div class="prompt" style="font-size:24px">'+esc(G.p.uz)+'</div>'+
+    '<div class="tip n" style="font-size:13px;text-align:left;margin-top:10px">Eslatma: nemis tilida fe\'l odatda <b>2-o\'rinda</b>, savolda esa <b>boshida</b> turadi.</div>'+
+    '<div class="slots '+G.status+'">'+G.ans.map(function(ti,k){ return '<button class="lt w" data-act="senBack" data-p="'+k+'">'+esc(G.tiles[ti].t)+'</button>'; }).join('')+'</div>'+
+    '<div class="pool">'+G.tiles.map(function(t,k){ return '<button class="lt w '+(G.used[k]?'used':'')+'" data-act="senPick" data-p="'+k+'">'+esc(t.t)+'</button>'; }).join('')+'</div>'+
+    '<div class="fb '+(G.status==='ok'?'ok':(G.status==='bad'?'bad':''))+'">'+(G.status==='ok'?'✓ Ajoyib! '+esc(G.p.de):(G.status==='bad'?'✗ Tartib noto\'g\'ri — so\'zni bosib qaytaring':''))+'</div>'+
+    '<div class="toolbar mt" style="justify-content:center">'+(G.status==='ok'?'<button class="btn btn-n" data-act="senNext">Keyingi →</button>':'<button class="btn btn-o btn-s" data-act="senClear">↺ Tozalash</button><button class="btn btn-o btn-s" data-act="say" data-say="'+esc(G.p.de)+'">🔊 Tinglab ko\'rish</button><button class="btn btn-o btn-s" data-act="senSkip">O\'tkazib yuborish →</button>')+'</div></div></div>';
+  return h;
+};
+function senCheck(){
+  if(G.ans.length!==G.tiles.length) return;
+  var s=G.ans.map(function(ti){ return G.tiles[ti].t; }).join(' ');
+  if(s===G.toks.join(' ')){ G.status='ok'; G.score++; say(G.p.de); } else G.status='bad';
+}
+
+/* Dictation */
+GAME_VIEW.dictation = function(){
+  if(G.i>=G.list.length){
+    var isNew=setBest('dictation',G.score); if(!G.xpGiven){ G.xpGiven=1; addXp(G.score*8); if(isNew&&G.score>0) confetti(); }
+    return gameOverHtml("Diktant tugadi!", G.score+' / '+G.list.length, G.score*8, isNew);
+  }
+  var w=G.list[G.i], a=wordArt(w);
+  var h='<div class="qwrap"><div class="qhead"><span>'+(G.i+1)+' / '+G.list.length+'</span><span>✓ '+G.score+'</span></div><div class="pbar"><i style="width:'+(G.i/G.list.length*100)+'%"></i></div>'+
+    '<div class="qcard"><div class="ask">Eshiting va yozing'+(a?' (artiklsiz)':'')+'</div><div style="margin:20px 0"><button class="spk big" data-act="dicPlay">'+SPK_SVG+'</button> <button class="spk slow" data-act="dicSlow" style="vertical-align:bottom">🐢</button></div>'+
+    '<div class="sub">Ma\'nosi: <b>'+esc(w.uz)+'</b></div>'+
+    '<input class="inp mt" id="dicIn" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="So\'zni yozing..." style="max-width:340px;text-align:center" '+(G.answered?'disabled':'')+'>'+
+    (G.answered?'':'<div class="umls">'+['ä','ö','ü','ß'].map(function(c){ return '<button data-act="dicIns" data-p="'+c+'">'+c+'</button>'; }).join('')+'</div>')+
+    '<div class="fb '+(G.answered?(G.lastOk?'ok':'bad'):'')+'">'+(G.answered?(G.lastOk?'✓ To\'g\'ri! ':'✗ To\'g\'ri yozilishi: ')+artHtml(w.de)+' <span class="muted">['+esc(w.tr)+']</span>':'')+'</div>'+
+    '<div class="toolbar mt" style="justify-content:center">'+(G.answered?'<button class="btn btn-n" data-act="dicNext">Keyingi →</button>':'<button class="btn btn-c" data-act="dicCheck">Tekshirish</button>')+'</div>'+
+    '<p class="muted" style="font-size:13px;margin-top:14px">Umlaut o\'rniga ae / oe / ue / ss yozsangiz ham qabul qilinadi.</p></div></div>';
+  return h;
+};
+GAME_AFTER.dictation = function(){
+  if(!G || G.i>=G.list.length) return;
+  var inp=document.getElementById('dicIn');
+  if(inp && !G.answered){ inp.focus(); inp.addEventListener('keydown', function(e){ if(e.key==='Enter') dicCheck(); }); }
+  if(!G.answered && G.spokenFor!==G.i){ G.spokenFor=G.i; var g0=G, i0=G.i; setTimeout(function(){ if(G===g0 && G.i===i0 && G.list[i0]) say(G.list[i0].de); }, 300); }
+};
+function dicCheck(){
+  if(G.answered) return;
+  var w=G.list[G.i]; var v=document.getElementById('dicIn').value;
+  if(!v.trim()){ toast("So'zni yozing"); return; }
+  var nv=norm(v), b=norm(wordBare(w)), full=norm(w.de);
+  G.lastOk = (nv===b || nv===full);
+  if(G.lastOk){ G.score++; state.learned[w.id]=1; saveState(); }
+  G.answered=true; render(); say(w.de);
+}
+
+/* Speed */
+GAME_VIEW.speed = function(){
+  if(G.over){
+    var isNew=setBest('speed',G.score); if(!G.xpGiven){ G.xpGiven=1; addXp(G.score*3); if(isNew&&G.score>0) confetti(); }
+    return gameOverHtml("Vaqt tugadi!", G.score+' ball', G.score*3, isNew, '<p class="muted">Xatolar: '+G.wrongN+'</p>');
+  }
+  if(!G.started){
+    return '<div class="card result" style="max-width:560px;margin:0 auto"><div style="font-size:56px">⚡</div><h2 class="serif" style="color:var(--navy)">60 soniyada qancha?</h2><p class="muted">Ekranda nemischa so\'z va tarjima chiqadi. Tarjima to\'g\'ri bo\'lsa — <b>To\'g\'ri</b>, aks holda — <b>Noto\'g\'ri</b>. Klaviaturada: ← to\'g\'ri, → noto\'g\'ri.</p>'+
+      (state.best.speed!=null?'<p><b>🏆 Rekord: '+state.best.speed+'</b></p>':'')+'<button class="btn btn-c" data-act="spStart">▶ Boshlash</button></div>';
+  }
+  var q=G.q;
+  return '<div class="qwrap"><div class="gtop"><div class="timer" id="spT">'+G.left+'</div><div class="toolbar"><div class="pill">✓ '+G.score+'</div><div class="pill c">✗ '+G.wrongN+'</div></div></div>'+
+    '<div class="qcard" id="spCard"><div class="prompt">'+artHtml(q.w.de)+'</div><div style="font-size:22px;margin:6px 0">=</div><div class="prompt" style="font-size:26px;color:var(--coral-d)">'+esc(q.shown)+'</div>'+
+    '<div class="tf"><button class="y" data-act="spAns" data-p="1">✓ To\'g\'ri</button><button class="n" data-act="spAns" data-p="0">✗ Noto\'g\'ri</button></div></div></div>';
+};
+function spNewQ(){
+  var w=ALLW[rnd(0,ALLW.length-1)];
+  var truth = Math.random()<0.5, shown=w.uz;
+  if(!truth){ shown = pickDistractors(w, ALLW.filter(function(x){ return x.cat===w.cat; }), 'uz', 1)[0]; }
+  G.q={w:w, truth:truth, shown:shown};
+}
+function spAnswer(yes){
+  if(!G.started||G.over) return;
+  var ok = (yes===G.q.truth);
+  if(ok) G.score++; else G.wrongN++;
+  var card=document.getElementById('spCard');
+  spNewQ(); render();
+  var c2=document.getElementById('spCard'); if(c2){ c2.style.boxShadow = ok?'0 0 0 4px var(--ok)':'0 0 0 4px var(--bad)'; setTimeout(function(){ if(c2) c2.style.boxShadow=''; }, 250); }
+}
+function spStart(){
+  G.started=true; G.left=60; G.score=0; G.wrongN=0; spNewQ(); render();
+  var timer=setInterval(function(){
+    G.left--; var t=document.getElementById('spT'); if(t) t.textContent=G.left;
+    if(G.left<=0){ clearInterval(timer); G.over=true; render(); }
+  }, 1000);
+  var key=function(e){ if(e.key==='ArrowLeft') spAnswer(true); if(e.key==='ArrowRight') spAnswer(false); };
+  document.addEventListener('keydown', key);
+  cleanups.push(function(){ clearInterval(timer); document.removeEventListener('keydown', key); });
+}
+
+/* ---------- Grammatika ---------- */
+VIEWS.grammar = function(){
+  var h = pageHead("Grammatik", "Mini grammatika", "To'liq grammatika shart emas. Bu yerda faqat kundalik gapirish uchun eng zarur 9 ta qoida — har bir misolni tinglang.");
+  h += '<div class="grid g2">';
+  GRAMMAR.forEach(function(g){
+    h += '<div class="card"><h3 style="color:var(--navy);font-size:20px">'+g.t+'</h3><p class="muted" style="margin:8px 0 0">'+g.text+'</p>';
+    if(g.rows){ h += '<table class="gtbl"><tr><th>Nemischa</th><th>O\'zbekcha</th></tr>'+g.rows.map(function(r){ return '<tr><td class="de">'+spk(r[0].replace(' / ',', '),'sm')+' &nbsp;'+esc(r[0])+'</td><td>'+esc(r[1])+'</td></tr>'; }).join('')+'</table>'; }
+    if(g.ex){ h += '<div class="mt">'+g.ex.map(function(e){ return '<div class="ex-row">'+spk(e[0].replace(' — ',', '),'sm')+'<div><div class="de">'+esc(e[0])+'</div><div class="uz">'+esc(e[1])+'</div></div></div>'; }).join('')+'</div>'; }
+    h += '</div>';
+  });
+  return h+'</div>';
+};
+
+/* =====================================================================
+   SOZLAMALAR (modal)
+   ===================================================================== */
+function openSettings(){
+  var s=state.settings;
+  var vs = TTS.deVoices;
+  var h = '<h2>⚙️ Ovoz sozlamalari</h2>'+
+    '<div class="cfg"><div class="row"><label>Ovoz manbai</label><select class="sel" id="sEngine">'+
+      '<option value="auto" '+(s.engine==='auto'?'selected':'')+'>Avtomatik (tavsiya etiladi)</option>'+
+      '<option value="browser" '+(s.engine==='browser'?'selected':'')+'>'+(NATIVE?'Telefon ovozi':'Qurilma / brauzer ovozi')+'</option>'+
+      '<option value="google" '+(s.engine==='google'?'selected':'')+'>Google ovozi (internet orqali)</option></select></div>'+
+    (NATIVE ? '<div class="row"><label>Telefon ovozi</label>'+nativeInfoHtml()+'</div>' :
+    '<div class="row"><label>Nemischa ovoz ('+vs.length+' ta topildi)</label>'+(vs.length?'<select class="sel" id="sVoice">'+vs.map(function(v){ return '<option value="'+esc(v.name)+'" '+(TTS.voice&&TTS.voice.name===v.name?'selected':'')+'>'+esc(v.name)+' ('+esc(v.lang)+')</option>'; }).join('')+'</select>':
+      '<div class="tip c" style="font-size:14px">Qurilmada nemischa ovoz o\'rnatilmagan. Google ovozi ishlatiladi. Kompyuterda <b>Google Chrome</b> yoki Androidda «Google Text-to-Speech» → Deutsch ovozini o\'rnatsangiz, internetsiz ham ishlaydi.</div>')+'</div>')+
+    '<div class="row"><label>Tezlik: <span id="sRateV">'+(+s.rate).toFixed(2)+'</span></label><input type="range" class="range" id="sRate" min="0.6" max="1.2" step="0.05" value="'+s.rate+'"></div>'+
+    '<div class="toolbar"><button class="btn btn-n btn-s" data-act="testVoice">🔊 Sinab ko\'rish</button><button class="btn btn-c btn-s" data-act="closeModal">Saqlash</button></div>'+
+    '<hr style="border:none;border-top:1px solid var(--cream-2);margin:22px 0">'+
+    '<label style="font-weight:800;color:var(--navy)">Progress</label><p class="muted" style="font-size:14px;margin:6px 0 10px">XP, o\'rganilgan so\'zlar va rekordlar '+(NATIVE?'telefonda':(HAS_GAS?'shu Google akkauntda':'shu brauzerda'))+' saqlanadi.</p>'+
+    '<button class="btn btn-o btn-s" data-act="resetAsk" id="resetBtn">🗑 Progressni tozalash</button></div>';
+  document.getElementById('modalBody').innerHTML=h;
+  document.getElementById('modal').classList.add('show');
+  var eng=document.getElementById('sEngine'), rate=document.getElementById('sRate'), voice=document.getElementById('sVoice');
+  eng.addEventListener('change', function(){ s.engine=eng.value; saveState(); });
+  rate.addEventListener('input', function(){ s.rate=parseFloat(rate.value); document.getElementById('sRateV').textContent=s.rate.toFixed(2); });
+  rate.addEventListener('change', saveState);
+  if(voice) voice.addEventListener('change', function(){ s.voice=voice.value; TTS.pick(); saveState(); });
+}
+function nativeInfoHtml(){
+  var st=TTS.nativeStatus();
+  var t = st===1 ? '<span class="tag ok">✓ Nemischa ovoz tayyor</span>' :
+          st===0 ? '<span class="tag n">Tayyorlanmoqda...</span>' :
+          st===2 ? '<span class="tag">Nemischa ovoz o\'rnatilmagan</span>' : '<span class="tag">Ovoz tizimi topilmadi</span>';
+  return '<div>'+t+'</div><div class="toolbar mt"><button class="btn btn-o btn-s" data-act="installVoice">⬇️ Nemischa ovozni o\'rnatish</button><button class="btn btn-o btn-s" data-act="ttsSettings">📱 Telefon ovoz sozlamalari</button></div>'+
+    '<p class="muted" style="font-size:13px;margin:8px 0 0">Ovoz chiqmasa: Sozlamalar → Til va kiritish → Matnni nutqqa aylantirish → Google → Deutsch ovozini yuklab oling.</p>';
+}
+function closeModal(){ document.getElementById('modal').classList.remove('show'); saveState(); if(current.view==='home') render(); }
+
+/* =====================================================================
+   HODISALAR (event delegation)
+   ===================================================================== */
+var ACT = {
+  go: function(el){ go(el.dataset.v, el.dataset.p||null); },
+  say: function(el){ say(el.dataset.say, el.classList.contains('spk')?el:null); },
+  sayslow: function(el){ say(el.dataset.say, el, true); },
+  stop: function(){ TTS.stop(); clearActive(); },
+  openDrawer: openDrawer, closeDrawer: closeDrawer,
+  openSettings: openSettings, closeModal: closeModal,
+  installVoice: function(){ if(NATIVE){ try{ window.AndroidTTS.installVoice(); }catch(e){ toast("Ochib bo'lmadi"); } } },
+  ttsSettings: function(){ if(NATIVE){ try{ window.AndroidTTS.openSettings(); }catch(e){ toast("Ochib bo'lmadi"); } } },
+  testVoice: function(){ say("Hallo! Ich heiße Anna. Wie geht es Ihnen?"); },
+  resetAsk: function(el){
+    if(el.dataset.sure){ var keep=state.settings; state={xp:0,streak:0,lastDay:'',learned:{},lessons:{},best:{},settings:keep,ts:0}; saveState(); if(HAS_GAS){ try{ google.script.run.resetProgress(); }catch(e){} } closeModal(); render(); toast("Progress tozalandi"); return; }
+    el.dataset.sure='1'; el.textContent="⚠️ Ha, hammasini o'chirish"; el.style.borderColor='var(--bad)'; el.style.color='var(--bad)';
+  },
+  abcAll: function(){ TTS.sequence(ALPHABET.map(function(a){ return {text:a[2]}; }), function(){}, null); },
+  playLesson: function(){
+    var l=LESSONS.filter(function(x){ return x.id===current.p; })[0]||LESSONS[0];
+    TTS.sequence(l.items.map(function(it){ return {text:it.de}; }), function(i){
+      clearActive(); if(i<0) return; var el=document.getElementById('ph'+i); if(el){ el.classList.add('active'); el.scrollIntoView({block:'center', behavior:'smooth'}); }
+    });
+  },
+  playDialog: function(){
+    var d=DIALOGS.filter(function(x){ return x.id===current.p; })[0]||DIALOGS[0];
+    TTS.sequence(d.lines.map(function(ln){ return {text:ln.de, b:ln.s==='B'}; }), function(i){
+      clearActive(); if(i<0) return; var el=document.getElementById('bl'+i); if(el){ el.classList.add('active'); el.scrollIntoView({block:'center', behavior:'smooth'}); }
+    });
+  },
+  toggleUz: function(){ document.getElementById('dlg').classList.toggle('hide-uz'); },
+  lessonQuiz: function(el){ var l=LESSONS.filter(function(x){ return x.id===el.dataset.p; })[0]; startQuiz(buildLessonQuiz(l.id), l.title, ['lesson', l.title], l.id); },
+  numTab: function(el){ numTab=el.dataset.p; go('numbers'); },
+  numSay: function(el){ doNumSay(el); },
+  numRand: function(){ var inp=document.getElementById('numIn'); var r=[rnd(0,100),rnd(100,999),rnd(1000,9999),rnd(1900,2030)][rnd(0,3)]; inp.value=r; updateConv(); say(numDe(r)); },
+  npMode: function(el){ NPCFG.mode=el.dataset.p; render(); },
+  npLevel: function(el){ NPCFG.level=el.dataset.p; render(); },
+  npStart: function(){ NP={mode:NPCFG.mode, level:NPCFG.level, i:0, score:0, total:10, used:{}, finished:false}; npNewQ(); },
+  npPlay: function(el){ say(numDe(NP.cur), el); },
+  npPlaySlow: function(el){ say(numDe(NP.cur), el, true); },
+  npCheck: npCheck,
+  npPick: function(el){ if(NP.answered) return; var v=parseInt(el.dataset.p,10); NP.picked=v; npAnswer(v===NP.cur); },
+  npNext: function(){ NP.i++; if(NP.i>=NP.total){ NP.finished=true; addXp(NP.score*5); if(NP.score>=8) confetti(); render(); } else npNewQ(); },
+  vcat: function(el){ vocabCat=el.dataset.p; vocabLimit=120; render(); },
+  vmore: function(){ vocabLimit+=200; document.getElementById('vlist').innerHTML=vocabListHtml(); },
+  startFlash: function(){ var pool = vocabCat==='all'? ALLW : ALLW.filter(function(w){ return w.cat===vocabCat; }); var unk = pool.filter(function(w){ return !state.learned[w.id]; }); FC={deck:shuffle(unk.length?unk:pool).slice(0,20), flip:false}; go('flash'); },
+  flip: function(){ FC.flip=!FC.flip; var el=document.getElementById('fc'); if(el) el.classList.toggle('flip', FC.flip); if(FC.flip) say(FC.deck[0].de); },
+  fcKnow: function(){ var w=FC.deck.shift(); state.learned[w.id]=1; touchDay(); state.xp+=2; saveState(); FC.flip=false; render(); },
+  fcAgain: function(){ var w=FC.deck.shift(); FC.deck.push(w); FC.flip=false; render(); },
+  tMode: function(el){ TCFG.mode=el.dataset.p; document.querySelectorAll('[data-act="tMode"]').forEach(function(b){ b.classList.toggle('on', b.dataset.p===TCFG.mode); }); },
+  tStart: function(){ var qs=buildVocabQuiz(); if(qs.length<2){ toast("Bu bo'limda yetarli so'z yo'q"); return; } var m=QMODES.filter(function(x){ return x[0]===TCFG.mode; })[0]; startQuiz(qs, m[2], ['tests','Testlar']); },
+  qPick: function(el){
+    if(QZ.answered) return;
+    var q=QZ.qs[QZ.i], o=q.options[parseInt(el.dataset.p,10)];
+    QZ.picked=o; QZ.answered=true;
+    if(o===q.answer){ QZ.score++; touchDay(); state.xp+=10; if(q.wid) state.learned[q.wid]=1; saveState(); }
+    else QZ.wrong.push(q);
+    render();
+    if(q.type!=='de2uz' || o!==q.answer) say(q.say);
+  },
+  qNext: function(){
+    QZ.i++; QZ.answered=false; QZ.picked=null; QZ.spoken=false;
+    if(QZ.i>=QZ.qs.length){
+      QZ.done=true;
+      var pct=Math.round(QZ.score/QZ.qs.length*100);
+      if(QZ.lessonId && pct>=70){ state.lessons[QZ.lessonId]=Math.max(pct, state.lessons[QZ.lessonId]||0); state.xp+=30; }
+      saveState(); if(pct>=70) confetti();
+    }
+    render(); window.scrollTo(0,0);
+  },
+  qRetry: function(){
+    if(QZ.lessonId){ var id=QZ.lessonId; var l=LESSONS.filter(function(x){ return x.id===id; })[0]; startQuiz(buildLessonQuiz(id), l.title, ['lesson', l.title], id); }
+    else { var m=QMODES.filter(function(x){ return x[0]===TCFG.mode; })[0]; startQuiz(buildVocabQuiz(), m[2], ['tests','Testlar']); }
+  },
+  gRestart: function(){ restartGame(); },
+  memFlip: function(el){ memFlip(parseInt(el.dataset.p,10)); },
+  scrPick: function(el){ var k=+el.dataset.p; if(G.used[k]||G.status==='ok') return; G.used[k]=1; G.ans.push(k); G.status=''; scrCheck(); render(); },
+  scrBack: function(el){ if(G.status==='ok') return; var k=+el.dataset.p; var ti=G.ans[k]; G.ans.splice(k,1); delete G.used[ti]; G.status=''; render(); },
+  scrClear: function(){ G.ans=[]; G.used={}; G.status=''; render(); },
+  scrHint: function(){ scrHint(); render(); },
+  scrSkip: function(){ G.i++; if(G.i<G.list.length) scrSetup(); render(); },
+  scrNext: function(){ G.i++; if(G.i<G.list.length) scrSetup(); render(); },
+  senPick: function(el){ var k=+el.dataset.p; if(G.used[k]||G.status==='ok') return; G.used[k]=1; G.ans.push(k); G.status=''; senCheck(); render(); },
+  senBack: function(el){ if(G.status==='ok') return; var k=+el.dataset.p; var ti=G.ans[k]; G.ans.splice(k,1); delete G.used[ti]; G.status=''; render(); },
+  senClear: function(){ G.ans=[]; G.used={}; G.status=''; render(); },
+  senSkip: function(){ G.i++; if(G.i<G.list.length) senSetup(); render(); },
+  senNext: function(){ G.i++; if(G.i<G.list.length) senSetup(); render(); },
+  dicPlay: function(el){ say(G.list[G.i].de, el); },
+  dicSlow: function(el){ say(G.list[G.i].de, el, true); },
+  dicIns: function(el){ var inp=document.getElementById('dicIn'); var s=inp.selectionStart==null?inp.value.length:inp.selectionStart, e=inp.selectionEnd==null?s:inp.selectionEnd; inp.value=inp.value.slice(0,s)+el.dataset.p+inp.value.slice(e); inp.focus(); try{ inp.setSelectionRange(s+1,s+1); }catch(x){} },
+  dicCheck: dicCheck,
+  dicNext: function(){ G.i++; G.answered=false; render(); },
+  spStart: spStart,
+  spAns: function(el){ spAnswer(el.dataset.p==='1'); }
+};
+function clearActive(){ document.querySelectorAll('.phr.active,.bub.active').forEach(function(e){ e.classList.remove('active'); }); }
+document.addEventListener('click', function(e){
+  var t=e.target.closest('[data-act]'); if(!t) return;
+  var a=ACT[t.dataset.act]; if(a){ e.preventDefault(); a(t, e); }
+});
+document.getElementById('modal').addEventListener('click', function(e){ if(e.target.id==='modal') closeModal(); });
+
+/* =====================================================================
+   ISHGA TUSHIRISH
+   ===================================================================== */
+render();
+TTS.init();
+loadState(function(changed){ if(changed) render(); else renderXp(); });
+</script>
+</body>
+</html>
