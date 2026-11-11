@@ -2,11 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Talaffuzni tekshirish uchun mikrofon -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <!-- Android 11+ da telefonning ovoz (TTS) dasturini topish uchun kerak -->
     <queries>
         <intent>
             <action android:name="android.intent.action.TTS_SERVICE" />
+        </intent>
+        <!-- Android 11+ da nutqni tanish xizmatini topish uchun kerak -->
+        <intent>
+            <action android:name="android.speech.RecognitionService" />
         </intent>
     </queries>
 
