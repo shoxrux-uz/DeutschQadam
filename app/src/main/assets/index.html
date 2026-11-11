@@ -304,6 +304,8 @@ input,select{font-family:inherit;font-size:16px}
 .ex-row{display:flex;align-items:center;gap:10px;padding:8px 0}
 .ex-row .de{font-weight:800;color:var(--navy)}
 .ex-row .uz{color:var(--muted);font-size:14px}
+.ex-h{margin:16px 0 4px;font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--coral)}
+.ex-row + .ex-row{border-top:1px dashed var(--line, rgba(20,33,61,.12))}
 
 /* misc */
 .search{position:relative;max-width:360px;flex:1}
@@ -2884,6 +2886,2045 @@ der Stil|deer shtiil|uslub
 `}
 ]);
 /* matnli ro'yxatlarni massivga aylantirish: [nemischa, transkripsiya, o'zbekcha, ko'plik] */
+VOCAB = VOCAB.concat([
+{id:"b1feyl", lv:"B1", icon:"⚙️", title:"Fe'llar (B1)", t:`
+abhängen von|aphengen fon|...ga bog'liq bo'lmoq
+ablehnen|apleenen|rad etmoq
+absagen|apzaagen|bekor qilmoq (uchrashuvni)
+achten auf|axten auf|...ga e'tibor bermoq
+sich ändern|zix endern|o'zgarmoq
+anerkennen|anerkennen|tan olmoq
+angeben|angeeben|ko'rsatmoq (ma'lumot); maqtanmoq
+annehmen|anneemen|qabul qilmoq; taxmin qilmoq
+sich anpassen|zix anpassen|moslashmoq
+anstrengen|anshtrengen|kuch sarflamoq, charchatmoq
+sich anstrengen|zix anshtrengen|astoydil harakat qilmoq
+antworten auf|antvorten auf|...ga javob bermoq
+sich aufregen|zix aufreegen|asabiylashmoq
+auffordern|auffordern|chaqirmoq, talab qilmoq
+aufnehmen|aufneemen|qabul qilmoq; yozib olmoq
+aufteilen|auftaylen|bo'lib chiqmoq
+ausdrücken|ausdrükken|ifodalamoq
+auskommen mit|auskommen mit|...bilan til topishmoq
+ausleihen|auslayen|qarzga olmoq (kitob)
+ausnutzen|ausnutsen|foydalanib qolmoq
+ausreichen|ausrayxen|yetarli bo'lmoq
+ausschalten|ausshalten|o'chirmoq (qurilma)
+einschalten|aynshalten|yoqmoq (qurilma)
+sich auswirken auf|zix ausvirken auf|...ga ta'sir qilmoq
+auswählen|ausveelen|tanlab olmoq
+sich bedanken|zix bedanken|minnatdorchilik bildirmoq
+beeinflussen|beaynflussen|ta'sir ko'rsatmoq
+befürchten|befürxten|xavotir olmoq
+begründen|begründen|asoslamoq
+behandeln|behandeln|muomala qilmoq; davolamoq
+behaupten|behaupten|da'vo qilmoq, ta'kidlamoq
+beitragen|baytraagen|hissa qo'shmoq
+belasten|belasten|og'irlik qilmoq, yuklamoq
+beleidigen|belaydigen|haqorat qilmoq
+sich bemühen|zix bemüüen|harakat qilmoq, urinmoq
+benötigen|benöötigen|muhtoj bo'lmoq
+beobachten|beoobaxten|kuzatmoq
+berücksichtigen|berükzixtigen|hisobga olmoq
+beschließen|beshliisen|qaror qabul qilmoq (rasman)
+besitzen|bezitsen|egalik qilmoq
+bestimmen|beshtimmen|belgilamoq, aniqlamoq
+sich beteiligen|zix betayligen|ishtirok etmoq
+betreffen|betreffen|tegishli bo'lmoq
+betrügen|betrüügen|aldamoq
+beweisen|bevayzen|isbotlamoq
+bewerten|beverten|baholamoq
+bewundern|bevundern|hayratlanmoq
+bezeichnen|betsayxnen|atamoq, nomlamoq
+sich beziehen auf|zix betsiien auf|...ga taalluqli bo'lmoq
+bieten|biiten|taklif qilmoq, bermoq
+bitten um|bitten um|...ni so'ramoq, iltimos qilmoq
+danken für|danken füür|...uchun rahmat aytmoq
+darstellen|daarshtellen|tasvirlamoq
+sich durchsetzen|zix durxzetsen|o'z fikrini o'tkazmoq
+sich eignen|zix aygnen|yaramoq, mos bo'lmoq
+einführen|aynfüüren|joriy qilmoq
+eingehen auf|ayngeeen auf|...ga to'xtalmoq
+einhalten|aynhalten|rioya qilmoq
+sich einigen|zix aynigen|kelishib olmoq
+einrichten|aynrixten|jihozlamoq
+einsetzen|aynzetsen|qo'llamoq, joylashtirmoq
+einstellen|aynshtellen|ishga olmoq; sozlamoq
+eintreten|ayntreeten|kirmoq; tarafini olmoq
+empfangen|empfangen|qabul qilmoq (mehmon)
+enthalten|enthalten|o'z ichiga olmoq
+entlassen|entlassen|ishdan bo'shatmoq
+sich entscheiden|zix entshayden|qaror qilmoq
+entstehen|entshteeen|paydo bo'lmoq
+enttäuschen|enttoyshen|hafsalasini pir qilmoq
+entwickeln|entvikkeln|rivojlantirmoq
+erfahren|erfaaren|bilib olmoq
+erfinden|erfinden|ixtiro qilmoq
+erfüllen|erfüllen|bajarmoq (orzu, talab)
+sich erholen|zix erhoolen|dam olib tiklanmoq
+sich erinnern an|zix erinnern an|...ni eslamoq
+erkennen|erkennen|tanimoq, anglamoq
+ermöglichen|ermööglixen|imkon bermoq
+erscheinen|ershaynen|paydo bo'lmoq; nashr etilmoq
+ersetzen|erzetsen|almashtirmoq
+erwarten|ervarten|kutmoq (umid qilib)
+erwähnen|erveenen|tilga olmoq
+erzeugen|ertsoygen|ishlab chiqarmoq
+festlegen|festleegen|belgilab qo'ymoq
+festhalten|festhalten|ushlab turmoq
+fördern|fördern|rag'batlantirmoq, qo'llab-quvvatlamoq
+fordern|fordern|talab qilmoq
+sich fühlen|zix füülen|o'zini his qilmoq
+sich fürchten vor|zix fürxten foor|...dan qo'rqmoq
+garantieren|garantiiren|kafolat bermoq
+gehören zu|gehöören tsu|...ga kirmoq (tarkibiga)
+gelingen|gelingen|muvaffaqiyatli chiqmoq
+genießen|geniisen|zavqlanmoq
+gründen|gründen|asos solmoq
+halten von|halten fon|... haqida fikrda bo'lmoq
+handeln|handeln|harakat qilmoq; savdo qilmoq
+es handelt sich um|es handelt zix um|gap ... haqida bormoqda
+herausfinden|herausfinden|aniqlab olmoq
+herstellen|heershtellen|tayyorlamoq, ishlab chiqarmoq (zavodda)
+hinweisen auf|hinvayzen auf|...ga ishora qilmoq
+hoffen auf|hoffen auf|...ga umid qilmoq
+klären|kleeren|aniqlashtirmoq
+sich konzentrieren|zix kontsentriiren|diqqatni jamlamoq
+kritisieren|kritiziiren|tanqid qilmoq
+leiden|layden|azob chekmoq
+leisten|laysten|bajarmoq; qodir bo'lmoq
+sich leisten|zix laysten|(pulga) qurbi yetmoq
+leiten|layten|rahbarlik qilmoq
+melden|melden|xabar bermoq
+merken|merken|sezmoq
+mitteilen|mittaylen|ma'lum qilmoq
+nachdenken über|naaxdenken üüber|... haqida o'ylab ko'rmoq
+nachfragen|naaxfraagen|qayta so'ramoq
+nützen|nütsen|foyda bermoq
+pflegen|pfleegen|parvarish qilmoq
+reagieren auf|reagiiren auf|...ga munosabat bildirmoq
+rechnen mit|rexnen mit|...ni kutmoq, hisobga olmoq
+regeln|reegeln|tartibga solmoq
+schätzen|shetsen|qadrlamoq; taxmin qilmoq
+sorgen für|zorgen füür|...ni ta'minlamoq
+stattfinden|shtattfinden|bo'lib o'tmoq
+teilnehmen an|taylneemen an|...da qatnashmoq
+träumen von|troymen fon|...ni orzu qilmoq
+trennen|trennen|ajratmoq
+überzeugen|üübertsoygen|ishontirmoq
+unterbrechen|unterbrexen|bo'lmoq (gapni)
+unterscheiden|untershayden|farqlamoq
+unterstützen|untershtütsen|qo'llab-quvvatlamoq
+verbrauchen|ferbrauxen|iste'mol qilmoq, sarflamoq
+sich verhalten|zix ferhalten|o'zini tutmoq
+verhindern|ferhindern|oldini olmoq
+sich verlassen auf|zix ferlassen auf|...ga ishonmoq, tayanmoq
+vermeiden|fermayden|qochmoq, yo'l qo'ymaslik
+veröffentlichen|feröffentlixen|e'lon qilmoq, nashr etmoq
+verraten|ferraaten|sotmoq (sirni), xiyonat qilmoq
+sich verständigen|zix fershtendigen|bir-birini tushunmoq
+verteilen|fertaylen|tarqatmoq
+verursachen|feruurzaxen|sabab bo'lmoq
+verwenden|ferwenden|ishlatmoq
+verzichten auf|fertsixten auf|...dan voz kechmoq
+sich vorbereiten auf|zix foorberayten auf|...ga tayyorlanmoq
+sich vorstellen|zix foorshtellen|tasavvur qilmoq; tanishtirmoq
+warnen vor|varnen foor|...dan ogohlantirmoq
+sich wehren|zix veeren|o'zini himoya qilmoq
+widersprechen|viidershprexen|e'tiroz bildirmoq
+wirken|virken|ta'sir qilmoq; ko'rinmoq
+sich wundern über|zix vundern üüber|...dan ajablanmoq
+zögern|tsöögern|ikkilanmoq
+zugeben|tsuugeeben|tan olmoq (aybni)
+zunehmen|tsuuneemen|ko'paymoq; semirmoq
+abnehmen|apneemen|kamaymoq; ozmoq
+zurechtkommen|tsurextkommen|uddasidan chiqmoq
+zusammenarbeiten|tsuzammenarbayten|hamkorlik qilmoq
+zweifeln an|tsvayfeln an|...ga shubha qilmoq
+`},
+{id:"b1sifat", lv:"B1", icon:"🎯", title:"Sifat va ravishlar (B1)", t:`
+abhängig|aphengix|qaram, bog'liq
+unabhängig|unaphengix|mustaqil
+absolut|apzoluut|mutlaq
+aktuell|aktuel|dolzarb, hozirgi
+allgemein|algemayn|umumiy
+unangenehm|unangeneem|noxush
+ausführlich|ausfüürlix|batafsil
+ausreichend|ausrayxent|yetarli
+äußerst|oyserst|nihoyatda
+bedeutend|bedoytent|muhim, mashhur
+begeistert|begaystert|zavqli, ishtiyoqli
+begrenzt|begrentst|cheklangan
+berechtigt|berextixt|haqli
+bescheiden|beshayden|kamtar
+betrunken|betrunken|mast
+bewusst|bevusst|ongli
+durchschnittlich|durxshnittlix|o'rtacha
+echt|ext|haqiqiy
+eindeutig|ayndoytix|aniq, shubhasiz
+einverstanden|aynfershtanden|rozi
+einzig|ayntsix|yagona
+empfindlich|empfintlix|sezgir, nozik
+endgültig|entgültix|qat'iy, oxirgi
+entfernt|entfernt|uzoqda
+erforderlich|erforderlix|zarur
+erstaunlich|ershtaunlix|ajoyib, hayratlanarli
+ewig|eevix|abadiy
+fair|feer|halol (o'yinda), adolatli
+fähig|feeix|qodir, qobiliyatli
+flexibel|fleksiibel|moslashuvchan
+freiwillig|frayvillix|ixtiyoriy
+gelegentlich|geleegentlix|vaqti-vaqti bilan
+gemeinsam|gemaynzaam|birgalikda
+genügend|genüügent|yetarlicha
+gerecht|gerext|adolatli
+gering|gering|oz, kichik
+gewöhnlich|gevöönlix|odatiy
+gleichzeitig|glayxtsaytix|bir vaqtda
+glücklicherweise|glüklixervayze|yaxshiyamki, baxtimizga
+grundsätzlich|gruntzetslix|asosan, printsipial
+gültig|gültix|amal qiladigan
+häufig|hoyfix|tez-tez
+heimlich|haymlix|yashirin
+herrlich|herrlix|ajoyib
+hilfreich|hilfrayx|foydali
+ideal|ideaal|ideal
+intensiv|intenziif|jadal
+jedenfalls|yeedenfals|har holda
+konkret|konkreet|aniq, muayyan
+kräftig|kreftix|kuchli, baquvvat
+kürzlich|kürtslix|yaqinda
+locker|lokker|bo'sh, erkin
+logisch|loogish|mantiqiy
+merkwürdig|merkvürdix|g'alati
+möglicherweise|mööglixervayze|balki, mumkin
+nachhaltig|naaxhaltix|barqaror
+offensichtlich|offenzixtlix|ochiq-oydin
+persönlich|perzöönlix|shaxsan
+peinlich|paynlix|uyatli, noqulay
+riesig|riizix|ulkan
+sinnvoll|zinnfol|ma'noli
+sorgfältig|zorgfeltix|ehtiyotkor
+ständig|shtendix|doimiy
+tatsächlich|taatzexlix|haqiqatan
+teilweise|taylvayze|qisman
+überflüssig|üüberflüssix|ortiqcha
+umsonst|umzonst|bekorga; bepul
+unterschiedlich|untershiitlix|turlicha
+vergeblich|fergeeplix|befoyda
+verantwortlich|ferantvortlix|mas'ul
+verständlich|fershtentlix|tushunarli
+vollständig|follshtendix|to'liq
+wahrscheinlich|vaarshaynlix|ehtimol
+wesentlich|veezentlix|muhim, asosiy
+zufällig|tsuufelix|tasodifiy
+zusätzlich|tsuuzetslix|qo'shimcha
+zuständig|tsuushtendix|mas'ul (vakolatli)
+abwechslungsreich|apveksslungsrayx|rang-barang, xilma-xil
+alltäglich|alteeglix|kundalik
+anspruchsvoll|anshpruxsfol|talabchan
+aufregend|aufreegent|hayajonli
+ausländisch|auslendish|chet ellik
+beeindruckend|beayndrukkent|ta'sirli
+begabt|begaapt|iqtidorli
+belastend|belastent|og'ir (ruhiy)
+bemerkenswert|bemerkensveert|e'tiborga molik
+beruhigend|beruuigent|tinchlantiruvchi
+bezahlbar|betsaalbaar|hamyonbop
+dauerhaft|dauerhaft|doimiy, uzoq muddatli
+ehemalig|eeemaalix|sobiq
+eilig|aylix|shoshilinch
+einheitlich|aynhaytlix|bir xil, yagona
+einmalig|aynmaalix|bir martalik; noyob
+entscheidend|entshaydent|hal qiluvchi
+erheblich|erheeplix|sezilarli
+erträglich|ertreeglix|chidasa bo'ladigan
+unerträglich|unertreeglix|chidab bo'lmas
+fehlerhaft|feelerhaft|xatoli
+feierlich|fayerlix|tantanali
+fortgeschritten|fortgeshritten|ilg'or (darajada)
+gegenseitig|geegenzaytix|o'zaro
+geeignet|geaygnet|mos, yaroqli
+gelungen|gelungen|muvaffaqiyatli chiqqan
+gewaltig|gevaltix|juda katta, kuchli
+gleichberechtigt|glayxberextixt|teng huquqli
+großartig|groosaartix|zo'r, ulug'vor
+gründlich|grüntlix|puxta
+harmlos|harmloos|zararsiz
+herkömmlich|heerkömlix|an'anaviy
+hilflos|hilfloos|ojiz
+hoffnungslos|hoffnungsloos|umidsiz
+jeweils|yeevayls|har biri
+knapp|knapp|tanqis, kam
+körperlich|körperlix|jismoniy
+kulturell|kulturel|madaniy
+langfristig|langfristix|uzoq muddatli
+kurzfristig|kurtsfristix|qisqa muddatli
+lebenswichtig|leebensvixtix|hayotiy muhim
+leistungsfähig|laystungsfeeix|samarali, kuchli
+mangelhaft|mangelhaft|qoniqarsiz
+menschlich|menshlix|insoniy
+mündlich|müntlix|og'zaki
+schriftlich|shriftlix|yozma
+nachdenklich|naaxdenklix|o'ychan
+neutral|noytraal|betaraf
+oberflächlich|ooberflexlix|yuzaki
+offiziell|ofitsiel|rasmiy
+psychisch|psüüxish|ruhiy
+rechtlich|rextlix|huquqiy
+riskant|riskant|xavfli (tavakkal)
+schädlich|sheedlix|zararli
+sichtbar|zixtbaar|ko'rinadigan
+sparsam|shpaarzaam|tejamkor
+steigend|shtaygent|o'sib borayotgan
+tödlich|töötlix|o'limga olib keluvchi
+überzeugend|üübertsoygent|ishonarli
+umstritten|umshtritten|bahsli
+unvergesslich|unfergesslix|unutilmas
+unglaublich|unglauplix|aql bovar qilmaydigan
+unklar|unklaar|noaniq
+unzufrieden|untsufriiden|norozi
+verständnisvoll|fershtentnisfol|tushunadigan
+vertraut|fertraut|tanish, yaqin
+verwandt|fervant|qarindosh
+vielfältig|fiilfeltix|xilma-xil
+vorbildlich|foorbiltlix|namunali
+vorig|foorix|o'tgan
+weltweit|veltvayt|dunyo bo'ylab
+widersprüchlich|viidershprüxlix|ziddiyatli
+wirksam|virkzaam|samarali
+zahlreich|tsaalrayx|ko'p sonli
+zeitgemäß|tsaytgemees|zamonaviy
+zukünftig|tsuukünftix|kelajakdagi
+zurückhaltend|tsurükhaltent|kamgap, vazmin
+zweifelhaft|tsvayfelhaft|shubhali
+`},
+{id:"b1his", lv:"B1", icon:"🫶", title:"Xarakter va munosabatlar", t:`
+die Aufregung|di aufreegung|hayajon
+die Begeisterung|di begaysterung|ishtiyoq, zavq
+die Eifersucht|di ayferzuxt|rashk
+die Einsamkeit|di aynzaamkayt|yolg'izlik
+die Enttäuschung|di enttoyshung|hafsala pir bo'lishi
+die Erziehung|di ertsiiung|tarbiya
+das Gewissen|das gevissen|vijdon
+der Hass|der hass|nafrat
+der Humor|der humoor|hazil tuyg'usi
+das Interesse|das interesse|qiziqish
+der Kontakt|der kontakt|aloqa
+der Kompromiss|der kompromiss|murosa
+der Konflikt|der konflikt|nizo
+küssen|küssen|o'pmoq
+das Lob|das loop|maqtov
+loben|looben|maqtamoq
+das Missverständnis|das missfershtentnis|tushunmovchilik
+das Mitleid|das mitlayt|achinish, rahm
+die Neugier|di noygiir|qiziquvchanlik
+die Partnerschaft|di partnershaft|sheriklik
+die Rücksicht|di rükzixt|hurmat, e'tibor
+rücksichtsvoll|rükzixtsfol|e'tiborli, ehtiyotkor
+die Scham|di shaam|uyat
+sich schämen|zix sheemen|uyalmoq
+die Sehnsucht|di zeenzuxt|sog'inch
+der Stolz|der shtolts|g'urur
+stolz auf|shtolts auf|...dan faxrlanadigan
+die Sympathie|di zümpatii|xayrixohlik
+die Trauer|di trauer|qayg'u, motam
+die Treue|di troye|sadoqat
+die Verantwortung|di ferantvortung|mas'uliyat
+das Verhalten|das ferhalten|xulq-atvor
+das Verhältnis|das ferheltnis|munosabat, nisbat
+verlobt|ferloopt|unashtirilgan
+die Verlobung|di ferloobung|unashtiruv
+die Zärtlichkeit|di tseertlixkayt|nazokat, mehr
+zärtlich|tseertlix|mehribon, nozik
+die Zuneigung|di tsuunaygung|mehr, moyillik
+der Zweifel|der tsvayfel|shubha
+aggressiv|agressiif|tajovuzkor
+arrogant|arogant|kibrli
+aufmerksam|aufmerkzaam|diqqatli
+ehrgeizig|eergaytsix|shuhratparast, intiluvchan
+egoistisch|egoistish|xudbin
+empfindsam|empfintzaam|ta'sirchan
+frech|frex|surbet
+großzügig|groostsüügix|saxiy
+geizig|gaytsix|xasis
+humorvoll|humoorfol|hazilkash
+optimistisch|optimistish|optimist
+pessimistisch|pesimistish|pessimist
+schüchtern|shüxtern|uyatchan
+selbstbewusst|zelpstbevusst|o'ziga ishongan
+sensibel|zenziibel|nozik ta'b, sezgir
+spontan|shpontaan|kutilmagan, o'z-o'zidan
+tolerant|tolerant|bag'rikeng
+die Persönlichkeit|di perzöönlixkayt|shaxsiyat
+der Erwachsene|der ervaksene|katta yoshli
+die Generation|di generatsioon|avlod
+die Umarmung|di umarmung|quchoqlash
+sich versöhnen|zix ferzöönen|yarashmoq
+sich verstehen|zix fershteeen|bir-birini tushunmoq
+sich kennenlernen|zix kennenlernen|tanishmoq
+sich scheiden lassen|zix shayden lassen|ajrashmoq
+die Dankbarkeit|di dankbaarkayt|minnatdorlik
+die Zufriedenheit|di tsufriidenhayt|mamnunlik
+die Unsicherheit|di unzixerhayt|ishonchsizlik
+die Nervosität|di nervoziteet|asabiylik
+die Erleichterung|di erlayxterung|yengil tortish
+erleichtert|erlayxtert|yengil tortgan
+verwirrt|fervirrt|sarosimaga tushgan
+beleidigt|belaydixt|xafa bo'lgan (ranjigan)
+eingebildet|ayngebildet|manman
+verwöhnt|fervöönt|erka
+chaotisch|kaootish|tartibsiz
+unzuverlässig|untsuuferlesix|ishonchsiz
+fantasievoll|fantaziifol|xayolparast, ijodiy
+die Ehrlichkeit|di eerlixkayt|halollik
+die Höflichkeit|di höflixkayt|xushmuomalalik
+die Freundlichkeit|di froyntlixkayt|samimiylik
+die Verlegenheit|di ferleegenhayt|xijolat
+verlegen|ferleegen|xijolatli
+der Liebeskummer|der liibeskummer|sevgi iztirobi
+die Trennung|di trennung|ajralish
+die Scheidung|di shaydung|ajrashish
+die Urgroßmutter|di uurgroosmutter|evara buvi
+die Verwandtschaft|di fervantshaft|qarindoshlar
+das Einzelkind|das ayntselkint|yolg'iz farzand
+die Stiefmutter|di shtiifmutter|o'gay ona
+alleinerziehend|alaynertsiient|yolg'iz o'zi farzand tarbiyalovchi
+die Patenschaft|di paatenshaft|homiylik
+`},
+{id:"b1shahar", lv:"B1", icon:"🧳", title:"Safar va transport (B1)", t:`
+die Ausfahrt|di ausfaart|chiqish yo'li (avtomagistraldan)
+die Bahn|di baan|temir yo'l; poyezd
+tanken|tanken|yoqilg'i quymoq
+die Buchung|di buuxung|bron qilish
+die Fähre|di feere|parom
+der Gepäckwagen|der gepekvaagen|yuk aravachasi
+die Gepäckaufbewahrung|di gepekaufbevaarung|yuk saqlash xonasi
+der Hafen|der haafen|port
+die Halbpension|di halppanzioon|yarim pansion (nonushta+kechki)
+die Vollpension|di folpanzioon|to'liq pansion
+die Kurve|di kurve|burilish
+der Abschleppdienst|der apshlepdiinst|evakuator xizmati
+die Bremse|di bremze|tormoz
+bremsen|bremzen|tormozlamoq
+überholen|üüberhoolen|quvib o'tmoq
+das Parkhaus|das parkhaus|ko'p qavatli turargoh
+der Strafzettel|der shtraaftsettel|jarima qog'ozi
+der Radfahrer|der raatfaarer|velosipedchi
+die Unterführung|di unterfüürung|yer osti o'tish joyi
+der Tunnel|der tunnel|tunnel
+das Navi|das naavi|navigator
+die Strecke|di shtrekke|masofa, yo'nalish
+die Entfernung|di entfernung|masofa
+verspätet|fershpeetet|kechikkan
+der Fahrkartenautomat|der faarkartenautomaat|chipta avtomati
+die Ermäßigung|di ermeesigung|chegirma
+der Speisewagen|der shpayzevaagen|vagon-restoran
+der Schlafwagen|der shlaafvaagen|uxlash vagoni
+der Aufenthalt|der aufenthalt|to'xtash; bo'lish (joyda)
+die Übernachtung|di üübernaxtung|tunash
+der Reiseführer|der rayzefüürer|gid; yo'lko'rsatkich kitob
+die Rundfahrt|di runtfaart|aylanma sayohat
+die Besichtigung|di bezixtigung|tomosha qilish (diqqatga sazovor joy)
+der Reisepass|der rayzepass|xorijiy pasport
+verzollen|fertsollen|bojdan o'tkazmoq
+die Währung|di veerung|valyuta
+im Ausland|im auslant|chet elda
+die Saison|di zezong|mavsum
+die Hauptsaison|di hauptzezong|qizg'in mavsum
+begleiten|beglayten|kuzatib bormoq
+der Halt|der halt|bekat, to'xtash
+die Mitfahrgelegenheit|di mitfaargeleegenhayt|yo'ldosh (mashinada birga borish)
+das Fahrzeug|das faartsoyk|transport vositasi
+der Lkw|der elkaavee|yuk mashinasi
+der Anhänger|der anhenger|tirkama
+die Rushhour|di rashauer|eng gavjum vaqt
+gesperrt|geshperrt|yopiq (yo'l)
+die Einbahnstraße|di aynbaanshtraase|bir tomonlama ko'cha
+die Vorfahrt|di foorfaart|o'tish ustunligi
+die Fahrbahn|di faarbaan|qatnov qismi
+der Fahrradweg|der faarraatveek|velosiped yo'lagi
+der Kreisverkehr|der kraysferkeer|aylanma harakat
+das Verkehrsschild|das ferkeersshilt|yo'l belgisi
+die Höchstgeschwindigkeit|di hööxstgeshvindixkayt|eng yuqori tezlik
+sich anschnallen|zix anshnallen|kamarni taqmoq
+der Kofferraum|der kofferraum|bagaj
+der Scheinwerfer|der shaynverfer|fara
+der Mietwagen|der miitvaagen|ijaraga olingan mashina
+das Elektroauto|das elektroauto|elektromobil
+die Ladestation|di laadeshtatsioon|zaryadlash stansiyasi
+der Passagier|der pasajiir|yo'lovchi (samolyot)
+die Flugbegleiterin|di fluukbeglayterin|styuardessa
+der Start|der shtart|uchish
+der Gang|der gang|yo'lak
+der Fensterplatz|der fensterplats|deraza yonidagi joy
+die Sicherheitskontrolle|di zixerhaytskontrolle|xavfsizlik nazorati
+die Passkontrolle|di passkontrolle|pasport nazorati
+das Gepäckband|das gepekbant|bagaj lentasi
+das Übergepäck|das üübergepek|ortiqcha yuk
+der Direktflug|der direktfluuk|to'g'ridan-to'g'ri reys
+der Zwischenstopp|der tsvishenshtop|oraliq qo'nish
+der Jetlag|der jetleg|jetlag (vaqt farqi charchog'i)
+die Zeitverschiebung|di tsaytfershiibung|vaqt farqi
+die Kreuzfahrt|di kroytsfaart|kruiz
+die Pauschalreise|di paushaalrayze|tayyor turpaket
+die Rundreise|di runtrayze|aylanma safar
+die Städtereise|di shteeterayze|shaharlar bo'ylab safar
+die Landkarte|di lantkarte|xarita
+die Altstadt|di altshtat|eski shahar
+der Brunnen|der brunnen|favvora; quduq
+`},
+{id:"b1uy", lv:"B1", icon:"🏘️", title:"Uy-joy va xizmatlar (B1)", t:`
+der Altbau|der altbau|eski bino
+der Neubau|der noybau|yangi bino
+die Kaltmiete|di kaltmiite|kommunal to'lovsiz ijara
+die Warmmiete|di varmmiite|kommunal to'lov bilan ijara
+die Wohngemeinschaft|di voongemaynshaft|birgalikda yashash (WG)
+der Mitbewohner|der mitbevoonor|xonadosh
+der Dachboden|der daxbooden|cherdak
+der Stecker|der shtekker|vilka (elektr)
+das Kabel|das kaabel|kabel
+die Glühbirne|di glüübirne|lampochka
+der Trockner|der trokner|quritgich
+staubsaugen|shtaupzaugen|changyutgichda tozalamoq
+den Müll trennen|den müll trennen|axlatni saralamoq
+der Abfall|der apfal|chiqindi
+die Kommode|di komoode|tortmali shkaf
+möbliert|möbliirt|mebelli
+renovieren|renoviiren|ta'mirlamoq
+streichen|shtrayxen|bo'yamoq (devor)
+tapezieren|tapetsiiren|gulqog'oz yopishtirmoq
+der Hammer|der hammer|bolg'a
+der Nagel|der naagel|mix
+die Schraube|di shraube|shurup, vint
+bohren|booren|parmalamoq
+der Klempner|der klempner|santexnik
+die Reinigung|di raynigung|kimyoviy tozalash
+der Schlüsseldienst|der shlüsseldiinst|qulf ochish xizmati
+die Nachbarin|di naxbaarin|qo'shni (ayol)
+die Diele|di diile|dahliz, yo'lak
+der Notausgang|der nootausgang|favqulodda chiqish
+der Rauchmelder|der rauxmelder|tutun signalizatori
+die Hausratversicherung|di hausraatferzixerung|uy-ro'zg'or sug'urtasi
+der Schimmel|der shimmel|mog'or
+feucht|foyxt|nam
+die Umgebung|di umgeebung|atrof-muhit
+der Vorort|der foorort|shahar chekkasi
+die Innenstadt|di innenshtat|shahar markazi
+das Reihenhaus|das rayenhaus|qator uylar
+die Eigentumswohnung|di aygentuumsvoonung|xususiy kvartira
+die Wohnfläche|di voonflexe|yashash maydoni
+der Grundriss|der gruntriss|reja-chizma
+der Makler|der maakler|rieltor
+die Provision|di provizioon|komissiya haqi
+die Einrichtung|di aynrixtung|jihozlar
+die Hausarbeit|di hausarbayt|uy ishlari
+bügeln|büügeln|dazmollamoq
+abwaschen|apvashen|idish yuvmoq
+wischen|vishen|artmoq
+lüften|lüften|shamollatmoq
+gießen|giisen|(gulga) suv quymoq
+die Wohnungssuche|di voonungszuuxe|kvartira qidirish
+die Wohnungsanzeige|di voonungsantsayge|kvartira e'loni
+die Einbauküche|di aynbauküxe|o'rnatilgan oshxona
+der Fußboden|der fuusbooden|pol
+der Schornstein|der shornshtayn|mo'ri
+die Fensterbank|di fensterbank|deraza tokchasi
+der Rollladen|der rollaaden|rolli darpardasi
+die Jalousie|di jaluzii|jalyuzi
+der Zaun|der tsaun|devor (panjara)
+der Abstellraum|der apshtelraum|omborxona
+das Bettlaken|das betlaaken|choyshab
+die Bettdecke|di betdekke|ko'rpa
+die Matratze|di matratse|matras
+die Vase|di vaaze|guldon
+der Rahmen|der raamen|ramka
+die Steckdosenleiste|di shtekdoozenlayste|uzaytirgich
+der Wasserschaden|der vassershaaden|suv toshqini zarari
+die Verstopfung|di fershtopfung|tiqilib qolish
+tropfen|tropfen|tomchilamoq
+undicht|undixt|oqadigan, teshik
+der Ventilator|der ventilaator|ventilyator
+der Föhn|der föön|fen
+die Fernbedienung|di fernbediinung|pult
+der Lappen|der lappen|latta
+das Waschmittel|das vashmittel|kir yuvish kukuni
+die Wäscheleine|di veshelayne|kir yoyadigan ip
+`},
+{id:"b1sogliq", lv:"B1", icon:"🩺", title:"Sog'liq (B1)", t:`
+allergisch gegen|alergish geegen|...ga allergiyasi bor
+rezeptpflichtig|retseptpflixtix|retsept bilan beriladigan
+die Arztpraxis|di artstpraksis|shifokor qabulxonasi
+der Augenarzt|der augenartst|ko'z shifokori
+der Kinderarzt|der kinderartst|bolalar shifokori
+der Notfall|der nootfal|favqulodda holat
+krankgeschrieben|krankgeshriiben|kasallik varaqasida
+die Behandlung|di behandlung|davolash
+die Diagnose|di diagnooze|tashxis
+das Symptom|das zümptoom|alomat
+die Narkose|di narkooze|narkoz
+die Impfung|di impfung|emlash
+impfen|impfen|emlamoq
+die Nebenwirkung|di neebenvirkung|nojo'ya ta'sir
+die Dosis|di doozis|doza
+einnehmen|aynneemen|(dori) ichmoq
+brechen|brexen|sindirmoq
+gebrochen|gebroxen|singan
+das Gelenk|das gelenk|bo'g'im
+der Darm|der darm|ichak
+die Leber|di leeber|jigar
+die Niere|di niire|buyrak
+das Gehirn|das gehirn|miya
+der Nerv|der nerf|asab
+die Entzündung|di enttsündung|yallig'lanish
+die Infektion|di infektsioon|infeksiya
+ansteckend|anshtekkent|yuqumli
+schwindlig|shvindlix|boshi aylanadigan
+erbrechen|erbrexen|qusmoq
+der Ausschlag|der ausshlaak|toshma
+jucken|yukken|qichishmoq
+die Schwellung|di shvellung|shish
+geschwollen|geshvollen|shishgan
+der Kreislauf|der krayslauf|qon aylanishi
+die Zuckerkrankheit|di tsukkerkrankhayt|qandli diabet
+chronisch|kroonish|surunkali
+die Schwangerschaft|di shvangershaft|homiladorlik
+die Geburt|di geburt|tug'ilish
+die Erschöpfung|di ershöpfung|holsizlik
+erschöpft|ershöpft|holdan toygan
+die Kur|di kuur|sanatoriyda davolanish
+die Reha|di reea|reabilitatsiya
+die Pflege|di pfleege|parvarish
+der Pfleger|der pfleeger|hamshira (erkak)
+der Patient|der patsient|bemor
+die Klinik|di kliinik|klinika
+das Pflegeheim|das pfleegehaym|qariyalar uyi
+der Rollstuhl|der rolshtuul|nogironlar aravachasi
+die Kontaktlinse|di kontaktlinze|kontakt linza
+das Hörgerät|das höörgereet|eshitish apparati
+die Füllung|di füllung|plomba
+das Röntgenbild|das röntgenbilt|rentgen surati
+der Ultraschall|der ultrashal|UZI
+die Blutprobe|di bluutproobe|qon tahlili
+schmerzen|shmertsen|og'rimoq
+sich übergeben|zix üübergeeben|qayt qilmoq
+heilen|haylen|tuzalmoq; davolamoq
+die Besserung|di besserung|tuzalish
+die Vorsorgeuntersuchung|di foorzorgeunterzuuxung|profilaktik tekshiruv
+die Überweisung zum Facharzt|di üübervayzung tsum faxartst|mutaxassisga yo'llanma
+der Bluttest|der bluuttest|qon testi
+der Puls|der puls|tomir urishi
+die Verdauung|di ferdauung|hazm qilish
+die Wirbelsäule|di virbelzoyle|umurtqa pog'onasi
+die Bandscheibe|di bantshaybe|umurtqalararo disk
+die Migräne|di migreene|migren
+das Asthma|das astma|astma
+der Heuschnupfen|der hoyshnupfen|pichan isitmasi (allergiya)
+die Physiotherapie|di füzioterapii|fizioterapiya
+die Massage|di masaaje|massaj
+die Therapie|di terapii|terapiya
+der Therapeut|der terapoyt|terapevt (psixoterapevt)
+die Depression|di depresioon|depressiya
+die Schlafstörung|di shlaafshtöörung|uyqu buzilishi
+das Übergewicht|das üübergevixt|ortiqcha vazn
+die Vorbeugung|di foorboygung|oldini olish
+vorbeugen|foorboygen|oldini olmoq
+das Immunsystem|das imuunzüsteem|immunitet tizimi
+der Erreger|der erreeger|qo'zg'atuvchi
+die Packungsbeilage|di pakkungsbaylaage|dori yo'riqnomasi
+`},
+{id:"b1pul", lv:"B1", icon:"💳", title:"Pul va iste'mol", t:`
+der Ausverkauf|der ausferkauf|sotib bitirish (arzon savdo)
+die Marke|di marke|brend; marka
+der Verbraucher|der ferbrauxer|iste'molchi
+die Kundin|di kundin|xaridor (ayol)
+der Kundenservice|der kundenzörvis|mijozlarga xizmat
+die Beschwerde|di beshveerde|shikoyat
+die Reklamation|di reklamatsioon|e'tiroz (tovar bo'yicha)
+bar bezahlen|baar betsaalen|naqd to'lamoq
+die EC-Karte|di eetsee-karte|bank kartasi
+das Girokonto|das jirokonto|joriy hisob
+eröffnen|eröffnen|ochmoq (hisob)
+abheben|apheeben|(puldan) yechib olmoq
+einzahlen|ayntsaalen|(hisobga) pul qo'ymoq
+der Kontoauszug|der kontoaustsuuk|hisob ko'chirmasi
+die Zinsen|di tsinzen|foizlar
+das Einkommen|das aynkommen|daromad
+die Ausgaben|di ausgaaben|xarajatlar
+die Kosten|di kosten|narx-xarajat
+das Sparkonto|das shpaarkonto|jamg'arma hisobi
+die Steuererklärung|di shtoyererkleerung|soliq deklaratsiyasi
+das Abonnement|das abonemang|obuna
+die Versandkosten|di ferzantkosten|yetkazish narxi
+der Onlineshop|der onlaynshop|internet do'kon
+der Warenkorb|der vaarenkorp|savatcha (internet do'konda)
+die Lieferzeit|di liifertsayt|yetkazish muddati
+sich lohnen|zix loonen|arzimoq, foyda keltirmoq
+gratis|graatis|tekin
+die Auswahl|di ausvaal|tanlov, assortiment
+anprobieren|anprobiiren|kiyib ko'rmoq
+gebraucht|gebrauxt|ishlatilgan
+neuwertig|noyveertix|yangidek
+der Gutschein|der guutshayn|sovg'a sertifikati, kupon
+der Wert|der veert|qiymat
+wertvoll|veertfol|qimmatbaho
+der Händler|der hendler|savdogar
+insgesamt|insgezamt|jami
+der Dollar|der dollar|dollar
+der Wechselkurs|der vekselkurs|valyuta kursi
+das Budget|das büdjee|byudjet
+eine Versicherung abschließen|ayne ferzixerung apshliisen|sug'urta qilmoq
+die Armut|di armuut|kambag'allik
+der Reichtum|der rayxtuum|boylik
+die Investition|di investitsioon|investitsiya
+die Aktie|di aktsie|aksiya
+die Börse|di börze|birja
+der Zins|der tsins|foiz (stavka)
+die Hypothek|di hüpoteek|ipoteka
+das Darlehen|das daarleeen|qarz, ssuda
+die Rate|di raate|bo'lib to'lash qismi
+in Raten zahlen|in raaten tsaalen|bo'lib to'lamoq
+der Dauerauftrag|der dauerauftraak|doimiy to'lov topshirig'i
+die Lastschrift|di lastshrift|avtomatik yechib olish
+das Online-Banking|das onlaynbenking|onlayn bank
+die Bankleitzahl|di banklayttsaal|bank kodi
+die IBAN|di iiban|IBAN (hisob raqami)
+die Inflation|di inflatsioon|inflyatsiya
+die Lebenshaltungskosten|di leebenshaltungskosten|turmush xarajatlari
+der Verdienst|der ferdiinst|topgan pul, ish haqi
+der Mindestlohn|der mindestloon|eng kam ish haqi
+die Abrechnung|di aprexnung|hisob-kitob
+die Mehrwertsteuer|di meerveertshtoyer|QQS
+inklusive|inkluziive|ichida, qo'shib hisoblanganda
+exklusive|eksluziive|qo'shilmagan holda
+der Pfand|der pfant|garov puli (shisha uchun)
+das Schnäppchen|das shnepxen|arzon topilma
+der Kaufvertrag|der kauffertraak|oldi-sotdi shartnomasi
+der Besitzer|der bezitser|egasi
+das Eigentum|das aygentuum|mulk
+verschuldet|fershuldet|qarzga botgan
+pleite|playte|kambag'al bo'lib qolgan (sinib ketgan)
+`},
+{id:"b1kichik", lv:"B1", icon:"🪢", title:"Bog'lovchi va iboralar (B1)", t:`
+allerdings|allerdings|ammo, albatta
+andererseits|andererzayts|boshqa tomondan
+einerseits|aynerzayts|bir tomondan
+anschließend|anshliisent|so'ngra
+auf jeden Fall|auf yeeden fal|har holda, albatta
+auf keinen Fall|auf kaynen fal|hech qachon, aslo
+ausgerechnet|ausgerexnet|aynan (kutilmaganda)
+außer|ausser|...dan tashqari
+bisher|bisheer|hozirgacha
+dabei|dabay|shu bilan birga
+dadurch|dadurx|shu tufayli
+dafür|dafüür|buning uchun
+dagegen|dageegen|bunga qarshi
+daher|daheer|shuning uchun
+damals|daamals|o'sha paytda
+darum|darum|shu sababdan
+dennoch|dennox|shunday bo'lsa-da
+deswegen|desveegen|shu sababli
+doch|dox|axir; baribir
+ebenfalls|eebenfals|xuddi shunday
+ehrlich gesagt|eerlix gezaakt|rostini aytsam
+ferner|ferner|bundan tashqari
+folglich|folklix|natijada
+irgendwann|irgentvan|qachondir
+irgendwie|irgentvii|qandaydir
+je ... desto|ye ... desto|qancha ... shuncha
+jedoch|yedox|biroq
+keineswegs|kaynesveeks|aslo
+nichtsdestotrotz|nixtsdestotrots|shunga qaramay
+ohnehin|oonehin|baribir, shundoq ham
+schließlich|shliislix|nihoyat; axir
+sobald|zobalt|...ishi bilan
+solange|zolange|...ekan, ...guncha
+sonst|zonst|aks holda
+sowieso|zovizoo|baribir
+stattdessen|shtattdessen|uning o'rniga
+um ... zu|um ... tsu|... uchun
+und zwar|unt tsvaar|aniqrog'i
+weshalb|vesshalp|nima uchun
+wieso|vizoo|nega
+womit|voomit|nima bilan
+zuletzt|tsuletst|oxirida
+zumindest|tsumindest|hech bo'lmaganda
+zwar ... aber|tsvaar ... aaber|to'g'ri ... lekin
+im Gegenteil|im geegentayl|aksincha
+im Allgemeinen|im algemaynen|umuman olganda
+im Grunde|im grunde|aslida, mohiyatan
+in der Regel|in der reegel|odatda
+vor allem|foor allem|eng avvalo
+unter anderem|unter anderem|jumladan
+meiner Meinung nach|mayner maynung naax|mening fikrimcha
+Ich bin der Meinung, dass ...|ix bin der maynung dass|Men ... degan fikrdaman
+Ich bin dafür.|ix bin dafüür|Men tarafdorman.
+Ich bin dagegen.|ix bin dageegen|Men qarshiman.
+Da hast du recht.|daa hast du rext|Bu yerda haqsan.
+Das stimmt nicht.|das shtimmt nixt|Bu to'g'ri emas.
+Das sehe ich anders.|das zeee ix anders|Men buni boshqacha ko'raman.
+Ich stimme dir zu.|ix shtimme diir tsuu|Senga qo'shilaman.
+Es kommt darauf an.|es kommt darauf an|Bu vaziyatga bog'liq.
+Es geht um ...|es geet um|Gap ... haqida
+Keine Ahnung.|kayne aanung|Bilmayman (xabarim yo'q).
+Na ja ...|na yaa|Xo'sh ... / Mayli ...
+Genau!|genau|Aynan!
+Stimmt.|shtimmt|To'g'ri.
+Moment mal!|moment maal|Bir daqiqa!
+Ich verstehe.|ix fershteee|Tushunaman.
+Kein Problem.|kayn probleem|Muammo yo'q.
+Viel Erfolg!|fiil erfolk|Omad!
+Ich drücke dir die Daumen.|ix drükke diir di daumen|Senga omad tilayman.
+Lass uns ...|las uns|Keling ... qilaylik
+Mach dir keine Sorgen.|max diir kayne zorgen|Xavotir olma.
+Das ist ja toll!|das ist yaa tol|Bu ajoyib-ku!
+Schade!|shaade|Afsus!
+Leider nicht.|layder nixt|Afsuski, yo'q.
+Ich bin mir nicht sicher.|ix bin miir nixt zixer|Aniq bilmayman.
+Ich habe es eilig.|ix haabe es aylix|Shoshyapman.
+Das freut mich.|das froyt mix|Bundan xursandman.
+Was meinst du?|vas maynst du|Nima deb o'ylaysan?
+Wie meinst du das?|vii maynst du das|Buni qanday ma'noda aytyapsan?
+Darf ich kurz stören?|darf ix kurts shtöören|Bir daqiqaga bezovta qilsam maylimi?
+`},
+{id:"b1ish", lv:"B1", icon:"📈", title:"Ish va iqtisodiyot (B1)", t:`
+der Abteilungsleiter|der aptaylungslayter|bo'lim boshlig'i
+der Arbeitsplatz|der arbaytsplats|ish joyi
+die Arbeitslosigkeit|di arbaytsloozixkayt|ishsizlik
+der Auszubildende|der austsuubildende|o'quvchi-shogird
+der Bewerber|der beverber|nomzod
+das Anschreiben|das anshrayben|qo'shimcha xat (ariza uchun)
+der Minijob|der minijob|qisqa ish (kam soatli)
+die Probezeit|di proobetsayt|sinov muddati
+der Arbeitsvertrag|der arbaytsfertraak|mehnat shartnomasi
+befristet|befristet|muddatli
+unbefristet|unbefristet|muddatsiz
+die Überstunden|di üübershtunden|qo'shimcha soatlar
+der Urlaubsanspruch|der urlaupsanshprux|ta'tilga bo'lgan huquq
+die Gehaltserhöhung|di gehaltserhööung|maosh oshishi
+brutto|brutto|soliqdan oldin (brutto)
+netto|netto|qo'lga (netto)
+die Beförderung|di beförderung|lavozimga ko'tarilish
+die Kenntnisse|di kentnisse|bilimlar
+die Qualifikation|di kvalifikatsioon|malaka
+die Weiterbildung|di vayterbildung|malaka oshirish
+die Fortbildung|di fortbildung|malaka oshirish kursi
+die Sitzung|di zitsung|yig'ilish
+der Termindruck|der termiindruk|vaqt bosimi
+der Vorgesetzte|der foorgezetste|rahbar (bevosita)
+die Geschäftsführung|di geshefsfüürung|rahbariyat
+die Industrie|di industrii|sanoat
+die Wirtschaft|di virtshaft|iqtisodiyot
+wirtschaftlich|virtshaftlix|iqtisodiy
+der Umsatz|der umzats|aylanma, savdo hajmi
+der Gewinn|der gevinn|foyda
+der Verlust|der ferlust|zarar
+der Export|der eksport|eksport
+der Import|der import|import
+der Handel|der handel|savdo
+der Konkurrent|der konkurrent|raqobatchi
+die Konkurrenz|di konkurrents|raqobat
+der Vertrieb|der fertriip|sotuv bo'limi
+der Kundenkontakt|der kundenkontakt|mijozlar bilan aloqa
+die Buchhaltung|di buuxhaltung|buxgalteriya
+die Personalabteilung|di perzonaalaptaylung|kadrlar bo'limi
+der Kopierer|der kopiirer|nusxa ko'chirish apparati
+die Gewerkschaft|di geverkshaft|kasaba uyushmasi
+streiken|shtrayken|ish tashlamoq
+der Selbstständige|der zelpstshtendige|o'zini o'zi band qilgan
+die Gründung|di gründung|tashkil etish
+der Gründer|der gründer|asoschi
+der Dienstwagen|der diinstvaagen|xizmat mashinasi
+pünktlich sein|pünktlix zayn|o'z vaqtida bo'lmoq
+sich krankmelden|zix krankmelden|kasalligini ma'lum qilmoq
+beruflich|beruuflix|kasbiy
+die Pflegekraft|di pfleegekraft|parvarishchi
+der Erzieher|der ertsiier|tarbiyachi
+der Berater|der beraater|maslahatchi
+der Dolmetscher|der dolmetsher|og'zaki tarjimon
+der Übersetzer|der üüberzetser|tarjimon
+der Angestellte|der angeshtelte|xizmatchi
+der Lehrling|der leerling|shogird
+die Leistung|di laystung|natija, unumdorlik
+der Misserfolg|der misserfolk|muvaffaqiyatsizlik
+verhandeln|ferhandeln|muzokara qilmoq
+die Verhandlung|di ferhandlung|muzokara
+in Rente gehen|in rente geeen|nafaqaga chiqmoq
+die Arbeitsbedingungen|di arbaytsbedingungen|mehnat sharoitlari
+das Betriebsklima|das betriipskliima|jamoadagi muhit
+die Bewerbungsunterlagen|di beverbungsunterlaagen|ariza hujjatlari
+der Berufseinstieg|der beruufsaynshtiik|kasbga birinchi qadam
+die Berufserfahrung|di beruufserfaarung|ish tajribasi
+die Elternzeit|di elterntsayt|bola parvarishi ta'tili
+der Mutterschutz|der muttershuts|onalikni muhofaza qilish
+die Gleitzeit|di glayttsayt|egiluvchan ish vaqti
+das Homeoffice|das hoomofis|uydan ishlash
+die Messe|di messe|ko'rgazma-yarmarka
+die Niederlassung|di niiderlassung|filial
+die Filiale|di filiaale|do'kon/bank filiali
+das Personal|das perzonaal|xodimlar
+die Produktivität|di produktiviteet|unumdorlik
+das Protokoll|das protokol|bayonnoma
+die Qualitätskontrolle|di kvaliteetskontrolle|sifat nazorati
+der Rechnungsbetrag|der rexnungsbetraak|hisob summasi
+die Tagesordnung|di taagesordnung|kun tartibi
+der Umsatzrückgang|der umzatsrükgang|savdoning pasayishi
+der Vertreter|der fertreeter|vakil
+der Zeitplan|der tsaytplaan|ish rejasi (jadval)
+die Zielgruppe|di tsiilgruppe|maqsadli auditoriya
+die Zusage|di tsuuzaage|rozilik javobi
+die Absage|di apzaage|rad javobi
+die Gehaltsabrechnung|di gehaltsaprexnung|maosh varaqasi
+die Krankenversicherung|di krankenferzixerung|tibbiy sug'urta
+die Rentenversicherung|di rentenferzixerung|pensiya sug'urtasi
+die Arbeitslosenversicherung|di arbaytsloozenferzixerung|ishsizlik sug'urtasi
+der Lohnzettel|der loontsettel|maosh qog'ozi
+der Werkvertrag|der verkfertraak|pudrat shartnomasi
+der Ruhestand|der ruueshtant|nafaqa (iste'fo)
+`},
+{id:"b1talim", lv:"B1", icon:"🔬", title:"Ta'lim va fan (B1)", t:`
+die Abschlussprüfung|di apshlussprüüfung|bitiruv imtihoni
+das Abitur|das abituur|o'rta maktab bitiruv imtihoni (Germaniyada)
+die Berufsschule|di beruufsshuule|kasb-hunar maktabi
+die Fakultät|di fakulteet|fakultet
+der Studiengang|der shtuudiengang|yo'nalish (o'qish)
+die Abschlussarbeit|di apshlussarbayt|bitiruv ishi
+der Bachelor|der bechelor|bakalavr
+der Master|der master|magistr
+die Doktorarbeit|di doktorarbayt|dissertatsiya
+die Studiengebühr|di shtuudiengebüür|o'qish to'lovi
+die Einschreibung|di aynshraybung|o'qishga yozilish
+die Zulassung|di tsuulassung|qabul (ruxsat)
+die Bewerbungsfrist|di beverbungsfrist|hujjat topshirish muddati
+das Niveau|das nivoo|daraja
+die Stufe|di shtuufe|bosqich
+durchfallen|durxfallen|(imtihondan) yiqilmoq
+die Ausnahme|di ausnaame|istisno
+der Begriff|der begriff|tushuncha, atama
+der Ausdruck|der ausdruk|ibora
+der Wortschatz|der vortshats|so'z boyligi
+fließend|fliisent|ravon
+der Absatz|der apzats|xatboshi
+die Zusammenfassung|di tsuzammenfassung|xulosa, qisqacha mazmun
+zusammenfassen|tsuzammenfassen|qisqacha bayon qilmoq
+das Referat|das referaat|referat
+der Vortrag|der foortraak|ma'ruza
+die Diskussion|di diskusioon|munozara
+das Argument|das argument|dalil
+die Wissenschaft|di vissenshaft|fan
+der Wissenschaftler|der vissenshaftler|olim
+wissenschaftlich|vissenshaftlix|ilmiy
+die Forschung|di forshung|tadqiqot
+forschen|forshen|tadqiq qilmoq
+das Experiment|das eksperiment|tajriba (ilmiy)
+das Labor|das laboor|laboratoriya
+die Theorie|di teorii|nazariya
+die Erfindung|di erfindung|ixtiro
+die Entdeckung|di entdekkung|kashfiyot
+die Studie|di shtuudie|tadqiqot ishi
+die Statistik|di shtatistik|statistika
+die Mathematik|di matematik|matematika
+die Physik|di füziik|fizika
+die Chemie|di xemii|kimyo
+die Biologie|di biologii|biologiya
+die Erdkunde|di eertkunde|geografiya
+die Philosophie|di filozofii|falsafa
+die Psychologie|di psüxologii|psixologiya
+die Medizin|di meditsiin|tibbiyot
+die Informatik|di informaatik|informatika
+das Fach|das fax|fan (o'quv)
+das Lieblingsfach|das liiplingsfax|sevimli fan
+die Klassenarbeit|di klassenarbayt|nazorat ishi
+die Hausaufgaben|di hausaufgaaben|uy vazifasi
+gebildet|gebildet|bilimli
+die Kenntnis|di kentnis|bilim
+das Gedächtnis|das gedextnis|xotira
+die Konzentration|di kontsentratsioon|diqqat
+die Motivation|di motivatsioon|motivatsiya
+motiviert|motiviirt|motivatsiyali
+der Fortschritt|der fortshritt|taraqqiyot, yutuq
+die Prüfungsangst|di prüüfungsangst|imtihon qo'rquvi
+die Volkshochschule|di folkshoxshuule|xalq universiteti (kurslar)
+die Lernmethode|di lernmetoode|o'qish usuli
+der Lernerfolg|der lernerfolk|o'qishdagi muvaffaqiyat
+die Lerngruppe|di lerngruppe|o'quv guruhi
+der Klassenkamerad|der klassenkameraat|sinfdosh
+der Kommilitone|der kommilitoone|kursdosh
+das Studentenwohnheim|das shtudentenvoonhaym|talabalar yotoqxonasi
+die Mensa|di menza|talabalar oshxonasi
+der Hörsaal|der höörzaal|auditoriya
+die Anwesenheit|di anveezenhayt|davomat
+anwesend|anveezent|hozir (darsda)
+abwesend|apveezent|yo'q (darsda)
+das Schuljahr|das shuulyaar|o'quv yili
+die Klassenfahrt|di klassenfaart|sinf sayohati
+der Elternabend|der elternaabent|ota-onalar majlisi
+die Schulpflicht|di shuulpflixt|majburiy ta'lim
+der Schulabschluss|der shuulapshluss|maktabni bitirish
+die Nachhilfe|di naaxhilfe|repetitorlik
+die Lernplattform|di lernplattform|o'quv platformasi
+der Lesestoff|der leezeshtof|o'qish uchun material
+die Fachsprache|di faxshpraaxe|soha tili (terminologiya)
+die Abkürzung|di apkürtsung|qisqartma
+die Silbe|di zilbe|bo'g'in
+der Satzbau|der zatsbau|gap tuzilishi
+das Verb|das verp|fe'l
+das Nomen|das noomen|ot
+das Adjektiv|das adyektiif|sifat
+die Endung|di endung|qo'shimcha (oxiri)
+die Vergangenheitsform|di fergangenhaytsform|o'tgan zamon shakli
+`},
+{id:"b1ofis", lv:"B1", icon:"🏛️", title:"Rasmiy ishlar va idoralar", t:`
+das Bürgeramt|das bürgeramt|fuqarolar idorasi
+die Ausländerbehörde|di auslenderbehöörde|migratsiya idorasi
+das Standesamt|das shtandesamt|FHDYo (ZAGS)
+das Finanzamt|das finantsamt|soliq idorasi
+das Jobcenter|das jobsenter|ish markazi
+einen Antrag stellen|aynen antraak shtellen|ariza bermoq
+beantragen|beantraagen|ariza bilan so'ramoq
+die Unterlagen|di unterlaagen|hujjatlar
+die Bestätigung|di beshteetigung|tasdiqnoma
+die Genehmigung|di geneemigung|ruxsatnoma
+die Aufenthaltserlaubnis|di aufenthaltserlaupnis|yashash uchun ruxsatnoma
+die Arbeitserlaubnis|di arbaytserlaupnis|ishlash uchun ruxsatnoma
+der Personalausweis|der perzonaalausvays|shaxsiy guvohnoma
+die Geburtsurkunde|di geburtsuurkunde|tug'ilganlik haqida guvohnoma
+die Heiratsurkunde|di hayraatsuurkunde|nikoh guvohnomasi
+beglaubigt|beglaubixt|tasdiqlangan (notarial)
+die Übersetzung|di üüberzetsung|tarjima
+das Passfoto|das passfoto|pasport surati
+ungültig|ungültix|amal qilmaydigan
+abgelaufen|apgelaufen|muddati o'tgan
+verlängern|ferlengern|uzaytirmoq
+die Verlängerung|di ferlengerung|uzaytirish
+der Wohnsitz|der voonzits|doimiy yashash joyi
+die Nationalität|di natsionaliteet|millat; fuqarolik
+der Sachbearbeiter|der zaxbearbayter|ish yurituvchi xodim
+die Wartenummer|di vartenummer|navbat raqami
+die Auskunft|di auskunft|ma'lumot
+die Beratung|di beraatung|maslahat
+die Beratungsstelle|di beraatungsshtelle|maslahat markazi
+das Gesetz|das gezets|qonun
+das Recht|das rext|huquq
+das Recht auf|das rext auf|...ga huquq
+die Pflicht|di pflixt|majburiyat
+die Vorschrift|di foorshrift|ko'rsatma, qoida
+der Richter|der rixter|sudya
+der Rechtsanwalt|der rextsanvalt|advokat
+die Versicherungsnummer|di ferzixerungsnummer|sug'urta raqami
+die Steuernummer|di shtoyernummer|soliq raqami
+das Kindergeld|das kindergelt|bola puli
+das Elterngeld|das elterngelt|ota-ona nafaqasi
+die Sozialhilfe|di zotsiaalhilfe|ijtimoiy yordam
+das Wohngeld|das voongelt|uy-joy subsidiyasi
+der Integrationskurs|der integratsioonskurs|integratsiya kursi
+die Einbürgerung|di aynbürgerung|fuqarolik olish
+das Schreiben|das shrayben|rasmiy xat
+der Bescheid|der beshayt|qaror (rasmiy javob)
+der Widerspruch|der viidershprux|e'tiroz (rasmiy)
+die Mahnung|di maanung|eslatma (to'lov haqida)
+die Anlage|di anlaage|ilova
+der Betreff|der betreff|mavzu (xatda)
+Sehr geehrte Damen und Herren|zeer geeerte daamen unt herren|Hurmatli xonimlar va janoblar
+Mit freundlichen Grüßen|mit froyntlixen grüüsen|Hurmat bilan
+das Einschreiben|das aynshrayben|buyurtma xat
+vorlegen|foorleegen|taqdim etmoq
+einreichen|aynrayxen|topshirmoq (hujjat)
+bearbeiten|bearbayten|ko'rib chiqmoq (ariza)
+genehmigen|geneemigen|ruxsat bermoq
+`},
+{id:"b1media", lv:"B1", icon:"🌐", title:"Media va texnologiya (B1)", t:`
+die Schlagzeile|di shlaaktsayle|sarlavha
+die Presse|di presse|matbuot
+das Interview|das interviu|intervyu
+der Sender|der zender|telekanal
+das Fernsehen|das fernzeeen|televidenie
+der Rundfunk|der runtfunk|radioeshittirish
+die Medien|di meedien|ommaviy axborot vositalari
+die sozialen Medien|di zotsiaalen meedien|ijtimoiy tarmoqlar
+das Netzwerk|das netsverk|tarmoq
+die Homepage|di hoompeyj|bosh sahifa (sayt)
+kopieren|kopiiren|nusxalamoq
+einfügen|aynfüügen|qo'ymoq (nusxani)
+ausdrucken|ausdrukken|chop etmoq
+aufladen|auflaaden|zaryadlamoq
+die Anwendung|di anvendung|dastur, ilova
+installieren|instaliiren|o'rnatmoq
+aktualisieren|aktualiziiren|yangilamoq
+das Update|das apdeyt|yangilanish
+sich einloggen|zix aynlogen|tizimga kirmoq
+sich ausloggen|zix auslogen|tizimdan chiqmoq
+das Profil|das profiil|profil
+der Nutzer|der nutser|foydalanuvchi
+die Daten|di daaten|ma'lumotlar
+der Datenschutz|der daatenshuts|ma'lumotlar himoyasi
+die Privatsphäre|di privaatsfeere|shaxsiy hayot
+die Sicherheit|di zixerhayt|xavfsizlik
+der Virus|der viirus|virus
+der Hacker|der hekker|xaker
+der Empfang|der empfang|aloqa signali
+Der Akku ist leer.|der akku ist leer|Akkumulyator tugadi.
+der Anhang|der anhang|ilova (xatga)
+weiterleiten|vayterlayten|yuborib yubormoq (forward)
+eine Nachricht schicken|ayne naaxrixt shikken|xabar yubormoq
+der Chat|der chet|chat
+posten|posten|joylamoq (post)
+der Beitrag|der baytraak|post, maqola
+liken|layken|layk bosmoq
+der Kommentar|der komentaar|izoh
+kommentieren|komentiiren|izoh qoldirmoq
+folgen|folgen|kuzatmoq (obuna bo'lmoq)
+der Follower|der follower|obunachi
+der Podcast|der podkast|podkast
+streamen|striimen|striming qilmoq
+die Suchmaschine|di zuuxmashiine|qidiruv tizimi
+googeln|guugeln|internetdan qidirmoq
+die Quelle|di kvelle|manba
+die Falschmeldung|di falshmeldung|soxta xabar
+die Technologie|di texnologii|texnologiya
+die Digitalisierung|di digitaliziirung|raqamlashtirish
+die künstliche Intelligenz|di künstlixe inteligents|sun'iy intellekt
+der Roboter|der robooter|robot
+bedienen|bediinen|boshqarmoq (qurilmani)
+die Bedienungsanleitung|di bediinungsanlaytung|foydalanish yo'riqnomasi
+veraltet|feraltet|eskirgan
+die Videokonferenz|di viideokonferents|videokonferensiya
+das Mikrofon|das mikrofoon|mikrofon
+der Lautsprecher|der lautshprexer|karnay
+die Kopfhörer|di kopfhöörer|quloqchinlar
+der Bildschirmschoner|der biltshirmshooner|ekran pardasi
+der Browser|der brauzer|brauzer
+die Cloud|di klaut|bulut (xotira)
+der Speicher|der shpayxer|xotira
+die Festplatte|di festplatte|qattiq disk
+der USB-Stick|der uuesbee-shtik|fleshka
+die Software|di softveer|dastur ta'minoti
+die Hardware|di haardveer|apparat ta'minoti
+das Betriebssystem|das betriipszüsteem|operatsion tizim
+die Einstellungen|di aynshtellungen|sozlamalar
+der Benutzername|der benutsernaame|foydalanuvchi nomi
+die Zwei-Faktor-Authentifizierung|di tsvay-faktor-autentifitsiirung|ikki bosqichli tekshiruv
+der Spam|der spem|spam
+der Newsletter|der nyuuzletter|axborot byulleteni
+das Abo|das abo|obuna
+die Reichweite|di rayxvayte|qamrov
+der Influencer|der influenser|influenser
+der Kanal|der kanaal|kanal
+den Bildschirm teilen|den biltshirm taylen|ekranni ulashmoq
+die Tastenkombination|di tastenkombinatsioon|tugmalar birikmasi
+der Akkustand|der akkushtant|zaryad darajasi
+der Flugmodus|der fluukmoodus|parvoz rejimi
+der Klingelton|der klingeltoon|qo'ng'iroq ohangi
+die Sprachnachricht|di shpraaxnaaxrixt|ovozli xabar
+die Mailbox|di meylboks|ovozli pochta
+die Prepaidkarte|di priipeydkarte|oldindan to'lanadigan SIM-karta
+der Handyvertrag|der hendifertraak|mobil aloqa shartnomasi
+das Datenvolumen|das daatenvoluumen|internet trafigi
+`},
+{id:"b1jamiyat", lv:"B1", icon:"🗳️", title:"Jamiyat va siyosat", t:`
+die Gesellschaft|di gezelshaft|jamiyat
+gesellschaftlich|gezelshaftlix|ijtimoiy
+der Staat|der shtaat|davlat
+staatlich|shtaatlix|davlat (sifat)
+die Regierung|di regiirung|hukumat
+der Präsident|der prezident|prezident
+der Minister|der minister|vazir
+der Bundeskanzler|der bundeskantsler|federal kansler
+das Parlament|das parlament|parlament
+der Bundestag|der bundestaak|Bundestag (Germaniya parlamenti)
+die Partei|di partay|partiya
+der Politiker|der politiker|siyosatchi
+die Politik|di politiik|siyosat
+politisch|politish|siyosiy
+die Wahl|di vaal|saylov
+abstimmen|apshtimmen|ovoz bermoq
+die Demokratie|di demokratii|demokratiya
+demokratisch|demokraatish|demokratik
+die Freiheit|di frayhayt|erkinlik
+die Meinungsfreiheit|di maynungsfrayhayt|so'z erkinligi
+die Gleichberechtigung|di glayxberextigung|teng huquqlilik
+die Menschenrechte|di menshenrexte|inson huquqlari
+die Verfassung|di ferfassung|konstitutsiya
+die Bürgerinitiative|di bürgerinitsiatiive|fuqarolar tashabbusi
+die Demonstration|di demonstratsioon|namoyish
+protestieren|protestiiren|norozilik bildirmoq
+der Krieg|der kriik|urush
+der Frieden|der friiden|tinchlik
+die Armee|di armee|armiya
+die Gefahr|di gefaar|xavf
+das Verbrechen|das ferbrexen|jinoyat
+der Verbrecher|der ferbrexer|jinoyatchi
+der Dieb|der diip|o'g'ri
+der Diebstahl|der diipshtaal|o'g'irlik
+stehlen|shteelen|o'g'irlamoq
+das Gefängnis|das gefengnis|qamoqxona
+die Gerechtigkeit|di gerextixkayt|adolat
+die Ungerechtigkeit|di ungerextixkayt|adolatsizlik
+die Korruption|di koruptsioon|korrupsiya
+die Migration|di migratsioon|migratsiya
+der Migrant|der migrant|migrant
+der Flüchtling|der flüxtling|qochqin
+die Integration|di integratsioon|integratsiya
+die Herkunft|di heerkunft|kelib chiqish
+das Heimweh|das haymvee|vatan sog'inchi
+die Kultur|di kultuur|madaniyat
+die Tradition|di traditsioon|an'ana
+traditionell|traditsionel|an'anaviy
+die Religion|di religioon|din
+religiös|religiöös|diniy
+die Sitte|di zitte|odat, urf
+das Vorurteil|das foorurtayl|xurofot, noto'g'ri tasavvur
+die Toleranz|di tolerants|bag'rikenglik
+die Rolle|di rolle|rol
+die Gleichheit|di glayxhayt|tenglik
+die Mehrheit|di meerhayt|ko'pchilik
+die Minderheit|di minderhayt|ozchilik
+die Öffentlichkeit|di öffentlixkayt|jamoatchilik
+der Bürgermeister|der bürgermayster|shahar meri
+die Gemeinde|di gemaynde|jamoa, mahalla
+die Stadtverwaltung|di shtatferwaltung|shahar ma'muriyati
+das Bundesland|das bundeslant|federal yer (viloyat)
+die Europäische Union|di oyropeeishe unioon|Yevropa Ittifoqi
+die Beziehungen|di betsiiungen|munosabatlar
+die Zusammenarbeit|di tsuzammenarbayt|hamkorlik
+die Entwicklung|di entvikklung|rivojlanish
+die Krise|di kriize|inqiroz
+die Entscheidung|di entshaydung|qaror
+die Reform|di reform|islohot
+die Veränderung|di ferenderung|o'zgarish
+historisch|histoorish|tarixiy
+die Epoche|di epoxe|davr
+die Organisation|di organizatsioon|tashkilot
+das Ehrenamt|das eerenamt|ko'ngilli ish
+ehrenamtlich|eerenamtlix|ko'ngilli (ravishda)
+spenden|shpenden|xayriya qilmoq
+die Spende|di shpende|xayriya
+die Solidarität|di zolidariteet|birdamlik
+die Umfrage|di umfraage|so'rovnoma
+die Abstimmung|di apshtimmung|ovoz berish
+der Abgeordnete|der apgeordnete|deputat
+die Opposition|di opozitsioon|muxolifat
+der Kandidat|der kandidaat|nomzod
+der Wahlkampf|der vaalkampf|saylov kampaniyasi
+das Wahlrecht|das vaalrext|saylov huquqi
+die Behinderung|di behinderung|nogironlik
+die Chancengleichheit|di shangsenglayxhayt|imkoniyatlar tengligi
+die Diskriminierung|di diskriminiirung|kamsitish
+der Rassismus|der rasismus|irqchilik
+die Obdachlosigkeit|di oopdaxloozixkayt|uysizlik
+obdachlos|oopdaxloos|uysiz
+die Sozialversicherung|di zotsiaalferzixerung|ijtimoiy sug'urta
+der Wohlstand|der voolshtant|farovonlik
+die Globalisierung|di globaliziirung|globallashuv
+`},
+{id:"b1tabiat", lv:"B1", icon:"🌿", title:"Atrof-muhit va tabiat (B1)", t:`
+umweltfreundlich|umveltfroyntlix|ekologik toza
+umweltschädlich|umveltsheedlix|atrof-muhitga zararli
+die Umweltverschmutzung|di umveltfershmutsung|atrof-muhit ifloslanishi
+verschmutzen|fershmutsen|ifloslantirmoq
+der Klimawandel|der kliimavandel|iqlim o'zgarishi
+die Erderwärmung|di eerterwermung|global isish
+die Luftverschmutzung|di luftfershmutsung|havo ifloslanishi
+das Abgas|das apgaas|chiqindi gaz
+das Recycling|das risayking|qayta ishlash
+die Verpackung|di ferpakkung|qadoq
+die Plastiktüte|di plastiktüüte|plastik paket
+die Solarenergie|di zolaarenergii|quyosh energiyasi
+die Windenergie|di vintenergii|shamol energiyasi
+das Kraftwerk|das kraftverk|elektr stansiyasi
+das Atomkraftwerk|das atoomkraftverk|atom elektr stansiyasi
+erneuerbar|ernoyerbaar|qayta tiklanadigan
+Strom sparen|shtroom shpaaren|elektr tejamoq
+der Verbrauch|der ferbraux|iste'mol
+die Ressource|di resurse|resurs
+das Trinkwasser|das trinkvasser|ichimlik suvi
+der Naturschutz|der natuurshuts|tabiatni muhofaza qilish
+das Naturschutzgebiet|das natuurshutsgebiit|qo'riqxona
+der Felsen|der felzen|qoya
+das Gebirge|das gebirge|tog' tizmasi
+der Ozean|der ootseaan|okean
+die Steppe|di shteppe|dasht
+das Insekt|das inzekt|hasharot
+aussterben|ausshterben|qirilib ketmoq
+bedroht|bedroot|xavf ostidagi
+der Frost|der frost|ayoz
+die Trockenheit|di trokkenhayt|qurg'oqchilik
+die Überschwemmung|di üübershvemmung|suv toshqini
+das Erdbeben|das eertbeeben|zilzila
+die Katastrophe|di katastroofe|falokat
+regnerisch|reegnerish|yomg'irli
+die Ernte|di ernte|hosil
+die Landwirtschaft|di lantvirtshaft|qishloq xo'jaligi
+bio|bio|organik
+die Nachhaltigkeit|di naaxhaltixkayt|barqarorlik
+der Kontinent|der kontinent|qit'a
+die Küstenregion|di küstenregioon|qirg'oq hududi
+die Halbinsel|di halpinzel|yarim orol
+der Vulkan|der vulkaan|vulqon
+die Höhle|di hööle|g'or
+der Gletscher|der gletsher|muzlik
+der Wasserfall|der vasserfal|sharshara
+der Bach|der bax|soy
+die Oase|di oaaze|voha
+der Kaktus|der kaktus|kaktus
+der Strauch|der shtraux|buta
+die Wurzel|di vurtsel|ildiz
+der Zweig|der tsvayk|novda
+die Blüte|di blüüte|gul (daraxtniki)
+die Frucht|di fruxt|meva
+der Samen|der zaamen|urug'
+die Tanne|di tanne|archa
+die Eiche|di ayxe|eman
+die Rose|di rooze|atirgul
+die Tulpe|di tulpe|lola
+das Reh|das ree|kiyik
+der Adler|der aadler|burgut
+die Taube|di taube|kaptar
+die Ameise|di aamayze|chumoli
+der Schmetterling|der shmetterling|kapalak
+der Frosch|der frosh|qurbaqa
+`},
+{id:"b1madaniyat", lv:"B1", icon:"🎨", title:"Madaniyat, sport va hordiq", t:`
+die Galerie|di galerii|galereya
+das Kunstwerk|das kunstverk|san'at asari
+das Gemälde|das gemeelde|surat (bo'yoqli)
+die Skulptur|di skulptuur|haykal
+das Theaterstück|das teaatershtük|spektakl
+die Aufführung|di auffüürung|sahnalashtirish
+die Bühne|di büüne|sahna
+das Publikum|das puublikum|tomoshabinlar
+der Applaus|der aplaus|qarsak
+die Oper|di ooper|opera
+das Orchester|das orkester|orkestr
+die Geige|di gayge|skripka
+der Kinofilm|der kiinofilm|kinofilm
+der Regisseur|der rejisöör|rejissyor
+der Schriftsteller|der shriftshteller|yozuvchi
+die Literatur|di literatuur|adabiyot
+die Komödie|di komöödie|komediya
+der Bestseller|der bestseller|bestseller
+die Kritik|di kritiik|tanqid; taqriz
+der Zeitvertreib|der tsaytfertrayp|vaqt o'tkazish
+basteln|basteln|qo'lda yasamoq
+stricken|shtrikken|to'qimoq
+klettern|kletern|toqqa chiqmoq
+angeln|angeln|baliq ovlamoq
+campen|kempen|chodirda dam olmoq
+der Tanz|der tants|raqs
+das Brettspiel|das bretshpiil|stol o'yini
+die Sportart|di shportaart|sport turi
+der Spieler|der shpiiler|o'yinchi
+der Wettkampf|der vetkampf|musobaqa
+die Meisterschaft|di maystershaft|chempionat
+der Sieger|der ziiger|g'olib
+Rad fahren|raat faaren|velosiped haydamoq
+Ski fahren|shii faaren|chang'i uchmoq
+Weihnachten|vaynaxten|Rojdestvo
+Ostern|oostern|Pasxa
+Silvester|zilvester|Yangi yil kechasi
+der Brauch|der braux|odat
+die Unterhaltung|di unterhaltung|ko'ngilochar narsa; suhbat
+sich langweilen|zix langvaylen|zerikmoq
+unterhaltsam|unterhaltzaam|qiziqarli, ko'ngilochar
+das Abenteuer|das aabentoyer|sarguzasht
+die Leidenschaft|di laydenshaft|ishtiyoq
+die Sammlung|di zammlung|kolleksiya
+die Fernsehserie|di fernzeezeerie|teleserial
+die Folge|di folge|qism (serial)
+der Zeichentrickfilm|der tsayxentrikfilm|multfilm
+der Dokumentarfilm|der dokumentaarfilm|hujjatli film
+der Untertitel|der untertiitel|subtitr
+die Handlung|di handlung|syujet
+die Hauptfigur|di hauptfiguur|bosh qahramon
+der Held|der helt|qahramon
+das Märchen|das meerxen|ertak
+die Sage|di zaage|afsona
+der Dichter|der dixter|shoir
+der Autor|der autor|muallif
+der Verlag|der ferlaak|nashriyot
+die Buchhandlung|di buuxhandlung|kitob do'koni
+der Comic|der komik|komiks
+das Kapitel|das kapitel|bob
+die Bühnenshow|di büünenshoo|sahna shousi
+der Zirkus|der tsirkus|sirk
+der Freizeitpark|der fraytsaytpark|attraksionlar parki
+das Volksfest|das folksfest|xalq sayli
+der Karneval|der karneval|karnaval
+der Ramadan|der ramadaan|Ramazon
+das Opferfest|das opferfest|Qurbon hayit
+das Zuckerfest|das tsukkerfest|Ramazon hayiti
+das Neujahrsfest|das noyyaarsfest|Yangi yil bayrami
+die Hochzeitsfeier|di hoxtsaytsfayer|to'y bazmi
+der Gastgeber|der gastgeeber|mezbon
+der Wettbewerb|der vetbeverp|tanlov
+der Pokal|der pokaal|kubok
+die Medaille|di medalye|medal
+der Rekord|der rekort|rekord
+der Schiedsrichter|der shiitsrixter|hakam
+das Spielfeld|das shpiilfelt|o'yin maydoni
+die Halbzeit|di halptsayt|bo'lim (o'yin)
+unentschieden|unentshiiden|durang
+der Zuschauer|der tsuushauer|tomoshabin
+die Fitness|di fitness|fitnes
+die Ausdauer|di ausdauer|chidamlilik
+die Kraft|di kraft|kuch
+der Marathon|der maraton|marafon
+das Turnier|das turniir|turnir
+`},
+{id:"b1abstrakt", lv:"B1", icon:"💡", title:"Mavhum tushunchalar", t:`
+der Ablauf|der aplauf|jarayon
+die Absicht|di apzixt|niyat
+die Ahnung|di aanung|tasavvur
+der Anlass|der anlass|sabab, bahona
+der Anspruch|der anshprux|da'vo, talab
+die Anstrengung|di anshtrengung|kuch-g'ayrat
+die Art und Weise|di aart unt vayze|usul, tarz
+der Aspekt|der aspekt|jihat
+der Aufwand|der aufvant|sarf-xarajat, mehnat
+die Aussage|di auszaage|bayonot
+die Auswirkung|di ausvirkung|ta'sir, oqibat
+die Bedingung|di bedingung|shart
+das Bedürfnis|das bedürfnis|ehtiyoj
+die Belastung|di belastung|yuk, bosim
+die Bemerkung|di bemerkung|izoh, mulohaza
+der Bereich|der berayx|soha
+die Beschreibung|di beshraybung|tasvir
+der Beweis|der bevays|dalil, isbot
+die Bewertung|di bevertung|baho
+das Bewusstsein|das bevusstzayn|ong
+der Bezug|der betsuuk|aloqadorlik
+die Chance|di shangse|imkoniyat
+der Eindruck|der ayndruk|taassurot
+der Einfluss|der aynfluss|ta'sir
+die Einstellung|di aynshtellung|munosabat, nuqtai nazar
+die Einzelheit|di ayntselhayt|tafsilot
+die Empfehlung|di empfeelung|tavsiya
+das Ereignis|das eraygnis|voqea
+die Erkenntnis|di erkentnis|anglash, xulosa
+die Erlaubnis|di erlaupnis|ruxsat
+die Erwartung|di ervartung|kutilma
+die Forderung|di forderung|talab
+der Gedanke|der gedanke|fikr
+der Gegensatz|der geegenzats|qarama-qarshilik
+die Grundlage|di gruntlaage|asos
+die Haltung|di haltung|munosabat, pozitsiya
+der Hinweis|der hinvays|ko'rsatma, ishora
+das Ideal|das ideaal|ideal
+der Irrtum|der irtuum|adashish
+der Kreis|der krays|doira
+der Maßstab|der maasshtaap|mezon
+die Maßnahme|di maasnaame|chora
+die Methode|di metoode|usul
+das Motiv|das motiif|sabab, motiv
+die Not|di noot|muhtojlik
+der Nutzen|der nutsen|foyda
+der Plan|der plaan|reja
+der Prozess|der protsess|jarayon; sud jarayoni
+der Punkt|der punkt|nuqta, band
+die Rede|di reede|nutq
+die Reihenfolge|di rayenfolge|ketma-ketlik
+das Risiko|das riziko|xavf, tavakkal
+der Schritt|der shritt|qadam
+die Schwierigkeit|di shviirixkayt|qiyinchilik
+der Sinn|der zinn|ma'no
+der Standpunkt|der shtantpunkt|nuqtai nazar
+das System|das züsteem|tizim
+die Tatsache|di taatzaxe|fakt, dalil
+der Umstand|der umshtant|holat, sharoit
+die Ursache|di uurzaxe|sabab
+das Urteil|das urtayl|hukm, xulosa
+der Vergleich|der fergleyx|taqqoslash
+das Verständnis|das fershtentnis|tushunish
+der Versuch|der ferzuux|urinish
+die Voraussetzung|di forauszetsung|shart, zamin
+der Vorschlag|der foorshlaak|taklif
+die Wirklichkeit|di virklixkayt|haqiqat (voqelik)
+die Wirkung|di virkung|ta'sir (natija)
+der Zufall|der tsuufal|tasodif
+der Zusammenhang|der tsuzammenhang|bog'liqlik
+der Zustand|der tsuushtant|holat
+der Zweck|der tsvek|maqsad
+die Wahrheit|di vaarhayt|haqiqat
+die Lüge|di lüüge|yolg'on
+der Ausweg|der ausveek|chiqish yo'li (vaziyatdan)
+die Aufmerksamkeit|di aufmerkzaamkayt|diqqat
+die Beobachtung|di beoobaxtung|kuzatuv
+die Durchführung|di durxfüürung|amalga oshirish
+die Einigung|di aynigung|kelishuv
+die Einschränkung|di aynshrenkung|cheklov
+die Gewissheit|di gevisshayt|ishonch, aniqlik
+das Gleichgewicht|das glayxgevixt|muvozanat
+die Herausforderung|di herausforderung|sinov, qiyin vazifa
+der Hintergrund|der hintergrunt|orqa fon
+die Lebensqualität|di leebenskvaliteet|hayot sifati
+der Mangel|der mangel|tanqislik
+die Notwendigkeit|di nootvendixkayt|zaruriyat
+der Rückgang|der rükgang|pasayish
+der Anstieg|der anshtiik|o'sish
+die Steigerung|di shtaygerung|oshish
+die Verbesserung|di ferbesserung|yaxshilanish
+die Verschlechterung|di fershlexterung|yomonlashuv
+die Vielfalt|di fiilfalt|xilma-xillik
+die Wahrscheinlichkeit|di vaarshaynlixkayt|ehtimollik
+die Zuverlässigkeit|di tsuuferlesixkayt|ishonchlilik
+das Ziel erreichen|das tsiil errayxen|maqsadga erishmoq
+`},
+{id:"b1verb", lv:"B1", icon:"🔧", title:"Fe'llar 2 (B1)", t:`
+abbiegen|apbiigen|burilmoq
+abbrechen|apbrexen|to'xtatmoq, uzib qo'ymoq
+ablenken|aplenken|chalg'itmoq
+abnutzen|apnutsen|eskirtmoq, yeyilmoq
+abschaffen|apshaffen|bekor qilmoq (qonun, odat)
+abschreiben|apshrayben|ko'chirib yozmoq
+absichern|apzixern|himoyalamoq, kafolatlamoq
+abwarten|apvarten|kutib turmoq
+abwechseln|apveksseln|navbatlashmoq
+anbauen|anbauen|yetishtirmoq (ekin)
+andeuten|andoyten|ishora qilmoq
+anfassen|anfassen|qo'l tekkizmoq
+angreifen|angrayfen|hujum qilmoq
+anhalten|anhalten|to'xtatmoq; davom etmoq
+ankündigen|ankündigen|e'lon qilmoq
+anlegen|anleegen|qo'ymoq; investitsiya qilmoq
+anregen|anreegen|rag'batlantirmoq
+anschauen|anshauen|tomosha qilmoq
+ansprechen|anshprexen|murojaat qilmoq; (mavzuni) ko'tarmoq
+anstellen|anshtellen|ishga olmoq; navbatga turmoq
+sich anstellen|zix anshtellen|navbatga turmoq
+anwenden|anvenden|qo'llamoq
+anzweifeln|antsvayfeln|shubha ostiga qo'ymoq
+aufbauen|aufbauen|qurmoq, yig'moq
+aufbewahren|aufbevaaren|saqlamoq
+auffallen|auffallen|ko'zga tashlanmoq
+aufgeben|aufgeeben|taslim bo'lmoq; topshirmoq (pochta)
+aufheben|aufheeben|ko'tarmoq; saqlab qo'ymoq
+aufklären|aufkleeren|tushuntirmoq, oydinlashtirmoq
+auflösen|auflöözen|eritmoq; tarqatib yubormoq
+aufwachsen|aufvaksen|katta bo'lmoq (o'smoq)
+ausbauen|ausbauen|kengaytirmoq
+ausbilden|ausbilden|o'qitmoq (kasbga)
+ausbrechen|ausbrexen|boshlanib ketmoq (yong'in, urush)
+ausgleichen|ausglayxen|tenglashtirmoq
+auslösen|auslöözen|keltirib chiqarmoq
+ausrichten|ausrixten|yetkazmoq (salom, xabar)
+ausrutschen|ausrutshen|sirpanib ketmoq
+ausschlafen|ausshlaafen|to'yib uxlamoq
+ausstellen|ausshtellen|ko'rgazmaga qo'ymoq; bermoq (hujjat)
+aussuchen|auszuuxen|tanlamoq
+austauschen|austaushen|almashmoq
+ausweichen|ausvayxen|chetlab o'tmoq
+auswandern|ausvandern|boshqa mamlakatga ko'chmoq
+auszeichnen|austsayxnen|mukofotlamoq
+beantworten|beantvorten|javob bermoq (savolga)
+bedrohen|bedrooen|tahdid qilmoq
+befreien|befrayen|ozod qilmoq
+begegnen|begeegnen|duch kelmoq
+begeistern|begaystern|ilhomlantirmoq
+begrenzen|begrentsen|cheklamoq
+behindern|behindern|to'sqinlik qilmoq
+beißen|baysen|tishlamoq
+bekämpfen|bekempfen|qarshi kurashmoq
+belohnen|beloonen|taqdirlamoq
+bemerken|bemerken|payqamoq
+berechnen|berexnen|hisoblamoq
+beruhigen|beruuigen|tinchlantirmoq
+sich beruhigen|zix beruuigen|tinchlanmoq
+beschädigen|besheedigen|shikastlamoq
+beschäftigen|besheftigen|ish bilan ta'minlamoq
+sich beschäftigen mit|zix besheftigen mit|...bilan shug'ullanmoq
+besetzen|bezetsen|egallamoq
+bestrafen|beshtraafen|jazolamoq
+beten|beeten|ibodat qilmoq
+betonen|betoonen|urg'u bermoq
+betreuen|betroyen|qaramoq, g'amxo'rlik qilmoq
+bewahren|bevaaren|saqlamoq, asramoq
+bewegen|beveegen|harakatlantirmoq
+biegen|biigen|egmoq
+binden|binden|bog'lamoq
+blasen|blaazen|puflamoq
+blühen|blüüen|gullamoq
+dämpfen|dempfen|bug'da pishirmoq; pasaytirmoq
+decken|dekken|yopmoq; (dasturxon) tuzamoq
+dienen|diinen|xizmat qilmoq
+drehen|dreeen|aylantirmoq
+drohen|drooen|po'pisa qilmoq
+eindringen|ayndringen|bostirib kirmoq
+einfallen|aynfallen|esga tushmoq
+einordnen|aynordnen|tartibga solmoq
+einsehen|aynzeeen|tan olmoq, tushunib yetmoq
+eintragen|ayntraagen|ro'yxatga kiritmoq
+einwerfen|aynverfen|tashlamoq (xatni qutiga)
+empören|empöören|g'azablantirmoq
+entdecken|entdekken|kashf qilmoq
+entfernen|entfernen|olib tashlamoq
+entführen|entfüüren|o'g'irlab ketmoq (odamni)
+entkommen|entkommen|qochib qutulmoq
+entlasten|entlasten|yukini yengillatmoq
+entsorgen|entzorgen|utilizatsiya qilmoq
+sich entspannen|zix entshpannen|bo'shashmoq, dam olmoq
+entsprechen|entshprexen|mos kelmoq
+erben|erben|meros olmoq
+ergänzen|ergentsen|to'ldirmoq
+erhöhen|erhööen|oshirmoq
+sich erkundigen|zix erkundigen|surishtirmoq
+erleben|erleeben|boshdan kechirmoq
+erleichtern|erlayxtern|yengillashtirmoq
+ermitteln|ermitteln|aniqlamoq, tergov qilmoq
+ernähren|erneeren|boqmoq
+erneuern|ernoyern|yangilamoq
+erobern|eroobern|zabt etmoq
+erschrecken|ershrekken|qo'rqib ketmoq; qo'rqitmoq
+erstellen|ershtellen|tuzmoq (hujjat, reja)
+ertragen|ertraagen|chidamoq
+erwerben|erverben|sotib olmoq; egallamoq
+erziehen|ertsiien|tarbiyalamoq
+fallen lassen|fallen lassen|tushirib yubormoq
+falten|falten|buklamoq
+fangen|fangen|tutmoq
+fassen|fassen|ushlab olmoq; tushunmoq
+fliehen|fliien|qochmoq
+fließen|fliisen|oqmoq
+flüstern|flüstern|pichirlamoq
+formulieren|formuliiren|ifodalamoq
+fressen|fressen|yemoq (hayvon)
+füttern|füttern|ovqat bermoq (hayvonga)
+gelten|gelten|amal qilmoq; hisoblanmoq
+gestalten|geshtalten|shakllantirmoq, bezamoq
+glänzen|glentsen|yaltiramoq
+graben|graaben|qazimoq
+greifen|grayfen|ushlamoq
+grüßen|grüüsen|salomlashmoq
+heben|heeben|ko'tarmoq
+hupen|huupen|signal chalmoq
+hüten|hüüten|qo'riqlamoq
+investieren|investiiren|investitsiya qilmoq
+jammern|yammern|nolimoq
+kleben|kleeben|yopishtirmoq
+kriechen|kriixen|emaklamoq
+kühlen|küülen|sovutmoq
+lehnen|leenen|suyamoq
+lenken|lenken|boshqarmoq (rul)
+leuchten|loyxten|nur sochmoq
+loswerden|loosveerden|qutulmoq
+mahlen|maalen|tuyib un qilmoq
+nachahmen|naaxaamen|taqlid qilmoq
+nachgeben|naaxgeeben|yon bermoq
+nachweisen|naaxvayzen|isbotlamoq
+nähen|neeen|tikmoq
+nicken|nikken|bosh irg'amoq
+pflanzen|pflantsen|ekmoq
+produzieren|produtsiiren|ishlab chiqarmoq
+quälen|kveelen|qiynamoq
+rasieren|raziiren|soqol olmoq
+rauben|rauben|talamoq
+räumen|roymen|bo'shatmoq
+reichen|rayxen|yetarli bo'lmoq; uzatmoq
+reißen|raysen|yirtmoq
+reizen|raytsen|qitiqlamoq; jahlini chiqarmoq
+rollen|rollen|dumalatmoq
+rutschen|rutshen|sirpanmoq
+schaden|shaaden|zarar yetkazmoq
+schalten|shalten|yoqmoq; uzatmani almashtirmoq
+schieben|shiiben|itarmoq
+schießen|shiisen|otmoq
+schimpfen|shimpfen|so'kmoq, urishmoq
+schlagen|shlaagen|urmoq
+schleppen|shleppen|sudramoq
+schmelzen|shmeltsen|erimoq
+schonen|shoonen|ayamoq
+schreien|shrayen|baqirmoq
+schütteln|shütteln|silkitmoq
+schweigen|shvaygen|jim turmoq
+schwitzen|shvitsen|terlamoq
+segeln|zeegeln|yelkanli qayiqda suzmoq
+senken|zenken|pasaytirmoq
+setzen|zetsen|o'tqazmoq, qo'ymoq
+sinken|zinken|cho'kmoq; pasaymoq
+spüren|shpüüren|sezmoq
+stecken|shtekken|tiqmoq
+stoßen|shtoosen|turtib yubormoq
+strahlen|shtraalen|porlamoq
+streben|shtreeben|intilmoq
+stürzen|shtürtsen|yiqilmoq
+täuschen|toyshen|aldamoq
+sich täuschen|zix toyshen|adashmoq
+töten|tööten|o'ldirmoq
+trösten|trösten|tasalli bermoq
+übernehmen|üüberneemen|o'z zimmasiga olmoq
+übertragen|üübertraagen|uzatmoq (efirda)
+übertreiben|üübertrayben|oshirib yubormoq
+umgehen mit|umgeeen mit|...bilan muomala qilmoq
+unterhalten|unterhalten|ko'ngil ochmoq; ta'minlamoq
+unternehmen|unterneemen|bir ish qilmoq (amalga oshirmoq)
+verabschieden|ferapshiiden|kuzatmoq; qabul qilmoq (qonun)
+veranstalten|feranshtalten|o'tkazmoq (tadbir)
+verarbeiten|ferarbayten|qayta ishlamoq
+verbreiten|ferbrayten|tarqatmoq
+verdächtigen|ferdextigen|gumon qilmoq
+vereinbaren|feraynbaaren|kelishmoq
+verfolgen|ferfolgen|ta'qib qilmoq
+vergeben|fergeeben|kechirmoq
+verhaften|ferhaften|hibsga olmoq
+verkleiden|ferklayden|niqoblamoq
+verlangen|ferlangen|talab qilmoq
+verletzen|ferletsen|jarohatlamoq
+vermitteln|fermitteln|vositachilik qilmoq
+vermuten|fermuuten|taxmin qilmoq
+verpacken|ferpakken|qadoqlamoq
+verschwenden|fershvenden|isrof qilmoq
+verschwinden|fershvinden|g'oyib bo'lmoq
+versichern|ferzixern|sug'urta qilmoq; ishontirmoq
+versorgen|ferzorgen|ta'minlamoq
+verteidigen|fertaydigen|himoya qilmoq
+vertreten|fertreeten|vakillik qilmoq
+verurteilen|ferurtaylen|hukm qilmoq
+verwechseln|ferveksseln|adashtirmoq
+verwirklichen|fervirklixen|amalga oshirmoq
+verzeihen|fertsayen|kechirmoq (uzrni qabul qilmoq)
+vorkommen|foorkommen|uchramoq; tuyulmoq
+vorziehen|foortsiien|afzal ko'rmoq
+wachsen|vaksen|o'smoq
+wagen|vaagen|jur'at qilmoq
+winken|vinken|qo'l silkitmoq
+zerstören|tsershtöören|vayron qilmoq
+zittern|tsittern|titramoq
+zubereiten|tsuuberayten|tayyorlamoq (ovqat)
+zulassen|tsuulassen|ruxsat bermoq
+zuschauen|tsuushauen|qarab turmoq
+zwingen|tsvingen|majburlamoq
+`},
+{id:"b1ovqat", lv:"B1", icon:"🥘", title:"Ovqat va pazandalik (B1)", t:`
+die Zubereitung|di tsuuberaytung|tayyorlanishi
+die Beilage|di baylaage|garnir
+das Tagesgericht|das taagesgerixt|kun taomi
+die Brühe|di brüüe|sho'rva (qaynatma)
+der Eintopf|der ayntopf|quyuq sho'rva
+der Auflauf|der auflauf|zapekanka
+der Braten|der braaten|qovurilgan go'sht
+das Schweinefleisch|das shvaynefleysh|cho'chqa go'shti
+der Speck|der shpek|so'lak (yog'li go'sht)
+die Meeresfrüchte|di meeresfrüxte|dengiz mahsulotlari
+der Lachs|der laks|losos (baliq)
+der Thunfisch|der tuunfish|tunets
+die Garnele|di garneele|krevetka
+das Vollkornbrot|das folkornbroot|to'liq donli non
+die Hefe|di heefe|xamirturush
+das Backpulver|das bakpulfer|qabartirgich
+der Zimt|der tsimt|dolchin
+die Petersilie|di peterziilie|petrushka
+der Dill|der dil|shivit
+das Basilikum|das baziilikum|rayhon
+die Linse|di linze|yasmiq
+der Mais|der mays|makkajo'xori
+die Mandel|di mandel|bodom
+die Schale|di shaale|po'st; kosa
+hacken|hakken|maydalamoq
+reiben|rayben|qirg'ichdan o'tkazmoq
+rühren|rüüren|aralashtirmoq
+kneten|kneeten|xamir qormoq
+dünsten|dünsten|dimlamoq
+würzen|vürtsen|ziravor solmoq
+abschmecken|apshmekken|ta'mini rostlamoq
+aufwärmen|aufvermen|isitmoq
+einfrieren|aynfriiren|muzlatmoq
+auftauen|auftauen|muzdan tushirmoq
+der Backofen|der bakoofen|duxovka
+das Schneidebrett|das shnaydebret|taxta (go'sht to'g'raydigan)
+die Kelle|di kelle|cho'mich
+der Schneebesen|der shneebeezen|ko'pirtirgich
+das Sieb|das ziip|elak, suzgich
+das Gefrierfach|das gefriirfax|muzlatkich bo'limi
+gar|gaar|pishgan
+knusprig|knusprix|qarsildoq
+saftig|zaftix|suvli, shirali
+zart|tsaart|yumshoq (go'sht)
+fettig|fettix|yog'li
+fettarm|fettarm|kam yog'li
+vegan|veegaan|vegan
+glutenfrei|gluuteenfray|glyutensiz
+laktosefrei|laktoozefray|laktozasiz
+haltbar|haltbaar|uzoq saqlanadigan
+das Haltbarkeitsdatum|das haltbaarkaytsdaatum|yaroqlilik muddati
+verdorben|ferdorben|buzilgan (ovqat)
+`},
+{id:"b1kiyim", lv:"B1", icon:"👔", title:"Kiyim va tashqi ko'rinish (B1)", t:`
+das Kleidungsstück|das klaydungsshtük|kiyim (bitta)
+die Bluse|di bluuze|bluzka
+die Strickjacke|di shtrikyakke|kardigan
+die Weste|di veste|nimcha
+der Regenmantel|der reegenmantel|yomg'irpo'sh
+die Shorts|di shorts|shortik
+die Socke|di zokke|paypoq
+die Strumpfhose|di shtrumpfhooze|kolgotka
+der Badeanzug|der baadeantsuuk|cho'milish kostyumi
+die Badehose|di baadehooze|suzish shortigi
+der Schuh|der shuu|poyabzal
+der Stiefel|der shtiifel|etik
+die Sandale|di zandaale|sandal
+der Turnschuh|der turnshuu|krossovka
+der Hausschuh|der hausshuu|shippak
+der Handschuh|der hantshuu|qo'lqop
+die Handtasche|di hanttashe|ayollar sumkasi
+der Geldbeutel|der geltboytel|pul xalta, hamyon
+die Geldbörse|di geltbörze|hamyon (pul uchun)
+der Schmuck|der shmuk|zargarlik buyumlari
+die Kette|di kette|marjon, zanjir
+der Ohrring|der oorring|sirg'a
+das Armband|das armbant|bilaguzuk
+die Armbanduhr|di armbantuur|qo'l soati
+die Sonnenbrille|di zonnenbrille|quyosh ko'zoynagi
+der Stoff|der shtof|mato
+die Baumwolle|di baumvolle|paxta (mato)
+die Wolle|di volle|jun
+die Seide|di zayde|ipak
+das Leder|das leeder|charm
+das Muster|das muster|naqsh
+gestreift|geshtrayft|yo'l-yo'l
+kariert|kariirt|katakli
+gepunktet|gepunktet|xol-xol
+einfarbig|aynfarbix|bir rangli
+elegant|elegant|nafis
+schick|shik|chiroyli, zamonaviy
+altmodisch|altmoodish|eskicha
+modisch|moodish|zamonaviy (moda)
+der Ärmel|der ermel|yeng
+der Kragen|der kraagen|yoqa
+der Knopf|der knopf|tugma
+der Reißverschluss|der raysfershluss|zamok (kiyimda)
+sich umziehen|zix umtsiien|kiyim almashtirmoq
+passen zu|passen tsu|...ga mos kelmoq
+groß gewachsen|groos gevaksen|bo'yi baland
+die Falte|di falte|ajin
+der Schnurrbart|der shnurrbaart|mo'ylov
+dunkelhaarig|dunkelhaarix|qora sochli
+schminken|shminken|bo'yanmoq
+das Make-up|das meykap|makiyaj
+der Lippenstift|der lippenshtift|lab bo'yog'i
+das Shampoo|das shampuu|shampun
+der Rasierer|der raziirer|ustara
+die Hygiene|di hügieene|gigiyena
+`},
+{id:"b1vaqt", lv:"B1", icon:"⏱️", title:"Vaqt, miqdor va o'lchov", t:`
+der Zeitpunkt|der tsaytpunkt|vaqt nuqtasi, payt
+der Zeitraum|der tsaytraum|davr, muddat
+die Weile|di vayle|bir oz vaqt
+die Mitternacht|di mitternaxt|yarim tun
+der Sonnenaufgang|der zonnenaufgang|quyosh chiqishi
+der Sonnenuntergang|der zonnenuntergang|quyosh botishi
+neulich|noylix|yaqinda
+vorhin|foorhin|hozirgina
+demnächst|demneekst|yaqin kunlarda
+künftig|künftix|kelgusida
+vorläufig|foorloyfix|hozircha
+rechtzeitig|rexttsaytix|o'z vaqtida
+zeitweise|tsaytvayze|vaqtinchalik
+jahrelang|yaarelang|yillar davomida
+stundenlang|shtundenlang|soatlab
+tagsüber|taaksüüber|kunduzi
+nachts|naxts|tunda
+werktags|verktaaks|ish kunlari
+ab und zu|ap unt tsuu|vaqti-vaqti bilan
+noch nie|nox nii|hali hech qachon
+schon lange|shoon lange|allaqachondan beri
+längst|lengst|allaqachon
+zuvor|tsufoor|oldin
+das Drittel|das drittel|uchdan bir
+das Prozent|das protsent|foiz
+die Anzahl|di antsaal|son, miqdor
+die Mehrzahl|di meertsaal|ko'pchilik; ko'plik
+ein paar|ayn paar|bir nechta
+das Dutzend|das dutsent|o'nlab (12 ta)
+die Tausend|di tauzent|ming
+die Million|di milioon|million
+die Milliarde|di miliarde|milliard
+das Maß|das maas|o'lchov
+die Länge|di lenge|uzunlik
+die Breite|di brayte|kenglik
+die Höhe|di hööe|balandlik
+die Tiefe|di tiife|chuqurlik
+der Zentimeter|der tsentimeeter|santimetr
+der Millimeter|der milimeeter|millimetr
+der Kilometer|der kilomeeter|kilometr
+das Gramm|das gramm|gramm
+die Tonne|di tonne|tonna
+die Fläche|di flexe|maydon
+der Umfang|der umfang|hajm; aylana
+das Volumen|das voluumen|hajm
+der Abstand|der apshtant|masofa, oraliq
+der Rand|der rant|chet
+die Kante|di kante|qirra
+das Dreieck|das drayek|uchburchak
+das Quadrat|das kvadraat|kvadrat
+das Rechteck|das rextek|to'rtburchak
+die Ziffer|di tsiffer|raqam
+plus|plus|qo'shuv
+minus|miinus|ayiruv
+mal|maal|ko'paytiruv
+geteilt durch|getaylt durx|bo'linadi
+dreifach|drayfax|uch baravar
+zu viel|tsu fiil|juda ko'p
+zu wenig|tsu veenix|juda kam
+etwa|etva|taxminan
+`},
+{id:"b1hodisa", lv:"B1", icon:"🚨", title:"Hodisa va favqulodda vaziyat", t:`
+der Feuerwehrmann|der foyerveermann|o't o'chiruvchi
+der Brand|der brant|yong'in
+der Rauch|der raux|tutun
+die Explosion|di eksploziyoon|portlash
+die Rettung|di rettung|qutqaruv
+der Retter|der retter|qutqaruvchi
+Hilfe!|hilfe|Yordam bering!
+die Erste Hilfe|di eerste hilfe|birinchi yordam
+der Verletzte|der ferletste|jarohatlangan
+das Opfer|das opfer|qurbon
+der Zeuge|der tsoyge|guvoh
+der Täter|der teeter|aybdor, jinoyatchi
+der Einbruch|der aynbrux|o'g'irlik maqsadida bostirib kirish
+der Einbrecher|der aynbrexer|o'g'ri (uyga kiruvchi)
+der Überfall|der üüberfal|hujum, bosqin
+überfallen|üüberfallen|hujum qilmoq
+der Betrug|der betruuk|firibgarlik
+der Betrüger|der betrüüger|firibgar
+die Gewalt|di gevalt|zo'ravonlik
+der Mord|der mort|qotillik
+die Festnahme|di festnaame|qo'lga olish
+festnehmen|festneemen|qo'lga olmoq
+die Polizeiwache|di politsayvaxe|politsiya bo'limi
+Anzeige erstatten|antsayge ershtatten|politsiyaga ariza bermoq
+die Ermittlung|di ermittlung|tergov
+der Verdacht|der ferdaxt|gumon
+verdächtig|ferdextix|shubhali
+schuldig|shuldix|aybdor
+unschuldig|unshuldix|aybsiz
+die Schuld|di shult|ayb
+der Schaden|der shaaden|zarar
+beschädigt|besheedixt|shikastlangan
+der Zusammenstoß|der tsuzammenshtoos|to'qnashuv
+zusammenstoßen|tsuzammenshtoosen|to'qnashmoq
+der Unfallort|der unfalort|hodisa joyi
+die Absperrung|di apshperrung|to'siq
+evakuieren|evakuiiren|evakuatsiya qilmoq
+der Alarm|der alarm|signal, xavotir
+die Sirene|di zireene|sirena
+die Warnung|di varnung|ogohlantirish
+warnen|varnen|ogohlantirmoq
+bewusstlos|bevusstloos|hushsiz
+atmen|aatmen|nafas olmoq
+die Atmung|di aatmung|nafas olish
+ohnmächtig|oonmextix|hushidan ketgan
+in Ohnmacht fallen|in oonmaxt fallen|hushidan ketmoq
+der Herzinfarkt|der hertsinfarkt|infarkt
+der Schlaganfall|der shlaakanfal|insult
+die Vergiftung|di fergiftung|zaharlanish
+giftig|giftix|zaharli
+der Sturz|der shturts|yiqilish
+ertrinken|ertrinken|cho'kib o'lmoq
+der Rettungsdienst|der rettungsdiinst|tez yordam xizmati
+der Hubschrauber|der huupshrauber|vertolyot
+die Panik|di paanik|vahima
+in Panik geraten|in paanik geraaten|vahimaga tushmoq
+ruhig bleiben|ruuix blayben|xotirjam bo'lmoq
+Vorsicht!|foorzixt|Ehtiyot bo'ling!
+Achtung!|axtung|Diqqat!
+der Feuerlöscher|der foyerlösher|o't o'chirgich
+der Verbandskasten|der ferbantskasten|dori qutisi (avtoda)
+das Warndreieck|das varndrayek|avariya belgisi (uchburchak)
+die Sicherheitsweste|di zixerhaytsveste|yorqin nimcha (xavfsizlik)
+verloren|ferlooren|yo'qolgan
+das Fundbüro|das funtbüroo|topilgan buyumlar byurosi
+gestohlen|geshtoolen|o'g'irlangan
+die Brieftasche|di briiftashe|hamyon
+sperren|shperren|bloklamoq (karta)
+die Karte sperren lassen|di karte shperren lassen|kartani bloklatmoq
+`},
+{id:"b1ibora", lv:"B1", icon:"🧠", title:"Turg'un birikmalar (B1)", t:`
+eine Entscheidung treffen|ayne entshaydung treffen|qaror qabul qilmoq
+eine Frage stellen|ayne fraage shtellen|savol bermoq
+eine Antwort geben|ayne antvort geeben|javob bermoq
+einen Vorschlag machen|aynen foorshlaak maxen|taklif kiritmoq
+Rücksicht nehmen auf|rükzixt neemen auf|...ni hisobga olmoq
+Bescheid sagen|beshayt zaagen|xabar bermoq
+Bescheid wissen|beshayt vissen|xabardor bo'lmoq
+in Frage kommen|in fraage kommen|to'g'ri kelmoq (variant sifatida)
+zur Verfügung stehen|tsur ferfüügung shteeen|ixtiyorida bo'lmoq
+in Kontakt bleiben|in kontakt blayben|aloqada qolmoq
+Kontakt aufnehmen|kontakt aufneemen|bog'lanmoq
+Abschied nehmen|apshiit neemen|xayrlashmoq
+Platz nehmen|plats neemen|o'tirmoq (taklif)
+eine Rolle spielen|ayne rolle shpiilen|rol o'ynamoq
+Bedeutung haben|bedoytung haaben|ahamiyatga ega bo'lmoq
+Erfahrungen sammeln|erfaarungen zammeln|tajriba to'plamoq
+Erfolg haben|erfolk haaben|muvaffaqiyat qozonmoq
+Glück haben|glük haaben|omadi kelmoq
+Pech haben|pex haaben|omadi kelmaslik
+Recht haben|rext haaben|haq bo'lmoq
+Lust haben auf|lust haaben auf|...ni xohlamoq
+Angst haben vor|angst haaben foor|...dan qo'rqmoq
+Hunger haben|hunger haaben|och bo'lmoq
+Durst haben|durst haaben|chanqamoq
+Mühe haben mit|müüe haaben mit|...da qiynalmoq
+sich Mühe geben|zix müüe geeben|astoydil harakat qilmoq
+eine Pause machen|ayne pauze maxen|tanaffus qilmoq
+einen Fehler machen|aynen feeler maxen|xato qilmoq
+einen Termin vereinbaren|aynen termiin feraynbaaren|uchrashuv belgilamoq
+einen Termin absagen|aynen termiin apzaagen|uchrashuvni bekor qilmoq
+eine Prüfung ablegen|ayne prüüfung apleegen|imtihon topshirmoq
+eine Prüfung bestehen|ayne prüüfung beshteeen|imtihondan o'tmoq
+Wert legen auf|veert leegen auf|...ga ahamiyat bermoq
+Bezug nehmen auf|betsuuk neemen auf|...ga murojaat qilmoq (havola)
+in Ordnung bringen|in ordnung bringen|tartibga keltirmoq
+in Ordnung sein|in ordnung zayn|joyida bo'lmoq
+zu Ende gehen|tsu ende geeen|tugamoq
+zur Schule gehen|tsur shuule geeen|maktabga qatnamoq
+ums Leben kommen|ums leeben kommen|halok bo'lmoq
+ins Gespräch kommen|ins geshpreex kommen|suhbatga kirishmoq
+auf die Nerven gehen|auf di nerfen geeen|asabga tegmoq
+im Mittelpunkt stehen|im mittelpunkt shteeen|diqqat markazida bo'lmoq
+Spaß machen|shpaas maxen|zavq bermoq
+Sorgen machen|zorgen maxen|xavotirga solmoq
+Freude machen|froyde maxen|xursand qilmoq
+einen Ausflug machen|aynen ausfluuk maxen|sayrga chiqmoq
+Urlaub machen|urlaup maxen|ta'tilga chiqmoq
+Sport treiben|shport trayben|sport bilan shug'ullanmoq
+Kritik üben|kritiik üüben|tanqid qilmoq
+Einfluss nehmen auf|aynfluss neemen auf|...ga ta'sir o'tkazmoq
+Verantwortung übernehmen|ferantvortung üüberneemen|mas'uliyatni o'z zimmasiga olmoq
+Hilfe leisten|hilfe laysten|yordam ko'rsatmoq
+ein Gespräch führen|ayn geshpreex füüren|suhbat olib bormoq
+Ordnung halten|ordnung halten|tartib saqlamoq
+ein Versprechen halten|ayn fershprexen halten|va'dani bajarmoq
+eine Rede halten|ayne reede halten|nutq so'zlamoq
+den Kontakt verlieren|den kontakt ferliiren|aloqani yo'qotmoq
+die Geduld verlieren|di gedult ferliiren|sabri tugamoq
+Zeit verbringen|tsayt ferbringen|vaqt o'tkazmoq
+Zeit verschwenden|tsayt fershvenden|vaqtni behuda sarflamoq
+Geld ausgeben|gelt ausgeeben|pul sarflamoq
+ein Auge zudrücken|ayn auge tsuudrükken|ko'z yummoq (kechirmoq)
+keine Ahnung haben|kayne aanung haaben|tushunchasi yo'q
+von Zeit zu Zeit|fon tsayt tsu tsayt|vaqti-vaqti bilan
+nach und nach|naax unt naax|asta-sekin
+Schritt für Schritt|shritt füür shritt|qadam-baqadam
+mehr oder weniger|meer ooder veeniger|ozmi-ko'pmi
+so schnell wie möglich|zoo shnell vii mööglix|iloji boricha tezroq
+im Voraus|im forauz|oldindan
+im Laufe der Zeit|im laufe der tsayt|vaqt o'tishi bilan
+unter vier Augen|unter fiir augen|yuzma-yuz, ikki kishi o'rtasida
+Das kommt nicht in Frage.|das kommt nixt in fraage|Bu haqda gap bo'lishi mumkin emas.
+Das liegt mir am Herzen.|das liikt miir am hertsen|Bu men uchun juda muhim.
+Ich habe die Nase voll.|ix haabe di naaze fol|Jonimga tegdi.
+Das ist nicht mein Ding.|das ist nixt mayn ding|Bu menga to'g'ri kelmaydi.
+Es ist höchste Zeit.|es ist hööxste tsayt|Vaqt allaqachon keldi.
+Alles klar!|alles klaar|Hammasi tushunarli!
+Mal sehen.|maal zeeen|Ko'ramiz.
+Das hängt davon ab.|das hengt dafon ap|Bu bunga bog'liq.
+Ich bin gespannt.|ix bin geshpannt|Qiziqib kutyapman.
+Ich verlasse mich auf dich.|ix ferlasse mix auf dix|Senga ishonaman (tayanaman).
+Mir ist langweilig.|miir ist langvaylix|Zerikyapman.
+Mir ist schlecht.|miir ist shlext|Ko'nglim aynayapti.
+Mir ist kalt.|miir ist kalt|Sovqotyapman.
+`}
+]);
+
 VOCAB.forEach(function(c){
   c.w = c.t.split('\n').map(function(s){ return s.trim(); }).filter(Boolean).map(function(s){ return s.split('|').map(function(x){ return x.trim(); }); });
   delete c.t;
@@ -2956,27 +4997,31 @@ function startQuotes(){ if(!quoteTimer) quoteTimer = setInterval(nextQuote, 7000
 
 var GRAMMAR = [
 {t:"1. Kishilik olmoshlari", text:"Gapning egasi. <b>Sie</b> (katta harf bilan) — rasmiy «Siz».", rows:[
- ["ich","men"],["du","sen"],["er / sie / es","u (erkak / ayol / narsa)"],["wir","biz"],["ihr","sizlar (do'stona)"],["sie","ular"],["Sie","Siz (rasmiy)"]]},
+ ["ich","men"],["du","sen"],["er / sie / es","u (erkak / ayol / narsa)"],["wir","biz"],["ihr","sizlar (do'stona)"],["sie","ular"],["Sie","Siz (rasmiy)"]],
+ ex:[["Ich heiße Shoxrux.","Mening ismim Shoxrux."],["Du bist mein Freund.","Sen mening do'stimsan."],["Er kommt aus Usbekistan.","U (erkak) O'zbekistondan."],["Sie wohnt in Berlin.","U (ayol) Berlinda yashaydi."],["Wir lernen Deutsch.","Biz nemis tilini o'rganyapmiz."],["Ihr seid sehr nett.","Sizlar juda yoqimlisizlar."],["Woher kommen Sie?","Siz qayerdansiz?"]]},
 {t:"2. sein — bo'lmoq", text:"Eng muhim fe'l. «Men ...man», «U ...dir» ma'nosida.", rows:[
  ["ich bin","men ...man"],["du bist","sen ...san"],["er / sie ist","u ...dir"],["wir sind","biz ...miz"],["ihr seid","sizlar ...siz"],["sie / Sie sind","ular ...dir / Siz ...siz"]],
- ex:[["Ich bin müde.","Men charchaganman."],["Sind Sie Lehrer?","Siz o'qituvchimisiz?"]]},
+ ex:[["Ich bin Student.","Men talabaman."],["Ich bin müde.","Men charchaganman."],["Du bist sehr nett.","Sen juda yoqimlisan."],["Er ist mein Bruder.","U mening akam."],["Wir sind aus Usbekistan.","Biz O'zbekistondanmiz."],["Ihr seid zu spät.","Sizlar kechikdingiz."],["Sind Sie Lehrer?","Siz o'qituvchimisiz?"]]},
 {t:"3. haben — ega bo'lmoq", text:"«Menda ... bor» ma'nosida.", rows:[
  ["ich habe","menda bor"],["du hast","senda bor"],["er / sie hat","unda bor"],["wir haben","bizda bor"],["ihr habt","sizlarda bor"],["sie / Sie haben","ularda / Sizda bor"]],
- ex:[["Ich habe Zeit.","Mening vaqtim bor."],["Haben Sie Wasser?","Sizda suv bormi?"]]},
+ ex:[["Ich habe Zeit.","Mening vaqtim bor."],["Hast du ein Handy?","Telefoning bormi?"],["Sie hat zwei Kinder.","Uning ikki farzandi bor."],["Wir haben heute frei.","Bugun bizda dam olish kuni."],["Habt ihr Hunger?","Qorningiz ochmi?"],["Haben Sie Wasser?","Sizda suv bormi?"],["Haben Sie ein Zimmer frei?","Bo'sh xonangiz bormi?"]]},
 {t:"4. Oddiy fe'l qo'shimchalari", text:"Fe'lning o'zagi + qo'shimcha. Misol: <b>wohnen</b> (yashamoq) → o'zak <b>wohn-</b>", rows:[
  ["ich wohne","-e"],["du wohnst","-st"],["er / sie wohnt","-t"],["wir wohnen","-en"],["ihr wohnt","-t"],["sie / Sie wohnen","-en"]],
- ex:[["Ich wohne in Taschkent.","Men Toshkentda yashayman."],["Wo wohnst du?","Qayerda yashaysan?"]]},
-{t:"5. Savol so'zlari (W-so'zlar)", text:"Hammasi <b>W</b> harfi bilan boshlanadi va «v» deb o'qiladi.", rows:[
- ["Wer?","Kim?"],["Was?","Nima?"],["Wo?","Qayerda?"],["Woher?","Qayerdan?"],["Wohin?","Qayerga?"],["Wann?","Qachon?"],["Wie?","Qanday?"],["Wie viel?","Qancha?"],["Warum?","Nega?"],["Welcher?","Qaysi?"]]},
+ ex:[["Ich wohne in Taschkent.","Men Toshkentda yashayman."],["Wo wohnst du?","Qayerda yashaysan?"],["Er lernt jeden Tag Deutsch.","U har kuni nemis tilini o'rganadi."],["Sie arbeitet in einer Bank.","U (ayol) bankda ishlaydi."],["Wir kochen heute Plov.","Bugun palov pishiramiz."],["Ihr spielt gut Fußball.","Sizlar futbolni yaxshi o'ynaysizlar."],["Was machen Sie beruflich?","Kasbingiz nima?"]]},
+{t:"5. Savol so'zlari (W-so'zlar)", text:"Hammasi <b>W</b> harfi bilan boshlanadi va «v» deb o'qiladi. W-so'zdan keyin darhol <b>fe'l</b> keladi.", rows:[
+ ["Wer?","Kim?"],["Was?","Nima?"],["Wo?","Qayerda?"],["Woher?","Qayerdan?"],["Wohin?","Qayerga?"],["Wann?","Qachon?"],["Wie?","Qanday?"],["Wie viel?","Qancha?"],["Warum?","Nega?"],["Welcher?","Qaysi?"]],
+ ex:[["Wer ist das?","Bu kim?"],["Was machst du?","Nima qilyapsan?"],["Wo ist der Bahnhof?","Vokzal qayerda?"],["Woher kommen Sie?","Siz qayerdansiz?"],["Wohin fährt dieser Bus?","Bu avtobus qayerga boradi?"],["Wann beginnt der Kurs?","Kurs qachon boshlanadi?"],["Wie heißt du?","Isming nima?"],["Wie viel kostet das?","Bu qancha turadi?"],["Warum lernst du Deutsch?","Nega nemis tilini o'rganyapsan?"]]},
 {t:"6. Gap tartibi — fe'l 2-o'rinda!", text:"O'zbek tilida fe'l oxirida keladi, nemis tilida esa <b>fe'l doim ikkinchi o'rinda</b> turadi. Savolda (ha/yo'q savoli) fe'l <b>birinchi</b> o'ringa chiqadi.", ex:[
  ["Ich wohne in Taschkent.","Men Toshkentda yashayman. (fe'l — 2-o'rinda)"],["Heute arbeite ich.","Bugun ishlayman. (Heute 1-o'rinda, fe'l baribir 2-o'rinda)"],
- ["Wo wohnen Sie?","Qayerda yashaysiz? (W-so'z + fe'l)"],["Sprechen Sie Deutsch?","Nemischa gapirasizmi? (fe'l boshida)"]]},
+ ["Morgen fahre ich nach Samarkand.","Ertaga Samarqandga boraman."],["Am Wochenende besuche ich meine Eltern.","Dam olish kunlari ota-onamni ziyorat qilaman."],
+ ["Wo wohnen Sie?","Qayerda yashaysiz? (W-so'z + fe'l)"],["Sprechen Sie Deutsch?","Nemischa gapirasizmi? (fe'l boshida)"],["Hast du heute Zeit?","Bugun vaqting bormi? (fe'l boshida)"]]},
 {t:"7. Inkor: nicht va kein", text:"<b>nicht</b> — fe'l va sifatni inkor qiladi. <b>kein / keine</b> — otni inkor qiladi («hech qanday ... yo'q»).", ex:[
- ["Ich verstehe nicht.","Men tushunmayman."],["Das ist nicht teuer.","Bu qimmat emas."],["Ich habe kein Geld.","Menda pul yo'q."],["Ich habe keine Zeit.","Mening vaqtim yo'q."]]},
-{t:"8. Artikllar: der, die, das", text:"Har bir otning «jinsi» bor: <b class='art der'>der</b> (erkak), <b class='art die'>die</b> (ayol), <b class='art das'>das</b> (o'rta). Qoida yo'q deyarli — shuning uchun so'zni <b>doim artikl bilan</b> yodlang. Ko'plikda hammasi <b class='art die'>die</b>. «Bitta» = <b>ein</b> (der/das), <b>eine</b> (die).", ex:[
- ["der Bahnhof — ein Bahnhof","vokzal — bitta vokzal"],["die Bank — eine Bank","bank — bitta bank"],["das Hotel — ein Hotel","mehmonxona — bitta mehmonxona"]]},
+ ["Ich verstehe nicht.","Men tushunmayman."],["Er kommt heute nicht.","U bugun kelmaydi."],["Das ist nicht teuer.","Bu qimmat emas."],["Ich habe kein Geld.","Menda pul yo'q."],["Ich habe keine Zeit.","Mening vaqtim yo'q."],["Das ist kein Problem.","Bu muammo emas."],["Wir haben keine Kinder.","Bizning farzandimiz yo'q."]]},
+{t:"8. Artikllar: der, die, das", text:"Har bir otning «jinsi» bor: <b class='art der'>der</b> (erkak), <b class='art die'>die</b> (ayol), <b class='art das'>das</b> (o'rta). Qoida yo'q deyarli — shuning uchun so'zni <b>doim artikl bilan</b> yodlang. Ko'plikda hammasi <b class='art die'>die</b>. «Bitta» = <b>ein</b> (der/das), <b>eine</b> (die).", rows:[
+ ["der Bahnhof / ein Bahnhof","vokzal / bitta vokzal"],["die Bank / eine Bank","bank / bitta bank"],["das Hotel / ein Hotel","mehmonxona / bitta mehmonxona"],["die Hotels","mehmonxonalar (ko'plik)"]],
+ ex:[["Der Bahnhof ist dort.","Vokzal ana u yerda."],["Die Bank ist geschlossen.","Bank yopiq."],["Das Hotel ist sehr gut.","Mehmonxona juda yaxshi."],["Das ist ein Buch.","Bu (bitta) kitob."],["Hier ist eine Apotheke.","Bu yerda dorixona bor."],["Die Kinder spielen im Park.","Bolalar parkda o'ynayapti."]]},
 {t:"9. Xushmuomalalik: möchte va können", text:"<b>Ich möchte</b> — «istardim» (odobli iltimos). <b>Können Sie ...?</b> — «...a olasizmi?». Ikkinchi fe'l gap oxiriga ketadi.", ex:[
- ["Ich möchte einen Kaffee.","Bir kofe istardim."],["Ich möchte zum Bahnhof gehen.","Vokzalga bormoqchiman."],["Können Sie mir helfen?","Menga yordam bera olasizmi?"],["Kann ich mit Karte zahlen?","Karta bilan to'lay olamanmi?"]]}
+ ["Ich möchte einen Kaffee.","Bir kofe istardim."],["Ich möchte zum Bahnhof gehen.","Vokzalga bormoqchiman."],["Möchtest du etwas trinken?","Biror narsa ichasanmi?"],["Wir möchten ein Zimmer reservieren.","Biz xona band qilmoqchimiz."],["Können Sie mir helfen?","Menga yordam bera olasizmi?"],["Können Sie das bitte wiederholen?","Iltimos, buni qaytarib aytib bera olasizmi?"],["Kann ich mit Karte zahlen?","Karta bilan to'lay olamanmi?"],["Ich kann gut Englisch sprechen.","Men inglizchani yaxshi gapira olaman."]]}
 ];
 
 /* ---------- So'zlar ro'yxatini tekislash ---------- */
@@ -4119,7 +6164,7 @@ function quizResultHtml(){
     '<h2 class="serif" style="color:var(--navy)">'+msg+'</h2><p class="muted">'+QZ.score+' / '+QZ.qs.length+' to\'g\'ri · +'+xp+' XP</p>'+
     (QZ.msgOk?'<div class="unlock-msg">'+esc(QZ.msgOk)+'</div>':'')+(QZ.msgBad?'<div class="fail-msg">'+esc(QZ.msgBad)+'</div>':'')+
     '<div class="toolbar mt" style="justify-content:center">';
-  if(QZ.cert) h += '<button class="btn btn-c" data-act="go" data-v="cert" data-p="'+(QZ.cert==='A2'?'A2':'A1')+'">📜 Sertifikatni olish</button>';
+  if(QZ.cert) h += '<button class="btn btn-c" data-act="go" data-v="cert" data-p="'+(QZ.cert||'A1')+'">📜 Sertifikatni olish</button>';
   if(QZ.opts.nodeId || QZ.opts.placement) h += '<button class="btn btn-n" data-act="go" data-v="home">🗺️ Yo\'lda davom etish</button>';
   if(QZ.opts.retry) h += '<button class="btn '+(QZ.opts.nodeId?'btn-o':'btn-c')+'" data-act="qRetry">🔁 Qaytadan</button>';
   h += '<button class="btn btn-o" data-act="go" data-v="'+QZ.back[0]+'"'+(QZ.back[2]?' data-p="'+esc(QZ.back[2])+'"':'')+'>'+esc(QZ.back[1])+'</button></div>';
@@ -4166,7 +6211,7 @@ VIEWS.home = function(){
         '<div><h4>Kunlik maqsad</h4><div class="big">'+(gp>=1?'Bajarildi! ✅':Math.round(gp*100)+'%')+'</div><small>'+(gp>=1?'Ajoyib, ertaga ham davom eting':'Yana '+(goal-today)+' XP to\'plang')+'</small></div></div>'+
       '<div class="dcard"><span class="flame '+(state.lastDay===todayStr()?'':'off')+'">🔥</span><div><h4>Seriya</h4><div class="big"><span data-count="'+state.streak+'">'+state.streak+'</span> kun</div><small>Eng uzun: '+nz(state.bestStreak)+' kun</small></div></div>'+
       (nx ? '<div class="dcard cont"><div class="nic">'+nx.icon+'</div><div style="min-width:0"><h4>Keyingi qadam</h4><div class="big">'+esc(nx.title)+'</div><button class="btn" data-act="node" data-p="'+nx.id+'">Davom etish →</button></div></div>'
-          : '<div class="dcard cont"><div class="nic">👑</div><div><h4>Tabriklaymiz!</h4><div class="big">A2 tugatildi</div><button class="btn" data-act="go" data-v="cert" data-p="A2">📜 Sertifikat</button></div></div>')+
+          : '<div class="dcard cont"><div class="nic">👑</div><div><h4>Tabriklaymiz!</h4><div class="big">B1 tugatildi</div><button class="btn" data-act="go" data-v="cert" data-p="B1">📜 Sertifikat</button></div></div>')+
     '</div>'+
     '<h2 class="sec-t">🗺️ O\'rganish yo\'li</h2>'+pathTabsHtml()+
     '<div class="card mt2"><div class="tag">Bugungi ibora</div><div class="potd mt">'+spk(p.de)+spkSlow(p.de)+
@@ -4245,7 +6290,7 @@ VIEWS.stats = function(){
   /* yutuqlar */
   h += '<h2 class="sec-t">🏆 Yutuqlar <span class="tag n">'+achCount()+' / '+ACH.length+'</span></h2><div class="achs">'+
     ACH.map(function(a){ var on=!!state.ach[a[0]]; return '<div class="ach '+(on?'on':'off')+'"><div class="ai">'+a[1]+'</div><b>'+esc(a[2])+'</b><small>'+esc(a[3])+'</small>'+(on?'<small style="color:var(--sand);font-weight:800">'+esc(state.ach[a[0]])+'</small>':'')+'</div>'; }).join('')+'</div>';
-  if(nodeIsDone('final')) h += '<div class="mt2 toolbar" style="justify-content:center"><button class="btn btn-c" data-act="go" data-v="cert" data-p="A1">📜 A1 sertifikati</button>'+(nodeIsDone('a2final')?'<button class="btn btn-n" data-act="go" data-v="cert" data-p="A2">📜 A2 sertifikati</button>':'')+'</div>';
+  if(nodeIsDone('final')) h += '<div class="mt2 toolbar" style="justify-content:center"><button class="btn btn-c" data-act="go" data-v="cert" data-p="A1">📜 A1 sertifikati</button>'+(nodeIsDone('a2final')?'<button class="btn btn-n" data-act="go" data-v="cert" data-p="A2">📜 A2 sertifikati</button>':'')+(nodeIsDone('b1final')?'<button class="btn btn-c" data-act="go" data-v="cert" data-p="B1">📜 B1 sertifikati</button>':'')+'</div>';
   return h;
 };
 AFTER.stats = function(){
@@ -5125,6 +7170,353 @@ var GRAM = [
 /* =====================================================================
    DARAJALAR: A1 → A2 → B1, grammatika darslari va mashqlari
    ===================================================================== */
+var GRAM_B1 = [
+{id:'gb_prat', lv:'B1', icon:'📖', title:"Hikoya zamoni: Präteritum", de:"Präteritum aller Verben",
+ desc:"Kitob, xabar va hikoyalardagi o'tgan zamon",
+ theory:"Og'zaki nutqda o'tgan zamon uchun <b>Perfekt</b> ishlatiladi, yozma matnlarda (hikoya, gazeta, xat) esa <b>Präteritum</b>.<br><br><b>Kuchsiz (to'g'ri) fe'llar</b>: o'zakka <b>-te</b> qo'shiladi: mach<b>te</b>, wohn<b>te</b>, arbeit<b>ete</b>.<br><b>Kuchli fe'llar</b> o'zak unlisini o'zgartiradi: geh-en → <b>ging</b>, komm-en → <b>kam</b>, fahr-en → <b>fuhr</b>.<br><br>Muhim: <b>ich</b> va <b>er/sie/es</b> shakllari bir xil, kuchli fe'llarda ular qo'shimchasiz: ich <b>ging</b>, er <b>ging</b>.<br>Aralash fe'llar: denken → <b>dachte</b>, bringen → <b>brachte</b>, wissen → <b>wusste</b>, kennen → <b>kannte</b>.",
+ tables:[{h:["Shaxs","machen (kuchsiz)","gehen (kuchli)"], r:[["ich","machte","ging"],["du","machtest","gingst"],["er / sie / es","machte","ging"],["wir","machten","gingen"],["ihr","machtet","gingt"],["sie / Sie","machten","gingen"]]},
+  {h:["Infinitiv","Präteritum","Ma'nosi"], r:[["kommen","kam","kelmoq"],["fahren","fuhr","bormoq (transportda)"],["sehen","sah","ko'rmoq"],["nehmen","nahm","olmoq"],["geben","gab","bermoq"],["finden","fand","topmoq"],["bleiben","blieb","qolmoq"],["schreiben","schrieb","yozmoq"],["sprechen","sprach","gapirmoq"],["essen","aß","yemoq"],["trinken","trank","ichmoq"],["stehen","stand","turmoq"],["laufen","lief","yugurmoq"],["werden","wurde","bo'lmoq"],["denken","dachte","o'ylamoq"],["wissen","wusste","bilmoq"]]}],
+ ex:[["Gestern arbeitete ich bis acht Uhr.","Kecha soat sakkizgacha ishladim."],["Als Kind spielte er jeden Tag Fußball.","Bolaligida u har kuni futbol o'ynardi."],["Wir gingen ins Kino und sahen einen Film.","Kinoga bordik va film ko'rdik."],["Sie schrieb mir einen langen Brief.","U menga uzun xat yozdi."],["Der Zug kam pünktlich an.","Poyezd o'z vaqtida keldi."],["Ich wusste nicht, was ich sagen sollte.","Nima deyishni bilmasdim."]],
+ tip:"Kuchli fe'llarni jadvaldagidek <b>uchlik</b> qilib yodlang: gehen – <b>ging</b> – gegangen, kommen – <b>kam</b> – gekommen.",
+ drill:[
+  {t:'mc', q:"Gestern ___ ich lange im Büro.", o:["arbeitete","arbeitet","gearbeitet"], a:0, uz:"Kecha ofisda uzoq ishladim."},
+  {t:'mc', q:"Als Kind ___ er jeden Tag Fußball.", o:["spielte","spielt","spielten"], a:0, uz:"Bolaligida u har kuni futbol o'ynardi."},
+  {t:'mc', q:"Wir ___ um acht Uhr nach Hause.", o:["gingen","gingt","ging"], a:0, uz:"Soat sakkizda uyga ketdik."},
+  {t:'mc', q:"Sie ___ mir einen langen Brief.", o:["schrieb","schreibte","schrieben"], a:0, uz:"U menga uzun xat yozdi."},
+  {t:'mc', q:"Plötzlich ___ das Telefon.", o:["klingelte","klingeltet","geklingelt"], a:0, uz:"To'satdan telefon jiringladi."},
+  {t:'mc', q:"Ich ___ nicht, wo er wohnte.", o:["wusste","wisste","weißte"], a:0, uz:"Uning qayerda yashashini bilmasdim."},
+  {t:'mc', q:"Der Zug ___ pünktlich in Berlin an.", o:["kam","kommte","kamen"], a:0, uz:"Poyezd Berlinga o'z vaqtida keldi."},
+  {t:'mc', q:"Ihr ___ den ganzen Abend fern.", o:["saht","sahen","sah"], a:0, uz:"Butun kechqurun televizor ko'rdingiz."},
+  {t:'mc', q:"Nach dem Essen ___ wir einen Tee.", o:["tranken","trinkten","trankt"], a:0, uz:"Ovqatdan keyin choy ichdik."},
+  {t:'type', q:"fahren → er ___ (Präteritum)", a:["fuhr"]},
+  {t:'type', q:"nehmen → ich ___ (Präteritum)", a:["nahm"]},
+  {t:'order', de:"Letztes Jahr fuhren wir mit dem Auto nach Italien.", uz:"O'tgan yili mashinada Italiyaga bordik."},
+  {t:'order', de:"Als Kind wohnte ich in einem kleinen Dorf.", uz:"Bolaligimda kichik bir qishloqda yashardim."}
+ ]},
+{id:'gb_plusq', lv:'B1', icon:'⏮️', title:"O'tgan zamondan oldin: Plusquamperfekt", de:"Plusquamperfekt",
+ desc:"Bir voqea boshqasidan OLDIN bo'lgan",
+ theory:"O'tmishdagi ikki voqeadan <b>oldinroq</b> bo'lganini ko'rsatish uchun <b>Plusquamperfekt</b> ishlatiladi.<br><br>Yasalishi: <b>hatte / war</b> + <b>Partizip II</b> (gap oxirida).<br>Perfektda <b>haben</b> olgan fe'l → <b>hatte</b>: ich habe gegessen → ich <b>hatte</b> gegessen.<br>Perfektda <b>sein</b> olgan fe'l → <b>war</b>: er ist gekommen → er <b>war</b> gekommen.<br><br>Ko'pincha <b>nachdem</b> (...gandan keyin) bilan keladi: <b>Nachdem</b> ich gegessen <b>hatte</b>, ging ich spazieren.",
+ tables:[{h:["Shaxs","haben → hatte","sein → war"], r:[["ich","hatte gegessen","war gegangen"],["du","hattest gegessen","warst gegangen"],["er / sie / es","hatte gegessen","war gegangen"],["wir","hatten gegessen","waren gegangen"],["ihr","hattet gegessen","wart gegangen"],["sie / Sie","hatten gegessen","waren gegangen"]]},
+  {h:["Avval (Plusquamperfekt)","Keyin (Präteritum)"], r:[["Ich hatte den Film schon gesehen.","Deshalb ging ich nicht ins Kino."],["Der Zug war schon abgefahren,","als wir ankamen."]]}],
+ ex:[["Als ich ankam, hatte der Film schon begonnen.","Men kelganimda film allaqachon boshlangan edi."],["Nachdem er gegessen hatte, ging er spazieren.","Ovqatlanib bo'lgach, u sayrga chiqdi."],["Sie war schon nach Hause gegangen.","U allaqachon uyga ketib bo'lgan edi."],["Wir hatten das Hotel vorher gebucht.","Mehmonxonani oldindan bron qilgan edik."],["Ich war müde, weil ich schlecht geschlafen hatte.","Charchagan edim, chunki yomon uxlagan edim."],["Er hatte seinen Schlüssel vergessen.","U kalitini unutgan edi."]],
+ tip:"Qoida oddiy: Perfektdagi <b>habe/bin</b> o'rniga <b>hatte/war</b> qo'ying — tamom!",
+ drill:[
+  {t:'mc', q:"Als ich ankam, ___ der Film schon begonnen.", o:["hatte","war","habe"], a:0, uz:"Men kelganimda film allaqachon boshlangan edi."},
+  {t:'mc', q:"Nachdem er gegessen ___, ging er spazieren.", o:["hatte","war","hat"], a:0, uz:"Ovqatlanib bo'lgach, u sayrga chiqdi."},
+  {t:'mc', q:"Sie ___ schon nach Hause gegangen.", o:["war","hatte","ist"], a:0, uz:"U allaqachon uyga ketgan edi."},
+  {t:'mc', q:"Wir hatten das Hotel vorher ___.", o:["gebucht","buchten","buchen"], a:0, uz:"Mehmonxonani oldindan bron qilgan edik."},
+  {t:'mc', q:"Ich war müde, weil ich schlecht geschlafen ___.", o:["hatte","war","habe"], a:0, uz:"Charchagan edim, chunki yomon uxlagan edim."},
+  {t:'mc', q:"Der Zug ___ schon abgefahren.", o:["war","hatte","wurde"], a:0, uz:"Poyezd allaqachon jo'nab ketgan edi."},
+  {t:'mc', q:"Nachdem wir ___ waren, regnete es.", o:["angekommen","ankommen","ankamen"], a:0, uz:"Biz yetib kelganimizdan keyin yomg'ir yog'di."},
+  {t:'mc', q:"Er hatte seinen Schlüssel ___.", o:["vergessen","vergaß","vergisst"], a:0, uz:"U kalitini unutgan edi."},
+  {t:'mc', q:"Bevor sie nach Deutschland kam, ___ sie schon Deutsch gelernt.", o:["hatte","war","hat"], a:0, uz:"Germaniyaga kelishidan oldin u nemis tilini o'rgangan edi."},
+  {t:'type', q:"Ich ___ gegessen. (Plusquamperfekt)", a:["hatte"]},
+  {t:'type', q:"Sie ___ gekommen. (Plusquamperfekt)", a:["war"]},
+  {t:'order', de:"Nachdem ich die Hausaufgaben gemacht hatte, sah ich fern.", uz:"Uy vazifasini qilib bo'lgach, televizor ko'rdim."},
+  {t:'order', de:"Als wir ankamen, war der Bus schon weg.", uz:"Biz kelganimizda avtobus allaqachon ketgan edi."}
+ ]},
+{id:'gb_temporal', lv:'B1', icon:'⏳', title:"Vaqt bog'lovchilari", de:"als, wenn, während, bevor, nachdem, seit, bis",
+ desc:"Qachon? Qachongacha? Qachondan beri?",
+ theory:"Bu bog'lovchilar ergash gap boshlaydi — <b>fe'l gap oxiriga</b> ketadi.<br><br><b>als</b> — o'tmishda <b>bir marta</b> bo'lgan voqea: <b>Als</b> ich Kind war, ...<br><b>wenn</b> — hozirgi/kelasi zamon yoki o'tmishda <b>har safar</b>: <b>Wenn</b> ich Zeit habe, ... / Immer <b>wenn</b> er kam, ...<br><b>wann</b> — faqat savol: <b>Wann</b> kommst du? / Ich weiß nicht, <b>wann</b> er kommt.<br><br><b>während</b> — ...ayotganda (bir vaqtda)<br><b>bevor</b> — ...dan oldin<br><b>nachdem</b> — ...dan keyin (zamonni almashtiring!)<br><b>seit</b> — ...dan beri<br><b>bis</b> — ...gacha",
+ tables:[{h:["Bog'lovchi","Ma'nosi","Misol"], r:[["als","...ganda (bir marta, o'tmish)","Als ich 18 war, ..."],["wenn","...ganda / har safar","Wenn es regnet, ..."],["während","...ayotganda","Während ich koche, ..."],["bevor","...dan oldin","Bevor du gehst, ..."],["nachdem","...dan keyin","Nachdem er gegessen hatte, ..."],["seit","...dan beri","Seit ich hier wohne, ..."],["bis","...gacha","Warte, bis ich komme."]]}],
+ ex:[["Als ich ein Kind war, wohnte ich in Taschkent.","Bolaligimda Toshkentda yashardim."],["Wenn ich Zeit habe, lese ich.","Vaqtim bo'lsa, kitob o'qiyman."],["Während ich koche, höre ich Musik.","Ovqat pishirayotganimda musiqa tinglayman."],["Bevor du isst, wasch dir die Hände!","Ovqatdan oldin qo'lingni yuv!"],["Seit ich in Berlin wohne, spreche ich besser Deutsch.","Berlinda yashaganimdan beri nemischani yaxshiroq gapiraman."],["Warte hier, bis ich zurückkomme.","Men qaytgunimcha shu yerda kut."]],
+ tip:"O'tmishda <b>bir marta</b> → <b>als</b>; <b>ko'p marta</b> yoki hozir → <b>wenn</b>. Savol bo'lsa → <b>wann</b>.",
+ drill:[
+  {t:'mc', q:"___ ich ein Kind war, wohnte ich in Taschkent.", o:["Als","Wenn","Wann"], a:0, uz:"Bolaligimda Toshkentda yashardim."},
+  {t:'mc', q:"Immer ___ ich Zeit habe, lese ich.", o:["wenn","als","wann"], a:0, uz:"Har safar vaqtim bo'lsa, kitob o'qiyman."},
+  {t:'mc', q:"Ich höre Musik, ___ ich koche.", o:["während","als","wann"], a:0, uz:"Ovqat pishirayotganimda musiqa tinglayman."},
+  {t:'mc', q:"Wasch dir die Hände, ___ du isst!", o:["bevor","seit","als"], a:0, uz:"Ovqatlanishdan oldin qo'lingni yuv!"},
+  {t:'mc', q:"___ er das Studium beendet hatte, fand er eine Stelle.", o:["Nachdem","Während","Seit"], a:0, uz:"O'qishni tugatgach, u ish topdi."},
+  {t:'mc', q:"___ ich in Deutschland bin, spreche ich besser Deutsch.", o:["Seit","Bis","Als"], a:0, uz:"Germaniyadaligimdan beri nemischani yaxshiroq gapiraman."},
+  {t:'mc', q:"Warte hier, ___ ich zurückkomme.", o:["bis","seit","als"], a:0, uz:"Men qaytgunimcha shu yerda kut."},
+  {t:'mc', q:"Ich weiß nicht, ___ der Kurs beginnt.", o:["wann","wenn","als"], a:0, uz:"Kurs qachon boshlanishini bilmayman."},
+  {t:'mc', q:"___ wir in Wien waren, haben wir viele Museen besucht.", o:["Als","Wenn","Wann"], a:0, uz:"Venada bo'lganimizda ko'p muzeylarga bordik."},
+  {t:'type', q:"___ ich gestern nach Hause kam, schlief mein Sohn schon. (als / wenn)", a:["Als","als"]},
+  {t:'type', q:"Ich rufe dich an, ___ ich angekommen bin. (...gandan keyin)", a:["nachdem"]},
+  {t:'order', de:"Als ich jung war, spielte ich viel Fußball.", uz:"Yoshligimda ko'p futbol o'ynardim."},
+  {t:'order', de:"Bevor ich schlafen gehe, lese ich ein Buch.", uz:"Uxlashdan oldin kitob o'qiyman."}
+ ]},
+{id:'gb_relativ', lv:'B1', icon:'👉', title:"Nisbiy gaplar (1): der, die, das", de:"Relativsätze: Nominativ und Akkusativ",
+ desc:"«...gan odam», «...gan kitob»",
+ theory:"Nisbiy gap otni <b>izohlaydi</b> — o'zbekchadagi «...gan» qo'shimchasiga o'xshaydi: «qo'shnim bo'lgan odam» = der Mann, <b>der</b> neben mir wohnt.<br><br>Nisbiy olmosh (<b>der / die / das / die</b>) <b>jinsi va soni</b>ni izohlanayotgan otdan, <b>kelishigini</b> esa o'z gapidagi vazifasidan oladi:<br>• Ega bo'lsa → <b>Nominativ</b>: der Mann, <b>der</b> hier wohnt<br>• To'ldiruvchi bo'lsa → <b>Akkusativ</b>: der Mann, <b>den</b> ich kenne<br><br>Fe'l nisbiy gapning <b>oxiriga</b> ketadi, oldidan <b>vergul</b> qo'yiladi.",
+ tables:[{h:["Kelishik","erkak","ayol","o'rta","ko'plik"], r:[["Nominativ","der","die","das","die"],["Akkusativ","den","die","das","die"],["Dativ","dem","der","dem","denen"]]}],
+ ex:[["Das ist der Mann, der neben mir wohnt.","Bu mening qo'shnim bo'lgan odam."],["Das ist die Frau, die ich gestern gesehen habe.","Bu men kecha ko'rgan ayol."],["Das Buch, das ich lese, ist sehr spannend.","Men o'qiyotgan kitob juda qiziqarli."],["Ich kenne den Lehrer, der Deutsch unterrichtet.","Nemis tilidan dars beradigan o'qituvchini taniyman."],["Die Kinder, die im Park spielen, sind laut.","Parkda o'ynayotgan bolalar shovqin qilyapti."],["Der Film, den wir gesehen haben, war langweilig.","Biz ko'rgan film zerikarli edi."]],
+ tip:"Faqat erkak jinsi Akkusativda o'zgaradi: der → <b>den</b>. die, das, die — o'zgarmaydi.",
+ drill:[
+  {t:'mc', q:"Das ist der Mann, ___ neben mir wohnt.", o:["der","den","dem"], a:0, uz:"Bu mening qo'shnim bo'lgan odam."},
+  {t:'mc', q:"Das ist die Frau, ___ ich gestern gesehen habe.", o:["die","der","den"], a:0, uz:"Bu men kecha ko'rgan ayol."},
+  {t:'mc', q:"Das Buch, ___ ich lese, ist sehr spannend.", o:["das","der","dem"], a:0, uz:"Men o'qiyotgan kitob juda qiziqarli."},
+  {t:'mc', q:"Ich kenne den Lehrer, ___ Deutsch unterrichtet.", o:["der","den","die"], a:0, uz:"Nemis tilidan dars beradigan o'qituvchini taniyman."},
+  {t:'mc', q:"Wo ist der Kuli, ___ du mir gegeben hast?", o:["den","der","dem"], a:0, uz:"Sen menga bergan ruchka qani?"},
+  {t:'mc', q:"Die Kinder, ___ im Park spielen, sind laut.", o:["die","denen","der"], a:0, uz:"Parkda o'ynayotgan bolalar shovqin qilyapti."},
+  {t:'mc', q:"Das ist das Auto, ___ mein Vater fährt.", o:["das","den","der"], a:0, uz:"Bu otam haydaydigan mashina."},
+  {t:'mc', q:"Der Film, den wir gesehen ___, war langweilig.", o:["haben","hat","sind"], a:0, uz:"Biz ko'rgan film zerikarli edi."},
+  {t:'mc', q:"Ich habe einen Freund, ___ in München studiert.", o:["der","den","das"], a:0, uz:"Myunxenda o'qiydigan bir do'stim bor."},
+  {t:'type', q:"Das ist die Stadt, ___ ich liebe.", a:["die"]},
+  {t:'type', q:"Hier ist der Bus, ___ zum Bahnhof fährt.", a:["der"]},
+  {t:'order', de:"Das ist der Mann, der mir geholfen hat.", uz:"Bu menga yordam bergan odam."},
+  {t:'order', de:"Ich suche eine Wohnung, die nicht so teuer ist.", uz:"Unchalik qimmat bo'lmagan kvartira qidiryapman."}
+ ]},
+{id:'gb_relativ2', lv:'B1', icon:'🤝', title:"Nisbiy gaplar (2): dem, denen, mit dem", de:"Relativsätze: Dativ, mit Präposition, wo, was",
+ desc:"«...ga yordam bergan», «...da ishlaydigan»",
+ theory:"Agar nisbiy gapdagi fe'l yoki predlog <b>Dativ</b> talab qilsa, olmosh ham Dativda bo'ladi:<br>der Freund, <b>dem</b> ich helfe (helfen + Dat) · die Frau, <b>der</b> ich danke · die Leute, <b>denen</b> ich schreibe<br><br><b>Predlog</b> olmoshdan <b>oldin</b> turadi: die Firma, <b>bei der</b> ich arbeite · der Kollege, <b>mit dem</b> ich spreche · das Haus, <b>in dem</b> ich wohne.<br><br><b>wo</b> — joy uchun: die Stadt, <b>wo</b> ich wohne.<br><b>was</b> — alles, etwas, nichts, das dan keyin: Das ist alles, <b>was</b> ich weiß.",
+ tables:[{h:["Fe'l / predlog","Misol"], r:[["helfen (Dat)","der Mann, dem ich helfe"],["danken (Dat)","die Frau, der ich danke"],["mit (Dat)","die Leute, mit denen ich arbeite"],["bei (Dat)","die Firma, bei der ich arbeite"],["in (Dat, Wo?)","das Haus, in dem ich wohne"],["für (Akk)","der Mann, für den ich arbeite"],["was","alles, was ich weiß"],["wo","die Stadt, wo ich lebe"]]}],
+ ex:[["Das ist der Freund, dem ich das Buch gegeben habe.","Bu men kitobni bergan do'stim."],["Die Frau, der ich geholfen habe, war sehr nett.","Men yordam bergan ayol juda yoqimli edi."],["Das ist die Firma, bei der ich arbeite.","Bu men ishlaydigan kompaniya."],["Das ist das Haus, in dem ich geboren bin.","Bu men tug'ilgan uy."],["Die Leute, mit denen ich arbeite, sind freundlich.","Men birga ishlaydigan odamlar samimiy."],["Das ist alles, was ich weiß.","Bilganim shu, xolos."]],
+ tip:"Ko'plikdagi Dativ olmoshi — <b>denen</b> (den emas!): die Kinder, <b>denen</b> ich helfe.",
+ drill:[
+  {t:'mc', q:"Das ist der Freund, ___ ich das Buch gegeben habe.", o:["dem","den","der"], a:0, uz:"Bu men kitobni bergan do'stim."},
+  {t:'mc', q:"Die Frau, ___ ich geholfen habe, war sehr nett.", o:["der","die","denen"], a:0, uz:"Men yordam bergan ayol juda yoqimli edi."},
+  {t:'mc', q:"Die Leute, mit ___ ich arbeite, sind freundlich.", o:["denen","den","die"], a:0, uz:"Men birga ishlaydigan odamlar samimiy."},
+  {t:'mc', q:"Das ist die Firma, bei ___ ich arbeite.", o:["der","die","dem"], a:0, uz:"Bu men ishlaydigan kompaniya."},
+  {t:'mc', q:"Das ist das Haus, in ___ ich geboren bin.", o:["dem","das","den"], a:0, uz:"Bu men tug'ilgan uy."},
+  {t:'mc', q:"Der Kollege, mit ___ ich spreche, kommt aus Wien.", o:["dem","den","der"], a:0, uz:"Men gaplashayotgan hamkasb Venadan."},
+  {t:'mc', q:"Das ist alles, ___ ich weiß.", o:["was","das","wo"], a:0, uz:"Bilganim shu, xolos."},
+  {t:'mc', q:"Taschkent ist die Stadt, ___ ich wohne.", o:["wo","was","wer"], a:0, uz:"Toshkent — men yashaydigan shahar."},
+  {t:'mc', q:"Der Chef, für ___ ich arbeite, ist sehr streng.", o:["den","dem","der"], a:0, uz:"Men ishlaydigan boshliq juda qattiqqo'l."},
+  {t:'type', q:"Das ist der Lehrer, ___ ich vertraue. (Dativ)", a:["dem"]},
+  {t:'type', q:"Die Kinder, ___ ich Geschenke gebe, freuen sich. (Dativ, ko'plik)", a:["denen"]},
+  {t:'order', de:"Das ist die Firma, bei der mein Bruder arbeitet.", uz:"Bu akam ishlaydigan kompaniya."},
+  {t:'order', de:"Der Mann, mit dem ich gesprochen habe, ist Arzt.", uz:"Men gaplashgan odam shifokor."}
+ ]},
+{id:'gb_konnek', lv:'B1', icon:'⚖️', title:"obwohl, trotzdem, deshalb", de:"Konnektoren: Gegensatz und Folge",
+ desc:"Garchi..., baribir..., shuning uchun...",
+ theory:"Ikki guruhni farqlang:<br><br><b>1) Ergash gap bog'lovchisi</b> — fe'l <b>oxirga</b>:<br><b>obwohl</b> (garchi ... bo'lsa ham): Ich gehe spazieren, <b>obwohl</b> es <b>regnet</b>.<br><br><b>2) Ravish-bog'lovchi</b> — u <b>1-o'rinda</b> turadi, fe'l esa darhol <b>2-o'rinda</b>, keyin ega:<br><b>trotzdem</b> (baribir): Es regnet, <b>trotzdem gehe ich</b> spazieren.<br><b>deshalb / deswegen / daher</b> (shuning uchun): Ich bin krank, <b>deshalb bleibe ich</b> zu Hause.<br><b>sonst</b> (bo'lmasa): Beeil dich, <b>sonst verpasst du</b> den Bus.<br><b>außerdem</b> (bundan tashqari): ..., <b>außerdem ist</b> sie billig.",
+ tables:[{h:["So'z","Ma'nosi","Gap tartibi"], r:[["obwohl","garchi","..., obwohl es regnet."],["trotzdem","baribir","..., trotzdem gehe ich."],["deshalb / deswegen","shuning uchun","..., deshalb bleibe ich."],["sonst","aks holda","..., sonst kommst du zu spät."],["außerdem","bundan tashqari","..., außerdem ist es billig."]]}],
+ ex:[["Obwohl es regnet, gehen wir spazieren.","Yomg'ir yog'ayotgan bo'lsa ham, sayrga chiqamiz."],["Es regnet. Trotzdem gehen wir spazieren.","Yomg'ir yog'yapti. Baribir sayrga chiqamiz."],["Ich bin krank, deshalb bleibe ich zu Hause.","Kasalman, shuning uchun uyda qolaman."],["Beeil dich, sonst verpasst du den Bus.","Shoshil, bo'lmasa avtobusga ulgurmaysan."],["Die Wohnung ist schön, außerdem ist sie billig.","Kvartira chiroyli, bundan tashqari arzon."],["Obwohl sie wenig Geld hat, reist sie viel.","Puli kam bo'lsa ham, u ko'p sayohat qiladi."]],
+ tip:"<b>obwohl</b> → fe'l oxirida. <b>trotzdem / deshalb</b> → fe'l darhol ulardan keyin.",
+ drill:[
+  {t:'mc', q:"___ es regnet, gehen wir spazieren.", o:["Obwohl","Trotzdem","Deshalb"], a:0, uz:"Yomg'ir yog'ayotgan bo'lsa ham, sayrga chiqamiz."},
+  {t:'mc', q:"Es regnet. ___ gehen wir spazieren.", o:["Trotzdem","Obwohl","Weil"], a:0, uz:"Yomg'ir yog'yapti. Baribir sayrga chiqamiz."},
+  {t:'mc', q:"Ich bin krank, ___ bleibe ich zu Hause.", o:["deshalb","obwohl","weil"], a:0, uz:"Kasalman, shuning uchun uyda qolaman."},
+  {t:'mc', q:"Er ist müde, trotzdem ___ weiter.", o:["arbeitet er","er arbeitet","arbeiten er"], a:0, uz:"U charchagan, baribir ishlashda davom etyapti."},
+  {t:'mc', q:"Obwohl sie wenig Geld ___, reist sie viel.", o:["hat","haben","habe"], a:0, uz:"Puli kam bo'lsa ham, u ko'p sayohat qiladi."},
+  {t:'mc', q:"Beeil dich, ___ verpasst du den Bus.", o:["sonst","deshalb","obwohl"], a:0, uz:"Shoshil, bo'lmasa avtobusga ulgurmaysan."},
+  {t:'mc', q:"Die Wohnung ist schön, ___ ist sie billig.", o:["außerdem","obwohl","sonst"], a:0, uz:"Kvartira chiroyli, bundan tashqari arzon."},
+  {t:'mc', q:"Ich habe keine Zeit, deswegen ___ nicht mitkommen.", o:["kann ich","ich kann","können ich"], a:0, uz:"Vaqtim yo'q, shuning uchun birga bora olmayman."},
+  {t:'mc', q:"Er ging zur Arbeit, obwohl er krank ___.", o:["war","ist gewesen","sein"], a:0, uz:"U kasal bo'lsa ham ishga bordi."},
+  {t:'type', q:"Ich habe viel gelernt, ___ habe ich die Prüfung bestanden. (shuning uchun)", a:["deshalb","deswegen","daher"]},
+  {t:'type', q:"___ er krank war, ging er zur Arbeit. (garchi)", a:["Obwohl","obwohl"]},
+  {t:'order', de:"Obwohl ich müde bin, gehe ich ins Fitnessstudio.", uz:"Charchagan bo'lsam ham, sport zaliga boraman."},
+  {t:'order', de:"Es war kalt, trotzdem sind wir schwimmen gegangen.", uz:"Sovuq edi, baribir suzishga bordik."}
+ ]},
+{id:'gb_doppel', lv:'B1', icon:'🔀', title:"Juft bog'lovchilar", de:"entweder … oder, weder … noch, je … desto",
+ desc:"Yo ... yo, na ... na, qancha ... shuncha",
+ theory:"Juft bog'lovchilar ikki qismdan iborat va gapdagi ikki narsani bog'laydi:<br><br><b>entweder ... oder</b> — yo ... yoki<br><b>sowohl ... als auch</b> — ham ... ham<br><b>weder ... noch</b> — na ... na (inkor!)<br><b>nicht nur ... sondern auch</b> — nafaqat ... balki<br><b>zwar ... aber</b> — to'g'ri, ... lekin<br><b>je ... desto / umso</b> — qancha ... shuncha: <b>Je</b> mehr ich lerne, <b>desto</b> besser spreche ich.<br><br>«je» qismida fe'l <b>oxirda</b>, «desto» qismida fe'l <b>qiyosiy so'zdan keyin</b> keladi.",
+ tables:[{h:["Bog'lovchi","Ma'nosi","Misol"], r:[["entweder ... oder","yo ... yoki","entweder heute oder morgen"],["sowohl ... als auch","ham ... ham","sowohl Deutsch als auch Englisch"],["weder ... noch","na ... na","weder Zeit noch Geld"],["nicht nur ... sondern auch","nafaqat ... balki","nicht nur klug, sondern auch nett"],["zwar ... aber","to'g'ri ... lekin","zwar klein, aber gemütlich"],["je ... desto","qancha ... shuncha","je mehr, desto besser"]]}],
+ ex:[["Wir fahren entweder mit dem Zug oder mit dem Bus.","Yo poyezdda, yo avtobusda boramiz."],["Er spricht sowohl Deutsch als auch Englisch.","U ham nemischa, ham inglizcha gapiradi."],["Ich habe weder Zeit noch Geld.","Menda na vaqt, na pul bor."],["Sie ist nicht nur klug, sondern auch fleißig.","U nafaqat aqlli, balki tirishqoq ham."],["Die Wohnung ist zwar klein, aber sehr gemütlich.","Kvartira kichkina, lekin juda shinam."],["Je mehr ich lerne, desto besser spreche ich.","Qancha ko'p o'qisam, shuncha yaxshi gapiraman."]],
+ tip:"<b>weder ... noch</b> o'zi inkor — yoniga <b>nicht</b> yoki <b>kein</b> qo'shmang!",
+ drill:[
+  {t:'mc', q:"Wir fahren ___ mit dem Zug oder mit dem Bus.", o:["entweder","weder","sowohl"], a:0, uz:"Yo poyezdda, yo avtobusda boramiz."},
+  {t:'mc', q:"Er spricht ___ Deutsch als auch Englisch.", o:["sowohl","entweder","weder"], a:0, uz:"U ham nemischa, ham inglizcha gapiradi."},
+  {t:'mc', q:"Ich habe ___ Zeit noch Geld.", o:["weder","entweder","sowohl"], a:0, uz:"Menda na vaqt, na pul bor."},
+  {t:'mc', q:"Sie ist nicht nur klug, ___ auch fleißig.", o:["sondern","aber","oder"], a:0, uz:"U nafaqat aqlli, balki tirishqoq ham."},
+  {t:'mc', q:"Je mehr ich lerne, ___ besser spreche ich.", o:["desto","je","als"], a:0, uz:"Qancha ko'p o'qisam, shuncha yaxshi gapiraman."},
+  {t:'mc', q:"Die Wohnung ist zwar klein, ___ sehr gemütlich.", o:["aber","sondern","oder"], a:0, uz:"Kvartira kichkina, lekin juda shinam."},
+  {t:'mc', q:"___ öfter du übst, desto leichter wird es.", o:["Je","Desto","Wenn"], a:0, uz:"Qancha ko'p mashq qilsang, shuncha osonlashadi."},
+  {t:'mc', q:"Er kommt weder heute ___ morgen.", o:["noch","oder","nicht"], a:0, uz:"U na bugun, na ertaga keladi."},
+  {t:'mc', q:"Ich trinke ___ Kaffee als auch Tee gern.", o:["sowohl","weder","entweder"], a:0, uz:"Men ham qahvani, ham choyni yaxshi ko'raman."},
+  {t:'type', q:"Entweder du kommst mit, ___ du bleibst zu Hause.", a:["oder"]},
+  {t:'type', q:"Je länger ich warte, ___ nervöser werde ich.", a:["desto","umso"]},
+  {t:'order', de:"Ich trinke weder Kaffee noch Tee.", uz:"Men na qahva, na choy ichaman."},
+  {t:'order', de:"Je mehr du übst, desto besser wirst du.", uz:"Qancha ko'p mashq qilsang, shuncha yaxshi bo'lasan."}
+ ]},
+{id:'gb_infzu', lv:'B1', icon:'➡️', title:"zu + Infinitiv", de:"Infinitiv mit zu",
+ desc:"Es ist wichtig, ... zu lernen",
+ theory:"Ko'p fe'l va iboralardan keyin ikkinchi fe'l <b>zu + Infinitiv</b> shaklida gap oxiriga keladi:<br>Ich habe keine Lust, heute <b>zu kochen</b>.<br><br>Shunday so'zlar: <b>Lust haben, Zeit haben, versuchen, vergessen, anfangen, aufhören, vorhaben, hoffen, Es ist wichtig / schwer / leicht / verboten ...</b><br><br><b>Ajraladigan fe'llarda</b> «zu» ichiga kiradi: anrufen → an<b>zu</b>rufen, aufstehen → auf<b>zu</b>stehen.<br><br><b>Modal fe'llardan keyin «zu» YO'Q:</b> Ich kann heute nicht <b>kommen</b>. Ich muss <b>arbeiten</b>.",
+ tables:[{h:["Ibora","Misol"], r:[["keine Lust haben","Ich habe keine Lust, zu kochen."],["Zeit haben","Hast du Zeit, mir zu helfen?"],["versuchen","Ich versuche, früher aufzustehen."],["vergessen","Vergiss nicht, mich anzurufen!"],["anfangen","Er fängt an, Deutsch zu lernen."],["Es ist wichtig","Es ist wichtig, viel zu üben."],["können / müssen (zu YO'Q!)","Ich muss jetzt gehen."]]}],
+ ex:[["Ich habe keine Lust, heute zu kochen.","Bugun ovqat pishirgim yo'q."],["Es ist wichtig, jeden Tag Deutsch zu lernen.","Har kuni nemis tilini o'rganish muhim."],["Vergiss nicht, mich anzurufen!","Menga qo'ng'iroq qilishni unutma!"],["Hast du Zeit, mir zu helfen?","Menga yordam berishga vaqting bormi?"],["Ich versuche, früher aufzustehen.","Ertaroq turishga harakat qilyapman."],["Er hat angefangen, ein Buch zu schreiben.","U kitob yozishni boshladi."]],
+ tip:"Ajraladigan fe'l: an<b>zu</b>rufen, ein<b>zu</b>kaufen, auf<b>zu</b>räumen — bitta so'z qilib yoziladi.",
+ drill:[
+  {t:'mc', q:"Ich habe keine Lust, heute ___.", o:["zu kochen","kochen","gekocht"], a:0, uz:"Bugun ovqat pishirgim yo'q."},
+  {t:'mc', q:"Es ist wichtig, jeden Tag Deutsch ___.", o:["zu lernen","lernen","zu gelernt"], a:0, uz:"Har kuni nemis tilini o'rganish muhim."},
+  {t:'mc', q:"Vergiss nicht, mich ___!", o:["anzurufen","zu anrufen","anrufen"], a:0, uz:"Menga qo'ng'iroq qilishni unutma!"},
+  {t:'mc', q:"Ich kann heute nicht ___.", o:["kommen","zu kommen","gekommen"], a:0, uz:"Bugun kela olmayman."},
+  {t:'mc', q:"Er hat angefangen, ein Buch ___.", o:["zu schreiben","schreiben","zu schreibt"], a:0, uz:"U kitob yozishni boshladi."},
+  {t:'mc', q:"Hast du Zeit, mir ___?", o:["zu helfen","helfen","hilfst"], a:0, uz:"Menga yordam berishga vaqting bormi?"},
+  {t:'mc', q:"Ich versuche, früher ___.", o:["aufzustehen","zu aufstehen","aufstehen"], a:0, uz:"Ertaroq turishga harakat qilyapman."},
+  {t:'mc', q:"Wir müssen morgen früh ___.", o:["abfahren","abzufahren","zu abfahren"], a:0, uz:"Ertaga erta jo'nashimiz kerak."},
+  {t:'mc', q:"Es ist verboten, hier ___.", o:["zu rauchen","rauchen","raucht"], a:0, uz:"Bu yerda chekish taqiqlangan."},
+  {t:'type', q:"einkaufen → Ich habe keine Zeit, ___ (zu + Infinitiv)", a:["einzukaufen"]},
+  {t:'type', q:"Es ist schwer, früh ___. (aufstehen)", a:["aufzustehen"]},
+  {t:'order', de:"Ich habe vergessen, dir zu schreiben.", uz:"Senga yozishni unutibman."},
+  {t:'order', de:"Es ist nicht leicht, eine Wohnung zu finden.", uz:"Kvartira topish oson emas."}
+ ]}
+];
+GRAM_B1 = GRAM_B1.concat([
+{id:'gb_umzu', lv:'B1', icon:'🎯', title:"Maqsad: um ... zu, damit", de:"Finalsätze: um … zu, damit, ohne … zu, statt … zu",
+ desc:"Nima uchun? Nima maqsadda?",
+ theory:"Maqsadni ifodalashning ikki yo'li bor:<br><br><b>um ... zu + Infinitiv</b> — ikkala gapda <b>ega bir xil</b> bo'lsa:<br>Ich lerne Deutsch, <b>um</b> in Deutschland <b>zu arbeiten</b>. (men o'rganaman — men ishlayman)<br><br><b>damit</b> + to'liq gap — ega <b>har xil</b> bo'lsa (fe'l oxirda):<br>Ich spreche langsam, <b>damit du</b> mich <b>verstehst</b>. (men gapiraman — sen tushunasan)<br><br>Shunga o'xshash: <b>ohne ... zu</b> (...masdan): Er ging, <b>ohne</b> etwas <b>zu sagen</b>.<br><b>statt ... zu</b> (...ish o'rniga): <b>Statt zu arbeiten</b>, sieht er fern.",
+ tables:[{h:["Shakl","Qachon","Misol"], r:[["um ... zu","ega bir xil","Ich spare, um ein Auto zu kaufen."],["damit","ega har xil","Ich spare, damit meine Kinder studieren können."],["ohne ... zu","...masdan","Er ging, ohne Tschüss zu sagen."],["statt ... zu","...ish o'rniga","Statt zu lernen, spielt er."]]}],
+ ex:[["Ich lerne Deutsch, um in Deutschland zu arbeiten.","Germaniyada ishlash uchun nemis tilini o'rganyapman."],["Ich spreche langsam, damit du mich verstehst.","Meni tushunishing uchun sekin gapiryapman."],["Er ging weg, ohne etwas zu sagen.","U hech narsa demasdan ketib qoldi."],["Statt zu arbeiten, sieht er fern.","Ishlash o'rniga u televizor ko'ryapti."],["Ich spare Geld, um ein Auto zu kaufen.","Mashina sotib olish uchun pul yig'yapman."],["Ich mache das Fenster auf, damit frische Luft reinkommt.","Toza havo kirsin deb derazani ochyapman."]],
+ tip:"Savol <b>Wozu?</b> (nima uchun?) — javob <b>um ... zu</b> yoki <b>damit</b> bilan.",
+ drill:[
+  {t:'mc', q:"Ich lerne Deutsch, ___ in Deutschland zu arbeiten.", o:["um","damit","dass"], a:0, uz:"Germaniyada ishlash uchun nemis tilini o'rganyapman."},
+  {t:'mc', q:"Ich spreche langsam, ___ du mich verstehst.", o:["damit","um","ohne"], a:0, uz:"Meni tushunishing uchun sekin gapiryapman."},
+  {t:'mc', q:"Er ging weg, ___ etwas zu sagen.", o:["ohne","um","damit"], a:0, uz:"U hech narsa demasdan ketib qoldi."},
+  {t:'mc', q:"___ zu arbeiten, sieht er fern.", o:["Statt","Damit","Weil"], a:0, uz:"Ishlash o'rniga u televizor ko'ryapti."},
+  {t:'mc', q:"Ich spare Geld, um ein Auto zu ___.", o:["kaufen","kaufe","gekauft"], a:0, uz:"Mashina sotib olish uchun pul yig'yapman."},
+  {t:'mc', q:"Sie gibt mir die Adresse, damit ich sie ___.", o:["finde","zu finden","finden"], a:0, uz:"Uni topishim uchun u menga manzilni beryapti."},
+  {t:'mc', q:"Wir stehen früh auf, um den Zug nicht zu ___.", o:["verpassen","verpasst","verpassten"], a:0, uz:"Poyezdga kechikmaslik uchun erta turamiz."},
+  {t:'mc', q:"Ich mache das Fenster auf, ___ frische Luft reinkommt.", o:["damit","um","ohne"], a:0, uz:"Toza havo kirsin deb derazani ochyapman."},
+  {t:'mc', q:"Er fährt nach Berlin, um dort ___.", o:["zu studieren","studieren","studiert"], a:0, uz:"U o'sha yerda o'qish uchun Berlinga ketyapti."},
+  {t:'type', q:"Ich fahre nach Berlin, ___ meine Freunde zu besuchen.", a:["um"]},
+  {t:'type', q:"Er rief an, ___ wir uns keine Sorgen machen. (damit / um)", a:["damit"]},
+  {t:'order', de:"Ich lerne jeden Tag, um die Prüfung zu bestehen.", uz:"Imtihondan o'tish uchun har kuni o'qiyman."},
+  {t:'order', de:"Er ging nach Hause, ohne sich zu verabschieden.", uz:"U xayrlashmasdan uyga ketdi."}
+ ]},
+{id:'gb_indirekt', lv:'B1', icon:'❓', title:"Bilvosita savollar", de:"Indirekte Fragen: ob, wo, wann, wie …",
+ desc:"Ayting-chi, ... qayerda?",
+ theory:"Savolni muloyimroq berish uchun uni boshqa gap ichiga qo'yamiz: <b>Können Sie mir sagen, ...? Wissen Sie, ...? Ich weiß nicht, ...</b><br><br><b>W-savol</b> (wo, wann, wie, warum, wer...) → so'roq so'zi qoladi, <b>fe'l oxirga</b> ketadi:<br>Wo <b>ist</b> der Bahnhof? → Können Sie mir sagen, wo der Bahnhof <b>ist</b>?<br><br><b>Ha/yo'q savol</b> → <b>ob</b> (...mi yo'qmi) qo'shiladi:<br><b>Kommt</b> er? → Ich weiß nicht, <b>ob</b> er <b>kommt</b>.",
+ tables:[{h:["To'g'ri savol","Bilvosita savol"], r:[["Wo ist die Post?","Können Sie mir sagen, wo die Post ist?"],["Wann beginnt der Film?","Weißt du, wann der Film beginnt?"],["Wie viel kostet das?","Ich möchte wissen, wie viel das kostet."],["Kommt er morgen?","Ich weiß nicht, ob er morgen kommt."],["Ist der Laden offen?","Wissen Sie, ob der Laden offen ist?"]]}],
+ ex:[["Können Sie mir sagen, wo der Bahnhof ist?","Ayta olasizmi, vokzal qayerda?"],["Ich weiß nicht, ob ich morgen Zeit habe.","Ertaga vaqtim bo'ladimi-yo'qmi, bilmayman."],["Weißt du, wann der Film beginnt?","Film qachon boshlanishini bilasanmi?"],["Ich möchte wissen, wie viel das kostet.","Bu qancha turishini bilmoqchiman."],["Er hat gefragt, wo ich wohne.","U qayerda yashashimni so'radi."],["Wissen Sie, ob der Supermarkt sonntags geöffnet ist?","Supermarket yakshanba kunlari ochiqmi, bilasizmi?"]],
+ tip:"Notanish odamdan yo'l so'rashning eng muloyim usuli: <b>Entschuldigung, können Sie mir sagen, wo ... ist?</b>",
+ drill:[
+  {t:'mc', q:"Können Sie mir sagen, wo der Bahnhof ___?", o:["ist","sind","bin"], a:0, uz:"Ayta olasizmi, vokzal qayerda?"},
+  {t:'mc', q:"Ich frage mich, ___ er morgen kommt.", o:["ob","dass","weil"], a:0, uz:"U ertaga keladimi-yo'qmi, deb o'ylayapman."},
+  {t:'mc', q:"Weißt du, wann der Film ___?", o:["beginnt","beginnst","beginnen"], a:0, uz:"Film qachon boshlanishini bilasanmi?"},
+  {t:'mc', q:"Ich möchte wissen, wie viel das ___.", o:["kostet","kosten","kostest"], a:0, uz:"Bu qancha turishini bilmoqchiman."},
+  {t:'mc', q:"Kannst du mir sagen, ___ du so spät kommst?", o:["warum","ob","dass"], a:0, uz:"Nega bunchalik kech kelayotganingni ayta olasanmi?"},
+  {t:'mc', q:"Wissen Sie, ob der Supermarkt sonntags geöffnet ___?", o:["ist","hat","sind"], a:0, uz:"Supermarket yakshanba kunlari ochiqmi, bilasizmi?"},
+  {t:'mc', q:"Er hat gefragt, wo ich ___.", o:["wohne","wohnst","wohnen"], a:0, uz:"U qayerda yashashimni so'radi."},
+  {t:'mc', q:"Ich weiß nicht, wer das ___ hat.", o:["gemacht","machen","macht"], a:0, uz:"Buni kim qilganini bilmayman."},
+  {t:'mc', q:"Können Sie mir sagen, wie ich zum Museum ___?", o:["komme","kommen","kommst"], a:0, uz:"Muzeyga qanday borishimni ayta olasizmi?"},
+  {t:'type', q:"Wo ist die Post? → Können Sie mir sagen, wo die Post ___?", a:["ist"]},
+  {t:'type', q:"Kommst du? → Ich weiß nicht, ___ du kommst.", a:["ob"]},
+  {t:'order', de:"Können Sie mir sagen, wie spät es ist?", uz:"Soat necha bo'lganini ayta olasizmi?"},
+  {t:'order', de:"Ich weiß nicht, ob ich morgen Zeit habe.", uz:"Ertaga vaqtim bo'ladimi-yo'qmi, bilmayman."}
+ ]},
+{id:'gb_verbprap', lv:'B1', icon:'🧷', title:"Predlogli fe'llar", de:"Verben mit Präpositionen, da- und wo-",
+ desc:"warten auf, denken an, sich freuen auf",
+ theory:"Ko'p nemis fe'llari <b>ma'lum bir predlog</b> bilan keladi — ularni birga yodlash kerak:<br>warten <b>auf</b> + Akk (kutmoq), denken <b>an</b> + Akk (o'ylamoq), sich interessieren <b>für</b> + Akk (qiziqmoq)...<br><br>Narsa haqida so'rash: <b>wo(r)</b> + predlog: <b>Worauf</b> wartest du? <b>Woran</b> denkst du?<br>Odam haqida: predlog + <b>wen / wem</b>: <b>Auf wen</b> wartest du?<br><br>Narsani qaytarmaslik uchun <b>da(r)</b> + predlog: Ich freue mich <b>darauf</b>. Ich habe Angst <b>davor</b>.<br>(Unli bilan boshlansa, <b>r</b> qo'shiladi: d<b>ar</b>auf, w<b>or</b>an.)",
+ tables:[{h:["Fe'l","Ma'nosi","wo- / da-"], r:[["warten auf + A","...ni kutmoq","worauf / darauf"],["sich freuen auf + A","...ni intiqlik bilan kutmoq","worauf / darauf"],["sich freuen über + A","...dan xursand bo'lmoq","worüber / darüber"],["denken an + A","...ni o'ylamoq","woran / daran"],["sich interessieren für + A","...ga qiziqmoq","wofür / dafür"],["sprechen über + A","... haqida gapirmoq","worüber / darüber"],["Angst haben vor + D","...dan qo'rqmoq","wovor / davor"],["sich kümmern um + A","...ga g'amxo'rlik qilmoq","worum / darum"],["teilnehmen an + D","...da qatnashmoq","woran / daran"],["helfen bei + D","...da yordam bermoq","wobei / dabei"]]}],
+ ex:[["Ich warte auf den Bus.","Avtobusni kutyapman."],["Sie freut sich auf den Urlaub.","U ta'tilni intiqlik bilan kutyapti."],["Er interessiert sich für Musik.","U musiqaga qiziqadi."],["Ich denke oft an meine Familie.","Oilam haqida tez-tez o'ylayman."],["Woran denkst du? — An meine Prüfung.","Nima haqida o'ylayapsan? — Imtihonim haqida."],["Hast du Angst vor dem Hund? — Ja, ich habe Angst davor.","Itdan qo'rqasanmi? — Ha, undan qo'rqaman."]],
+ tip:"Fe'lni doim predlogi bilan yodlang: <b>warten auf</b>, <b>denken an</b> — xuddi otni artikli bilan yodlaganingizdek.",
+ drill:[
+  {t:'mc', q:"Ich warte ___ den Bus.", o:["auf","für","an"], a:0, uz:"Avtobusni kutyapman."},
+  {t:'mc', q:"Sie freut sich ___ den Urlaub.", o:["auf","an","mit"], a:0, uz:"U ta'tilni intiqlik bilan kutyapti."},
+  {t:'mc', q:"Er interessiert sich ___ Musik.", o:["für","an","auf"], a:0, uz:"U musiqaga qiziqadi."},
+  {t:'mc', q:"Ich denke oft ___ meine Familie.", o:["an","auf","für"], a:0, uz:"Oilam haqida tez-tez o'ylayman."},
+  {t:'mc', q:"Wir sprechen ___ das Wetter.", o:["über","an","für"], a:0, uz:"Ob-havo haqida gaplashyapmiz."},
+  {t:'mc', q:"Kannst du mir ___ der Arbeit helfen?", o:["bei","auf","für"], a:0, uz:"Ishda menga yordam bera olasanmi?"},
+  {t:'mc', q:"___ denkst du? — An meine Prüfung.", o:["Woran","Worauf","Wofür"], a:0, uz:"Nima haqida o'ylayapsan? — Imtihonim haqida."},
+  {t:'mc', q:"Hast du Angst vor dem Hund? — Ja, ich habe Angst ___.", o:["davor","darauf","dafür"], a:0, uz:"Itdan qo'rqasanmi? — Ha, undan qo'rqaman."},
+  {t:'mc', q:"Sie kümmert sich ___ ihre kranke Mutter.", o:["um","für","an"], a:0, uz:"U kasal onasiga g'amxo'rlik qilyapti."},
+  {t:'type', q:"Ich interessiere mich ___ Politik.", a:["für"]},
+  {t:'type', q:"Er hat sich ___ den Lärm beschwert.", a:["über"]},
+  {t:'order', de:"Ich freue mich auf das Wochenende.", uz:"Dam olish kunlarini intiqlik bilan kutyapman."},
+  {t:'order', de:"Wir haben lange über das Problem gesprochen.", uz:"Muammo haqida uzoq gaplashdik."}
+ ]},
+{id:'gb_konj2', lv:'B1', icon:'💭', title:"Shart mayli: würde, hätte, wäre", de:"Konjunktiv II: Höflichkeit, Wünsche, Ratschläge",
+ desc:"Bo'lsa edi..., qilardim..., mumkinmi?",
+ theory:"<b>Konjunktiv II</b> — haqiqiy bo'lmagan, orzu qilingan yoki muloyim ifoda.<br><br>Ko'p fe'llarda: <b>würde + Infinitiv</b>: Ich <b>würde</b> gern reisen. (sayohat qilardim)<br>Eng muhim maxsus shakllar:<br>haben → <b>hätte</b> · sein → <b>wäre</b> · können → <b>könnte</b> · müssen → <b>müsste</b> · sollen → <b>sollte</b> · dürfen → <b>dürfte</b><br><br><b>Shart gap</b> (bo'lmagan holat): <b>Wenn</b> ich Zeit <b>hätte</b>, <b>würde</b> ich dich besuchen.<br><b>Muloyim iltimos</b>: <b>Könnten</b> Sie mir helfen? Ich <b>hätte</b> gern einen Kaffee.<br><b>Maslahat</b>: Du <b>solltest</b> mehr schlafen. An deiner Stelle <b>würde</b> ich ...",
+ tables:[{h:["Shaxs","haben","sein","können","werden"], r:[["ich","hätte","wäre","könnte","würde"],["du","hättest","wärst","könntest","würdest"],["er / sie / es","hätte","wäre","könnte","würde"],["wir","hätten","wären","könnten","würden"],["ihr","hättet","wärt","könntet","würdet"],["sie / Sie","hätten","wären","könnten","würden"]]}],
+ ex:[["Ich würde gern nach Deutschland reisen.","Germaniyaga sayohat qilishni xohlardim."],["Wenn ich Zeit hätte, würde ich dich besuchen.","Vaqtim bo'lganida, seni ziyorat qilardim."],["Wenn ich reich wäre, würde ich ein Haus kaufen.","Boy bo'lganimda, uy sotib olardim."],["Könnten Sie mir bitte helfen?","Menga yordam bera olarmidingiz?"],["Ich hätte gern einen Kaffee.","Bir qahva olsam bo'ladimi."],["An deiner Stelle würde ich zum Arzt gehen.","Sening o'rningda bo'lganimda, shifokorga borardim."]],
+ tip:"Restoranda va do'konda <b>Ich hätte gern ...</b> va <b>Könnten Sie ...?</b> — eng muloyim va tabiiy iboralar.",
+ drill:[
+  {t:'mc', q:"Ich ___ gern nach Deutschland reisen.", o:["würde","werde","wurde"], a:0, uz:"Germaniyaga sayohat qilishni xohlardim."},
+  {t:'mc', q:"Wenn ich Zeit ___, würde ich dich besuchen.", o:["hätte","habe","hatte"], a:0, uz:"Vaqtim bo'lganida, seni ziyorat qilardim."},
+  {t:'mc', q:"Wenn ich reich ___, würde ich ein Haus kaufen.", o:["wäre","war","bin"], a:0, uz:"Boy bo'lganimda, uy sotib olardim."},
+  {t:'mc', q:"___ Sie mir bitte helfen?", o:["Könnten","Konnten","Könntet"], a:0, uz:"Menga yordam bera olarmidingiz?"},
+  {t:'mc', q:"Ich ___ gern einen Kaffee.", o:["hätte","hatte","hättest"], a:0, uz:"Bir qahva olsam bo'ladimi."},
+  {t:'mc', q:"Du ___ mehr schlafen.", o:["solltest","solltet","sollten"], a:0, uz:"Ko'proq uxlashing kerak (maslahat)."},
+  {t:'mc', q:"An deiner Stelle ___ ich zum Arzt gehen.", o:["würde","wurde","würdest"], a:0, uz:"Sening o'rningda bo'lganimda, shifokorga borardim."},
+  {t:'mc', q:"Es ___ schön, wenn du kommst.", o:["wäre","war","wärst"], a:0, uz:"Kelsang, yaxshi bo'lardi."},
+  {t:'mc', q:"Wenn wir ein Auto hätten, ___ wir ans Meer fahren.", o:["würden","wurden","werden"], a:0, uz:"Mashinamiz bo'lganida, dengizga borardik."},
+  {t:'type', q:"haben → ich ___ (Konjunktiv II)", a:["hätte"]},
+  {t:'type', q:"sein → wir ___ (Konjunktiv II)", a:["wären"]},
+  {t:'order', de:"Wenn ich mehr Zeit hätte, würde ich mehr lesen.", uz:"Ko'proq vaqtim bo'lganida, ko'proq kitob o'qirdim."},
+  {t:'order', de:"Könnten Sie mir bitte das Salz geben?", uz:"Tuzni uzatib yuborolmaysizmi?"}
+ ]},
+{id:'gb_konj2b', lv:'B1', icon:'🌠', title:"Orzu va afsus", de:"Konjunktiv II: irreale Wünsche und Vergangenheit",
+ desc:"Qani endi...! Bilganimda edi...",
+ theory:"<b>Orzu</b> (hozir haqiqatda yo'q):<br><b>Wenn</b> ich doch mehr Zeit <b>hätte</b>! · Ich <b>wünschte</b>, ich <b>könnte</b> fliegen.<br><br><b>O'tmish haqida afsus</b> (bo'lmagan voqea): <b>hätte / wäre + Partizip II</b>:<br>Wenn ich das <b>gewusst hätte</b>, <b>wäre</b> ich <b>gekommen</b>. (bilganimda edi, kelardim)<br>Perfektda haben olgan fe'l → <b>hätte</b>, sein olgan fe'l → <b>wäre</b>.<br><br><b>als ob</b> — go'yoki: Er tut so, <b>als ob</b> er alles <b>wüsste</b>.<br><b>Tanbeh</b>: Du <b>hättest</b> mir das früher sagen <b>sollen</b>. (oldinroq aytishing kerak edi)",
+ tables:[{h:["Zamon","Shakl","Misol"], r:[["Hozir","hätte / wäre / würde + Inf.","Wenn ich Zeit hätte, käme ich."],["O'tmish (haben)","hätte + Partizip II","Ich hätte dich angerufen."],["O'tmish (sein)","wäre + Partizip II","Ich wäre gekommen."],["Orzu","Wenn ... doch ...!","Wenn ich doch reich wäre!"],["Go'yoki","als ob + Konj. II","als ob er krank wäre"]]}],
+ ex:[["Wenn ich doch mehr Zeit hätte!","Qani endi ko'proq vaqtim bo'lsa!"],["Ich wünschte, ich könnte besser Deutsch sprechen.","Nemischani yaxshiroq gapira olsam edi."],["Wenn ich das gewusst hätte, wäre ich gekommen.","Buni bilganimda, kelgan bo'lardim."],["Wenn du früher gekommen wärst, hättest du ihn gesehen.","Ertaroq kelganingda, uni ko'rgan bo'larding."],["Er tut so, als ob er alles wüsste.","U o'zini hamma narsani biladigandek tutadi."],["Du hättest mir das früher sagen sollen.","Buni menga oldinroq aytishing kerak edi."]],
+ tip:"O'tmishdagi afsus = <b>hätte/wäre ... + Partizip II</b>. Ikkala qismda ham shu shakl!",
+ drill:[
+  {t:'mc', q:"Wenn ich doch mehr Zeit ___!", o:["hätte","habe","hatte"], a:0, uz:"Qani endi ko'proq vaqtim bo'lsa!"},
+  {t:'mc', q:"Ich wünschte, ich ___ besser Deutsch sprechen.", o:["könnte","kann","konnte"], a:0, uz:"Nemischani yaxshiroq gapira olsam edi."},
+  {t:'mc', q:"Wenn ich das gewusst ___, wäre ich gekommen.", o:["hätte","wäre","würde"], a:0, uz:"Buni bilganimda, kelgan bo'lardim."},
+  {t:'mc', q:"Wenn du früher gekommen ___, hättest du ihn gesehen.", o:["wärst","hättest","bist"], a:0, uz:"Ertaroq kelganingda, uni ko'rgan bo'larding."},
+  {t:'mc', q:"Ich hätte dich angerufen, aber ich ___ keine Zeit.", o:["hatte","hätte","habe"], a:0, uz:"Senga qo'ng'iroq qilardim, lekin vaqtim yo'q edi."},
+  {t:'mc', q:"Er tut so, als ob er alles ___.", o:["wüsste","wissen","gewusst"], a:0, uz:"U o'zini hamma narsani biladigandek tutadi."},
+  {t:'mc', q:"Du ___ mir das früher sagen sollen.", o:["hättest","wärst","würdest"], a:0, uz:"Buni menga oldinroq aytishing kerak edi."},
+  {t:'mc', q:"Wenn das Wetter schön gewesen ___, wären wir ans Meer gefahren.", o:["wäre","hätte","ist"], a:0, uz:"Havo yaxshi bo'lganida, dengizga borgan bo'lardik."},
+  {t:'mc', q:"Ich wäre gern mitgekommen, aber ich ___ krank.", o:["war","wäre","bin gewesen"], a:0, uz:"Birga borishni xohlardim, lekin kasal edim."},
+  {t:'type', q:"Wenn ich Geld ___, würde ich reisen. (haben)", a:["hätte"]},
+  {t:'type', q:"Ich ___ gern Arzt geworden. (sein, Konjunktiv II)", a:["wäre"]},
+  {t:'order', de:"Wenn ich das gewusst hätte, hätte ich dir geholfen.", uz:"Buni bilganimda, senga yordam bergan bo'lardim."},
+  {t:'order', de:"Ich wünschte, ich wäre jetzt am Meer.", uz:"Qani endi hozir dengiz bo'yida bo'lsam."}
+ ]},
+{id:'gb_passiv', lv:'B1', icon:'🏗️', title:"Majhul nisbat: Passiv", de:"Passiv Präsens",
+ desc:"Uy qurilyapti — kim qurayotgani muhim emas",
+ theory:"<b>Passiv</b>da harakatni <b>kim</b> qilayotgani emas, <b>nima</b> bo'layotgani muhim. O'zbekchadagi <b>-il / -in</b> ga o'xshaydi: qurilyapti, gapiriladi.<br><br>Yasalishi: <b>werden + Partizip II</b> (gap oxirida):<br>Das Haus <b>wird</b> gebaut. Die Briefe <b>werden</b> verschickt.<br><br>Bajaruvchini aytmoqchi bo'lsak — <b>von + Dativ</b>: Das Essen wird <b>von</b> meiner Mutter gekocht.<br><br>Modal fe'l bilan: Modal + Partizip II + <b>werden</b>: Die Rechnung <b>muss</b> bezahlt <b>werden</b>.",
+ tables:[{h:["Aktiv","Passiv"], r:[["Man baut das Haus.","Das Haus wird gebaut."],["Der Arzt untersucht den Patienten.","Der Patient wird vom Arzt untersucht."],["Man spricht hier Deutsch.","Hier wird Deutsch gesprochen."],["Man muss die Rechnung bezahlen.","Die Rechnung muss bezahlt werden."]]},
+  {h:["Shaxs","werden"], r:[["ich","werde"],["du","wirst"],["er / sie / es","wird"],["wir","werden"],["ihr","werdet"],["sie / Sie","werden"]]}],
+ ex:[["Das Haus wird gebaut.","Uy qurilmoqda."],["In Österreich wird Deutsch gesprochen.","Avstriyada nemis tilida gapiriladi."],["Der Patient wird vom Arzt untersucht.","Bemor shifokor tomonidan tekshirilmoqda."],["Hier wird nicht geraucht!","Bu yerda chekilmaydi!"],["Die Briefe werden heute verschickt.","Xatlar bugun jo'natiladi."],["Die Rechnung muss heute bezahlt werden.","Hisob bugun to'lanishi kerak."]],
+ tip:"Yangiliklar, yo'riqnomalar va retseptlarda Passiv juda ko'p: <b>Die Zwiebeln werden geschnitten.</b> — Piyoz to'g'raladi.",
+ drill:[
+  {t:'mc', q:"Das Haus ___ gebaut.", o:["wird","werden","wirst"], a:0, uz:"Uy qurilmoqda."},
+  {t:'mc', q:"Die Briefe ___ heute verschickt.", o:["werden","wird","werdet"], a:0, uz:"Xatlar bugun jo'natiladi."},
+  {t:'mc', q:"In Österreich ___ Deutsch gesprochen.", o:["wird","werden","wirst"], a:0, uz:"Avstriyada nemis tilida gapiriladi."},
+  {t:'mc', q:"Der Patient wird vom Arzt ___.", o:["untersucht","untersuchen","untersuchte"], a:0, uz:"Bemor shifokor tomonidan tekshirilmoqda."},
+  {t:'mc', q:"Das Essen wird ___ meiner Mutter gekocht.", o:["von","mit","bei"], a:0, uz:"Ovqatni onam pishiradi."},
+  {t:'mc', q:"Hier ___ nicht geraucht!", o:["wird","werden","ist"], a:0, uz:"Bu yerda chekilmaydi!"},
+  {t:'mc', q:"Wann ___ die Geschäfte geöffnet?", o:["werden","wird","werdet"], a:0, uz:"Do'konlar qachon ochiladi?"},
+  {t:'mc', q:"Die Rechnung muss heute bezahlt ___.", o:["werden","wird","worden"], a:0, uz:"Hisob bugun to'lanishi kerak."},
+  {t:'mc', q:"Die Kartoffeln werden zuerst ___.", o:["gewaschen","waschen","wäscht"], a:0, uz:"Kartoshka avval yuviladi."},
+  {t:'type', q:"bauen → Die Brücke wird ___.", a:["gebaut"]},
+  {t:'type', q:"Die Kinder ___ abgeholt. (werden, Präsens)", a:["werden"]},
+  {t:'order', de:"Das Auto wird morgen repariert.", uz:"Mashina ertaga ta'mirlanadi."},
+  {t:'order', de:"In der Schweiz werden vier Sprachen gesprochen.", uz:"Shveytsariyada to'rtta tilda gapiriladi."}
+ ]},
+{id:'gb_passiv2', lv:'B1', icon:'🏛️', title:"Passiv: o'tgan zamon", de:"Passiv Präteritum und Perfekt",
+ desc:"Muzey 1900-yilda qurilgan",
+ theory:"<b>Präteritum Passiv</b>: <b>wurde + Partizip II</b> — tarix, yangiliklar uchun:<br>Das Haus <b>wurde</b> 1990 gebaut. Die Bücher <b>wurden</b> verkauft.<br><br><b>Perfekt Passiv</b>: <b>sein + Partizip II + worden</b> (geworden emas!):<br>Die Stadt <b>ist</b> im Krieg zerstört <b>worden</b>.<br><br><b>Modal fe'l</b> bilan o'tgan zamon: Das Problem <b>musste</b> gelöst <b>werden</b>.<br><br><b>Taqqoslang:</b> Er ist Arzt <b>geworden</b> (shifokor bo'ldi) — Er ist operiert <b>worden</b> (operatsiya qilindi).",
+ tables:[{h:["Zamon","Shakl","Misol"], r:[["Präsens","wird + P II","Das Haus wird gebaut."],["Präteritum","wurde + P II","Das Haus wurde gebaut."],["Perfekt","ist + P II + worden","Das Haus ist gebaut worden."],["Modal","muss + P II + werden","Das Haus muss gebaut werden."]]},
+  {h:["Shaxs","wurde"], r:[["ich","wurde"],["du","wurdest"],["er / sie / es","wurde"],["wir","wurden"],["ihr","wurdet"],["sie / Sie","wurden"]]}],
+ ex:[["Das Museum wurde im Jahr 1900 gebaut.","Muzey 1900-yilda qurilgan."],["Amerika wurde 1492 von Kolumbus entdeckt.","Amerika 1492-yilda Kolumb tomonidan kashf etilgan."],["Die Stadt ist im Krieg zerstört worden.","Shahar urushda vayron qilingan."],["Ich bin zum Geburtstag eingeladen worden.","Meni tug'ilgan kunga taklif qilishdi."],["Das Problem muss schnell gelöst werden.","Muammo tezda hal qilinishi kerak."],["Die Bücher wurden alle verkauft.","Kitoblarning hammasi sotildi."]],
+ tip:"Passiv Perfektda doim <b>worden</b> — «ge-» siz!",
+ drill:[
+  {t:'mc', q:"Das Haus ___ 1990 gebaut.", o:["wurde","wird","würde"], a:0, uz:"Uy 1990-yilda qurilgan."},
+  {t:'mc', q:"Die Stadt ist im Krieg zerstört ___.", o:["worden","geworden","werden"], a:0, uz:"Shahar urushda vayron qilingan."},
+  {t:'mc', q:"Der Brief ___ gestern geschrieben.", o:["wurde","wurden","worden"], a:0, uz:"Xat kecha yozildi."},
+  {t:'mc', q:"Die Bücher ___ alle verkauft.", o:["wurden","wurde","worden"], a:0, uz:"Kitoblarning hammasi sotildi."},
+  {t:'mc', q:"Das Problem muss schnell gelöst ___.", o:["werden","worden","wurde"], a:0, uz:"Muammo tezda hal qilinishi kerak."},
+  {t:'mc', q:"Ich bin zum Geburtstag eingeladen ___.", o:["worden","geworden","werden"], a:0, uz:"Meni tug'ilgan kunga taklif qilishdi."},
+  {t:'mc', q:"Das Fenster ___ nicht geöffnet werden.", o:["kann","wird","ist"], a:0, uz:"Derazani ochib bo'lmaydi."},
+  {t:'mc', q:"Amerika wurde 1492 von Kolumbus ___.", o:["entdeckt","entdecken","entdeckte"], a:0, uz:"Amerika 1492-yilda Kolumb tomonidan kashf etilgan."},
+  {t:'mc', q:"Er ist Arzt ___.", o:["geworden","worden","werden"], a:0, uz:"U shifokor bo'ldi."},
+  {t:'type', q:"Das Auto ___ gestern repariert. (Präteritum)", a:["wurde"]},
+  {t:'type', q:"Der Dieb ist gefangen ___. (Perfekt Passiv)", a:["worden"]},
+  {t:'order', de:"Das Museum wurde im Jahr 1900 gebaut.", uz:"Muzey 1900-yilda qurilgan."},
+  {t:'order', de:"Die Hausaufgaben müssen bis morgen gemacht werden.", uz:"Uy vazifasi ertagacha bajarilishi kerak."}
+ ]},
+{id:'gb_genitiv', lv:'B1', icon:'🔑', title:"Qaratqich: Genitiv", de:"Genitiv: des, der; wegen, trotz, während",
+ desc:"Otamning mashinasi, yomg'ir tufayli",
+ theory:"<b>Genitiv</b> — egalikni bildiradi (o'zbekchada <b>-ning</b>): das Auto <b>des Vaters</b> = otaning mashinasi.<br><br>Artikllar: erkak va o'rta jins → <b>des</b> (+ otga <b>-s / -es</b>): des Mann<b>es</b>, des Kind<b>es</b>, des Lehrer<b>s</b>.<br>Ayol jinsi va ko'plik → <b>der</b> (otga qo'shimcha yo'q): der Frau, der Kinder.<br><br>Ismlar: <b>Marias</b> Handy, <b>Peters</b> Auto.<br>Og'zaki nutqda ko'pincha <b>von + Dativ</b>: das Auto <b>von meinem Vater</b>.<br><br>Genitiv talab qiladigan predloglar: <b>wegen</b> (tufayli), <b>trotz</b> (qaramay), <b>während</b> (davomida), <b>statt</b> (o'rniga), <b>innerhalb</b> (ichida).",
+ tables:[{h:["","erkak","ayol","o'rta","ko'plik"], r:[["aniq","des Mannes","der Frau","des Kindes","der Kinder"],["noaniq","eines Mannes","einer Frau","eines Kindes","—"],["egalik","meines Vaters","meiner Mutter","meines Kindes","meiner Eltern"]]},
+  {h:["Predlog","Ma'nosi","Misol"], r:[["wegen","tufayli","wegen des Regens"],["trotz","qaramay","trotz der Kälte"],["während","davomida","während des Unterrichts"],["statt","o'rniga","statt des Autos"],["innerhalb","ichida","innerhalb einer Woche"]]}],
+ ex:[["Das ist das Auto meines Vaters.","Bu otamning mashinasi."],["Die Farbe der Tasche gefällt mir.","Sumkaning rangi menga yoqadi."],["Wegen des Regens bleiben wir zu Hause.","Yomg'ir tufayli uyda qolamiz."],["Trotz der Kälte gehen wir spazieren.","Sovuqqa qaramay sayrga chiqamiz."],["Während des Unterrichts darf man nicht telefonieren.","Dars davomida telefonda gaplashish mumkin emas."],["Das ist Marias Handy.","Bu Mariyaning telefoni."]],
+ tip:"Erkak va o'rta jinsda <b>ikki</b> joy o'zgaradi: <b>des</b> Vater<b>s</b>. Ayol jinsida faqat artikl: <b>der</b> Mutter.",
+ drill:[
+  {t:'mc', q:"Das ist das Auto ___ Vaters.", o:["des","der","dem"], a:0, uz:"Bu otaning mashinasi."},
+  {t:'mc', q:"Die Farbe ___ Tasche gefällt mir.", o:["der","des","die"], a:0, uz:"Sumkaning rangi menga yoqadi."},
+  {t:'mc', q:"Wegen ___ Regens bleiben wir zu Hause.", o:["des","dem","der"], a:0, uz:"Yomg'ir tufayli uyda qolamiz."},
+  {t:'mc', q:"Trotz ___ Kälte gehen wir spazieren.", o:["der","die","des"], a:0, uz:"Sovuqqa qaramay sayrga chiqamiz."},
+  {t:'mc', q:"Während ___ Unterrichts darf man nicht telefonieren.", o:["des","dem","der"], a:0, uz:"Dars davomida telefonda gaplashish mumkin emas."},
+  {t:'mc', q:"Das ist das Zimmer ___ Kinder.", o:["der","den","des"], a:0, uz:"Bu bolalarning xonasi."},
+  {t:'mc', q:"Der Name des ___ ist Peter.", o:["Lehrers","Lehrer","Lehrern"], a:0, uz:"O'qituvchining ismi Peter."},
+  {t:'mc', q:"Das ist ___ Handy.", o:["Marias","Maria","Mariae"], a:0, uz:"Bu Mariyaning telefoni."},
+  {t:'mc', q:"Das ist das Fahrrad ___ Bruders.", o:["meines","meinem","meiner"], a:0, uz:"Bu akamning velosipedi."},
+  {t:'type', q:"der Vater → das Haus ___ Vaters", a:["des"]},
+  {t:'type', q:"Wegen ___ Arbeit habe ich keine Zeit. (die Arbeit)", a:["der"]},
+  {t:'order', de:"Wegen des schlechten Wetters bleiben wir zu Hause.", uz:"Yomon ob-havo tufayli uyda qolamiz."},
+  {t:'order', de:"Das ist das Fahrrad meines Bruders.", uz:"Bu akamning velosipedi."}
+ ]}
+]);
+
+GRAM = GRAM.concat(GRAM_B1);
 var GRAM_MAP = {}; GRAM.forEach(function(g){ GRAM_MAP[g.id]=g; });
 var LEVELS = [['A1',"Boshlang'ich"],['A2',"Elementar"],['B1',"O'rta"]];
 var B1_TOPICS = ["Konjunktiv II: würde, hätte, wäre, könnte","Passiv: Das Haus wird gebaut","Nisbiy gaplar: der Mann, der...","Präteritum: barcha fe'llar","Plusquamperfekt","Genitiv","als / wenn / bevor / nachdem / während","zu + Infinitiv, um ... zu, damit","Bilvosita savollar: ob, wann, wo...","Predlogli fe'llar va da-/wo- so'zlari","obwohl, trotzdem, deshalb","Sifat qo'shimchalari (to'liq)"];
@@ -5133,7 +7525,7 @@ var B1_TOPICS = ["Konjunktiv II: würde, hätte, wäre, könnte","Passiv: Das Ha
 UNITS[3].nodes[0].certLv = 'A1';
 UNITS.forEach(function(u){ u.lv = u.lv || 'A1'; });
 function gNode(id){ var g=GRAM_MAP[id]; return {id:id, type:'grammar', icon:g.icon, title:g.title, desc:g.desc+'. Avval darsni o\'qing, keyin 10 ta mashq — o\'tish uchun 70%.', learn:['gram',id], pass:70}; }
-function vNode(cat){ var c=VOCAB.filter(function(x){ return x.id===cat; })[0]; return {id:'v_'+cat, type:'vocab', cat:cat, icon:c.icon, title:"So'zlar: "+c.title.replace(/ \(A2\)$/,''), desc:c.w.length+" ta so'z. Avval lug'atda ko'rib chiqing, keyin 12 ta savol — o'tish uchun 70%.", learn:['vocab',cat], pass:70}; }
+function vNode(cat){ var c=VOCAB.filter(function(x){ return x.id===cat; })[0]; return {id:'v_'+cat, type:'vocab', cat:cat, icon:c.icon, title:"So'zlar: "+c.title.replace(/ \((A2|B1)\)$/,''), desc:c.w.length+" ta so'z. Avval lug'atda ko'rib chiqing, keyin 12 ta savol — o'tish uchun 70%.", learn:['vocab',cat], pass:70}; }
 function eNode(id, title, gram, cats){ return {id:id, type:'exam', icon:'🏆', title:title, desc:"Bo'lim bo'yicha 15 ta aralash savol (grammatika va so'zlar). O'tish uchun 80% kerak.", spec:{gram:gram, cats:cats}, n:15, pass:80}; }
 var A2_UNITS = [
  {id:'u5', no:5, lv:'A2', title:"O'tgan zamon", desc:"Kecha nima qildingiz? Perfekt va Präteritum", color:'#E2503F', nodes:[
@@ -5150,9 +7542,29 @@ var A2_UNITS = [
    eNode('exam8', "8-bo'lim imtihoni", ['g_komp','g_poss','g_imp','g_adj','g_futur'], ['a2sifat','a2his','a2odam','a2tabiat','a2kichik'])]},
  {id:'u9', no:9, lv:'A2', title:"A2 yakuniy imtihoni", desc:"A2 grammatikasi va so'zlari bo'yicha 30 ta savol", color:'#14213D', nodes:[
    {id:'a2final', type:'final', certLv:'A2', icon:'👑', title:"A2 imtihoni", desc:"A2 bo'yicha 30 ta savol. 80% va undan yuqori natija — A2 sertifikati!",
-    spec:{gram:GRAM.map(function(g){ return g.id; }), cats:['a2feyl','a2sifat','a2kundalik','a2uy','a2shahar','a2ish','a2his','a2kichik']}, n:30, pass:80}]}
+    spec:{gram:GRAM.filter(function(g){ return g.lv==='A2'; }).map(function(g){ return g.id; }), cats:['a2feyl','a2sifat','a2kundalik','a2uy','a2shahar','a2ish','a2his','a2kichik']}, n:30, pass:80}]}
 ];
 A2_UNITS.forEach(function(u){ UNITS.push(u); u.nodes.forEach(function(n){ n.unit=u; NODES.push(n); }); });
+
+/* ---------- B1 bosqichlari ---------- */
+var B1_UNITS = [
+ {id:'u10', no:10, lv:'B1', title:"Hikoya qilish", desc:"Präteritum, Plusquamperfekt va vaqt bog'lovchilari", color:'#E2503F', nodes:[
+   gNode('gb_prat'), vNode('b1feyl'), gNode('gb_plusq'), vNode('b1vaqt'), gNode('gb_temporal'), vNode('b1his'), vNode('b1shahar'), vNode('b1hodisa'),
+   eNode('exam10', "10-bo'lim imtihoni", ['gb_prat','gb_plusq','gb_temporal'], ['b1feyl','b1vaqt','b1his','b1shahar','b1hodisa'])]},
+ {id:'u11', no:11, lv:'B1', title:"Murakkab gaplar", desc:"Nisbiy gaplar, obwohl / trotzdem, juft bog'lovchilar", color:'#2B4583', nodes:[
+   gNode('gb_relativ'), vNode('b1uy'), gNode('gb_relativ2'), vNode('b1ovqat'), gNode('gb_konnek'), vNode('b1sogliq'), gNode('gb_doppel'), vNode('b1kiyim'), vNode('b1pul'), vNode('b1kichik'),
+   eNode('exam11', "11-bo'lim imtihoni", ['gb_relativ','gb_relativ2','gb_konnek','gb_doppel'], ['b1uy','b1ovqat','b1sogliq','b1kiyim','b1pul','b1kichik'])]},
+ {id:'u12', no:12, lv:'B1', title:"Maqsad va fikr", desc:"zu + Infinitiv, um ... zu, bilvosita savollar, predlogli fe'llar", color:'#B8893F', nodes:[
+   gNode('gb_infzu'), vNode('b1ish'), gNode('gb_umzu'), vNode('b1talim'), gNode('gb_indirekt'), vNode('b1ofis'), gNode('gb_verbprap'), vNode('b1media'), vNode('b1verb'),
+   eNode('exam12', "12-bo'lim imtihoni", ['gb_infzu','gb_umzu','gb_indirekt','gb_verbprap'], ['b1ish','b1talim','b1ofis','b1media','b1verb'])]},
+ {id:'u13', no:13, lv:'B1', title:"Shart, orzu va passiv", desc:"Konjunktiv II, Passiv va Genitiv", color:'#1E3160', nodes:[
+   gNode('gb_konj2'), vNode('b1sifat'), gNode('gb_konj2b'), vNode('b1abstrakt'), gNode('gb_passiv'), vNode('b1jamiyat'), gNode('gb_passiv2'), vNode('b1tabiat'), gNode('gb_genitiv'), vNode('b1madaniyat'), vNode('b1ibora'),
+   eNode('exam13', "13-bo'lim imtihoni", ['gb_konj2','gb_konj2b','gb_passiv','gb_passiv2','gb_genitiv'], ['b1sifat','b1abstrakt','b1jamiyat','b1tabiat','b1madaniyat','b1ibora'])]},
+ {id:'u14', no:14, lv:'B1', title:"B1 yakuniy imtihoni", desc:"B1 grammatikasi va so'zlari bo'yicha 30 ta savol", color:'#14213D', nodes:[
+   {id:'b1final', type:'final', certLv:'B1', icon:'🏆', title:"B1 imtihoni", desc:"B1 bo'yicha 30 ta savol. 80% va undan yuqori natija — B1 sertifikati!",
+    spec:{gram:GRAM_B1.map(function(g){ return g.id; }), cats:['b1feyl','b1sifat','b1his','b1ish','b1abstrakt','b1kichik','b1verb','b1ibora']}, n:30, pass:80}]}
+];
+B1_UNITS.forEach(function(u){ UNITS.push(u); u.nodes.forEach(function(n){ n.unit=u; NODES.push(n); }); });
 function unitLabel(u){ return u.nodes.length===1 && u.nodes[0].type==='final' ? u.lv+' yakuniy' : u.no+'-bo\'lim'; }
 function lvNodes(lv){ return NODES.filter(function(n){ return n.unit.lv===lv; }); }
 function lvDone(lv){ return lvNodes(lv).filter(function(n){ return nodeIsDone(n.id); }).length; }
@@ -5231,7 +7643,7 @@ startNodeTest = function(id, back){
 var _nodeFinishedA1 = nodeFinished;
 nodeFinished = function(n, pct){
   var b = _nodeFinishedA1(n, pct);
-  if(n.type==='final' && pct>=n.pass){ QZ.cert = n.certLv || 'A1'; if(n.certLv==='A2' && !state.flags.a2) state.flags.a2 = dayKey(); }
+  if(n.type==='final' && pct>=n.pass){ QZ.cert = n.certLv || 'A1'; if(n.certLv==='A2' && !state.flags.a2) state.flags.a2 = dayKey(); if(n.certLv==='B1' && !state.flags.b1) state.flags.b1 = dayKey(); }
   return b;
 };
 
@@ -5259,14 +7671,14 @@ applyPlacement = function(){
 
 /* ---------- Yo'l: darajalar bo'yicha ---------- */
 var pathLv = null;
-function curLevel(){ var c=currentNode(); return c ? c.unit.lv : 'A2'; }
+function curLevel(){ var c=currentNode(); return c ? c.unit.lv : 'B1'; }
 function pathTabsHtml(){
   var lv = pathLv || curLevel();
   var h='<div class="lvtabs">'+LEVELS.map(function(L){
     var nodes=lvNodes(L[0]), done=lvDone(L[0]), soon=!nodes.length;
     return '<button class="lvtab '+(lv===L[0]?'on':'')+'" data-act="pathLv" data-p="'+L[0]+'"><b>'+L[0]+'</b><small>'+(soon?'Tez orada':done+' / '+nodes.length)+'</small><i style="width:'+(soon?0:done/nodes.length*100)+'%"></i></button>';
   }).join('')+'</div>';
-  if(lv==='B1') return h + '<div class="card soon"><div style="font-size:46px">🚧</div><h3 class="serif" style="color:var(--navy);font-size:22px">B1 darajasi tayyorlanmoqda</h3><p class="muted">Keyingi yangilanishda qo\'shiladi. A2 ni tugatib turing — B1 ochilganda shu yerdan davom etasiz.</p><div class="chips" style="justify-content:center">'+B1_TOPICS.map(function(t){ return '<span class="chip">'+esc(t)+'</span>'; }).join('')+'</div></div>';
+  if(lv==='B1' && !nodeIsDone('a2final') && lvDone('B1')===0) h += '<div class="tip n" style="max-width:560px;margin:0 auto 18px">🔒 B1 bosqichlari <b>A2 yakuniy imtihonidan</b> keyin ochiladi. B1 grammatika darslarini esa hozir ham o\'qishingiz mumkin — 🧩 <b>Grammatika</b> bo\'limida.</div>';
   if(lv==='A2' && !nodeIsDone('final') && lvDone('A2')===0) h += '<div class="tip n" style="max-width:560px;margin:0 auto 18px">🔒 A2 bosqichlari <b>A1 yakuniy imtihonidan</b> keyin ochiladi. Grammatika darslarini esa hozir ham o\'qishingiz mumkin — 🧩 <b>Grammatika</b> bo\'limida.</div>';
   return h + pathHtml(lv);
 }
@@ -5402,23 +7814,21 @@ AFTER.quiz = function(){
 var gramTab = null;
 VIEWS.grammar = function(p){
   if(p) gramTab=p;
-  var tab = gramTab || (curLevel()==='A1' ? 'A1' : 'A2');
+  var tab = gramTab || curLevel();
   var h = pageHead("Grammatik", "Grammatika", "A1 dan B1 gacha — har bir mavzu tushuntirish, jadval, ovozli misollar va mashqlar bilan.");
   h += '<div class="tabs" style="margin-bottom:20px">'+LEVELS.map(function(L){ return '<button class="'+(tab===L[0]?'on':'')+'" data-act="gramTab" data-p="'+L[0]+'">'+L[0]+' · '+L[1]+'</button>'; }).join('')+'</div>';
   if(tab==='A1'){
-    h += '<div class="tip n" style="margin-bottom:16px">A1 — kundalik gapirish uchun eng zarur 9 ta qoida. Har bir misolni tinglang.</div><div class="grid g2">';
-    GRAMMAR.forEach(function(g){
+    h += '<div class="tip n" style="margin-bottom:16px">A1 — kundalik gapirish uchun eng zarur 9 ta qoida. Har bir qoidadan keyin misol gaplar bor: 🔊 tinglang, 🐢 sekin eshiting, 🎤 o\'zingiz aytib ko\'ring.</div><div class="grid g2">';
+    GRAMMAR.forEach(function(g, gi){
       h += '<div class="card"><h3 style="color:var(--navy);font-size:20px">'+g.t+'</h3><p class="muted" style="margin:8px 0 0">'+g.text+'</p>';
       if(g.rows){ h += '<table class="gtbl"><tr><th>Nemischa</th><th>O\'zbekcha</th></tr>'+g.rows.map(function(r){ return '<tr><td class="de">'+spk(r[0].replace(' / ',', '),'sm')+' &nbsp;'+esc(r[0])+'</td><td>'+esc(r[1])+'</td></tr>'; }).join('')+'</table>'; }
-      if(g.ex){ h += '<div class="mt">'+g.ex.map(function(e){ return '<div class="ex-row">'+spk(e[0].replace(' — ',', '),'sm')+'<div><div class="de">'+esc(e[0])+'</div><div class="uz">'+esc(e[1])+'</div></div></div>'; }).join('')+'</div>'; }
+      if(g.ex){ h += '<div class="ex-h">✏️ Misollar</div><div>'+g.ex.map(function(e,k){ return '<div class="ex-row">'+spk(e[0],'sm')+'<div style="flex:1;min-width:0"><div class="de">'+esc(e[0])+'</div><div class="uz">'+esc(e[1])+'</div></div>'+spkSlow(e[0],'sm')+(PRON.supported()?'<button class="spk sm mic-s" data-act="gramPronA1" data-g="'+gi+'" data-i="'+k+'" title="Talaffuzni tekshirish">🎤</button>':'')+'</div>'; }).join('')+'</div>'; }
       h += '</div>';
     });
     return h+'</div>';
   }
-  if(tab==='B1'){
-    return h+'<div class="card soon"><div style="font-size:46px">🚧</div><h3 class="serif" style="color:var(--navy);font-size:22px">B1 grammatikasi tayyorlanmoqda</h3><p class="muted">Keyingi yangilanishda quyidagi mavzular qo\'shiladi:</p><div class="chips" style="justify-content:center">'+B1_TOPICS.map(function(t){ return '<span class="chip">'+esc(t)+'</span>'; }).join('')+'</div></div>';
-  }
-  A2_UNITS.filter(function(u){ return u.nodes.some(function(n){ return n.type==='grammar'; }); }).forEach(function(u){
+  if(tab==='B1') h += '<div class="tip n" style="margin-bottom:16px">B1 — mustaqil gapirish darajasi: hikoya qilish, fikr bildirish, murakkab gaplar. Har bir darsni tartib bilan o\'ting.</div>';
+  (tab==='B1' ? B1_UNITS : A2_UNITS).filter(function(u){ return u.nodes.some(function(n){ return n.type==='grammar'; }); }).forEach(function(u){
     h += '<h2 class="sec-t">'+u.no+'-bo\'lim: '+esc(u.title)+'</h2><div class="grid g3">';
     u.nodes.filter(function(n){ return n.type==='grammar'; }).forEach(function(n){
       var g=GRAM_MAP[n.id], sc=nodeScore(n.id), done=nodeIsDone(n.id);
@@ -5430,7 +7840,7 @@ VIEWS.grammar = function(p){
 };
 VIEWS.gram = function(id){
   var g=GRAM_MAP[id] || GRAM[0], idx=GRAM.indexOf(g), sc=nodeScore(g.id);
-  var h = backBtn('grammar','Grammatika', 'A2') + pageHead(g.icon+' '+g.lv+' · '+esc(g.de), esc(g.title), esc(g.desc),
+  var h = backBtn('grammar','Grammatika', g.lv) + pageHead(g.icon+' '+g.lv+' · '+esc(g.de), esc(g.title), esc(g.desc),
     '<button class="btn btn-c" data-act="gramTest" data-p="'+g.id+'">📝 Mashq qilish</button>');
   h += '<div class="card gtheory"><h3 class="serif">📖 Qoida</h3><div class="gtxt">'+g.theory+'</div></div>';
   (g.tables||[]).forEach(function(t){
@@ -5456,7 +7866,7 @@ VIEWS.vocab = function(p){
   if(p && p!=='all'){ var c=VOCAB.filter(function(x){ return x.id===p; })[0]; if(c){ vocabCat=p; vocabLv=c.lv||'A1'; vocabLimit=120; } }
   var cats = VOCAB.filter(function(c){ return (c.lv||'A1')===vocabLv; });
   var lvCount = ALLW.filter(function(w){ return w.lv===vocabLv; }).length;
-  var h = pageHead("Wortschatz", "Lug'at", ALLW.length+" ta so'z: A1 — "+ALLW.filter(function(w){ return w.lv==='A1'; }).length+", A2 — "+ALLW.filter(function(w){ return w.lv==='A2'; }).length+". Otlarni doim artikli bilan yodlang. ✓ — o'rganilgan so'zlar.",
+  var h = pageHead("Wortschatz", "Lug'at", ALLW.length+" ta so'z: A1 — "+ALLW.filter(function(w){ return w.lv==='A1'; }).length+", A2 — "+ALLW.filter(function(w){ return w.lv==='A2'; }).length+", B1 — "+ALLW.filter(function(w){ return w.lv==='B1'; }).length+". Otlarni doim artikli bilan yodlang. ✓ — o'rganilgan so'zlar.",
     '<button class="btn btn-c" data-act="startFlash">🃏 Kartochkalar</button>');
   h += '<div class="tabs" style="margin-bottom:14px">'+LEVELS.map(function(L){ var n=ALLW.filter(function(w){ return w.lv===L[0]; }).length; return '<button class="'+(vocabLv===L[0]?'on':'')+'" data-act="vocabLv" data-p="'+L[0]+'">'+L[0]+' <small style="opacity:.7">'+(n?n:'tez orada')+'</small></button>'; }).join('')+'</div>';
   if(!cats.length) return h+'<div class="card soon"><div style="font-size:46px">🚧</div><h3 class="serif" style="color:var(--navy)">B1 so\'zlari tayyorlanmoqda</h3><p class="muted">Keyingi yangilanishda qo\'shiladi.</p></div>';
@@ -5489,25 +7899,26 @@ VIEWS.tests = function(){
     return '<optgroup label="'+L[0]+' · '+L[1]+'">'+cats.map(function(c){ return '<option value="'+c.id+'" '+(TCFG.cat===c.id?'selected':'')+'>'+c.icon+' '+esc(c.title)+'</option>'; }).join('')+'</optgroup>';
   }).join('');
   h = h.replace(/<select class="sel" id="tCat">[\s\S]*?<\/select>/, '<select class="sel" id="tCat">'+opts+'</select>');
-  h += '<h2 class="sec-t">🧩 Grammatika mashqlari (A2)</h2><div class="grid g3">'+GRAM.map(function(g){ var sc=nodeScore(g.id); return '<button class="tile" data-act="gramTest" data-p="'+g.id+'">'+(nodeIsDone(g.id)?'<span class="tag ok done-badge">✓ '+sc+'%</span>':'')+'<div class="emo">'+g.icon+'</div><b>'+esc(g.title)+'</b><small>10 ta mashq</small></button>'; }).join('')+'</div>';
+  h += '<h2 class="sec-t">🧩 Grammatika mashqlari (A2 va B1)</h2><div class="grid g3">'+GRAM.map(function(g){ var sc=nodeScore(g.id); return '<button class="tile" data-act="gramTest" data-p="'+g.id+'">'+(nodeIsDone(g.id)?'<span class="tag ok done-badge">✓ '+sc+'%</span>':'')+'<div class="emo">'+g.icon+'</div><b>'+esc(g.title)+'</b><small>'+g.lv+' · 10 ta mashq</small></button>'; }).join('')+'</div>';
   return h;
 };
 
 /* ---------- Sertifikat: daraja bo'yicha ---------- */
 var _certView = VIEWS.cert;
 VIEWS.cert = function(p){
-  var lv = p==='A2' ? 'A2' : 'A1';
+  var lv = (p==='A2'||p==='B1') ? p : 'A1';
   if(lv==='A1') return _certView();
-  if(!nodeIsDone('a2final')){
-    return backBtn('home','Bosh sahifa')+'<div class="card result" style="max-width:520px;margin:20px auto"><div style="font-size:56px">🔒</div><h2 class="serif" style="color:var(--navy)">A2 sertifikati hali yopiq</h2><p class="muted">A2 bosqichlarini tugatib, A2 yakuniy imtihonidan 80% va undan yuqori natija oling.</p><button class="btn btn-c" data-act="go" data-v="home">🗺️ O\'rganish yo\'liga</button></div>';
+  var fid = lv==='B1' ? 'b1final' : 'a2final', lvName = lv==='B1' ? "B1 (o'rta)" : 'A2 (elementar)';
+  if(!nodeIsDone(fid)){
+    return backBtn('home','Bosh sahifa')+'<div class="card result" style="max-width:520px;margin:20px auto"><div style="font-size:56px">🔒</div><h2 class="serif" style="color:var(--navy)">'+lv+' sertifikati hali yopiq</h2><p class="muted">'+lv+' bosqichlarini tugatib, '+lv+' yakuniy imtihonidan 80% va undan yuqori natija oling.</p><button class="btn btn-c" data-act="go" data-v="home">🗺️ O\'rganish yo\'liga</button></div>';
   }
-  var dt = state.flags.a2 || dayKey();
+  var dt = state.flags[lv.toLowerCase()] || dayKey();
   return backBtn('stats','Statistika')+'<div class="cert"><div class="ci">'+
     '<div class="ct">SERTIFIKAT · ZERTIFIKAT</div><h1 class="serif">Deutsch Qadam</h1>'+
     '<p style="margin-top:14px">Ushbu sertifikat</p><div class="cn">'+esc(state.name||'')+'</div>'+
-    '<p>nemis tilidan <b>A2 (elementar)</b> darajasidagi o\'quv dasturini tugatib, yakuniy imtihonni muvaffaqiyatli topshirgani uchun beriladi.</p>'+
-    '<div class="seal">A2</div>'+
-    '<div class="crow"><div><b>'+nodeScore('a2final')+'%</b>Imtihon natijasi</div><div><b>'+esc(dt)+'</b>Sana</div><div><b>'+learnedCount()+'</b>O\'rganilgan so\'z</div></div>'+
+    '<p>nemis tilidan <b>'+lvName+'</b> darajasidagi o\'quv dasturini tugatib, yakuniy imtihonni muvaffaqiyatli topshirgani uchun beriladi.</p>'+
+    '<div class="seal">'+lv+'</div>'+
+    '<div class="crow"><div><b>'+nodeScore(fid)+'%</b>Imtihon natijasi</div><div><b>'+esc(dt)+'</b>Sana</div><div><b>'+learnedCount()+'</b>O\'rganilgan so\'z</div></div>'+
     '<p style="margin-top:22px;font-size:12px">Ilova ichidagi sertifikat — rasmiy hujjat emas. · made by shoxrux</p>'+
   '</div></div><p class="muted" style="text-align:center;margin-top:14px">📸 Sertifikatni ekran rasmiga olib, do\'stlaringizga ulashing!</p>';
 };
@@ -5515,10 +7926,12 @@ VIEWS.cert = function(p){
 /* ---------- Yangi yutuqlar ---------- */
 ACH.splice(7, 0,
  ['a2','🏅',"A2 sertifikati","A2 yakuniy imtihonidan o'ting", function(){ return nodeIsDone('a2final'); }],
- ['gram5','🧩',"Grammatika ustasi","5 ta A2 grammatika darsini tugating", function(){ return GRAM.filter(function(g){ return nodeIsDone(g.id); }).length>=5; }],
- ['gramAll','📐',"Barcha qoidalar","16 ta A2 grammatika darsining hammasini tugating", function(){ return GRAM.every(function(g){ return nodeIsDone(g.id); }); }]
+ ['gram5','🧩',"Grammatika ustasi","5 ta grammatika darsini tugating", function(){ return GRAM.filter(function(g){ return nodeIsDone(g.id); }).length>=5; }],
+ ['gramAll','📐',"Barcha A2 qoidalari","16 ta A2 grammatika darsining hammasini tugating", function(){ return GRAM.filter(function(g){ return g.lv==='A2'; }).every(function(g){ return nodeIsDone(g.id); }); }],
+ ['b1','🎖️',"B1 sertifikati","B1 yakuniy imtihonidan o'ting", function(){ return nodeIsDone('b1final'); }],
+ ['gramB1','🧠',"B1 grammatikasi","16 ta B1 grammatika darsining hammasini tugating", function(){ return GRAM.filter(function(g){ return g.lv==='B1'; }).every(function(g){ return nodeIsDone(g.id); }); }]
 );
-ACH.splice(ACH.length-2, 0, ['words1500','🌲',"1500 ta so'z","1500 ta so'zni o'rganing", function(){ return learnedCount()>=1500; }]);
+ACH.splice(ACH.length-2, 0, ['words1500','🌲',"1500 ta so'z","1500 ta so'zni o'rganing", function(){ return learnedCount()>=1500; }], ['words2500','🌴',"2500 ta so'z","2500 ta so'zni o'rganing", function(){ return learnedCount()>=2500; }], ['words3500','🏔️',"3500 ta so'z","3500 ta so'zni o'rganing", function(){ return learnedCount()>=3500; }]);
 
 /* =====================================================================
    SOZLAMALAR (modal)
@@ -5662,6 +8075,7 @@ var ACT = {
   vocabLv: function(el){ vocabLv=el.dataset.p; vocabCat='all'; vocabLimit=120; render(); },
   gramTab: function(el){ gramTab=el.dataset.p; render(); },
   gramTest: function(el){ var g=GRAM_MAP[el.dataset.p]; startNodeTest(g.id, ['gram', g.title, g.id]); },
+  gramPronA1: function(el){ var e=GRAMMAR[+el.dataset.g].ex[+el.dataset.i]; openPron({de:e[0], tr:'', uz:e[1]}); },
   gramPron: function(el){ var g=GRAM_MAP[el.dataset.g], e=g.ex[+el.dataset.i]; openPron({de:e[0], tr:'', uz:e[1]}); },
   qType: function(){ quizTypeCheck(); },
   qIns: function(el){ var inp=document.getElementById('qIn'); if(!inp) return; var s0=inp.selectionStart==null?inp.value.length:inp.selectionStart, e0=inp.selectionEnd==null?s0:inp.selectionEnd; inp.value=inp.value.slice(0,s0)+el.dataset.p+inp.value.slice(e0); inp.focus(); try{ inp.setSelectionRange(s0+1,s0+1); }catch(x){} },
