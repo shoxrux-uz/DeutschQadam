@@ -40,6 +40,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     /* ---- Nutqni tanish (talaffuzni tekshirish) ---- */
     private static final int REQ_MIC = 4242;
     private static final int REQ_NOTIF = 4343;
+    /** Bildirishnoma sozlamalari ochilgan — qaytganda holatni yangilaymiz */
+    private boolean notifSettingsOpened = false;
     private SpeechRecognizer recognizer;
     private String pendingListenId = null;
     private long lastLevelAt = 0;
@@ -166,8 +168,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                     if (android.os.Build.VERSION.SDK_INT >= 33
                         && checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
                         requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, REQ_NOTIF);
+                    } else if (!Notif.permitted(MainActivity.this)) {
+                        // Ruxsat oynasi chiqmaydigan holat — to'g'ridan-to'g'ri telefon sozlamasini ochamiz
+                        openNotifSettingsNow();
                     } else {
-                        sendJs("window.__notifPerm && window.__notifPerm(" + (Notif.permitted(MainActivity.this) ? 1 : 0) + ")");
+                        sendJs("window.__notifPerm && window.__notifPerm(1)");
                     }
                 }
             });
@@ -199,18 +204,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         @JavascriptInterface
         public void openNotifSettings() {
             runOnUiThread(new Runnable() {
-                @Override public void run() {
-                    try {
-                        Intent i = new Intent("android.settings.APP_NOTIFICATION_SETTINGS");
-                        i.putExtra("android.provider.extra.APP_PACKAGE", getPackageName());
-                        startActivity(i);
-                    } catch (Exception e) {
-                        try {
-                            Intent i2 = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", getPackageName(), null));
-                            startActivity(i2);
-                        } catch (Exception ignored) { }
-                    }
-                }
+                @Override public void run() { openNotifSettingsNow(); }
             });
         }
 
@@ -376,7 +370,13 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQ_NOTIF) {
             boolean ok = grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED;
-            sendJs("window.__notifPerm && window.__notifPerm(" + (ok ? 1 : 0) + ")");
+            if (ok) {
+                Notif.scheduleAll(this);
+                sendJs("window.__notifPerm && window.__notifPerm(1)");
+            } else {
+                // Oyna chiqmadi yoki rad etildi — sozlamani ochib beramiz
+                openNotifSettingsNow();
+            }
             return;
         }
         if (requestCode != REQ_MIC) return;
@@ -403,6 +403,22 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         sendJs("window.__sttError && window.__sttError('" + safeId(id) + "', " + code + ")");
     }
 
+    /** Telefonning shu ilova uchun bildirishnoma sozlamasini ochadi */
+    private void openNotifSettingsNow() {
+        notifSettingsOpened = true;
+        try {
+            Intent i = new Intent("android.settings.APP_NOTIFICATION_SETTINGS");
+            i.putExtra("android.provider.extra.APP_PACKAGE", getPackageName());
+            i.putExtra("app_package", getPackageName());
+            i.putExtra("app_uid", getApplicationInfo().uid);
+            startActivity(i);
+        } catch (Exception e) {
+            try {
+                startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", getPackageName(), null)));
+            } catch (Exception ignored) { notifSettingsOpened = false; }
+        }
+    }
+
     private void sendJs(final String js) {
         runOnUiThread(new Runnable() {
             @Override public void run() {
@@ -424,6 +440,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     @Override
     protected void onResume() {
         super.onResume();
+        if (notifSettingsOpened) {
+            notifSettingsOpened = false;
+            if (Notif.permitted(this)) Notif.scheduleAll(this);
+            sendJs("window.__notifPerm && window.__notifPerm(" + (Notif.permitted(this) ? 1 : 0) + ")");
+        }
         // Foydalanuvchi nemischa ovozni o'rnatib qaytgan bo'lsa — qayta tekshiramiz
         if (tts != null && ttsStatus == 2) {
             int r = tts.setLanguage(Locale.GERMANY);
