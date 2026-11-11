@@ -15,6 +15,16 @@ jobs:
       - name: Kodni olish
         uses: actions/checkout@v4
 
+      - name: Node.js o'rnatish (testlar uchun)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Avtomatik testlar (QA)
+        run: |
+          npm install --no-save --no-package-lock jsdom@24
+          node tests/run-tests.js
+
       - name: Java 17 o'rnatish
         uses: actions/setup-java@v4
         with:
