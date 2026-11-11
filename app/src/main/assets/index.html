@@ -573,6 +573,28 @@ html[data-theme="dark"] .heat i.l1{background:#5A2B33}html[data-theme="dark"] .h
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
 
+
+/* --- Talaffuz (mikrofon) --- */
+@keyframes micPulse{0%{box-shadow:0 0 0 0 rgba(255,107,91,.6),0 8px 0 #C9473A}100%{box-shadow:0 0 0 28px rgba(255,107,91,0),0 8px 0 #C9473A}}
+.pron{text-align:center}
+.pron .ask{font-size:14px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.pron-de{font-family:'Fraunces',Georgia,serif;font-size:28px;font-weight:800;color:var(--navy);margin:10px 0 4px;line-height:1.25;word-break:break-word}
+.pw-ok{color:var(--ok)}
+.pw-bad{color:var(--bad);text-decoration:underline wavy;text-underline-offset:5px}
+.pron-tr{color:var(--coral-d);font-style:italic;font-weight:700}
+.pron-ctrl{display:flex;gap:8px;justify-content:center;margin-top:12px}
+.mic{--lv:1;width:96px;height:96px;border-radius:50%;background:var(--coral);color:#fff;font-size:40px;display:grid;place-items:center;margin:22px auto 22px;box-shadow:0 8px 0 #C9473A,0 10px 24px rgba(255,107,91,.3);transition:transform .1s linear}
+.mic.listen{transform:scale(var(--lv));animation:micPulse 1.2s infinite}
+.mic.proc{background:var(--navy-3);box-shadow:0 8px 0 #1b2e5c}
+.pron-hint{font-weight:700;color:var(--muted);font-size:14px}
+.pron-res{display:flex;align-items:center;gap:14px;text-align:left;border-radius:16px;padding:12px 16px;margin-top:16px;animation:rise .4s ease backwards}
+.pron-res.ok{background:var(--ok-soft)}.pron-res.mid{background:var(--sand-soft)}.pron-res.bad{background:var(--bad-soft)}
+.pron-score{font-family:'Fraunces',serif;font-size:34px;font-weight:800;min-width:64px;text-align:center}
+.pron-res.ok .pron-score{color:var(--ok)}.pron-res.mid .pron-score{color:var(--sand)}.pron-res.bad .pron-score{color:var(--bad)}
+.pron-res b{color:var(--navy)}
+.pron-note{font-size:12px;color:var(--muted);margin-top:16px;line-height:1.4}
+.spk.mic-s{background:var(--nb);box-shadow:none;font-size:16px}
+
 @media (max-width:1050px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:860px){
   .app{display:block}
@@ -2101,7 +2123,7 @@ function applyState(o){
   state.settings = Object.assign({engine:'auto', rate:0.9, voice:'', theme:'', sfx:true}, o.settings||{});
   state.onboarded = !!o.onboarded; state.reason = String(o.reason||''); state.goal = +o.goal||50;
   ['days','ach','wrong','cat','path','flags'].forEach(function(k){ state[k] = (o[k] && typeof o[k]==='object') ? o[k] : {}; });
-  ['bestStreak','goalDays','quizzes','perfect','answered','correct'].forEach(function(k){ state[k] = +o[k]||0; });
+  ['bestStreak','goalDays','quizzes','perfect','answered','correct','pronOk','pronTries'].forEach(function(k){ state[k] = +o[k]||0; });
   state.ts = +o.ts||0;
 }
 /* O'rganilgan so'zlarni ixcham saqlash (har bo'lim uchun bit-maska, hex) */
@@ -2353,7 +2375,7 @@ function go(view, p, noPush, restoreY){
     HIST.push({view:current.view, p:(current.view==='numbers' ? numTab : current.p), y:(window.scrollY||window.pageYOffset||0)});
     if(HIST.length>40) HIST.shift();
   }
-  TTS.stop(); cleanup(); if(view==='game') G=null; current={view:view, p:p}; render(); closeDrawer();
+  TTS.stop(); PRON.stop(true); PR=null; cleanup(); if(view==='game') G=null; current={view:view, p:p}; render(); closeDrawer();
   var y = restoreY||0;
   window.scrollTo(0, y);
   if(y){ requestAnimationFrame(function(){ window.scrollTo(0, y); }); setTimeout(function(){ window.scrollTo(0, y); }, 60); }
@@ -2462,7 +2484,7 @@ VIEWS.lesson = function(id){
     '<div class="toolbar"><button class="btn btn-n" data-act="playLesson">▶ Hammasini tinglash</button><button class="btn btn-c" data-act="lessonQuiz" data-p="'+l.id+'">📝 Mini test</button></div>');
   h += '<div class="tip">💡 '+l.tip+'</div><div class="mt" id="phrases">';
   l.items.forEach(function(it, k){
-    h += '<div class="phr" id="ph'+k+'"><div class="txt"><div class="de">'+esc(it.de)+'</div><div class="tr">['+esc(it.tr)+']</div><div class="uz">'+esc(it.uz)+'</div></div><div class="acts">'+spk(it.de)+spkSlow(it.de)+'</div></div>';
+    h += '<div class="phr" id="ph'+k+'"><div class="txt"><div class="de">'+esc(it.de)+'</div><div class="tr">['+esc(it.tr)+']</div><div class="uz">'+esc(it.uz)+'</div></div><div class="acts">'+spk(it.de)+spkSlow(it.de)+(PRON.supported()?'<button class="spk mic-s" data-act="pron" data-l="'+l.id+'" data-i="'+k+'" title="Talaffuzni tekshirish">🎤</button>':'')+'</div></div>';
   });
   h += '</div><div class="mt2 toolbar" style="justify-content:space-between">'+
     (i>0?'<button class="btn btn-o" data-act="go" data-v="lesson" data-p="'+LESSONS[i-1].id+'">← '+esc(LESSONS[i-1].title)+'</button>':'<span></span>')+
@@ -2847,6 +2869,7 @@ var ACH = [
  ['memory','🧠',"Kuchli xotira","Juftlik o'yinida 90+ ball", function(s){ return nz(s.best.memory)>=90; }],
  ['speed','🚀',"Chaqmoq","60 soniyada 25+ ball", function(s){ return nz(s.best.speed)>=25; }],
  ['dict','✍️',"Diktant ustasi","Diktantda 10/10", function(s){ return nz(s.best.dictation)>=10; }],
+ ['pron10','🗣️',"Aniq talaffuz","10 marta 85+ ball bilan gapiring", function(s){ return nz(s.pronOk)>=10; }],
  ['night','🦉',"Tungi boyo'g'li","Soat 23:00 dan keyin o'qing", function(s){ return !!s.flags.night; }],
  ['early','🌅',"Erta turuvchi","Soat 7:00 gacha o'qing", function(s){ return !!s.flags.early; }]
 ];
@@ -3238,7 +3261,8 @@ VIEWS.home = function(){
       (weakWords().length ? '<button class="tile coral" data-act="reviewQuiz"><div class="emo">🔁</div><b>Xatolarim</b><small>'+weakWords().length+' ta so\'zni takrorlash</small></button>'
                           : '<button class="tile coral" data-act="go" data-v="tests"><div class="emo">📝</div><b>Lug\'at testi</b><small>4 xil rejim</small></button>')+
       '<button class="tile navy" data-act="go" data-v="game" data-p="memory"><div class="emo">🃏</div><b>Juftlikni top</b><small>Xotira o\'yini</small></button>'+
-      '<button class="tile" data-act="go" data-v="game" data-p="dictation"><div class="emo">🎧</div><b>Eshit va yoz</b><small>Diktant</small></button>'+
+      (PRON.supported() ? '<button class="tile" data-act="go" data-v="game" data-p="pron"><div class="emo">🎤</div><b>Talaffuz mashqi</b><small>Gapiring — ilova baholaydi</small></button>'
+                        : '<button class="tile" data-act="go" data-v="game" data-p="dictation"><div class="emo">🎧</div><b>Eshit va yoz</b><small>Diktant</small></button>')+
       '<button class="tile" data-act="go" data-v="stats"><div class="emo">📊</div><b>Statistika</b><small>Natijalarim va yutuqlar</small></button>'+
     '</div>';
   return h;
@@ -3421,7 +3445,8 @@ var GAMES = [
  ['scramble','🔀',"So'z yig'ish","Aralashgan harflardan so'zni tuzing"],
  ['sentence','🧱',"Gap tuzish","So'zlarni to'g'ri tartibda joylang"],
  ['dictation','🎧',"Eshit va yoz","Eshitgan so'zingizni yozing"],
- ['speed','⚡',"60 soniya","To'g'ri yoki noto'g'ri? Tez javob bering"]
+ ['speed','⚡',"60 soniya","To'g'ri yoki noto'g'ri? Tez javob bering"],
+ ['pron','🎤',"Talaffuz mashqi","Gapiring — ilova talaffuzingizni baholaydi"]
 ];
 VIEWS.games = function(){
   var h = pageHead("Spiele", "So'z o'yinlari", "O'ynab o'rganing! Har bir o'yinda eng yaxshi natijangiz saqlanadi.");
@@ -3652,6 +3677,208 @@ function spStart(){
   cleanups.push(function(){ clearInterval(timer); document.removeEventListener('keydown', key); });
 }
 
+/* =====================================================================
+   TALAFFUZNI TEKSHIRISH (mikrofon + nutqni tanish)
+   Android ilovada — telefonning nutqni tanish xizmati (AndroidTTS.listen),
+   brauzerda — Web Speech API (agar mavjud bo'lsa).
+   ===================================================================== */
+function levDist(a, b){
+  var m=a.length, n=b.length; if(!m) return n; if(!n) return m;
+  var prev=[], cur=[], i, j;
+  for(j=0;j<=n;j++) prev[j]=j;
+  for(i=1;i<=m;i++){
+    cur=[i];
+    for(j=1;j<=n;j++) cur[j]=Math.min(prev[j]+1, cur[j-1]+1, prev[j-1]+(a.charAt(i-1)===b.charAt(j-1)?0:1));
+    prev=cur;
+  }
+  return prev[n];
+}
+function strSim(a, b){ if(!a && !b) return 1; return 1 - levDist(a,b)/Math.max(a.length,b.length); }
+/* Solishtirish uchun matnni tekislash: kichik harf, umlaut → ae/oe/ue, raqamlar → nemischa so'z */
+function normPron(s){
+  s = String(s||'').toLowerCase().replace(/\d+/g, function(d){ var n=parseInt(d,10); return (n>=0 && n<=1000000) ? numDe(n).toLowerCase() : d; });
+  return norm(s).replace(/[-–—'’`´()\[\]]/g,' ').replace(/\s+/g,' ').trim();
+}
+/* target — namuna, alts — tanish tizimi bergan variantlar. Natija: ball (0–100), eshitilgan matn, so'zlar bo'yicha belgilar */
+function scorePron(target, alts){
+  var tokens = String(target||'').split(/\s+/).filter(Boolean);
+  var tnorm = tokens.map(normPron);
+  var full = tnorm.join('');
+  var best = {score:0, heard:'', marks:tokens.map(function(){ return false; })};
+  (alts||[]).forEach(function(alt){
+    var h = normPron(alt), hw = h.split(' ').filter(Boolean);
+    var real=0, ok=0;
+    var marks = tnorm.map(function(w){
+      if(!w) return true;
+      real++;
+      var hit = hw.some(function(x){ return x===w || (w.length>2 && strSim(x,w)>=0.75); });
+      if(hit) ok++;
+      return hit;
+    });
+    var ws = real ? ok/real : 0;
+    var cs = strSim(full, h.replace(/ /g,''));
+    var sc = Math.round(Math.max(ws, cs)*100);
+    if(sc>best.score || !best.heard) best = {score:sc, heard:alt, marks:marks};
+  });
+  return best;
+}
+
+var PRON = {
+  seq: 0, cur: null, timer: null,
+  nativeOk: function(){ try{ return !!(NATIVE && typeof window.AndroidTTS.listen==='function' && window.AndroidTTS.sttAvailable()); }catch(e){ return false; } },
+  webCtor: function(){ return window.SpeechRecognition || window.webkitSpeechRecognition || null; },
+  supported: function(){ return this.nativeOk() || !!this.webCtor(); },
+  start: function(cb){
+    var self=this; this.stop(true);
+    var id='p'+(++this.seq);
+    this.cur = {id:id, cb:cb};
+    TTS.stop();
+    clearTimeout(this.timer);
+    this.timer = setTimeout(function(){ if(self.cur && self.cur.id===id){ self.finishErr(id, 6); } }, 15000);
+    if(this.nativeOk()){
+      try{ window.AndroidTTS.listen(id); }catch(e){ this.finishErr(id, 5); }
+      return;
+    }
+    var C=this.webCtor();
+    if(!C){ this.finishErr(id, 100); return; }
+    try{
+      var r=new C(); this.web=r;
+      r.lang='de-DE'; r.maxAlternatives=5; r.interimResults=false; r.continuous=false;
+      r.onstart=function(){ window.__sttState(id,'ready'); };
+      r.onspeechstart=function(){ window.__sttState(id,'speech'); };
+      r.onresult=function(e){
+        var res=e.results[0], texts=[], conf=[];
+        for(var i=0;i<res.length;i++){ texts.push(res[i].transcript); conf.push(res[i].confidence); }
+        window.__sttResult(id, texts, conf);
+      };
+      r.onerror=function(e){
+        var m={'not-allowed':9,'service-not-allowed':9,'no-speech':6,'network':2,'audio-capture':3,'language-not-supported':12,'aborted':-1};
+        window.__sttError(id, m[e.error]!=null ? m[e.error] : 5);
+      };
+      r.onend=function(){ setTimeout(function(){ if(self.cur && self.cur.id===id) self.finishErr(id, 7); }, 400); };
+      r.start();
+    }catch(e){ this.finishErr(id, 5); }
+  },
+  stop: function(silent){
+    if(this.web){ try{ this.web.abort(); }catch(e){} this.web=null; }
+    if(NATIVE && typeof window.AndroidTTS.stopListening==='function'){ try{ window.AndroidTTS.stopListening(); }catch(e){} }
+    if(!silent && this.cur){ var c=this.cur; this.cur=null; c.cb({type:'cancel'}); }
+    this.cur=null; clearTimeout(this.timer);
+  },
+  finishErr: function(id, code){
+    if(!this.cur || this.cur.id!==id) return;
+    var c=this.cur; this.cur=null; clearTimeout(this.timer);
+    if(this.web){ try{ this.web.abort(); }catch(e){} this.web=null; }
+    c.cb({type:'error', code:code});
+  }
+};
+window.__sttState = function(id, st){ if(PRON.cur && PRON.cur.id===id) PRON.cur.cb({type:'state', state:st}); };
+window.__sttLevel = function(v){
+  var m=document.querySelector('.mic.listen'); if(!m) return;
+  var k=Math.max(0, Math.min(1, (v+2)/12));
+  m.style.setProperty('--lv', (1+k*0.18).toFixed(2));
+};
+window.__sttResult = function(id, texts, conf){
+  if(!PRON.cur || PRON.cur.id!==id) return;
+  var c=PRON.cur; PRON.cur=null; clearTimeout(PRON.timer);
+  c.cb({type:'result', texts:texts||[], conf:conf||[]});
+};
+window.__sttError = function(id, code){ if(code===-1) return; PRON.finishErr(id, code); };
+
+function sttErrText(code){
+  if(code===9) return "🎤 Mikrofon ruxsati berilmadi. Tugmani yana bosing va «Разрешить» ni tanlang.";
+  if(code===99) return "🎤 Mikrofon ruxsati o'chirilgan. Ilova sozlamalaridan «Микрофон» ruxsatini yoqing.";
+  if(code===6 || code===7) return "🤔 Ovoz eshitilmadi yoki tushunilmadi. Telefonni yaqinroq tuting va aniqroq ayting.";
+  if(code===1 || code===2 || code===4) return "📶 Internet bilan muammo. Nutqni tanish uchun internet kerak bo'lishi mumkin.";
+  if(code===3) return "🎤 Mikrofonga ulanib bo'lmadi. Boshqa ilova mikrofonni band qilmaganini tekshiring.";
+  if(code===8) return "⏳ Tanish tizimi band. Bir soniyadan keyin qayta urinib ko'ring.";
+  if(code===12 || code===13) return "🌐 Telefonda nemis tilini tanish paketi yo'q. Google ilovasini yangilab ko'ring.";
+  if(code===100) return "Bu qurilmada nutqni tanish xizmati topilmadi. Android ilovada «Google» ilovasi o'rnatilgan bo'lishi kerak.";
+  return "Nimadir xato ketdi. Yana bir bor urinib ko'ring.";
+}
+
+/* ---------- Bitta ibora uchun talaffuz kartasi ---------- */
+var PR = null;   /* {item, st:'idle'|'listen'|'proc', res, err, mode:'modal'|'game'} */
+function pronCardHtml(){
+  var it=PR.item, r=PR.res;
+  var micCls = 'mic'+(PR.st==='listen'?' listen':'')+(PR.st==='proc'?' proc':'');
+  var h = '<div class="pron">'+
+    '<div class="ask">Ayting:</div>'+
+    '<div class="pron-de">'+(r ? r.marks.map(function(ok,i){ return '<span class="'+(ok?'pw-ok':'pw-bad')+'">'+esc(it.de.split(/\s+/)[i])+'</span>'; }).join(' ') : esc(it.de))+'</div>'+
+    (it.tr?'<div class="pron-tr">['+esc(it.tr)+']</div>':'')+(it.uz?'<div class="muted">'+esc(it.uz)+'</div>':'')+
+    '<div class="pron-ctrl">'+spk(it.de)+spkSlow(it.de)+'</div>'+
+    '<button class="'+micCls+'" data-act="pronMic" aria-label="Gapirish">'+(PR.st==='proc'?'⏳':'🎤')+'</button>'+
+    '<div class="pron-hint">'+(PR.st==='listen'?'Tinglayapman... gapiring 🗣️':(PR.st==='proc'?'Tekshiryapman...':'Mikrofonni bosing va iborani ayting'))+'</div>';
+  if(r){
+    var cls = r.score>=85?'ok':(r.score>=60?'mid':'bad');
+    var msg = r.score>=85?"Ajoyib! Juda yaxshi talaffuz 🎉":(r.score>=60?"Yaxshi! Qizil so'zlarni yana bir bor mashq qiling 👍":"Yana urinib ko'ring — avval 🔊 tinglab oling 🙂");
+    h += '<div class="pron-res '+cls+'"><div class="pron-score">'+r.score+'</div><div><b>'+msg+'</b><div class="muted" style="font-size:14px">Eshitildi: «'+esc(r.heard||'—')+'»</div></div></div>';
+  }
+  if(PR.err){
+    h += '<div class="fail-msg">'+esc(sttErrText(PR.err))+(PR.err===99&&NATIVE?'<div class="mt"><button class="btn btn-o btn-s" data-act="micSettings">⚙️ Sozlamalarni ochish</button></div>':'')+'</div>';
+  }
+  h += '<div class="pron-note">🔒 Ovozingiz faqat matnga aylantirish uchun telefonning nutqni tanish xizmatiga (Google) yuboriladi. Ilova ovozni saqlamaydi.</div></div>';
+  return h;
+}
+function pronRefresh(){
+  if(!PR) return;
+  if(PR.mode==='modal'){ var b=document.getElementById('modalBody'); if(b && document.getElementById('modal').classList.contains('show')) b.innerHTML = pronCardHtml()+'<button class="btn btn-o mt" style="width:100%" data-act="closeModal">Yopish</button>'; }
+  else render();
+}
+function pronListen(){
+  if(!PR) return;
+  if(PR.st==='listen' || PR.st==='proc'){ PRON.stop(true); PR.st='idle'; pronRefresh(); return; }
+  if(!PRON.supported()){ PR.err=100; pronRefresh(); return; }
+  PR.st='listen'; PR.err=null; pronRefresh();
+  var item=PR.item, pr=PR;
+  PRON.start(function(ev){
+    if(PR!==pr) return;
+    if(ev.type==='state'){ if(ev.state==='end'){ PR.st='proc'; pronRefresh(); } return; }
+    if(ev.type==='cancel'){ PR.st='idle'; pronRefresh(); return; }
+    if(ev.type==='error'){ PR.st='idle'; PR.err=ev.code; SFX.play('bad'); pronRefresh(); return; }
+    var r=scorePron(item.de, ev.texts);
+    PR.st='idle'; PR.err=null;
+    if(!PR.res || r.score>=PR.res.score || PR.mode==='modal') PR.res=r;
+    PR.last=r;
+    state.pronTries = nz(state.pronTries)+1;
+    if(r.score>=85){ state.pronOk = nz(state.pronOk)+1; }
+    SFX.play(r.score>=60?'ok':'bad');
+    pronRefresh();
+    if(r.score>=85 && PR.mode==='modal') gainXp(5, document.querySelector('.pron-res')); else saveState();
+    checkAch();
+  });
+}
+function openPron(item){
+  PR = {item:item, st:'idle', res:null, err:null, mode:'modal'};
+  document.getElementById('modalBody').innerHTML = pronCardHtml()+'<button class="btn btn-o mt" style="width:100%" data-act="closeModal">Yopish</button>';
+  document.getElementById('modal').classList.add('show');
+}
+
+/* ---------- Talaffuz mashqi (o'yin) ---------- */
+function pronItems(){
+  var ph = allPhrases().filter(function(p){ var n=p.de.split(/\s+/).length; return n>=2 && n<=5 && p.de.indexOf('/')<0; });
+  var ws = ALLW.filter(function(w){ return wordBare(w).length>=4 && w.de.indexOf('-')<0; });
+  var a = shuffle(ph).slice(0,6).map(function(p){ return {de:p.de, tr:p.tr, uz:p.uz}; });
+  var b = shuffle(ws).slice(0,4).map(function(w){ return {de:w.de, tr:w.tr, uz:w.uz, wid:w.id}; });
+  return shuffle(a.concat(b));
+}
+GAME_VIEW.pron = function(){
+  if(!G.list){ G.list=pronItems(); G.i=0; G.scores=[]; }
+  if(G.i>=G.list.length){
+    var avg = Math.round(G.scores.reduce(function(s,x){ return s+x; },0)/G.list.length);
+    var xp = G.scores.reduce(function(s,x){ return s+(x>=85?10:(x>=60?5:0)); },0);
+    var isNew=setBest('pron', avg);
+    if(!G.xpGiven){ G.xpGiven=1; gainXp(xp); if(avg>=60) confetti(); }
+    return gameOverHtml("Mashq tugadi!", avg+' ball', xp, isNew, '<p class="muted">10 ta ibora bo\'yicha o\'rtacha talaffuz bali</p>');
+  }
+  if(!PR || PR.mode!=='game' || PR.idx!==G.i){ PR={item:G.list[G.i], st:'idle', res:null, err:null, mode:'game', idx:G.i}; }
+  var h = '<div class="qwrap"><div class="qhead"><span>'+(G.i+1)+' / '+G.list.length+'</span><span>O\'rtacha: '+(G.scores.length?Math.round(G.scores.reduce(function(s,x){return s+x;},0)/G.scores.length):0)+'</span></div><div class="pbar"><i style="width:'+(G.i/G.list.length*100)+'%"></i></div>'+
+    '<div class="qcard">'+pronCardHtml()+
+    '<div class="toolbar mt" style="justify-content:center">'+(PR.res?'<button class="btn btn-n" data-act="pronNext">Keyingi →</button>':'<button class="btn btn-o btn-s" data-act="pronSkip">O\'tkazib yuborish →</button>')+'</div></div></div>';
+  if(!PRON.supported()) h = '<div class="tip c">🎤 Bu qurilmada yoki brauzerda nutqni tanish xizmati topilmadi. Talaffuz mashqi <b>Android ilovada</b> ishlaydi (telefonda «Google» ilovasi bo\'lishi kerak).</div>'+h;
+  return h;
+};
+
 /* ---------- Grammatika ---------- */
 VIEWS.grammar = function(){
   var h = pageHead("Grammatik", "Mini grammatika", "To'liq grammatika shart emas. Bu yerda faqat kundalik gapirish uchun eng zarur 9 ta qoida — har bir misolni tinglang.");
@@ -3731,7 +3958,7 @@ function saveName(){
   if(current.view==='home') render();
   say('Hallo, '+v+'! Willkommen!');
 }
-function closeModal(){ document.getElementById('modal').classList.remove('show'); saveState(); if(current.view==='home') render(); }
+function closeModal(){ if(PR && PR.mode==='modal'){ PRON.stop(true); PR=null; } document.getElementById('modal').classList.remove('show'); saveState(); if(current.view==='home') render(); }
 
 /* =====================================================================
    HODISALAR (event delegation)
@@ -3798,6 +4025,11 @@ var ACT = {
   reviewQuiz: function(){ var qs=buildReviewQuiz(); if(!qs.length){ toast("Takrorlash uchun so'z yo'q — barakalla!"); return; } startQuiz(qs, {title:"Xatolarim", back:['stats','Statistika'], retry:buildReviewQuiz}); },
   obNext: function(){ obNext(); }, obBack: function(){ obBack(); }, obFinish: function(){ obFinish(); },
   obPick: function(el){ var k=el.dataset.k, v=el.dataset.p; OB[k] = k==='goal' ? +v : v; SFX.play('tap'); document.querySelectorAll('[data-act="obPick"][data-k="'+k+'"]').forEach(function(b){ b.classList.toggle('on', b.dataset.p===v); }); },
+  pron: function(el){ var l=LESSONS.filter(function(x){ return x.id===el.dataset.l; })[0]; if(l) openPron(l.items[+el.dataset.i]); },
+  pronMic: function(){ pronListen(); },
+  pronNext: function(){ if(!G || !PR) return; G.scores.push(PR.res?PR.res.score:0); G.i++; PR=null; render(); window.scrollTo(0,0); },
+  pronSkip: function(){ if(!G) return; PRON.stop(true); G.scores.push(0); G.i++; PR=null; render(); window.scrollTo(0,0); },
+  micSettings: function(){ if(NATIVE && typeof window.AndroidTTS.openAppSettings==='function') window.AndroidTTS.openAppSettings(); },
   celebClose: function(){ document.getElementById('celeb').classList.remove('show'); },
   setGoal: function(el){ state.goal=+el.dataset.p; saveState(); document.querySelectorAll('[data-act="setGoal"]').forEach(function(b){ b.classList.toggle('on', b.dataset.p===el.dataset.p); }); },
   setSfx: function(el){ state.settings.sfx = el.dataset.p==='on'; saveState(); document.querySelectorAll('[data-act="setSfx"]').forEach(function(b){ b.classList.toggle('on', b.dataset.p===el.dataset.p); }); if(state.settings.sfx) SFX.play('ok'); },
