@@ -1,9 +1,15 @@
 package uz.shoxrux.deutschqadam;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.speech.RecognitionListener;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
 import android.webkit.JavascriptInterface;
@@ -12,6 +18,9 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import org.json.JSONArray;
+
+import java.util.ArrayList;
 import java.util.Locale;
 
 /**
@@ -26,6 +35,12 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private TextToSpeech tts;
     /** 0 — tayyorlanmoqda, 1 — nemischa ovoz bor, 2 — nemischa ovoz yo'q, 3 — ovoz tizimi ishlamadi */
     private volatile int ttsStatus = 0;
+
+    /* ---- Nutqni tanish (talaffuzni tekshirish) ---- */
+    private static final int REQ_MIC = 4242;
+    private SpeechRecognizer recognizer;
+    private String pendingListenId = null;
+    private long lastLevelAt = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,12 +150,164 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             });
         }
 
+        /** Telefonda nutqni tanish xizmati bormi */
+        @JavascriptInterface
+        public boolean sttAvailable() {
+            try {
+                return SpeechRecognizer.isRecognitionAvailable(MainActivity.this);
+            } catch (Exception e) {
+                return false;
+            }
+        }
+
+        /** Mikrofon ruxsati berilganmi */
+        @JavascriptInterface
+        public boolean micGranted() {
+            return checkSelfPermission(Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED;
+        }
+
+        /** Tinglashni boshlash (natija window.__sttResult ga keladi) */
+        @JavascriptInterface
+        public void listen(final String id) {
+            runOnUiThread(new Runnable() {
+                @Override public void run() { startListening(id); }
+            });
+        }
+
+        /** Tinglashni to'xtatish */
+        @JavascriptInterface
+        public void stopListening() {
+            runOnUiThread(new Runnable() {
+                @Override public void run() {
+                    if (recognizer != null) {
+                        try { recognizer.stopListening(); } catch (Exception ignored) { }
+                    }
+                }
+            });
+        }
+
+        /** Ilova sozlamalarini ochish (ruxsatni qo'lda yoqish uchun) */
+        @JavascriptInterface
+        public void openAppSettings() {
+            runOnUiThread(new Runnable() {
+                @Override public void run() {
+                    try {
+                        Intent i = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                Uri.fromParts("package", getPackageName(), null));
+                        startActivity(i);
+                    } catch (Exception ignored) { }
+                }
+            });
+        }
+
         @JavascriptInterface
         public void openSettings() {
             runOnUiThread(new Runnable() {
                 @Override public void run() { openTtsSettingsNow(); }
             });
         }
+    }
+
+    /* ===================== NUTQNI TANISH ===================== */
+
+    private void startListening(String id) {
+        if (checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            pendingListenId = id;
+            requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, REQ_MIC);
+            return;
+        }
+        if (!SpeechRecognizer.isRecognitionAvailable(this)) {
+            sendSttError(id, 100);
+            return;
+        }
+        if (tts != null) tts.stop();
+        if (recognizer != null) {
+            try { recognizer.destroy(); } catch (Exception ignored) { }
+            recognizer = null;
+        }
+        final String rid = id;
+        try {
+            recognizer = SpeechRecognizer.createSpeechRecognizer(this);
+        } catch (Exception e) {
+            sendSttError(rid, 100);
+            return;
+        }
+        recognizer.setRecognitionListener(new RecognitionListener() {
+            @Override public void onReadyForSpeech(Bundle params) { sendSttState(rid, "ready"); }
+            @Override public void onBeginningOfSpeech() { sendSttState(rid, "speech"); }
+            @Override public void onRmsChanged(float rmsdB) {
+                long now = SystemClock.uptimeMillis();
+                if (now - lastLevelAt < 90) return;
+                lastLevelAt = now;
+                sendJs("window.__sttLevel && window.__sttLevel(" + rmsdB + ")");
+            }
+            @Override public void onBufferReceived(byte[] buffer) { }
+            @Override public void onEndOfSpeech() { sendSttState(rid, "end"); }
+            @Override public void onError(int error) { sendSttError(rid, error); }
+            @Override public void onResults(Bundle results) {
+                ArrayList<String> list = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                float[] conf = results.getFloatArray(SpeechRecognizer.CONFIDENCE_SCORES);
+                JSONArray texts = new JSONArray();
+                JSONArray scores = new JSONArray();
+                if (list != null) {
+                    for (int i = 0; i < list.size(); i++) {
+                        texts.put(list.get(i));
+                        try { scores.put(conf != null && i < conf.length ? (double) conf[i] : -1.0); }
+                        catch (Exception ignored) { }
+                    }
+                }
+                sendJs("window.__sttResult && window.__sttResult('" + safeId(rid) + "', " + texts.toString() + ", " + scores.toString() + ")");
+            }
+            @Override public void onPartialResults(Bundle partialResults) { }
+            @Override public void onEvent(int eventType, Bundle params) { }
+        });
+        Intent it = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        it.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        it.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "de-DE");
+        it.putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE, "de-DE");
+        it.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 5);
+        it.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, false);
+        it.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getPackageName());
+        try {
+            recognizer.startListening(it);
+        } catch (Exception e) {
+            sendSttError(rid, 5);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode != REQ_MIC) return;
+        String id = pendingListenId;
+        pendingListenId = null;
+        if (id == null) return;
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            startListening(id);
+        } else {
+            boolean canAskAgain = shouldShowRequestPermissionRationale(Manifest.permission.RECORD_AUDIO);
+            sendSttError(id, canAskAgain ? 9 : 99);
+        }
+    }
+
+    private String safeId(String id) {
+        return id == null ? "" : id.replaceAll("[^A-Za-z0-9_]", "");
+    }
+
+    private void sendSttState(String id, String st) {
+        sendJs("window.__sttState && window.__sttState('" + safeId(id) + "', '" + st + "')");
+    }
+
+    private void sendSttError(String id, int code) {
+        sendJs("window.__sttError && window.__sttError('" + safeId(id) + "', " + code + ")");
+    }
+
+    private void sendJs(final String js) {
+        runOnUiThread(new Runnable() {
+            @Override public void run() {
+                if (web != null) web.evaluateJavascript(js, null);
+            }
+        });
     }
 
     private void openTtsSettingsNow() {
@@ -182,10 +349,17 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     protected void onPause() {
         super.onPause();
         if (tts != null) tts.stop();
+        if (recognizer != null) {
+            try { recognizer.cancel(); } catch (Exception ignored) { }
+        }
     }
 
     @Override
     protected void onDestroy() {
+        if (recognizer != null) {
+            try { recognizer.destroy(); } catch (Exception ignored) { }
+            recognizer = null;
+        }
         if (tts != null) {
             tts.stop();
             tts.shutdown();
