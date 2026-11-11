@@ -794,6 +794,11 @@ html.rm #bgfx{display:none}
   .q-bz{top:-30px;right:6px}
   .hl-float.f1{font-size:38px}
 }
+.notif-plan{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.55}
+.notif-plan b{color:var(--navy)}
+#notifSt{gap:8px;align-items:center;flex-wrap:wrap}
+.upd-card{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#2B4583,#14213D);color:#fff;border-radius:18px;padding:14px 16px;margin-bottom:16px;text-decoration:none;box-shadow:var(--shadow-2);animation:celebIn .5s cubic-bezier(.2,1.4,.4,1)}
+.upd-card .ui{font-size:28px}.upd-card b{display:block;font-size:16px}.upd-card small{display:block;color:#C7CFE3;font-size:13px;line-height:1.35;margin-top:2px}.upd-card .ua{margin-left:auto;font-size:22px;animation:heroFloat 2s ease-in-out infinite}
 </style>
 </head>
 <body>
@@ -8097,6 +8102,8 @@ function openSettings(){
     '<div class="row"><label>Kunlik maqsad</label><div class="tabs">'+GOALS.map(function(g){ return '<button class="'+((+state.goal||50)===g[0]?'on':'')+'" data-act="setGoal" data-p="'+g[0]+'">'+g[1]+' '+g[0]+' XP</button>'; }).join('')+'</div></div>'+
     '<div class="row"><label>Ovozli effektlar</label><div class="tabs"><button class="'+(state.settings.sfx!==false?'on':'')+'" data-act="setSfx" data-p="on">🔔 Yoqilgan</button><button class="'+(state.settings.sfx===false?'on':'')+'" data-act="setSfx" data-p="off">🔕 O\'chirilgan</button></div></div>'+
     '<div class="row"><label>Animatsiyalar</label><div class="tabs"><button class="'+(state.settings.fx!==false?'on':'')+'" data-act="setFx" data-p="on">✨ To\'liq</button><button class="'+(state.settings.fx===false?'on':'')+'" data-act="setFx" data-p="off">🔋 Kam (batareya tejash)</button></div></div>'+
+    '<div class="row"><label>🔔 Kunlik eslatmalar</label><div class="tabs"><button class="'+(notifOn()?'on':'')+'" data-act="setNotif" data-p="on">Yoqilgan</button><button class="'+(!notifOn()?'on':'')+'" data-act="setNotif" data-p="off">O\'chirilgan</button></div><div id="notifBox">'+notifStatusHtml()+'</div></div>'+
+    '<div class="row"><label>🆕 Ilova yangilanishlari</label><div id="updBox">'+updSettingsHtml()+'</div></div>'+
     '<h3 class="serif" style="color:var(--navy);font-size:19px;margin:6px 0 14px">🔊 Ovoz</h3>'+
     '<div class="row"><label>Ovoz manbai</label><select class="sel" id="sEngine">'+
       '<option value="auto" '+(s.engine==='auto'?'selected':'')+'>Avtomatik (tavsiya etiladi)</option>'+
@@ -8501,6 +8508,97 @@ ACT.setFx = function(el){ state.settings.fx = el.dataset.p==='on'; saveState(); 
 initBgFx();
 var _applyThemeBz = applyTheme;
 applyTheme = function(){ _applyThemeBz(); applyFx(); };
+
+/* =====================================================================
+   KUNLIK ESLATMALAR (Android bildirishnomalari)
+   09:00, 12:00, 18:00 — maqsad bajarilmagan bo'lsa; 21:00 — bajarilgan bo'lsa tabrik.
+   Vaqtlarni telefonning o'zi (AlarmManager) boshqaradi; ilova faqat bugungi holatni yozib turadi.
+   ===================================================================== */
+function notifOn(){ return state.settings.notif!==false; }
+function notifCan(){ return !!(NATIVE && typeof window.AndroidTTS.notifSync==='function'); }
+function notifPerm(){ try{ return window.AndroidTTS.notifPermission(); }catch(e){ return 1; } }
+var _notifLast='';
+function notifPush(){
+  if(!notifCan()) return;
+  var k=dayKey();
+  var o={day:k, xp:nz(state.days[k]), goal:nz(state.goal)||50, streak:nz(state.streak), active:state.lastDay===todayStr(), name:state.name||'', on:notifOn()};
+  var j=JSON.stringify(o); if(j===_notifLast) return; _notifLast=j;
+  try{ window.AndroidTTS.notifSync(j); }catch(e){}
+}
+function notifStatusHtml(){
+  if(!notifCan()) return '<p class="muted" style="font-size:13px;margin:8px 0 0">Bildirishnomalar telefon ilovasida (APK) ishlaydi.</p>';
+  var p=notifPerm();
+  return '<div class="notif-plan"><div>⏰ <b>09:00 · 12:00 · 18:00</b> — kunlik maqsad bajarilmagan bo\'lsa eslatadi</div><div>🌙 <b>21:00</b> — maqsad bajarilgan bo\'lsa, «yaxshi dam oling» deb tabriklaydi</div><div>Maqsad bajarilgach, qolgan eslatmalar yuborilmaydi.</div></div>'+
+    '<div class="toolbar mt" id="notifSt">'+(p===1
+      ? '<span class="tag ok">✓ Ruxsat bor</span><button class="btn btn-o btn-s" data-act="notifTest">🔔 Sinab ko\'rish</button>'
+      : '<span class="tag">Ruxsat berilmagan</span><button class="btn btn-c btn-s" data-act="notifAsk">Ruxsat berish</button><button class="btn btn-o btn-s" data-act="notifOpenSettings">📱 Telefon sozlamalari</button>')+'</div>';
+}
+function notifRefresh(){ var el=document.getElementById('notifBox'); if(el) el.innerHTML=notifStatusHtml(); }
+window.__notifPerm = function(ok){
+  toast(ok ? "🔔 Eslatmalar yoqildi" : "Ruxsat berilmadi. Telefon sozlamalaridan yoqishingiz mumkin.");
+  notifRefresh();
+};
+ACT.setNotif = function(el){
+  state.settings.notif = el.dataset.p==='on'; saveState(); notifPush();
+  document.querySelectorAll('[data-act="setNotif"]').forEach(function(b){ b.classList.toggle('on', b.dataset.p===el.dataset.p); });
+  if(state.settings.notif && notifCan() && notifPerm()!==1){ try{ window.AndroidTTS.notifRequest(); }catch(e){} }
+  toast(state.settings.notif ? "🔔 Eslatmalar yoqildi" : "🔕 Eslatmalar o'chirildi");
+};
+ACT.notifAsk = function(){ try{ window.AndroidTTS.notifRequest(); }catch(e){} };
+ACT.notifTest = function(){ try{ window.AndroidTTS.notifTest(); toast("Bildirishnoma yuborildi — telefon tepasiga qarang"); }catch(e){} };
+ACT.notifOpenSettings = function(){ try{ window.AndroidTTS.openNotifSettings(); }catch(e){} };
+/* Har safar holat saqlanganda telefonga ham yozib qo'yamiz */
+var _saveStateN = saveState;
+saveState = function(){ var r=_saveStateN.apply(this, arguments); notifPush(); return r; };
+/* Ilova ochilganda: holatni yuborish va (bir marta) ruxsat so'rash */
+setTimeout(function(){
+  notifPush();
+  if(notifCan() && notifOn() && state.onboarded && !state.flags.notifAsked && notifPerm()!==1){
+    state.flags.notifAsked = dayKey(); saveState();
+    try{ window.AndroidTTS.notifRequest(); }catch(e){}
+  }
+}, 3500);
+document.addEventListener('visibilitychange', function(){ if(!document.hidden){ _notifLast=''; notifPush(); } });
+
+/* =====================================================================
+   YANGILANISHLAR — GitHub'da yangi versiya chiqsa, xabar berish
+   ===================================================================== */
+var UPD = null;
+function updCan(){ return !!(NATIVE && typeof window.AndroidTTS.updateInfo==='function'); }
+function updNew(){ return !!(UPD && UPD.latest>0 && UPD.installed>0 && UPD.latest>UPD.installed); }
+function updCardHtml(){
+  if(!updNew()) return '';
+  return '<a class="upd-card" href="'+esc(UPD.url)+'"><span class="ui">🆕</span><div><b>Yangi versiya chiqdi — v1.'+UPD.latest+'</b><small>Bosing: yangi APK yuklanadi, keyin uni ochib «Обновить» ni bosing. Natijalaringiz saqlanib qoladi.</small></div><span class="ua">⬇️</span></a>';
+}
+function updSettingsHtml(){
+  if(!updCan()) return '<p class="muted" style="font-size:13px;margin:8px 0 0">Yangilanishlarni tekshirish telefon ilovasida (APK) ishlaydi.</p>';
+  var u=UPD||{installed:0,latest:0,on:true};
+  return '<p style="margin:0 0 8px">Sizdagi versiya: <b>v1.'+u.installed+'</b>'+(updNew()?' · <span class="tag">Yangisi bor: v1.'+u.latest+'</span>':(u.latest?' · <span class="tag ok">✓ Eng so\'nggi versiya</span>':''))+'</p>'+
+    '<div class="toolbar" style="gap:8px;flex-wrap:wrap">'+(updNew()?'<a class="btn btn-c btn-s" href="'+esc(u.url)+'">⬇️ Yangilash</a>':'')+'<button class="btn btn-o btn-s" data-act="updCheck">🔄 Tekshirish</button></div>'+
+    '<div class="tabs mt"><button class="'+(u.on!==false?'on':'')+'" data-act="updNotify" data-p="on">🔔 Xabar berish</button><button class="'+(u.on===false?'on':'')+'" data-act="updNotify" data-p="off">🔕 Xabar bermaslik</button></div>';
+}
+function updRefresh(){
+  var b=document.getElementById('updBox'); if(b) b.innerHTML=updSettingsHtml();
+  if(current && current.view==='home'){
+    var c=document.querySelector('.upd-card'), html=updCardHtml();
+    if(c && !html) c.remove();
+    else if(!c && html){ var m=document.getElementById('main'); if(m) m.insertAdjacentHTML('afterbegin', html); }
+  }
+}
+window.__updInfo = function(info, manual){
+  try{ UPD = (typeof info==='string') ? JSON.parse(info) : info; }catch(e){ return; }
+  if(manual) toast(updNew() ? "🆕 Yangi versiya bor: v1."+UPD.latest : (UPD.latest ? "✓ Sizda eng so'nggi versiya" : "Internetga ulanib bo'lmadi — keyinroq urinib ko'ring"));
+  updRefresh();
+};
+ACT.updCheck = function(){ if(!updCan()) return; toast("Tekshirilmoqda…"); try{ window.AndroidTTS.updateCheck(); }catch(e){} };
+ACT.updNotify = function(el){
+  var on=el.dataset.p==='on'; try{ window.AndroidTTS.updateNotify(on); }catch(e){}
+  if(UPD) UPD.on=on;
+  document.querySelectorAll('[data-act="updNotify"]').forEach(function(b){ b.classList.toggle('on', b.dataset.p===el.dataset.p); });
+};
+var _homeViewUpd = VIEWS.home;
+VIEWS.home = function(){ return updCardHtml() + _homeViewUpd.apply(this, arguments); };
+if(updCan()){ try{ UPD = JSON.parse(window.AndroidTTS.updateInfo()); }catch(e){} }
 
 function clearActive(){ document.querySelectorAll('.phr.active,.bub.active').forEach(function(e){ e.classList.remove('active'); }); }
 document.addEventListener('click', function(e){

@@ -4,6 +4,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Talaffuzni tekshirish uchun mikrofon -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- Kunlik eslatmalar (bildirishnomalar) -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <!-- Android 11+ da telefonning ovoz (TTS) dasturini topish uchun kerak -->
     <queries>
@@ -33,5 +36,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Eslatmalar: belgilangan vaqtda va telefon qayta yonganda -->
+        <receiver
+            android:name=".NotifReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+            </intent-filter>
+        </receiver>
     </application>
 </manifest>

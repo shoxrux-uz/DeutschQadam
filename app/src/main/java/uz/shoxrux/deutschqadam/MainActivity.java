@@ -19,6 +19,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -38,6 +39,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
     /* ---- Nutqni tanish (talaffuzni tekshirish) ---- */
     private static final int REQ_MIC = 4242;
+    private static final int REQ_NOTIF = 4343;
     private SpeechRecognizer recognizer;
     private String pendingListenId = null;
     private long lastLevelAt = 0;
@@ -77,6 +79,17 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
 
         web.loadUrl("file:///android_asset/index.html");
+
+        // Kunlik eslatmalarni rejalashtirish
+        try {
+            Notif.ensureChannel(this);
+            Notif.scheduleAll(this);
+        } catch (Exception ignored) { }
+
+        // Yangilanishni tekshirish (fonda)
+        Updater.checkAsync(getApplicationContext(), false, new Runnable() {
+            @Override public void run() { sendJs("window.__updInfo && window.__updInfo(" + Updater.infoJson(MainActivity.this) + ")"); }
+        });
     }
 
     @Override
@@ -116,6 +129,89 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         @JavascriptInterface
         public int status() {
             return ttsStatus;
+        }
+
+        /* ---- Kunlik eslatmalar ---- */
+        @JavascriptInterface
+        public void notifSync(String json) {
+            try {
+                JSONObject o = new JSONObject(json);
+                boolean wasOn = Notif.enabled(MainActivity.this);
+                boolean on = o.optBoolean("on", true);
+                int xp = o.optInt("xp", 0), goal = Math.max(1, o.optInt("goal", 50));
+                Notif.prefs(MainActivity.this).edit()
+                    .putString("day", o.optString("day", ""))
+                    .putInt("xp", xp)
+                    .putInt("goal", goal)
+                    .putInt("streak", o.optInt("streak", 0))
+                    .putBoolean("active", o.optBoolean("active", false))
+                    .putString("name", o.optString("name", ""))
+                    .putBoolean("on", on)
+                    .apply();
+                if (on != wasOn) Notif.scheduleAll(MainActivity.this);
+                if (xp >= goal || !on) Notif.cancelShown(MainActivity.this);   // eskirgan eslatmani olib tashlaymiz
+            } catch (Exception ignored) { }
+        }
+
+        /** 1 — ruxsat bor, 0 — ruxsat so'rash kerak */
+        @JavascriptInterface
+        public int notifPermission() {
+            return Notif.permitted(MainActivity.this) ? 1 : 0;
+        }
+
+        @JavascriptInterface
+        public void notifRequest() {
+            runOnUiThread(new Runnable() {
+                @Override public void run() {
+                    if (android.os.Build.VERSION.SDK_INT >= 33
+                        && checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, REQ_NOTIF);
+                    } else {
+                        sendJs("window.__notifPerm && window.__notifPerm(" + (Notif.permitted(MainActivity.this) ? 1 : 0) + ")");
+                    }
+                }
+            });
+        }
+
+        /* ---- Yangilanishlar ---- */
+        @JavascriptInterface
+        public String updateInfo() {
+            return Updater.infoJson(MainActivity.this);
+        }
+
+        @JavascriptInterface
+        public void updateCheck() {
+            Updater.checkAsync(getApplicationContext(), true, new Runnable() {
+                @Override public void run() { sendJs("window.__updInfo && window.__updInfo(" + Updater.infoJson(MainActivity.this) + ", true)"); }
+            });
+        }
+
+        @JavascriptInterface
+        public void updateNotify(boolean on) {
+            Notif.prefs(MainActivity.this).edit().putBoolean("upd_on", on).apply();
+        }
+
+        @JavascriptInterface
+        public void notifTest() {
+            Notif.show(MainActivity.this, "Deutsch Qadam \uD83D\uDD14", "Eslatmalar ishlayapti! Kunlik maqsad bo'yicha shu tarzda xabar beramiz.");
+        }
+
+        @JavascriptInterface
+        public void openNotifSettings() {
+            runOnUiThread(new Runnable() {
+                @Override public void run() {
+                    try {
+                        Intent i = new Intent("android.settings.APP_NOTIFICATION_SETTINGS");
+                        i.putExtra("android.provider.extra.APP_PACKAGE", getPackageName());
+                        startActivity(i);
+                    } catch (Exception e) {
+                        try {
+                            Intent i2 = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", getPackageName(), null));
+                            startActivity(i2);
+                        } catch (Exception ignored) { }
+                    }
+                }
+            });
         }
 
         @JavascriptInterface
@@ -278,6 +374,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQ_NOTIF) {
+            boolean ok = grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED;
+            sendJs("window.__notifPerm && window.__notifPerm(" + (ok ? 1 : 0) + ")");
+            return;
+        }
         if (requestCode != REQ_MIC) return;
         String id = pendingListenId;
         pendingListenId = null;
