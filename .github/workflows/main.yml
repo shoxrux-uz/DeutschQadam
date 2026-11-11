@@ -1,0 +1,47 @@
+name: APK yasash
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Kodni olish
+        uses: actions/checkout@v4
+
+      - name: Java 17 o'rnatish
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Gradle o'rnatish
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: APK yig'ish
+        run: gradle assembleDebug --no-daemon --stacktrace
+
+      - name: Faylga nom berish
+        run: cp app/build/outputs/apk/debug/app-debug.apk DeutschQadam.apk
+
+      - name: APK ni saqlash
+        uses: actions/upload-artifact@v4
+        with:
+          name: DeutschQadam-APK
+          path: DeutschQadam.apk
+
+      - name: Release sahifasiga joylash
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.${{ github.run_number }}
+          name: Deutsch Qadam v1.${{ github.run_number }}
+          body: "Telefonga o'rnatish uchun pastdagi DeutschQadam.apk faylini yuklab oling."
+          files: DeutschQadam.apk
