@@ -23,7 +23,7 @@ function assert(cond, msg) { if (!cond) throw new Error(msg || 'assert'); }
 function eq(a, b, msg) { if (a !== b) throw new Error((msg ? msg + ': ' : '') + JSON.stringify(a) + ' !== ' + JSON.stringify(b)); }
 
 /* Ilovani "soxta brauzer" (jsdom) ichida ochamiz */
-function boot(localData) {
+function boot(localData, setup) {
   const errors = [];
   const dom = new JSDOM(html, {
     runScripts: 'dangerously',
@@ -36,6 +36,7 @@ function boot(localData) {
       window.HTMLMediaElement.prototype.pause = () => {};
       window.addEventListener('error', (e) => errors.push(e.message || String(e.error)));
       if (localData) window.localStorage.setItem('deutschQadam_v1', JSON.stringify(localData));
+      if (setup) setup(window);
     }
   });
   dom.window.__errors = errors;
@@ -89,6 +90,7 @@ function checkQs(qs, label) {
   });
 }
 test('Barcha bo\'lim va rejimlarda lug\'at testi', () => {
+  run(w, "VOCAB.forEach(function(c){ state.seen.c[c.id]=1; })"); // hamma bo'limlar o'rganilgan deb olamiz
   const cats = run(w, 'VOCAB.map(function(c){ return c.id; })').concat(['all']);
   ['de2uz', 'uz2de', 'audio', 'art'].forEach((m) => cats.forEach((c) => {
     for (let k = 0; k < 3; k++) checkQs(run(w, "TCFG.mode='" + m + "';TCFG.cat='" + c + "';TCFG.n=10;buildVocabQuiz()"), m + '/' + c);
@@ -185,6 +187,13 @@ test('"Orqaga" tugmasi oldingi sahifaga qaytaradi', () => {
   eq(w8.eval('window.__back()'), false, 'bosh sahifada ilovadan chiqish kerak');
 });
 
+/* ---------- 8b. Talaffuz baholash ---------- */
+console.log('\n8b) Talaffuzni baholash');
+test('To\'g\'ri aytilgan ibora 100 ball', () => eq(w.eval('scorePron("Ich heiße Shoxrux.", ["ich heiße Shoxrux"]).score'), 100));
+test('Raqam bilan tanilgan son ham to\'g\'ri hisoblanadi', () => eq(w.eval('scorePron("Ich bin fünfundzwanzig Jahre alt.", ["Ich bin 25 Jahre alt"]).score'), 100));
+test('Umuman boshqa gap past ball oladi', () => assert(w.eval('scorePron("Entschuldigung, wo ist der Bahnhof?", ["und so weiter"]).score') < 40));
+test('Talaffuz mashqi sahifasi ochiladi', () => { const b = w8.__errors.length; w8.eval("go('game','pron')"); eq(w8.__errors.length, b); });
+
 /* ---------- 9. Onboarding ---------- */
 console.log('\n9) Onboarding');
 test('Yangi foydalanuvchiga onboarding ko\'rsatiladi va saqlanadi', () => {
@@ -193,6 +202,182 @@ test('Yangi foydalanuvchiga onboarding ko\'rsatiladi va saqlanadi', () => {
   assert(w9.document.getElementById('onb').classList.contains('show'), 'onboarding chiqmadi');
   w9.eval("obNext(); document.getElementById('obName').value='lola'; obNext(); OB.reason='ish'; obNext(); OB.goal=100; obNext(); obNext(); obFinish();");
   eq(w9.eval('state.name'), 'Lola'); eq(w9.eval('state.goal'), 100); eq(w9.eval('state.onboarded'), true);
+});
+
+
+/* ---------- 10. Faqat o'rganilgan materialdan test va o'yin ---------- */
+console.log('\n10) Faqat o\'rganilgan materialdan test va o\'yin');
+const w10 = boot({ name: 'Ali', onboarded: true, ts: 1, goal: 50 });
+test('Yangi foydalanuvchida o\'rganilgan so\'z yo\'q', () => eq(run(w10, 'studiedWords().length'), 0));
+test('Hech narsa o\'rganilmaganda lug\'at testi boshlanmaydi', () => {
+  run(w10, "go('tests'); TCFG.mode='de2uz'; TCFG.cat='all'; TCFG.n=10;");
+  eq(run(w10, 'buildVocabQuiz().length'), 0);
+  run(w10, 'ACT.tStart()'); eq(run(w10, 'current.view'), 'tests');
+});
+test('O\'yin qulflangan va tushuntirish chiqadi', () => {
+  ['memory', 'scramble', 'sentence', 'dictation', 'speed'].forEach((g) => {
+    run(w10, "G=null; go('game','" + g + "')");
+    assert(run(w10, '!!(G && G.locked)'), g + ' qulflanmadi');
+    assert(/Avval o'rganib oling/.test(w10.document.getElementById('main').textContent), g + ': tushuntirish yo\'q');
+  });
+  eq(w10.__errors.length, 0, 'JS xatolar: ' + w10.__errors.join(' | '));
+});
+test('Lug\'atda bo\'lim ochilsa — o\'sha so\'zlar o\'rganilgan hisoblanadi', () => {
+  run(w10, "go('vocab','oila')");
+  const n = run(w10, 'studiedWords().length'), tot = run(w10, "ALLW.filter(function(w){ return w.cat==='oila'; }).length");
+  eq(n, tot);
+  assert(run(w10, "studiedWords().every(function(w){ return w.cat==='oila'; })"), 'boshqa bo\'lim so\'zi aralashdi');
+});
+test('Test faqat o\'rganilgan so\'zlardan tuziladi (barcha rejimlar)', () => {
+  ['de2uz', 'uz2de', 'audio'].forEach((m) => {
+    for (let k = 0; k < 5; k++) {
+      const qs = run(w10, "TCFG.mode='" + m + "';TCFG.cat='all';TCFG.n=20; buildVocabQuiz().map(function(q){ return WMAP[q.wid].cat; })");
+      assert(qs.length > 0, 'test bo\'sh: ' + m);
+      assert(qs.every((c) => c === 'oila'), m + ': o\'rganilmagan so\'z tushdi');
+    }
+  });
+});
+test('Testlar sahifasida o\'rganilmagan bo\'limlar qulflangan', () => {
+  run(w10, "go('tests')");
+  const d = w10.document;
+  assert(d.querySelector('#tCat option[value="oila"]:not([disabled])'), 'oila ochiq bo\'lishi kerak');
+  assert(d.querySelector('#tCat option[value="ovqat"][disabled]'), 'ovqat qulflangan bo\'lishi kerak');
+  assert(d.querySelector('[data-act="lockedLesson"][data-p="salom"]'), 'salom darsi qulflangan bo\'lishi kerak');
+  assert(d.querySelector('[data-act="lockedGram"][data-p="g_perf1"]'), 'grammatika qulflangan bo\'lishi kerak');
+});
+test('Dars va grammatika o\'qilgach testi ochiladi', () => {
+  run(w10, "go('lesson','salom'); go('gram','g_perf1'); go('tests')");
+  const d = w10.document;
+  assert(d.querySelector('[data-act="lessonQuiz"][data-p="salom"]'), 'salom testi ochilmadi');
+  assert(d.querySelector('[data-act="gramTest"][data-p="g_perf1"]'), 'grammatika testi ochilmadi');
+  assert(d.querySelector('[data-act="lockedLesson"][data-p="kafe"]'), 'kafe hali qulflangan bo\'lishi kerak');
+});
+test('O\'yinlar endi o\'rganilgan so\'zlardan', () => {
+  run(w10, "G=null; go('game','memory')");
+  assert(!run(w10, 'G.locked'), 'memory ochilmadi');
+  assert(run(w10, "G.cards.every(function(c){ return WMAP[c.wid].cat==='oila'; })"), 'memory: begona so\'z');
+  run(w10, "G=null; go('game','speed'); spStart(); clearInterval(window.__spT)");
+  for (let k = 0; k < 20; k++) { run(w10, 'spNewQ()'); eq(run(w10, 'G.q.w.cat'), 'oila'); }
+  run(w10, "G.left=0; G.over=true;");
+  run(w10, "G=null; go('game','sentence')");
+  assert(!run(w10, 'G.locked'), 'gap tuzish ochilmadi');
+  const salom = run(w10, "LESSONS.filter(function(l){ return l.id==='salom'; })[0].items.map(function(i){ return i.de; })");
+  assert(run(w10, 'G.list.map(function(p){ return p.de; })').every((x) => salom.indexOf(x) > -1), 'gap tuzish: o\'qilmagan darsdan gap');
+  eq(w10.__errors.length, 0, 'JS xatolar: ' + w10.__errors.join(' | '));
+});
+test('Yo\'lda o\'tilgan qadamning so\'zlari ham hisoblanadi', () => {
+  run(w10, "state.path['v_a2feyl']=80");
+  assert(run(w10, "studiedWords().some(function(w){ return w.cat==='a2feyl'; })"), 'a2feyl hisoblanmadi');
+});
+test('«Ko\'rilgan» belgilari saqlanadi va qayta ochilganda tiklanadi', () => {
+  run(w10, 'saveState()');
+  const saved = JSON.parse(w10.localStorage.getItem('deutschQadam_v1'));
+  assert(saved.seen && saved.seen.c.oila && saved.seen.l.salom && saved.seen.g.g_perf1, 'saqlanmadi: ' + JSON.stringify(saved.seen));
+  const w10b = boot(saved);
+  assert(run(w10b, "studiedCatMap().oila===1 && lessonStudied('salom') && gramStudied('g_perf1')"), 'tiklanmadi');
+});
+
+/* ---------- 11. Google bilan kirish va bulutli zaxira ---------- */
+console.log('\n11) Google bilan kirish va bulutli zaxira');
+function fakeCloud() {
+  const db = { users: {}, prog: {} }, log = [];
+  function handle(req) {
+    log.push(req.action);
+    if (req.action === 'login') {
+      const m = /^tok:(.+)$/.exec(req.idToken || ''); if (!m) return { ok: false, err: 'token_invalid' };
+      const uid = m[1]; if (!db.users[uid]) db.users[uid] = { secret: 's-' + uid, email: uid + '@gmail.com' };
+      const p = db.prog[uid];
+      return { ok: true, uid, secret: db.users[uid].secret, name: 'User ' + uid, email: db.users[uid].email, progress: p ? p.json : null, ts: p ? p.ts : 0 };
+    }
+    const u = db.users[req.uid]; if (!u || u.secret !== req.secret) return { ok: false, err: 'auth' };
+    if (req.action === 'save') { const o = db.prog[req.uid]; if (o && o.ts > req.ts) return { ok: true, stale: true, ts: o.ts }; db.prog[req.uid] = { json: req.progress, ts: req.ts, sum: req.sum }; return { ok: true, ts: req.ts }; }
+    if (req.action === 'load') { const p = db.prog[req.uid]; return { ok: true, progress: p ? p.json : null, ts: p ? p.ts : 0 }; }
+    return { ok: false, err: 'unknown' };
+  }
+  return { db, log, handle };
+}
+function nativeBoot(local, cloud, who, opts) {
+  opts = opts || {};
+  const calls = [];
+  const win = boot(local, (win) => {
+    if (!opts.noConfig) win.DQ_CONFIG = { cloudUrl: 'https://script.google.com/macros/s/TEST/exec', googleClientId: '123-abc.apps.googleusercontent.com' };
+    win.AndroidTTS = {
+      status: () => 1, speak: () => {}, stop: () => {}, installVoice: () => {}, openSettings: () => {}, sttAvailable: () => 1, listen: () => {}, stopListening: () => {}, openAppSettings: () => {},
+      notifSync: () => {}, notifPermission: () => 1, notifRequest: () => {}, notifTest: () => {}, openNotifSettings: () => {},
+      googleSignIn: (cid) => { calls.push(['signin', cid]); win.__gAuth(JSON.stringify(who.v ? { ok: true, idToken: 'tok:' + who.v, email: who.v + '@gmail.com', name: 'User ' + who.v } : { ok: false, err: 'cancelled' })); },
+      googleSignOut: () => calls.push(['signout']),
+      cloudPost: (url, body, id) => { calls.push(['post', JSON.parse(body).action]); const r = cloud.handle(JSON.parse(body)); win.__cloudCb(id, true, JSON.stringify(r)); }
+    };
+  });
+  win.__calls = calls;
+  return win;
+}
+const cloud = fakeCloud(), who = { v: 'ali' };
+const c1 = nativeBoot({ name: 'Ali', onboarded: true, ts: 5, xp: 120, goal: 50, path: { abc: 90 } }, cloud, who);
+test('Sozlamalarda «Google bilan kirish» tugmasi bor', () => {
+  run(c1, 'openSettings()');
+  assert(c1.document.querySelector('#cloudBox [data-act="gLogin"]'), 'tugma yo\'q');
+});
+test('Bosh sahifada «progressni yo\'qotmang» kartasi chiqadi', () => {
+  run(c1, "closeModal(); go('home')");
+  assert(c1.document.querySelector('.cloud-card'), 'karta yo\'q');
+});
+test('Kirgandan keyin progress bulutga yuboriladi', () => {
+  run(c1, "ACT.gLogin({dataset:{}})");
+  eq(run(c1, 'state.cloud && state.cloud.uid'), 'ali');
+  const p = cloud.db.prog.ali; assert(p, 'bulutga saqlanmadi');
+  const o = JSON.parse(p.json); eq(o.xp, 120); assert(!o.cloud, 'kalit bulutga ketib qoldi');
+  eq(p.sum.xp, 120); eq(p.sum.name, 'Ali');
+  run(c1, "go('home')"); assert(!c1.document.querySelector('.cloud-card'), 'kirgandan keyin karta yo\'qolishi kerak');
+  run(c1, 'openSettings()'); assert(/ali@gmail\.com/.test(c1.document.getElementById('cloudBox').textContent), 'email ko\'rinmadi'); run(c1, 'closeModal()');
+});
+test('Yangi XP bulutga ham yetadi', () => {
+  run(c1, 'gainXp(30); cloudSave()');
+  eq(JSON.parse(cloud.db.prog.ali.json).xp, 150);
+});
+test('Yangi telefonda kirganda progress tiklanadi (onboardingsiz)', () => {
+  const c2 = nativeBoot(null, cloud, who);
+  run(c2, "bootStep('splash'); bootStep('data');");
+  assert(c2.document.getElementById('onb').classList.contains('show'), 'onboarding chiqmadi');
+  assert(c2.document.querySelector('#onb [data-act="gLogin"]'), 'onboardingda Google tugmasi yo\'q');
+  run(c2, "ACT.gLogin({dataset:{p:'ob'}})");
+  eq(run(c2, 'state.xp'), 150); eq(run(c2, 'state.name'), 'Ali'); eq(run(c2, 'state.onboarded'), true);
+  assert(!c2.document.getElementById('onb').classList.contains('show'), 'onboarding yopilmadi');
+  eq(run(c2, "current.view"), 'home');
+  eq(c2.__errors.length, 0, 'JS xatolar: ' + c2.__errors.join(' | '));
+});
+test('Ikkala joyda progress bo\'lsa — tanlash oynasi chiqadi', () => {
+  const c3 = nativeBoot({ name: 'Ali', onboarded: true, ts: 9, xp: 40, goal: 50, path: { abc: 90 } }, cloud, who);
+  run(c3, "ACT.gLogin({dataset:{}})");
+  assert(c3.document.querySelector('#modal.show [data-act="cloudPick"]'), 'tanlash oynasi chiqmadi');
+  run(c3, "ACT.cloudPick({dataset:{p:'srv'}})");
+  eq(run(c3, 'state.xp'), 150);
+});
+test('Shu telefondagini tanlasa — bulut yangilanadi', () => {
+  const c4 = nativeBoot({ name: 'Ali', onboarded: true, ts: Date.now(), xp: 999, goal: 50, path: { abc: 90 } }, cloud, who);
+  run(c4, "ACT.gLogin({dataset:{}}); ACT.cloudPick({dataset:{p:'loc'}})");
+  eq(JSON.parse(cloud.db.prog.ali.json).xp, 999);
+});
+test('Hisobdan chiqish', () => {
+  run(c1, 'ACT.cloudLogoutYes()');
+  eq(run(c1, 'state.cloud'), null);
+  assert(c1.__calls.some((c) => c[0] === 'signout'), 'googleSignOut chaqirilmadi');
+  eq(run(c1, 'state.xp'), 150, 'progress telefonda qolishi kerak');
+});
+test('Kalit noto\'g\'ri bo\'lsa — hisobdan chiqariladi', () => {
+  const c5 = nativeBoot({ name: 'X', onboarded: true, ts: 1, xp: 10, cloud: { uid: 'ali', secret: 'yolgon' } }, cloud, who);
+  run(c5, 'cloudSave()');
+  eq(run(c5, 'state.cloud'), null);
+});
+test('Bekor qilinsa hech narsa buzilmaydi', () => {
+  const c6 = nativeBoot({ name: 'Y', onboarded: true, ts: 1, xp: 10 }, cloud, { v: null });
+  run(c6, "ACT.gLogin({dataset:{}})");
+  eq(run(c6, 'state.cloud'), null); eq(c6.__errors.length, 0);
+});
+test('config.js to\'ldirilmagan bo\'lsa — Google tugmasi ko\'rinmaydi', () => {
+  const c7 = nativeBoot({ name: 'Z', onboarded: true, ts: 1, xp: 100 }, cloud, who, { noConfig: true });
+  eq(run(c7, 'cloudCan()'), false);
+  run(c7, "go('home')"); assert(!c7.document.querySelector('.cloud-card'), 'karta chiqmasligi kerak');
 });
 
 /* ---------- Natija ---------- */

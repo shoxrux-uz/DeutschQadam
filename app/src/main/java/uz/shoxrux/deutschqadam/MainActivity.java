@@ -133,6 +133,39 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             return ttsStatus;
         }
 
+        /* ---- Google bilan kirish va bulutli zaxira ---- */
+        @JavascriptInterface
+        public void googleSignIn(final String webClientId) {
+            runOnUiThread(new Runnable() {
+                @Override public void run() {
+                    GoogleAuth.signIn(MainActivity.this, webClientId, new GoogleAuth.Result() {
+                        @Override public void done(String json) {
+                            sendJs("window.__gAuth && window.__gAuth(" + JSONObject.quote(json) + ")");
+                        }
+                    });
+                }
+            });
+        }
+
+        @JavascriptInterface
+        public void googleSignOut() {
+            runOnUiThread(new Runnable() {
+                @Override public void run() { GoogleAuth.signOut(MainActivity.this); }
+            });
+        }
+
+        @JavascriptInterface
+        public void cloudPost(final String url, final String body, final String cbId) {
+            new Thread(new Runnable() {
+                @Override public void run() {
+                    String[] r = CloudHttp.post(url, body);
+                    boolean ok = r[0] != null;
+                    sendJs("window.__cloudCb && window.__cloudCb(" + JSONObject.quote(cbId) + ", " + ok + ", "
+                            + JSONObject.quote(ok ? r[0] : r[1]) + ")");
+                }
+            }).start();
+        }
+
         /* ---- Kunlik eslatmalar ---- */
         @JavascriptInterface
         public void notifSync(String json) {
