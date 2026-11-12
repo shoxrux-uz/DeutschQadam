@@ -464,7 +464,9 @@ body, .card, .tile, .phr, .vw, .opt, .chip, .side, .main{transition:background-c
 .pnode{--pn-bg:var(--cream-3);--pn-sh:#c9b796;width:76px;height:72px;border-radius:50%;background:var(--pn-bg);box-shadow:0 6px 0 var(--pn-sh);display:grid;place-items:center;font-size:30px;position:relative;transition:transform .12s}
 html[data-theme="dark"] .pnode{--pn-sh:#1b2747}
 .pnode.done{--pn-bg:var(--gold);--pn-sh:var(--gold-d)}
-.pnode.cur{--pn-bg:var(--coral);--pn-sh:#D35A3A;animation:ringPulse 1.8s infinite}
+.pnode.cur{--pn-bg:var(--coral);--pn-sh:#D35A3A}
+.pnode.cur::before{content:'';position:absolute;inset:-3px;border-radius:inherit;border:3px solid rgba(255,122,89,.7);pointer-events:none;animation:ringWave 1.8s ease-out infinite;will-change:transform,opacity}
+@keyframes ringWave{0%{transform:scale(1);opacity:.9}75%,100%{transform:scale(1.32);opacity:0}}
 .pnode.lock{filter:grayscale(1);opacity:.55}
 .pnode.exam{border-radius:24px;--pn-bg:var(--sand);--pn-sh:#8a6526}
 .pnode.exam.lock{--pn-bg:var(--cream-3)}
@@ -610,7 +612,7 @@ html[data-theme="dark"] .heat i.l1{background:#5A2B33}html[data-theme="dark"] .h
 .card.soon{text-align:center;max-width:620px;margin:0 auto}
 .card.soon .chips{margin-top:14px}
 .pnode.gram{--pn-bg:#2B4583;--pn-sh:#16264d}
-.pnode.gram.done{--pn-bg:var(--gold);--pn-sh:var(--gold-d)}.pnode.gram.cur{--pn-bg:var(--coral);--pn-sh:#D35A3A}
+.pnode.gram.done{--pn-bg:var(--gold);--pn-sh:var(--gold-d)}.pnode.gram.cur{--pn-bg:var(--coral);--pn-sh:#D35A3A;animation:none}
 .gprompt{font-size:26px !important}
 .gap{display:inline-block;min-width:60px;border-bottom:3px dashed var(--coral);color:var(--coral-t);padding:0 6px}
 .gap.ok{border-bottom-style:solid;border-color:var(--ok);color:var(--ok-t)}
@@ -648,7 +650,7 @@ html[data-theme="dark"] .heat i.l1{background:#5A2B33}html[data-theme="dark"] .h
 /* =====================================================================
    BREZI — maskot va jonli effektlar
    ===================================================================== */
-.bz{display:inline-block;position:relative;width:var(--bz,88px);height:calc(var(--bz,88px) * 1.0667);cursor:pointer;-webkit-tap-highlight-color:transparent;flex:0 0 auto;user-select:none}
+.bz{display:inline-block;position:relative;contain:layout paint;will-change:transform;width:var(--bz,88px);height:calc(var(--bz,88px) * 1.0667);cursor:pointer;-webkit-tap-highlight-color:transparent;flex:0 0 auto;user-select:none}
 .bz-svg{width:100%;height:100%;overflow:visible;display:block}
 .bz-body,.bz-arm{transform-box:view-box}
 .bz-body{transform-origin:60px 122px}
@@ -830,6 +832,11 @@ html.rm #bgfx{display:none}
 .cc-opt .ci{font-size:28px}
 .cc-opt b{display:block;color:var(--navy)}
 .cc-opt small{color:var(--muted)}
+
+/* --- Silliq aylantirish: surish paytida bezak animatsiyalari pauza --- */
+html.scrolling *,html.scrolling *::before,html.scrolling *::after{animation-play-state:paused !important}
+.anim-off,.anim-off *,.anim-off::before,.anim-off *::before{animation-play-state:paused !important}
+@media (max-width:640px){ .bg-l:nth-child(n+11){display:none} }
 </style>
 </head>
 <body>
@@ -8451,7 +8458,7 @@ function initBgFx(){
 function applyFx(){ document.documentElement.classList.toggle('rm', REDUCED || (state && state.settings && state.settings.fx===false)); }
 
 /* Bosish to'lqini */
-document.addEventListener('pointerdown', function(e){
+document.addEventListener('click', function(e){
   if(document.documentElement.classList.contains('rm')) return;
   var t=e.target.closest && e.target.closest('.btn,.tile,.opt,.chip,.lvtab,.ob-opt,.lt,.mode,.step');
   if(!t || t.disabled) return;
@@ -9103,6 +9110,27 @@ function cloudCardHtml(){
   if(cloudOn() && cloudCan()) setTimeout(function(){ cloudLoad(true); }, 2500);
 })();
 
+
+/* =====================================================================
+   SILLIQ ISHLASH: surish paytida va ekrandan tashqaridagi animatsiyalar to'xtaydi
+   ===================================================================== */
+(function(){
+  var root=document.documentElement, t=null, on=false;
+  document.addEventListener('scroll', function(){
+    if(!on){ on=true; root.classList.add('scrolling'); }
+    clearTimeout(t); t=setTimeout(function(){ on=false; root.classList.remove('scrolling'); }, 180);
+  }, {passive:true, capture:true});
+  var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function(es){
+    es.forEach(function(e){ e.target.classList.toggle('anim-off', !e.isIntersecting); });
+  }, {rootMargin:'80px'}) : null;
+  window.watchAnims = function(){
+    if(!io) return;
+    io.disconnect();
+    document.querySelectorAll('#main .bz, .hero, .pnode.cur, .flame').forEach(function(el){ io.observe(el); });
+  };
+  var _r = render;
+  render = function(){ var x=_r.apply(this, arguments); try{ watchAnims(); }catch(e){} return x; };
+})();
 function clearActive(){ document.querySelectorAll('.phr.active,.bub.active').forEach(function(e){ e.classList.remove('active'); }); }
 document.addEventListener('click', function(e){
   var t=e.target.closest('[data-act]'); if(!t) return;
