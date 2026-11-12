@@ -89,6 +89,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         } catch (Exception ignored) { }
 
         // Yangilanishni tekshirish (fonda)
+        UpdateWorker.schedule(this);   // ilova yopiq bo'lsa ham yangilanishni tekshirib turadi
         Updater.checkAsync(getApplicationContext(), false, new Runnable() {
             @Override public void run() { sendJs("window.__updInfo && window.__updInfo(" + Updater.infoJson(MainActivity.this) + ")"); }
         });

@@ -70,19 +70,23 @@ final class Updater {
         }
     }
 
-    /** Tekshirish (fon oqimida). force=false bo'lsa 6 soatda bir martadan ko'p internetga chiqmaydi. */
-    static void checkSync(Context c, boolean force) {
+    /**
+     * Tekshirish (fon oqimida). force=false bo'lsa 6 soatda bir martadan ko'p internetga chiqmaydi.
+     * @return false — internetga ulanib bo'lmadi (keyinroq qayta urinish kerak)
+     */
+    static boolean checkSync(Context c, boolean force) {
         SharedPreferences p = Notif.prefs(c);
         long now = System.currentTimeMillis();
-        if (!force && now - p.getLong("upd_checked", 0) < INTERVAL) return;
+        if (!force && now - p.getLong("upd_checked", 0) < INTERVAL) return true;
         int latest = fetchLatest();
-        if (latest < 0) return;
+        if (latest < 0) return false;
         p.edit().putLong("upd_checked", now).putInt("upd_latest", latest).apply();
         int mine = installed(c);
         if (latest > mine && p.getInt("upd_notified", 0) != latest && p.getBoolean("upd_on", true)) {
-            p.edit().putInt("upd_notified", latest).apply();
-            show(c, latest);
+            // faqat bildirishnoma haqiqatan chiqqanda «xabar berildi» deb belgilaymiz
+            if (show(c, latest)) p.edit().putInt("upd_notified", latest).apply();
         }
+        return true;
     }
 
     /** Fon oqimida tekshirish */
@@ -101,10 +105,10 @@ final class Updater {
             + ",\"on\":" + p.getBoolean("upd_on", true) + ",\"url\":\"" + APK_URL + "\"}";
     }
 
-    static void show(Context c, int latest) {
-        if (!Notif.permitted(c)) return;
+    static boolean show(Context c, int latest) {
+        if (!Notif.permitted(c)) return false;
         NotificationManager nm = (NotificationManager) c.getSystemService(Context.NOTIFICATION_SERVICE);
-        if (nm == null) return;
+        if (nm == null) return false;
         if (nm.getNotificationChannel(CHANNEL) == null) {
             NotificationChannel ch = new NotificationChannel(CHANNEL, "Yangilanishlar", NotificationManager.IMPORTANCE_DEFAULT);
             ch.setDescription("Ilovaning yangi versiyasi chiqqanda xabar beradi");
@@ -124,5 +128,6 @@ final class Updater {
             .setAutoCancel(true)
             .build();
         nm.notify(NOTIF_ID, n);
+        return true;
     }
 }
