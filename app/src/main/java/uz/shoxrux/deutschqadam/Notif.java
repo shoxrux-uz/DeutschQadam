@@ -131,29 +131,30 @@ final class Notif {
         boolean done = xp >= goal;
         int left = goal - xp;
 
+        // Matnlar Musofir tilidan: XP — kemaning yoqilg'isi, seriya — radio aloqa
         if (slot == 3) {
             if (!done) return null;                                  // 21:00 — faqat maqsad bajarilgan bo'lsa
             return new String[]{"Gute Nacht" + nm + "! \uD83C\uDF19",
-                "Bugun " + xp + " XP to'pladingiz — kunlik rejani bajardingiz. Yaxshi dam oling, ertaga davom etamiz! \uD83C\uDF89"};
+                "\uD83D\uDC7D Musofir: bugun kemaga " + xp + " XP yoqilg'i quydingiz — kunlik reja bajarildi. Yaxshi dam oling! \uD83C\uDF89"};
         }
         if (done) return null;                                       // maqsad bajarilgan — bezovta qilmaymiz
         if (slot == 0) {
             return new String[]{"Guten Morgen" + nm + "! \u2600\uFE0F", xp > 0
-                ? "Yaxshi boshladingiz! Bugungi maqsadga yana " + left + " XP qoldi."
-                : "Bugungi maqsad: " + goal + " XP. Ertalabki 5 daqiqa — eng samarali vaqt."};
+                ? "\uD83D\uDC7D Yaxshi boshladik! Kemaga yana " + left + " XP yoqilg'i kerak."
+                : "\uD83D\uDC7D Kemam yoqilg'i kutyapti: bugun " + goal + " XP. Ertalabki 5 daqiqa — eng samarali vaqt."};
         }
         if (slot == 1) {
             return new String[]{"Mahlzeit" + nm + "! \uD83C\uDF7D\uFE0F", xp > 0
-                ? "Yarim yo'ldasiz: maqsadga yana " + left + " XP qoldi. Tushlikda 10 daqiqa ajratamizmi?"
-                : "Tushlik tanaffusida 10 ta so'zni takrorlaymizmi? Bugun hali boshlanmadi."};
+                ? "\uD83D\uDC7D Yarim yo'ldamiz: maqsadga yana " + left + " XP qoldi. Tushlikda 10 daqiqa ajratamizmi?"
+                : "\uD83D\uDC7D Tushlikda 10 ta so'z? Bugun hali boshlanmadi — antennam sizni sog'indi \uD83D\uDCE1"};
         }
         if (streakRisk) {
-            return new String[]{"\uD83D\uDD25 " + streak + " kunlik seriyangiz xavf ostida!",
-                "Bugun hali mashq qilinmadi. Bitta kichik mashq seriyani saqlab qoladi."};
+            return new String[]{"\uD83D\uDCE1 " + streak + " kunlik seriyangiz xavf ostida!",
+                "\uD83D\uDC7D Musofir: bugun hali signal yo'q. Bitta kichik mashq radio aloqamizni saqlab qoladi."};
         }
         return new String[]{"Guten Abend" + nm + "! \uD83C\uDF06", xp > 0
-            ? "Oz qoldi! Kunlik maqsadga yana " + left + " XP kerak."
-            : "Kun tugashiga oz qoldi. Maqsadga " + goal + " XP — bitta mashq bilan boshlang."};
+            ? "\uD83D\uDC7D Oz qoldi! Kemaga yana " + left + " XP kerak."
+            : "\uD83D\uDC7D Kun tugayapti, kemam esa bo'sh turibdi. Maqsadga " + goal + " XP — bitta mashq bilan boshlaymiz?"};
     }
 
     static void show(Context c, String title, String text) {

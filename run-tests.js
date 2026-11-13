@@ -380,6 +380,53 @@ test('config.js to\'ldirilmagan bo\'lsa — Google tugmasi ko\'rinmaydi', () => 
   run(c7, "go('home')"); assert(!c7.document.querySelector('.cloud-card'), 'karta chiqmasligi kerak');
 });
 
+
+/* ---------- 12. Musofir: hikoya, ism va mimikalar ---------- */
+console.log('\n12) Musofir: hikoya, ism va mimikalar');
+test('Ilk ochilishda Musofir hikoyasi chiqadi va oxirida ism so\'raladi', () => {
+  const w12 = boot();
+  w12.eval("bootStep('splash'); bootStep('data');");
+  const d = w12.document;
+  assert(d.querySelector('#onb .st-card'), 'hikoya chiqmadi');
+  const n = run(w12, 'STORY.length');
+  for (let k = 0; k < n - 1; k++) { w12.eval('ACT.obStory()'); }
+  assert(/Shartlarimiz/.test(d.getElementById('onb').textContent), 'oxirgi sahifa emas');
+  w12.eval('ACT.obStory()');
+  assert(d.getElementById('obName'), 'ism so\'ralmadi');
+  w12.eval('obBack()'); assert(d.querySelector('#onb .st-card'), 'orqaga hikoyaga qaytmadi');
+  eq(w12.__errors.length, 0, 'JS xatolar: ' + w12.__errors.join(' | '));
+});
+test('Hikoyani o\'tkazib yuborish mumkin', () => {
+  const w12 = boot(); w12.eval("bootStep('splash'); bootStep('data'); ACT.obStorySkip()");
+  assert(w12.document.getElementById('obName'), 'ism sahifasi chiqmadi');
+});
+test('Darslardagi ism foydalanuvchining o\'z ismi bilan almashadi', () => {
+  const w12 = boot();
+  w12.eval("bootStep('splash'); bootStep('data'); ACT.obStorySkip(); document.getElementById('obName').value='lola'; obNext(); obNext(); obNext(); obNext(); obFinish();");
+  const all = run(w12, 'JSON.stringify([LESSONS, DIALOGS, GRAMMAR, GRAM])');
+  assert(all.indexOf('Shoxrux') < 0 && all.indexOf('shoxrux') < 0, 'Shoxrux qolib ketdi');
+  assert(all.indexOf('Ich heiße Lola.') > -1 && all.indexOf('Mening ismim Lola.') > -1, 'Lola qo\'yilmadi');
+  assert(all.indexOf('Hallo Anna! Ich heiße Lola.') > -1, 'dialogda ism almashmadi');
+  w12.eval("state.name='Aziz'; saveState();");
+  assert(run(w12, 'JSON.stringify(LESSONS)').indexOf('Ich heiße Aziz.') > -1, 'ism o\'zgarganda yangilanmadi');
+});
+test('Saqlangan ism qayta ochilganda darslarda turadi', () => {
+  const w12 = boot({ name: 'Bekzod', onboarded: true, ts: 1 });
+  assert(run(w12, 'JSON.stringify(LESSONS)').indexOf('Ich heiße Bekzod.') > -1, 'ism qo\'llanmadi');
+});
+test('Musofirning 16 ta mimikasi to\'g\'ri chiziladi', () => {
+  const moods = ['idle','wave','happy','celebrate','surprised','think','confused','sad','determined','love','sleep','angry','smug','joke','flirt','compliment'];
+  const w12 = boot({ name: 'X', onboarded: true, ts: 1 });
+  moods.forEach((m) => {
+    const html = run(w12, "BZ.html('" + m + "', 80)");
+    const box = w12.document.createElement('div'); box.innerHTML = html; w12.document.body.appendChild(box);
+    const mouths = Array.from(box.querySelectorAll('.mf-m')).filter((e) => w12.getComputedStyle(e).display !== 'none');
+    eq(mouths.length, 1, m + ': og\'iz soni');
+    box.remove();
+  });
+  eq(w12.__errors.length, 0);
+});
+
 /* ---------- Natija ---------- */
 console.log('\n────────────────────────────────────────');
 console.log('Natija: ' + passed + ' ta o\'tdi, ' + failed + ' ta xato');

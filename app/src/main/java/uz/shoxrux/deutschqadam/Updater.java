@@ -117,7 +117,7 @@ final class Updater {
         Intent open = new Intent(Intent.ACTION_VIEW, Uri.parse(APK_URL));
         open.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pi = PendingIntent.getActivity(c, 300, open, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-        String text = "Deutsch Qadam v1." + latest + " tayyor. Yangilash uchun shu yerga bosing — yangi APK yuklanadi, keyin uni ochib «Обновить» ni bosing.";
+        String text = "Musofir v1." + latest + " tayyor. Yangilash uchun shu yerga bosing — yangi APK yuklanadi, keyin uni ochib «Обновить» ni bosing.";
         Notification n = new Notification.Builder(c, CHANNEL)
             .setSmallIcon(R.drawable.ic_notif)
             .setContentTitle("🆕 Yangilanish chiqdi!")

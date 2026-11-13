@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 /**
- * Deutsch Qadam — Android ilova.
+ * Musofir (Deutsch Qadam) — Android ilova.
  * Ilovaning o'zi (darslar, lug'at, o'yinlar) assets/index.html faylida.
  * Bu klass uni to'liq ekranda ochadi va telefonning ovoz tizimini (TTS) ulaydi.
  * made by shoxrux
@@ -232,7 +232,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
         @JavascriptInterface
         public void notifTest() {
-            Notif.show(MainActivity.this, "Deutsch Qadam \uD83D\uDD14", "Eslatmalar ishlayapti! Kunlik maqsad bo'yicha shu tarzda xabar beramiz.");
+            Notif.show(MainActivity.this, "Musofir \uD83D\uDC7D", "Eslatmalar ishlayapti! Kunlik maqsad bo'yicha shu tarzda xabar beramiz.");
         }
 
         @JavascriptInterface
