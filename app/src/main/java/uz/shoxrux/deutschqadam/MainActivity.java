@@ -47,6 +47,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     /* ---- Profil rasmi uchun fayl tanlash ---- */
     private static final int REQ_FILE = 4444;
     private ValueCallback<Uri[]> fileCb = null;
+    /* ---- Chat bildirishnomasi bosilganda ochiladigan chat ---- */
+    private volatile String pendingChat = null;
+    private volatile boolean pageReady = false;
+    /** Ilova orqa fonda (lekin yopilmagan) bo'lsa — xabarlarni tezroq tekshirish */
+    private volatile Thread bgPoll = null;
 
     /* ---- Nutqni tanish (talaffuzni tekshirish) ---- */
     private static final int REQ_MIC = 4242;
@@ -72,6 +77,12 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         s.setTextZoom(100);
 
         web.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                pageReady = true;
+                deliverChat();
+            }
+
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 Uri uri = request.getUrl();
@@ -110,6 +121,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             ttsStatus = 3;
         }
 
+        pendingChat = chatFrom(getIntent());
         web.loadUrl("file:///android_asset/index.html");
 
         // Kunlik eslatmalarni rejalashtirish
@@ -138,6 +150,27 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             @Override public void onDone(String utteranceId) { notifyDone(utteranceId); }
             @Override public void onError(String utteranceId) { notifyDone(utteranceId); }
         });
+    }
+
+    private static String chatFrom(Intent it) {
+        if (it == null) return null;
+        String k = it.getStringExtra("chat");
+        return (k != null && k.matches("[A-Za-z0-9:|._-]{1,120}")) ? k : null;
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        String k = chatFrom(intent);
+        if (k != null) { pendingChat = k; deliverChat(); }
+    }
+
+    private void deliverChat() {
+        final String k = pendingChat;
+        if (k == null || !pageReady) return;
+        pendingChat = null;
+        sendJs("window.__openChat && window.__openChat(" + JSONObject.quote(k) + ")");
     }
 
     /** TTS ga joriy kurs tilini o'rnatadi va ovoz bor-yo'qligini yangilaydi */
@@ -200,6 +233,17 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 try { tts.stop(); } catch (Exception ignored) { }
                 applyLang();
             }
+        }
+
+        /** Chat bildirishnomalari uchun: server manzili va hisob kaliti (bo'sh — o'chirish) */
+        @JavascriptInterface
+        public void chatSetup(String url, String uid, String secret) {
+            ChatPoll.setup(getApplicationContext(), url, uid, secret);
+        }
+
+        @JavascriptInterface
+        public void chatSeen(String serverTs) {
+            try { ChatPoll.seen(getApplicationContext(), Long.parseLong(serverTs.replaceAll("\\..*", ""))); } catch (Exception ignored) { }
         }
 
         /** Do'stlik kodini ulashish */
@@ -569,6 +613,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     @Override
     protected void onResume() {
         super.onResume();
+        ChatPoll.foreground = true;
+        bgPoll = null;
+        try { ChatPoll.markSeen(getApplicationContext()); } catch (Exception ignored) { }
         if (notifSettingsOpened) {
             notifSettingsOpened = false;
             if (Notif.permitted(this)) Notif.scheduleAll(this);
@@ -594,14 +641,35 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     @Override
     protected void onPause() {
         super.onPause();
+        ChatPoll.foreground = false;
+        startBgPoll();
         if (tts != null) tts.stop();
         if (recognizer != null) {
             try { recognizer.cancel(); } catch (Exception ignored) { }
         }
     }
 
+    /** Ilova orqa fonga o'tganda: 20 daqiqa davomida har 20 soniyada yangi xabarni tekshiradi */
+    private void startBgPoll() {
+        final Context app = getApplicationContext();
+        if (!ChatPoll.configured(app)) return;
+        Thread t = new Thread(new Runnable() {
+            @Override public void run() {
+                long end = System.currentTimeMillis() + 20 * 60 * 1000L;
+                while (bgPoll == Thread.currentThread() && System.currentTimeMillis() < end) {
+                    try { Thread.sleep(20000); } catch (InterruptedException e) { return; }
+                    if (bgPoll != Thread.currentThread() || ChatPoll.foreground) return;
+                    try { ChatPoll.check(app); } catch (Exception ignored) { }
+                }
+            }
+        });
+        bgPoll = t;
+        t.start();
+    }
+
     @Override
     protected void onDestroy() {
+        bgPoll = null;
         if (recognizer != null) {
             try { recognizer.destroy(); } catch (Exception ignored) { }
             recognizer = null;

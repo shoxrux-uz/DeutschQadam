@@ -12460,8 +12460,11 @@ ACT.avatarSheet = function(){
 function setAvatar(a){
   state.avatar=a; saveState();
   document.getElementById('modal').classList.remove('show');
-  if(cloudOn() && cloudCan()) socCall({action:'profile_set', avatar:a}, function(r){ if(!r.ok) toast("Rasm serverga saqlanmadi"); else if(SOC.data){ SOC.data.me.avatar=a; } });
   render(); toast('✅ Profil rasmi yangilandi');
+  if(cloudOn() && cloudCan()) socCall({action:'profile_set', avatar:a}, function(r){
+    if(!r.ok){ state.flags.avPending=1; saveState(); toast("Rasm do'stlarga hali yuborilmadi — "+socErrText(r.err)+". Keyinroq o'zi qayta urinadi"); }
+    else { if(state.flags.avPending){ delete state.flags.avPending; saveState(); } if(SOC.data) SOC.data.me.avatar=a; }
+  });
 }
 ACT.avPick = function(el){ setAvatar(el.dataset.p); };
 function avFromFile(file){
@@ -12514,7 +12517,7 @@ function socUnread(){ if(!SOC.data || !SOC.data.inbox) return 0; var n=0, rd=soc
 function socCall(body, cb){
   if(!cloudOn() || !cloudCan()){ cb({ok:false, err:'login'}); return; }
   body.uid=state.cloud.uid; body.secret=state.cloud.secret;
-  cloudCall(body, function(r){ if(r && r.err==='auth'){ toast("Hisobga qayta kiring"); } cb(r||{ok:false}); });
+  cloudCall(body, function(r){ r=r||{ok:false}; if(r.err==='auth'){ toast("Hisobga qayta kiring"); } if(r.err==='server' || r.err==='bad_response') SOC.detail=String(r.detail||'').slice(0,120); cb(r); });
 }
 function socSync(quiet, cb){
   if(!cloudOn() || !cloudCan()){ if(cb) cb(); return; }
@@ -12523,7 +12526,8 @@ function socSync(quiet, cb){
   var sum = cloudSummary(); sum.course = COURSE;
   socCall({action:'soc', read:socRead(), sum:sum}, function(r){
     SOC.busy=false;
-    if(r.ok){ SOC.data=r; SOC.err=''; SOC.t=Date.now(); }
+    if(r.ok){ SOC.data=r; SOC.err=''; SOC.t=Date.now();
+      if(state.flags.avPending && state.avatar){ socCall({action:'profile_set', avatar:state.avatar}, function(x){ if(x.ok){ delete state.flags.avPending; saveState(); if(SOC.data) SOC.data.me.avatar=state.avatar; } }); } }
     else SOC.err = r.err||'net';
     if(current.view==='social') render(); else renderShell();
     if(cb) cb(r);
@@ -12533,7 +12537,8 @@ function socErrText(e){
   return ({net:"Internetga ulanib bo'lmadi", not_friend:"Siz endi do'st emassiz", not_member:"Siz bu guruhda emassiz", bad_code:"Kod 6 ta belgidan iborat bo'ladi",
     no_user:"Bunday kodli foydalanuvchi topilmadi", self:"Bu o'zingizning kodingiz 🙂", blocked:"Bu foydalanuvchini qo'shib bo'lmaydi", too_many:"Juda ko'p",
     slow_down:"Sekinroq — bir daqiqada 20 tadan ko'p xabar yo'q", empty:"Xabar bo'sh", bad_name:"Nom juda qisqa", no_members:"Kamida bitta do'stni tanlang",
-    unknown_action:"Server eski — Apps Script'ni yangilang (qo'llanma)", login:"Avval Google bilan kiring", auth:"Hisobga qayta kiring"})[e] || ("Xato: "+(e||'nomaʼlum'));
+    unknown_action:"Server eski — Apps Script'ni yangilang (qo'llanma)", login:"Avval Google bilan kiring", auth:"Hisobga qayta kiring",
+    server:"Server xatosi"+(SOC.detail?': '+SOC.detail:''), bad_response:"Server javobi noto'g'ri — Apps Script yangi versiyasi chiqarilganini tekshiring"})[e] || ("Xato: "+(e||'nomaʼlum'));
 }
 function personById(uid){
   var d=SOC.data; if(!d) return null; if(d.me && d.me.uid===uid) return d.me;
@@ -12690,7 +12695,9 @@ function chatPaint(stick){
 }
 function chatFetch(first){
   var c=SOC.chat; if(!c || current.view!=='chat') return;
+  SOC.chatBusy=true;
   socCall({action:'msg_list', chat:c.key, since:c.since}, function(r){
+    SOC.chatBusy=false;
     if(!SOC.chat || SOC.chat!==c) return;
     if(!r.ok){ if(r.err==='not_friend'||r.err==='not_member'){ toast(socErrText(r.err)); go('social', null, true); socSync(true); } return; }
     var had={}; c.msgs.forEach(function(m){ had[m.id]=1; });
@@ -12712,7 +12719,7 @@ AFTER.chat = function(key){
   tx.addEventListener('input', function(){ tx.style.height='auto'; tx.style.height=Math.min(120, tx.scrollHeight)+'px'; });
   tx.addEventListener('keydown', function(e){ if(e.key==='Enter' && !e.shiftKey && !NATIVE){ e.preventDefault(); ACT.chatSend(); } });
   chatFetch(true);
-  var iv=setInterval(function(){ if(!document.hidden) chatFetch(false); }, 4000);
+  var iv=setInterval(function(){ if(!document.hidden && !SOC.chatBusy) chatFetch(false); }, 2500);
   cleanups.push(function(){ clearInterval(iv); var b=document.getElementById('chatIn'); if(b) b.remove(); });
   window.scrollTo(0, document.body.scrollHeight);
 };
@@ -12775,11 +12782,56 @@ ACT.msgReportGo = function(el){
   });
 };
 
-/* Fon rejimida do'stlar xabarlarini tekshirish (nishon uchun) */
+/* Ilova ochiq turganda: yangi xabar va takliflarni tez tekshirish (yengil «inbox» so'rovi) */
+SOC.ibSince = 0; SOC.ibBusy = false;
+function inboxPoll(){
+  if(SOC.ibBusy || !cloudOn() || !cloudCan()) return;
+  SOC.ibBusy = true;
+  socCall({action:'inbox', since:SOC.ibSince}, function(r){
+    SOC.ibBusy = false;
+    if(!r.ok){ if(r.err==='unknown_action') SOC.ibOld=true; return; }
+    var first = !SOC.ibSince;
+    SOC.ibSince = Math.max(SOC.ibSince, r.now||0);
+    try{ if(NATIVE && typeof window.AndroidTTS.chatSeen==='function') window.AndroidTTS.chatSeen(String(SOC.ibSince)); }catch(e){}
+    if(first) return;
+    var me = state.cloud && state.cloud.uid, need=false;
+    (r.items||[]).forEach(function(it){
+      if(it.f===me) return;
+      if(it.k==='req' || it.k==='acc'){ toast(it.k==='req' ? '👋 '+it.n+" sizni do'stlikka taklif qildi" : '🤝 '+it.n+' taklifingizni qabul qildi'); need=true; return; }
+      if(current.view==='chat' && SOC.chat && SOC.chat.key===it.k){ chatFetch(false); return; }
+      if(SOC.data){ var b=(SOC.data.inbox[it.k]=SOC.data.inbox[it.k]||{unread:0}); b.last={from:it.f, text:it.t, ts:it.ts}; b.unread=(b.unread||0)+1; if(!chatInfo(it.k)) need=true; }
+      else need=true;
+      toast('💬 '+(it.g ? it.g+' · ' : '')+it.n+': '+String(it.t).slice(0,60));
+      SFX.play('tap');
+    });
+    if(need) socSync(true); else if((r.items||[]).length){ if(current.view==='social') render(); else renderShell(); }
+  });
+}
 setInterval(function(){
-  if(document.hidden || !cloudOn() || !cloudCan() || current.view==='chat') return;
-  if(Date.now()-SOC.t > (current.view==='social' ? 15000 : 60000)) socSync(true);
-}, 5000);
+  if(document.hidden || !cloudOn() || !cloudCan()) return;
+  if(!SOC.ibOld) inboxPoll();
+  if(current.view!=='chat' && Date.now()-SOC.t > (current.view==='social' ? 20000 : (SOC.ibOld ? 60000 : 180000))) socSync(true);
+}, 6000);
+/* Telefon: ilova yopiq bo'lsa ham bildirishnoma kelishi uchun kalitni Android qismiga beramiz */
+var _chatNative='';
+function chatNativeSync(){
+  if(!NATIVE || typeof window.AndroidTTS.chatSetup!=='function') return;
+  var on = cloudOn() && cloudConfigured(), k = on ? state.cloud.uid+'|'+state.cloud.secret : '';
+  if(k===_chatNative) return; _chatNative=k;
+  try{ window.AndroidTTS.chatSetup(on?CLOUD_CFG.cloudUrl:'', on?state.cloud.uid:'', on?state.cloud.secret:''); }catch(e){}
+}
+setInterval(chatNativeSync, 3000); setTimeout(chatNativeSync, 1500);
+/* Bildirishnoma bosilganda — o'sha chatni ochish */
+window.__openChat = function(key){
+  key=String(key||'');
+  var tries=0;
+  (function attempt(){
+    if(!BOOT.done || (OB && document.getElementById('onb').classList.contains('show'))){ if(++tries<40) setTimeout(attempt, 250); return; }
+    if(key==='social' || !/^(d|g):/.test(key)){ HIST=[]; go('social', null, true); return; }
+    if(SOC.data && chatInfo(key)){ HIST=[{view:'social', p:null, y:0}]; go('chat', key, true); return; }
+    if(++tries<3) socSync(true, attempt); else { HIST=[]; go('social', null, true); }
+  })();
+};
 
 /* Bulut xulosasiga joriy til ham qo'shiladi */
 (function(){ var _cs=cloudSummary; cloudSummary=function(){ var s=_cs.apply(this, arguments); s.course=COURSE; return s; }; })();

@@ -307,6 +307,7 @@ function nativeBoot(local, cloud, who, opts) {
       notifSync: () => {}, notifPermission: () => 1, notifRequest: () => {}, notifTest: () => {}, openNotifSettings: () => {},
       googleSignIn: (cid) => { calls.push(['signin', cid]); win.__gAuth(JSON.stringify(who.v ? { ok: true, idToken: 'tok:' + who.v, email: who.v + '@gmail.com', name: 'User ' + who.v } : { ok: false, err: 'cancelled' })); },
       googleSignOut: () => calls.push(['signout']),
+      chatSetup: (u, uid, sec) => calls.push(['chatSetup', u, uid]), chatSeen: () => {},
       cloudPost: (url, body, id) => { calls.push(['post', JSON.parse(body).action]); const r = cloud.handle(JSON.parse(body)); win.__cloudCb(id, true, JSON.stringify(r)); }
     };
   });
@@ -529,6 +530,8 @@ function socServer(){
     if (req.action === 'msg_list') return { ok: true, chat: req.chat, msgs: st.msgs.filter((m) => m.chat === req.chat && m.ts > (req.since || 0)) };
     if (req.action === 'msg_send') { const m = { id: 'm' + st.msgs.length + 1, chat: req.chat, from: 'ali', text: req.text, ts: Date.now() }; st.msgs.push(m); return { ok: true, msg: m }; }
     if (req.action === 'group_create') { st.groups = [{ gid: 'g1', name: req.name, owner: 'ali', members: ['ali'].concat(req.members) }]; return { ok: true, gid: 'g1' }; }
+    if (req.action === 'inbox') { const now = Date.now(); const it = (st.ib || []).filter((x) => x.ts > (req.since || 0)); return { ok: true, now, items: it }; }
+    if (req.action === 'profile_set' && st.failProfile) return { ok: false, err: 'server', detail: 'Lock timeout' };
     if (req.action === 'profile_set' || req.action === 'report' || req.action === 'block') return { ok: true };
     return null;
   } };
@@ -586,6 +589,29 @@ test('Guruh tuzish', () => {
 test('Google bilan kirmagan bo\'lsa — Do\'stlar bo\'limi kirishni taklif qiladi', () => {
   w8.eval("go('social')");
   assert(/Google/.test(w8.document.getElementById('main').textContent));
+});
+test('Yangi xabar kelsa — ilova ichida xabar va nishon', () => {
+  w14.eval("go('home'); SOC.ibSince=0; inboxPoll();");
+  assert(w14.eval('SOC.ibSince') > 0, 'birinchi so\'rov server vaqtini olmadi');
+  srv.st.ib = [{ k: 'd:ali|bek', f: 'bek', n: 'Bekzod', t: 'Qalaysan?', ts: Date.now() + 5000, id: 'e1' }];
+  w14.eval('inboxPoll()');
+  assert(/Bekzod: Qalaysan\?/.test(w14.document.getElementById('toast').textContent), 'toast chiqmadi: ' + w14.document.getElementById('toast').textContent);
+  assert(w14.document.querySelector('#tabbar .bdg'), 'nishon yo\'q');
+});
+test('Telefon bildirishnomalari uchun kalit Android\'ga beriladi', () => {
+  w14.eval('chatNativeSync()');
+  assert(w14.__calls.some((c) => c[0] === 'chatSetup' && c[2] === 'ali'), 'chatSetup chaqirilmadi');
+});
+test('Bildirishnoma bosilganda chat ochiladi', () => {
+  w14.eval("BOOT.done=true; window.__openChat('d:ali|bek')");
+  eq(w14.eval('current.view'), 'chat'); eq(w14.eval('current.p'), 'd:ali|bek');
+  w14.eval("go('home')");
+});
+test('Server xatosi tushunarli ko\'rsatiladi', () => {
+  srv.st.failProfile = true;
+  w14.eval("ACT.avPick({dataset:{p:'mf:joke'}})");
+  assert(/Lock timeout|saqlanmadi/.test(w14.document.getElementById('toast').textContent), w14.document.getElementById('toast').textContent);
+  srv.st.failProfile = false;
 });
 test('Xatosiz ishladi', () => eq(w14.__errors.length, 0, w14.__errors.join(' | ')));
 

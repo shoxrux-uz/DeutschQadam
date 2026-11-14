@@ -24,6 +24,7 @@ public class NotifReceiver extends BroadcastReceiver {
             // telefon qayta yondi, ilova yangilandi yoki vaqt o'zgardi — hammasini qayta rejalashtiramiz
             Notif.scheduleAll(context);
             UpdateWorker.schedule(context);
+            if (ChatPoll.configured(context)) ChatWorker.schedule(context);
         }
     }
 }
