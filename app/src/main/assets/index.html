@@ -7181,24 +7181,40 @@ function normPron(s){
   return norm(s).replace(/[-–—'’`´()\[\]]/g,' ').replace(/\s+/g,' ').trim();
 }
 /* target — namuna, alts — tanish tizimi bergan variantlar. Natija: ball (0–100), eshitilgan matn, so'zlar bo'yicha belgilar */
-function scorePron(target, alts){
+/* So'zlarni solishtirish: qisqa so'z — faqat aniq mos; uzun so'z — juda yaqin bo'lsa qisman ball.
+   «schon» va «schön», «ist» va «isst» kabi bitta harf farqi endi to'g'ri hisoblanmaydi. */
+function pronWordSim(heard, want){
+  if(heard===want) return 1;
+  var L=Math.max(heard.length, want.length);
+  if(L<=5) return 0;
+  var s=strSim(heard, want);
+  return s>=0.85 ? s*s*0.9 : 0;
+}
+/* target — namuna; alts — tanish tizimi bergan variantlar (eng ishonchlisi birinchi); conf — ishonch (0..1, -1 = noma'lum).
+   Faqat birinchi 3 ta variant olinadi, keyingilari ball bilan jarimalanadi. */
+function scorePron(target, alts, conf){
   var tokens = String(target||'').split(/\s+/).filter(Boolean);
   var tnorm = tokens.map(normPron);
-  var full = tnorm.join('');
   var best = {score:0, heard:'', marks:tokens.map(function(){ return false; })};
-  (alts||[]).forEach(function(alt){
+  (alts||[]).slice(0,3).forEach(function(alt, ai){
     var h = normPron(alt), hw = h.split(' ').filter(Boolean);
-    var real=0, ok=0;
+    var real=0, sum=0, pos=0, used=0;
     var marks = tnorm.map(function(w){
       if(!w) return true;
       real++;
-      var hit = hw.some(function(x){ return x===w || (w.length>2 && strSim(x,w)>=0.75); });
-      if(hit) ok++;
-      return hit;
+      var bs=0, bi=-1;
+      for(var j=pos; j<hw.length; j++){ var sv=pronWordSim(hw[j], w); if(sv>bs){ bs=sv; bi=j; if(sv===1) break; } }
+      if(bi>-1){ pos=bi+1; used++; }
+      sum+=bs;
+      return bs>=0.85;
     });
-    var ws = real ? ok/real : 0;
-    var cs = strSim(full, h.replace(/ /g,''));
-    var sc = Math.round(Math.max(ws, cs)*100);
+    var ws = real ? sum/real : 0;
+    var extra = Math.max(0, hw.length - used);           // ortiqcha aytilgan so'zlar
+    ws *= Math.max(0.6, 1 - 0.12*extra);
+    var pen = [1, 0.8, 0.65][ai];                          // 2- va 3-variantdan topilsa — kamroq ball
+    var c = conf && conf.length>ai ? +conf[ai] : -1;
+    if(c>=0 && c<0.6) pen *= 0.7 + 0.5*c;                 // tizim o'zi ishonmasa — ball pasayadi
+    var sc = Math.round(Math.min(1, ws*pen)*100);
     if(sc>best.score || !best.heard) best = {score:sc, heard:alt, marks:marks};
   });
   return best;
@@ -7317,7 +7333,7 @@ function pronListen(){
     if(ev.type==='state'){ if(ev.state==='end'){ PR.st='proc'; pronRefresh(); } return; }
     if(ev.type==='cancel'){ PR.st='idle'; pronRefresh(); return; }
     if(ev.type==='error'){ PR.st='idle'; PR.err=ev.code; SFX.play('bad'); pronRefresh(); return; }
-    var r=scorePron(item.de, ev.texts);
+    var r=scorePron(item.de, ev.texts, ev.conf);
     PR.st='idle'; PR.err=null;
     if(!PR.res || r.score>=PR.res.score || PR.mode==='modal') PR.res=r;
     PR.last=r;

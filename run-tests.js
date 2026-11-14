@@ -193,6 +193,11 @@ console.log('\n8b) Talaffuzni baholash');
 test('To\'g\'ri aytilgan ibora 100 ball', () => eq(w.eval('scorePron("Ich heiße Shoxrux.", ["ich heiße Shoxrux"]).score'), 100));
 test('Raqam bilan tanilgan son ham to\'g\'ri hisoblanadi', () => eq(w.eval('scorePron("Ich bin fünfundzwanzig Jahre alt.", ["Ich bin 25 Jahre alt"]).score'), 100));
 test('Umuman boshqa gap past ball oladi', () => assert(w.eval('scorePron("Entschuldigung, wo ist der Bahnhof?", ["und so weiter"]).score') < 40));
+test('Bitta harf farqi (schon / schön) to\'g\'ri hisoblanmaydi', () => assert(w.eval('scorePron("Das ist schön.", ["das ist schon"]).score') < 85));
+test('Yaqin, lekin boshqa so\'z (Bahnhof / Bauhof) to\'g\'ri hisoblanmaydi', () => assert(w.eval('scorePron("Wo ist der Bahnhof?", ["wo ist der Bauhof"]).score') < 85));
+test('Faqat 3-variantda topilsa — past ball', () => assert(w.eval('scorePron("Ich heiße Anna.", ["ich weiß", "ich heiße", "ich heiße Anna"]).score') < 85));
+test('Tizim ishonchi past bo\'lsa — ball pasayadi', () => assert(w.eval('scorePron("Guten Morgen!", ["guten Morgen"], [0.2]).score') < 85));
+test('Ortiqcha so\'zlar qo\'shilsa — ball pasayadi', () => assert(w.eval('scorePron("Danke.", ["danke schön vielen dank"]).score') < 85));
 test('Talaffuz mashqi sahifasi ochiladi', () => { const b = w8.__errors.length; w8.eval("go('game','pron')"); eq(w8.__errors.length, b); });
 
 /* ---------- 9. Onboarding ---------- */
