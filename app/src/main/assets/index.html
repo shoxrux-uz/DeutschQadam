@@ -6657,7 +6657,7 @@ function quizPick(el){
   }
   if(q.wid && WMAP[q.wid]){ var c=WMAP[q.wid].cat, cs=state.cat[c]||[0,0]; cs[1]++; if(ok) cs[0]++; state.cat[c]=cs; }
   render();
-  if(ok) gainXp(10, document.querySelector('.opt.right')); else saveState();
+  if(ok) gainXp(answerXp(q), document.querySelector('.opt.right')); else saveState();
   if(q.type!=='de2uz' || !ok) say(q.say);
 }
 function quizNext(){
@@ -6678,7 +6678,7 @@ function quizResultHtml(){
   var pct=QZ.pct, pass=QZ.opts.pass||70;
   var stars = pct>=90?3:(pct>=pass?2:(pct>=50?1:0));
   var msg = pct>=90?"Zo'r natija! 🏆":pct>=pass?"Yaxshi! Davom eting 💪":pct>=50?"Yomon emas, yana mashq qiling 🙂":"Mavzuni yana bir bor takrorlang 📘";
-  var xp = QZ.score*10 + nz(QZ.bonus);
+  var xp = (QZ.xpEarned!=null ? QZ.xpEarned : QZ.score*10) + nz(QZ.bonus);
   var h = backBtn(QZ.back[0], QZ.back[1], QZ.back[2]) + '<div class="card result qwrap">'+
     '<div class="ring" id="resRing" style="background:conic-gradient(var(--coral) 0deg, var(--cream-2) 0)"><div id="resPct">0%</div></div>'+
     '<div class="stars">'+[1,2,3].map(function(i){ return '<span class="'+(i<=stars?'on':'')+'">⭐</span>'; }).join('')+'</div>'+
@@ -6983,7 +6983,7 @@ GAME_VIEW.memory = function(){
   var cat=VOCAB.filter(function(c){ return c.id===G.cat; })[0] || {icon:'🧠', title:"O'rgangan so'zlaringiz"};
   if(G.over){
     var sc=Math.max(10, 100-(G.moves-6)*6); var isNew=setBest('memory',sc);
-    if(!G.xpGiven){ G.xpGiven=1; addXp(Math.round(sc/5)); if(isNew) confetti(); }
+    if(!G.xpGiven){ G.xpGiven=1; addXp(gameXp('memory', Math.round(sc/5))); if(isNew) confetti(); }
     return gameOverHtml("Hammasi topildi!", sc+' ball', Math.round(sc/5), isNew, '<p class="muted">'+G.moves+' ta urinish · '+Math.round((G.end-G.start)/1000)+' soniya</p>');
   }
   var h = '<div class="gtop"><div class="pill">'+cat.icon+' '+esc(cat.title)+'</div><div class="toolbar"><div class="pill c">Urinishlar: '+G.moves+'</div><button class="btn btn-o btn-s" data-act="gRestart">🔀 Boshqa so\'zlar</button></div></div><div class="mem">';
@@ -7027,7 +7027,7 @@ function scrSetup(){
 }
 GAME_VIEW.scramble = function(){
   if(G.i>=G.list.length){
-    var isNew=setBest('scramble',G.score); if(!G.xpGiven){ G.xpGiven=1; addXp(G.score*8); if(isNew&&G.score>0) confetti(); }
+    var isNew=setBest('scramble',G.score); if(!G.xpGiven){ G.xpGiven=1; addXp(gameXp('scramble', G.score*8)); if(isNew&&G.score>0) confetti(); }
     return gameOverHtml("O'yin tugadi!", G.score+' / '+G.list.length, G.score*8, isNew);
   }
   var w=G.w, a=wordArt(w);
@@ -7067,7 +7067,7 @@ function senSetup(){
 }
 GAME_VIEW.sentence = function(){
   if(G.i>=G.list.length){
-    var isNew=setBest('sentence',G.score); if(!G.xpGiven){ G.xpGiven=1; addXp(G.score*10); if(isNew&&G.score>0) confetti(); }
+    var isNew=setBest('sentence',G.score); if(!G.xpGiven){ G.xpGiven=1; addXp(gameXp('sentence', G.score*10)); if(isNew&&G.score>0) confetti(); }
     return gameOverHtml("Gaplar tuzildi!", G.score+' / '+G.list.length, G.score*10, isNew);
   }
   var h='<div class="qwrap"><div class="qhead"><span>'+(G.i+1)+' / '+G.list.length+'</span><span>✓ '+G.score+'</span></div><div class="pbar"><i style="width:'+(G.i/G.list.length*100)+'%"></i></div>'+
@@ -7088,7 +7088,7 @@ function senCheck(){
 /* Dictation */
 GAME_VIEW.dictation = function(){
   if(G.i>=G.list.length){
-    var isNew=setBest('dictation',G.score); if(!G.xpGiven){ G.xpGiven=1; addXp(G.score*8); if(isNew&&G.score>0) confetti(); }
+    var isNew=setBest('dictation',G.score); if(!G.xpGiven){ G.xpGiven=1; addXp(gameXp('dictation', G.score*8)); if(isNew&&G.score>0) confetti(); }
     return gameOverHtml("Diktant tugadi!", G.score+' / '+G.list.length, G.score*8, isNew);
   }
   var w=G.list[G.i], a=wordArt(w);
@@ -7121,7 +7121,7 @@ function dicCheck(){
 /* Speed */
 GAME_VIEW.speed = function(){
   if(G.over){
-    var isNew=setBest('speed',G.score); if(!G.xpGiven){ G.xpGiven=1; addXp(G.score*3); if(isNew&&G.score>0) confetti(); }
+    var isNew=setBest('speed',G.score); if(!G.xpGiven){ G.xpGiven=1; addXp(gameXp('speed', G.score*3)); if(isNew&&G.score>0) confetti(); }
     return gameOverHtml("Vaqt tugadi!", G.score+' ball', G.score*3, isNew, '<p class="muted">Xatolar: '+G.wrongN+'</p>');
   }
   if(!G.started){
@@ -7325,7 +7325,7 @@ function pronListen(){
     if(r.score>=85){ state.pronOk = nz(state.pronOk)+1; }
     SFX.play(r.score>=60?'ok':'bad');
     pronRefresh();
-    if(r.score>=85 && PR.mode==='modal') gainXp(5, document.querySelector('.pron-res')); else saveState();
+    var px = (r.score>=85 && PR.mode==='modal') ? onceXp('pr:'+(PR.item&&PR.item.de), 5) : 0; if(px) gainXp(px, document.querySelector('.pron-res')); else saveState();
     checkAch();
   });
 }
@@ -7349,7 +7349,7 @@ GAME_VIEW.pron = function(){
     var avg = Math.round(G.scores.reduce(function(s,x){ return s+x; },0)/G.list.length);
     var xp = G.scores.reduce(function(s,x){ return s+(x>=85?10:(x>=60?5:0)); },0);
     var isNew=setBest('pron', avg);
-    if(!G.xpGiven){ G.xpGiven=1; gainXp(xp); if(avg>=60) confetti(); }
+    if(!G.xpGiven){ G.xpGiven=1; gainXp(gameXp('pron', xp)); if(avg>=60) confetti(); }
     return gameOverHtml("Mashq tugadi!", avg+' ball', xp, isNew, '<p class="muted">10 ta ibora bo\'yicha o\'rtacha talaffuz bali</p>');
   }
   if(!PR || PR.mode!=='game' || PR.idx!==G.i){ PR={item:G.list[G.i], st:'idle', res:null, err:null, mode:'game', idx:G.i}; }
@@ -8272,7 +8272,7 @@ function quizMark(ok, picked, el){
   if(q.wid && WMAP[q.wid]){ var c=WMAP[q.wid].cat, cs=state.cat[c]||[0,0]; cs[1]++; if(ok) cs[0]++; state.cat[c]=cs; }
   if(q.gid){ var gs=state.cat['g:'+q.gid]||[0,0]; gs[1]++; if(ok) gs[0]++; state.cat['g:'+q.gid]=gs; }
   render();
-  if(ok) gainXp(10, document.querySelector('.opt.right, .slots.ok, .qtype.ok')); else saveState();
+  if(ok) gainXp(answerXp(q), document.querySelector('.opt.right, .slots.ok, .qtype.ok')); else saveState();
   if(q.type!=='de2uz' || !ok) say(q.say);
 }
 quizPick = function(el){
@@ -8581,7 +8581,7 @@ var ACT = {
   npPlaySlow: function(el){ say(numDe(NP.cur), el, true); },
   npCheck: npCheck,
   npPick: function(el){ if(NP.answered) return; var v=parseInt(el.dataset.p,10); NP.picked=v; npAnswer(v===NP.cur); },
-  npNext: function(){ NP.i++; if(NP.i>=NP.total){ NP.finished=true; addXp(NP.score*5); if(NP.score>=8) confetti(); render(); } else npNewQ(); },
+  npNext: function(){ NP.i++; if(NP.i>=NP.total){ NP.finished=true; addXp(gameXp('numpr', NP.score*5)); if(NP.score>=8) confetti(); render(); } else npNewQ(); },
   vcat: function(el){ vocabCat=el.dataset.p; vocabLimit=120; render(); },
   vmore: function(){ vocabLimit+=200; document.getElementById('vlist').innerHTML=vocabListHtml(); },
   startFlash: function(){ var pool = vocabCat==='all'? ALLW.filter(function(w){ return w.lv===vocabLv; }) : ALLW.filter(function(w){ return w.cat===vocabCat; }); var unk = pool.filter(function(w){ return !state.learned[w.id]; }); FC={deck:shuffle(unk.length?unk:pool).slice(0,20), flip:false}; go('flash'); },
@@ -12880,6 +12880,68 @@ STORY.length = 0;
     return _b.apply(this, arguments);
   };
   ACT.obCourse = function(el){ OB.course = el.dataset.p; SFX.play('tap'); renderOB(); };
+})();
+
+
+/* =====================================================================
+   XP QOIDASI: bir narsani qayta-qayta qilib XP «yig'ib» bo'lmaydi
+   • Yangi savolga to'g'ri javob — 10 XP
+   • Allaqachon tugatilgan bosqichni takrorlash — har to'g'ri javob 2 XP
+   • O'sha savolga bugun allaqachon XP olingan bo'lsa — 0 XP
+   • O'yinlar: kuniga 1-o'yin to'liq XP, 2-o'yin yarmi, keyingilari XP bermaydi
+   • Bosqich bonusi (+30 / +100) faqat birinchi marta o'tganda
+   ===================================================================== */
+function xpDay(){
+  var d=dayKey();
+  if(!state.xpd || typeof state.xpd!=='object' || state.xpd.d!==d) state.xpd={d:d, q:{}, g:{}};
+  state.xpd.q=state.xpd.q||{}; state.xpd.g=state.xpd.g||{};
+  return state.xpd;
+}
+function qKey(q){ return COURSE+':'+(q.wid || (q.gid ? q.gid+':'+(q.say||q.prompt||q.answer) : '') || q.say || q.prompt || q.answer || ''); }
+function onceXp(key, n){ var x=xpDay(), k=COURSE+':'+key; if(x.q[k]) return 0; x.q[k]=1; return n; }
+function answerXp(q){
+  var x=xpDay(), k=qKey(q), n;
+  if(x.q[k]) n=0;
+  else { x.q[k]=1; n = (QZ && QZ.repeat) ? 2 : 10; }
+  if(QZ){ if(n<10) QZ.xpCut=(QZ.xpCut||0)+1; QZ.xpEarned=(QZ.xpEarned||0)+n; }
+  return n;
+}
+function gameXp(id, n){
+  var x=xpDay(), k=COURSE+':'+id, c=x.g[k]||0; x.g[k]=c+1;
+  var r = c===0 ? n : (c===1 ? Math.round(n/2) : 0);
+  if(G && G.id===id){ G.xpReal=r; G.xpFull=n; G.xpPlays=c+1; }
+  return r;
+}
+(function(){
+  var _gx = gainXp;
+  gainXp = function(n){ if(!(n>0)){ saveState(); return; } return _gx.apply(this, arguments); };
+  var _ax = addXp;
+  addXp = function(n){ if(!(n>0)){ saveState(); return; } return _ax.apply(this, arguments); };
+  var _sq = startQuiz;
+  startQuiz = function(qs, opts){
+    var rep = !!(opts && opts.nodeId && nodeIsDone(opts.nodeId));
+    var r = _sq.apply(this, arguments);
+    if(QZ){ QZ.repeat = rep; QZ.xpCut = 0; QZ.xpEarned = 0; }
+    return r;
+  };
+  var _qr = quizResultHtml;
+  quizResultHtml = function(){
+    var h=_qr.apply(this, arguments);
+    if(QZ && QZ.xpCut){
+      var note='<div class="tip n" style="font-size:13px;margin-top:10px;text-align:left">🔁 '+(QZ.repeat?"Bu bosqich avval tugatilgan — takrorlashda har yangi to'g'ri javob +2 XP.":"Bugun bu savollar uchun XP olgansiz.")+" Bir xil savol kuniga bir marta XP beradi. Yangi bosqichlar — to'liq XP!</div>";
+      var i=h.lastIndexOf('<div class="toolbar"');
+      h = i>-1 ? h.slice(0,i)+note+h.slice(i) : h+note;
+    }
+    return h;
+  };
+  var _go = gameOverHtml;
+  gameOverHtml = function(title, scoreText, xp, isNew, extra){
+    if(G && G.xpReal!=null){
+      xp = G.xpReal;
+      if(G.xpReal < G.xpFull) extra = (extra||'')+'<div class="tip n" style="font-size:13px;text-align:left">🔁 Bugun bu o\'yinni '+G.xpPlays+'-marta o\'ynadingiz: '+(G.xpReal?'XP ning yarmi berildi.':'XP berilmaydi.')+' Ertaga yana to\'liq XP. Yangi bosqichlar — doim to\'liq XP!</div>';
+    }
+    return _go.call(this, title, scoreText, xp, isNew, extra);
+  };
 })();
 
 /*@@COURSE_END@@*/

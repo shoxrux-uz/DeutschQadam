@@ -615,6 +615,39 @@ test('Server xatosi tushunarli ko\'rsatiladi', () => {
 });
 test('Xatosiz ishladi', () => eq(w14.__errors.length, 0, w14.__errors.join(' | ')));
 
+/* ---------- 15. XP: qayta qilganda XP yig'ib bo'lmaydi ---------- */
+console.log('\n15) XP qoidasi: takrorlashda XP kamayadi');
+const w15 = boot({ name: 'Ali', onboarded: true, ts: 1, xp: 0, goal: 50 });
+w15.eval("bootStep('splash'); bootStep('data');");
+function passLesson(w, id) {
+  w.eval("startNodeTest('" + id + "')");
+  for (let i = 0; i < 40 && !w.eval('QZ.done'); i++) {
+    const idx = w.eval('QZ.qs[QZ.i].options.indexOf(QZ.qs[QZ.i].answer)');
+    w.eval('quizPick({dataset:{p:' + idx + '}}); quizNext();');
+  }
+}
+test('Birinchi marta: har to\'g\'ri javob 10 XP + bosqich bonusi', () => {
+  w15.eval("state.path.abc=90;");
+  const x0 = w15.eval('state.xp'); passLesson(w15, 'salom');
+  eq(w15.eval('state.xp') - x0, 8 * 10 + 30);
+});
+test('Shu kuni qayta: o\'sha savollar uchun XP yo\'q, bonus ham yo\'q', () => {
+  const x0 = w15.eval('state.xp'); passLesson(w15, 'salom');
+  assert(w15.eval('state.xp') - x0 <= 8 * 2, 'juda ko\'p XP berildi: ' + (w15.eval('state.xp') - x0));
+  assert(/takrorlash|XP olgansiz/.test(w15.document.getElementById('main').textContent), 'izoh chiqmadi');
+});
+test('Ertasi kuni tugatilgan bosqichni takrorlash: har javob 2 XP', () => {
+  w15.eval("state.xpd = {d:'2000-01-01', q:{}, g:{}};");
+  const x0 = w15.eval('state.xp'); passLesson(w15, 'salom');
+  eq(w15.eval('state.xp') - x0, 8 * 2);
+});
+test('O\'yinlar: 1-marta to\'liq, 2-marta yarmi, keyin 0', () => {
+  eq(w15.eval("gameXp('speed', 60)"), 60); eq(w15.eval("gameXp('speed', 60)"), 30); eq(w15.eval("gameXp('speed', 60)"), 0);
+});
+test('Har bir til uchun alohida hisoblanadi', () => {
+  w15.eval("setCourse('en')"); eq(w15.eval("gameXp('speed', 60)"), 60); w15.eval("setCourse('de')");
+});
+
 console.log('\n────────────────────────────────────────');
 console.log('Natija: ' + passed + ' ta o\'tdi, ' + failed + ' ta xato');
 if (failed) { console.log('Xato testlar:\n - ' + failures.join('\n - ')); process.exit(1); }
