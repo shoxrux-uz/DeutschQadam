@@ -12,7 +12,12 @@ import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.webkit.JavascriptInterface;
+import android.webkit.ValueCallback;
+import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -36,6 +41,12 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private TextToSpeech tts;
     /** 0 — tayyorlanmoqda, 1 — nemischa ovoz bor, 2 — nemischa ovoz yo'q, 3 — ovoz tizimi ishlamadi */
     private volatile int ttsStatus = 0;
+    /** Joriy kurs tili: nemis (de-DE), rus (ru-RU) yoki ingliz (en-US) */
+    private volatile Locale ttsLocale = Locale.GERMANY;
+    private volatile String sttTag = "de-DE";
+    /* ---- Profil rasmi uchun fayl tanlash ---- */
+    private static final int REQ_FILE = 4444;
+    private ValueCallback<Uri[]> fileCb = null;
 
     /* ---- Nutqni tanish (talaffuzni tekshirish) ---- */
     private static final int REQ_MIC = 4242;
@@ -72,6 +83,25 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             }
         });
 
+        web.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public boolean onShowFileChooser(WebView v, ValueCallback<Uri[]> cb, FileChooserParams params) {
+                if (fileCb != null) fileCb.onReceiveValue(null);
+                fileCb = cb;
+                try {
+                    Intent it = new Intent(Intent.ACTION_GET_CONTENT);
+                    it.addCategory(Intent.CATEGORY_OPENABLE);
+                    it.setType("image/*");
+                    startActivityForResult(Intent.createChooser(it, "Rasm tanlang"), REQ_FILE);
+                } catch (Exception e) {
+                    fileCb = null;
+                    cb.onReceiveValue(null);
+                    return false;
+                }
+                return true;
+            }
+        });
+
         web.addJavascriptInterface(new TtsBridge(), "AndroidTTS");
 
         try {
@@ -101,17 +131,41 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             ttsStatus = 3;
             return;
         }
-        int r = tts.setLanguage(Locale.GERMANY);
-        if (r == TextToSpeech.LANG_MISSING_DATA || r == TextToSpeech.LANG_NOT_SUPPORTED) {
-            r = tts.setLanguage(Locale.GERMAN);
-        }
-        ttsStatus = (r == TextToSpeech.LANG_MISSING_DATA || r == TextToSpeech.LANG_NOT_SUPPORTED) ? 2 : 1;
+        applyLang();
 
         tts.setOnUtteranceProgressListener(new UtteranceProgressListener() {
             @Override public void onStart(String utteranceId) { }
             @Override public void onDone(String utteranceId) { notifyDone(utteranceId); }
             @Override public void onError(String utteranceId) { notifyDone(utteranceId); }
         });
+    }
+
+    /** TTS ga joriy kurs tilini o'rnatadi va ovoz bor-yo'qligini yangilaydi */
+    private synchronized void applyLang() {
+        if (tts == null) return;
+        try {
+            int r = tts.setLanguage(ttsLocale);
+            if (r == TextToSpeech.LANG_MISSING_DATA || r == TextToSpeech.LANG_NOT_SUPPORTED) {
+                r = tts.setLanguage(new Locale(ttsLocale.getLanguage()));
+            }
+            ttsStatus = (r == TextToSpeech.LANG_MISSING_DATA || r == TextToSpeech.LANG_NOT_SUPPORTED) ? 2 : 1;
+        } catch (Exception e) {
+            ttsStatus = 3;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQ_FILE) {
+            ValueCallback<Uri[]> cb = fileCb;
+            fileCb = null;
+            if (cb != null) {
+                Uri u = (resultCode == RESULT_OK && data != null) ? data.getData() : null;
+                cb.onReceiveValue(u != null ? new Uri[]{u} : null);
+            }
+            return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     /** JavaScript tomoniga "gap tugadi" deb xabar berish */
@@ -132,6 +186,47 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         @JavascriptInterface
         public int status() {
             return ttsStatus;
+        }
+
+        /** Kurs almashganda: ovoz va nutqni tanish tilini o'zgartirish */
+        @JavascriptInterface
+        public void setLang(String tag) {
+            if (tag == null || !tag.matches("(de-DE|ru-RU|en-US|en-GB)")) return;
+            if (tag.equals(sttTag) && ttsStatus != 0) return;
+            ttsLocale = Locale.forLanguageTag(tag);
+            sttTag = tag;
+            Notif.prefs(MainActivity.this).edit().putString("lang", tag.substring(0, 2)).apply();
+            if (tts != null && ttsStatus != 0) {
+                try { tts.stop(); } catch (Exception ignored) { }
+                applyLang();
+            }
+        }
+
+        /** Do'stlik kodini ulashish */
+        @JavascriptInterface
+        public void share(final String text) {
+            runOnUiThread(new Runnable() {
+                @Override public void run() {
+                    try {
+                        Intent it = new Intent(Intent.ACTION_SEND);
+                        it.setType("text/plain");
+                        it.putExtra(Intent.EXTRA_TEXT, text == null ? "" : text);
+                        startActivity(Intent.createChooser(it, "Ulashish"));
+                    } catch (Exception ignored) { }
+                }
+            });
+        }
+
+        @JavascriptInterface
+        public void copy(final String text) {
+            runOnUiThread(new Runnable() {
+                @Override public void run() {
+                    try {
+                        ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                        if (cm != null) cm.setPrimaryClip(ClipData.newPlainText("Musofir", text == null ? "" : text));
+                    } catch (Exception ignored) { }
+                }
+            });
         }
 
         /* ---- Google bilan kirish va bulutli zaxira ---- */
@@ -387,8 +482,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         });
         Intent it = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         it.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        it.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "de-DE");
-        it.putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE, "de-DE");
+        it.putExtra(RecognizerIntent.EXTRA_LANGUAGE, sttTag);
+        it.putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE, sttTag);
         it.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 5);
         it.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, false);
         it.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getPackageName());
@@ -480,12 +575,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             sendJs("window.__notifPerm && window.__notifPerm(" + (Notif.permitted(this) ? 1 : 0) + ")");
         }
         // Foydalanuvchi nemischa ovozni o'rnatib qaytgan bo'lsa — qayta tekshiramiz
-        if (tts != null && ttsStatus == 2) {
-            int r = tts.setLanguage(Locale.GERMANY);
-            if (r != TextToSpeech.LANG_MISSING_DATA && r != TextToSpeech.LANG_NOT_SUPPORTED) {
-                ttsStatus = 1;
-            }
-        }
+        if (tts != null && ttsStatus == 2) applyLang();
     }
 
     @Override

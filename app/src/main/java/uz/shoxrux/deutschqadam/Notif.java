@@ -130,21 +130,26 @@ final class Notif {
         String nm = name.length() > 0 ? ", " + name : "";
         boolean done = xp >= goal;
         int left = goal - xp;
+        // Salomlashish o'rganilayotgan tilda: nemis, rus yoki ingliz
+        String lang = p.getString("lang", "de");
+        String[] g = "ru".equals(lang) ? new String[]{"Спокойной ночи", "Доброе утро", "Приятного аппетита", "Добрый вечер"}
+                   : "en".equals(lang) ? new String[]{"Good night", "Good morning", "Enjoy your lunch", "Good evening"}
+                   : new String[]{"Gute Nacht", "Guten Morgen", "Mahlzeit", "Guten Abend"};
 
         // Matnlar Musofir tilidan: XP — kemaning yoqilg'isi, seriya — radio aloqa
         if (slot == 3) {
             if (!done) return null;                                  // 21:00 — faqat maqsad bajarilgan bo'lsa
-            return new String[]{"Gute Nacht" + nm + "! \uD83C\uDF19",
+            return new String[]{g[0] + nm + "! \uD83C\uDF19",
                 "\uD83D\uDC7D Musofir: bugun kemaga " + xp + " XP yoqilg'i quydingiz — kunlik reja bajarildi. Yaxshi dam oling! \uD83C\uDF89"};
         }
         if (done) return null;                                       // maqsad bajarilgan — bezovta qilmaymiz
         if (slot == 0) {
-            return new String[]{"Guten Morgen" + nm + "! \u2600\uFE0F", xp > 0
+            return new String[]{g[1] + nm + "! \u2600\uFE0F", xp > 0
                 ? "\uD83D\uDC7D Yaxshi boshladik! Kemaga yana " + left + " XP yoqilg'i kerak."
                 : "\uD83D\uDC7D Kemam yoqilg'i kutyapti: bugun " + goal + " XP. Ertalabki 5 daqiqa — eng samarali vaqt."};
         }
         if (slot == 1) {
-            return new String[]{"Mahlzeit" + nm + "! \uD83C\uDF7D\uFE0F", xp > 0
+            return new String[]{g[2] + nm + "! \uD83C\uDF7D\uFE0F", xp > 0
                 ? "\uD83D\uDC7D Yarim yo'ldamiz: maqsadga yana " + left + " XP qoldi. Tushlikda 10 daqiqa ajratamizmi?"
                 : "\uD83D\uDC7D Tushlikda 10 ta so'z? Bugun hali boshlanmadi — antennam sizni sog'indi \uD83D\uDCE1"};
         }
@@ -152,7 +157,7 @@ final class Notif {
             return new String[]{"\uD83D\uDCE1 " + streak + " kunlik seriyangiz xavf ostida!",
                 "\uD83D\uDC7D Musofir: bugun hali signal yo'q. Bitta kichik mashq radio aloqamizni saqlab qoladi."};
         }
-        return new String[]{"Guten Abend" + nm + "! \uD83C\uDF06", xp > 0
+        return new String[]{g[3] + nm + "! \uD83C\uDF06", xp > 0
             ? "\uD83D\uDC7D Oz qoldi! Kemaga yana " + left + " XP kerak."
             : "\uD83D\uDC7D Kun tugayapti, kemam esa bo'sh turibdi. Maqsadga " + goal + " XP — bitta mashq bilan boshlaymiz?"};
     }

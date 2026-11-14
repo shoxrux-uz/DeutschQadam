@@ -50,7 +50,8 @@ console.log('\n🧪 Deutsch Qadam — avtomatik testlar\n');
 console.log('1) Ishga tushish');
 const w = boot();
 test('Ilova xatosiz ochiladi', () => eq(w.__errors.length, 0, 'JS xatolar: ' + w.__errors.join(' | ')));
-test('Bosh sahifa chiziladi', () => assert(w.document.querySelector('.hero h1'), 'hero topilmadi'));
+test('Bosh sahifa chiziladi (Musofir, kunlik maqsad, yo\'l)', () => assert(w.document.querySelector('.buddy') && w.document.querySelector('.goalbar') && w.document.querySelector('.path-wrap'), 'bosh sahifa qismlari topilmadi'));
+test('Pastda 4 ta bo\'lim, tepada til tanlash', () => { eq(w.document.querySelectorAll('#tabbar .tbi').length, 4); assert(w.document.querySelector('#tbx [data-act="courseSheet"]'), 'til tugmasi yo\'q'); });
 test('"made by shoxrux" yozuvi bor', () => assert(/made by/.test(w.document.querySelector('.made').textContent) && /shoxrux/.test(w.document.querySelector('.made').textContent)));
 
 /* ---------- 2. Ma'lumotlar butunligi ---------- */
@@ -359,6 +360,7 @@ test('Shu telefondagini tanlasa — bulut yangilanadi', () => {
   eq(JSON.parse(cloud.db.prog.ali.json).xp, 999);
 });
 test('Hisobdan chiqish', () => {
+  run(c1, 'saveState()');
   run(c1, 'ACT.cloudLogoutYes()');
   eq(run(c1, 'state.cloud'), null);
   assert(c1.__calls.some((c) => c[0] === 'signout'), 'googleSignOut chaqirilmadi');
@@ -428,6 +430,165 @@ test('Musofirning 16 ta mimikasi to\'g\'ri chiziladi', () => {
 });
 
 /* ---------- Natija ---------- */
+/* ---------- 13. Bir nechta til: nemis, rus, ingliz ---------- */
+console.log('\n13) Tillar: nemis, rus, ingliz');
+const w13 = boot({ name: 'Aziz', onboarded: true, ts: 1, xp: 40, goal: 50, path: { abc: 90, salom: 80 } });
+w13.eval("bootStep('splash'); bootStep('data');");
+const PAGES = [['home'], ['practice'], ['profile'], ['social'], ['stats'], ['sounds'], ['lessons'], ['lesson', 'salom'], ['lesson', 'tanish'], ['dialogs'], ['dialog', 'd1'],
+  ['numbers', 'learn'], ['numbers', 'conv'], ['numbers', 'practice'], ['vocab'], ['flash'], ['tests'], ['games'], ['game', 'memory'], ['game', 'scramble'], ['game', 'sentence'],
+  ['game', 'dictation'], ['game', 'speed'], ['grammar'], ['cert']];
+['ru', 'en'].forEach((c) => {
+  test(c.toUpperCase() + ': kursga o\'tish va barcha sahifalar xatosiz', () => {
+    w13.eval("setCourse('" + c + "')");
+    eq(w13.eval('COURSE'), c);
+    PAGES.forEach((v) => {
+      const b = w13.__errors.length;
+      w13.eval("go('" + v[0] + "'," + (v[1] ? "'" + v[1] + "'" : 'null') + ')');
+      eq(w13.__errors.length, b, c + ' ' + v.join('/') + ': ' + w13.__errors.slice(b).join(' | '));
+      assert(w13.document.getElementById('main').innerHTML.length > 100, c + ' ' + v.join('/') + ' bo\'sh');
+    });
+  });
+});
+test('Rus tili: so\'zlar, darslar, sonlar ruscha', () => {
+  w13.eval("setCourse('ru')");
+  assert(w13.eval('ALLW.length') > 900, 'so\'z kam');
+  eq(w13.eval('numDe(21)'), 'двадцать один'); eq(w13.eval('numDe(2026)'), 'две тысячи двадцать шесть');
+  eq(w13.eval('curTts()'), 'ru-RU');
+  assert(/Азиз/.test(w13.eval("DIALOGS[0].lines[1].de")), 'ism kirillga o\'girilmadi: ' + w13.eval("DIALOGS[0].lines[1].de"));
+  w13.eval("go('vocab')"); assert(!/der — erkak/.test(w13.document.getElementById('main').innerHTML), 'nemischa artikl izohi qoldi');
+  assert(!/[Nn]emis/.test(w13.document.getElementById('main').textContent), '«nemis» so\'zi qoldi');
+});
+test('Ingliz tili: so\'zlar, darslar, sonlar inglizcha', () => {
+  w13.eval("setCourse('en')");
+  assert(w13.eval('ALLW.length') > 650, 'so\'z kam');
+  eq(w13.eval('numDe(21)'), 'twenty-one'); eq(w13.eval('numDe(101)'), 'one hundred and one');
+  eq(w13.eval('curTts()'), 'en-US');
+  eq(w13.eval("LESSONS[1].items[0].de"), 'My name is Aziz.');
+  w13.eval("go('tests')"); assert(!w13.document.querySelector('[data-act="tMode"][data-p="art"]'), 'der/die/das rejimi inglizchada bo\'lmasligi kerak');
+  eq(w13.eval('NODES.filter(function(n){ return n.type===\'final\'; }).length'), 1);
+});
+test('Har bir tilning progressi alohida saqlanadi', () => {
+  w13.eval("setCourse('en'); state.path.abc=95; state.learned['oila0']=1; saveState();");
+  w13.eval("setCourse('de')");
+  eq(w13.eval('state.path.salom'), 80, 'nemischa progress yo\'qoldi');
+  eq(w13.eval('state.path.abc'), 90);
+  w13.eval("setCourse('en')"); eq(w13.eval('state.path.abc'), 95); eq(w13.eval("state.learned['oila0']"), 1); eq(w13.eval('state.path.salom'), undefined);
+  const saved = JSON.parse(w13.localStorage.getItem('deutschQadam_v1'));
+  eq(saved.course, 'en'); eq(saved.courses.de.path.salom, 80);
+});
+test('Qayta ochilganda oxirgi til tiklanadi', () => {
+  const saved = JSON.parse(w13.localStorage.getItem('deutschQadam_v1'));
+  const w13b = boot(saved);
+  eq(w13b.eval('COURSE'), 'en'); eq(w13b.eval('state.path.abc'), 95); eq(w13b.eval("LESSONS[0].items[0].de"), 'Hello!');
+  eq(w13b.__errors.length, 0, w13b.__errors.join(' | '));
+});
+test('XP va seriya barcha tillar uchun umumiy', () => {
+  const x = w13.eval('state.xp'); w13.eval("setCourse('ru')"); eq(w13.eval('state.xp'), x);
+});
+test('Imtihon faqat daraja oxirida: A1 da 1 ta imtihon, oldin qulflangan', () => {
+  w13.eval("setCourse('de')");
+  eq(w13.eval("NODES.filter(function(n){ return n.unit.lv==='A1' && (n.type==='exam'||n.type==='final'); }).length"), 1);
+  eq(w13.eval("NODES.filter(function(n){ return n.type==='exam'; }).length"), 0, 'oraliq imtihonlar qolib ketgan');
+  eq(w13.eval("nodeUnlocked('final')"), false);
+  w13.eval("openNode('final')");
+  assert(/barcha darslari tugagach/.test(w13.document.getElementById('modalBody').textContent), 'qulf izohi yo\'q');
+  w13.eval('closeModal()');
+});
+test('Til tanlash oynasi va til almashtirish', () => {
+  w13.eval("ACT.courseSheet()");
+  eq(w13.document.querySelectorAll('#modalBody [data-act="pickCourse"]').length, 3);
+  w13.eval("ACT.pickCourse({dataset:{p:'ru'}})");
+  eq(w13.eval('COURSE'), 'ru'); eq(w13.eval('current.view'), 'home');
+  assert(/RU/.test(w13.document.getElementById('tbx').textContent), 'tepada RU yo\'q');
+});
+test('Onboardingda til tanlanadi', () => {
+  const w = boot();
+  w.eval("bootStep('splash'); bootStep('data');");
+  w.eval("ACT.obStorySkip(); document.getElementById('obName').value='lola'; obNext();");
+  assert(w.document.querySelector('#onb [data-act="obCourse"][data-p="en"]'), 'til tanlash chiqmadi');
+  w.eval("ACT.obCourse({dataset:{p:'en'}}); obNext();");
+  eq(w.eval('COURSE'), 'en');
+  assert(/[Ii]ngliz/.test(w.document.getElementById('onb').textContent), 'keyingi qadam inglizchaga moslashmadi');
+  w.eval("OB.reason='ish'; obNext(); OB.goal=30; obNext(); obNext(); obFinish();");
+  eq(w.eval('state.course'), 'en'); eq(w.eval('state.name'), 'Lola');
+  eq(w.__errors.length, 0, w.__errors.join(' | '));
+});
+
+/* ---------- 14. Profil, do'stlar va chat ---------- */
+console.log('\n14) Profil, do\'stlar va chat');
+function socServer(){
+  const me = { uid: 'ali', name: 'Ali', avatar: 'mf:wave', code: 'K7M2QX', week: 40, xp: 150, streak: 2 };
+  const bek = { uid: 'bek', name: 'Bek', avatar: 'mf:happy', week: 90, xp: 300, streak: 5, course: 'en' };
+  const st = { friends: [bek], incoming: [{ uid: 'sar', name: 'Sardor', avatar: 'mf:joke' }], msgs: [{ id: 'm1', chat: 'd:ali|bek', from: 'bek', text: 'Hello!', ts: Date.now() - 5000 }], log: [] };
+  return { st, handle(req) {
+    st.log.push(req);
+    if (req.action === 'soc') return { ok: true, week: '2026-11-09', me, friends: st.friends, incoming: st.incoming, outgoing: [], blocked: [], groups: st.groups || [], others: [],
+      inbox: { 'd:ali|bek': { unread: 1, last: { from: 'bek', text: 'Hello!', ts: st.msgs[0].ts } } } };
+    if (req.action === 'friend_add') return req.code === 'BEK123' ? { ok: true, pending: true, name: 'Bek' } : { ok: false, err: 'no_user' };
+    if (req.action === 'friend_respond') { st.incoming = []; if (req.accept) st.friends.push({ uid: 'sar', name: 'Sardor', avatar: 'mf:joke', week: 0 }); return { ok: true }; }
+    if (req.action === 'msg_list') return { ok: true, chat: req.chat, msgs: st.msgs.filter((m) => m.chat === req.chat && m.ts > (req.since || 0)) };
+    if (req.action === 'msg_send') { const m = { id: 'm' + st.msgs.length + 1, chat: req.chat, from: 'ali', text: req.text, ts: Date.now() }; st.msgs.push(m); return { ok: true, msg: m }; }
+    if (req.action === 'group_create') { st.groups = [{ gid: 'g1', name: req.name, owner: 'ali', members: ['ali'].concat(req.members) }]; return { ok: true, gid: 'g1' }; }
+    if (req.action === 'profile_set' || req.action === 'report' || req.action === 'block') return { ok: true };
+    return null;
+  } };
+}
+const srv = socServer();
+const cloud14 = fakeCloud(); const _h = cloud14.handle; cloud14.handle = (req) => srv.handle(req) || _h(req);
+const w14 = nativeBoot({ name: 'Ali', onboarded: true, ts: 1, xp: 150, cloud: { uid: 'ali', secret: 's-ali', email: 'ali@gmail.com' } }, cloud14, { v: 'ali' });
+cloud14.db.users.ali = { secret: 's-ali', email: 'ali@gmail.com' };
+test('Profil sahifasi: rasm, ism, tillar', () => {
+  w14.eval("go('profile')");
+  const m = w14.document.getElementById('main');
+  assert(m.querySelector('.prof-h .av'), 'avatar yo\'q'); assert(/Ali/.test(m.textContent));
+  eq(m.querySelectorAll('[data-act="pickCourse"]').length, 3);
+  assert(/made by/.test(m.textContent) && /shoxrux/.test(m.textContent), 'made by shoxrux yo\'q');
+});
+test('Profil rasmini Musofir kayfiyatidan tanlash', () => {
+  w14.eval("ACT.avatarSheet()");
+  assert(w14.document.querySelectorAll('#modalBody [data-act="avPick"]').length >= 12, 'tanlovlar yo\'q');
+  assert(w14.document.getElementById('avFile'), 'rasm yuklash tugmasi yo\'q');
+  w14.eval("ACT.avPick({dataset:{p:'mf:love'}})");
+  eq(w14.eval('state.avatar'), 'mf:love');
+  assert(srv.st.log.some((r) => r.action === 'profile_set' && r.avatar === 'mf:love'), 'serverga yuborilmadi');
+});
+test('Do\'stlar: haftalik reyting va kiruvchi taklif', () => {
+  w14.eval("go('social')");
+  const m = w14.document.getElementById('main');
+  assert(/K7M2QX/.test(m.textContent), 'do\'stlik kodi yo\'q');
+  const rows = m.querySelectorAll('.lb .lr'); eq(rows.length, 2);
+  assert(/Bek/.test(rows[0].textContent) && /90 XP/.test(rows[0].textContent), 'reyting tartibi noto\'g\'ri');
+  assert(m.querySelector('[data-act="socResp"][data-p="sar"]'), 'taklif ko\'rinmadi');
+  assert(w14.document.querySelector('#tabbar .bdg'), 'o\'qilmagan nishon yo\'q');
+});
+test('Taklifni qabul qilish', () => {
+  w14.eval("ACT.socResp({dataset:{p:'sar', a:'1'}, disabled:false})");
+  eq(w14.eval('SOC.data.friends.length'), 2);
+});
+test('Do\'st qo\'shish (kod bilan)', () => {
+  w14.eval("ACT.socAdd(); document.getElementById('frCode').value='bek-123'; ACT.socAddGo();");
+  assert(srv.st.log.some((r) => r.action === 'friend_add' && r.code === 'BEK123'), 'so\'rov yuborilmadi');
+});
+test('Chat: xabarlarni o\'qish va yozish', () => {
+  w14.eval("go('chat','d:ali|bek')");
+  assert(/Hello!/.test(w14.document.getElementById('msgs').textContent), 'xabar ko\'rinmadi');
+  assert(w14.document.getElementById('chatTx'), 'yozish maydoni yo\'q');
+  w14.eval("document.getElementById('chatTx').value='Hi Bek!'; ACT.chatSend();");
+  assert(/Hi Bek!/.test(w14.document.getElementById('msgs').textContent), 'yuborilgan xabar ko\'rinmadi');
+  assert(w14.eval("state.soc.read['d:ali|bek']") > 0, 'o\'qildi deb belgilanmadi');
+  w14.eval("go('home')"); assert(!w14.document.getElementById('chatIn'), 'chat maydoni yopilmadi');
+});
+test('Guruh tuzish', () => {
+  w14.eval("go('social'); ACT.socGroupNew(); document.getElementById('grName').value='Ekipaj'; document.querySelector('.grM').checked=true; ACT.socGroupGo();");
+  eq(w14.eval('current.view'), 'chat'); eq(w14.eval('current.p'), 'g:g1');
+  w14.eval("go('home')");
+});
+test('Google bilan kirmagan bo\'lsa — Do\'stlar bo\'limi kirishni taklif qiladi', () => {
+  w8.eval("go('social')");
+  assert(/Google/.test(w8.document.getElementById('main').textContent));
+});
+test('Xatosiz ishladi', () => eq(w14.__errors.length, 0, w14.__errors.join(' | ')));
+
 console.log('\n────────────────────────────────────────');
 console.log('Natija: ' + passed + ' ta o\'tdi, ' + failed + ' ta xato');
 if (failed) { console.log('Xato testlar:\n - ' + failures.join('\n - ')); process.exit(1); }
