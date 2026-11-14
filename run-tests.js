@@ -653,6 +653,61 @@ test('Har bir til uchun alohida hisoblanadi', () => {
   w15.eval("setCourse('en')"); eq(w15.eval("gameXp('speed', 60)"), 60); w15.eval("setCourse('de')");
 });
 
+/* ---------- 16. Talaffuz: mikrofon holati va avtomatik rejim ---------- */
+console.log('\n16) Talaffuz mashqi: mikrofon');
+const mic = { ids: [], stops: 0 };
+const w16 = boot({ name: 'Ali', onboarded: true, ts: 1, xp: 0, goal: 50, path: { abc: 90, salom: 90, tanish: 90 }, seen: { c: { oila: 1, olmosh: 1 }, l: { salom: 1, tanish: 1 }, d: {}, g: {} } }, (win) => {
+  win.AndroidTTS = { status: () => 1, speak: () => {}, stop: () => {}, sttAvailable: () => 1, listen: (id) => mic.ids.push(id), stopListening: () => { mic.stops++; },
+    notifSync: () => {}, notifPermission: () => 1, setLang: () => {} };
+});
+w16.eval("bootStep('splash'); bootStep('data'); go('game','pron')");
+const lastId = () => mic.ids[mic.ids.length - 1];
+const mtext = () => w16.document.getElementById('main').textContent;
+test('Boshida mikrofon o\'chiq va bu yozib qo\'yilgan', () => { eq(w16.eval('PR.st'), 'idle'); assert(/Mikrofon o'chiq/.test(mtext())); });
+test('Bir bosish — mikrofon YONIQ deb ko\'rinadi', () => {
+  w16.eval('ACT.pronMic()'); eq(w16.eval('PR.st'), 'listen'); assert(/Mikrofon YONIQ/.test(mtext())); assert(w16.document.querySelector('.mic-ring'), 'halqa yo\'q');
+});
+test('Xato aytilsa — o\'zi qayta tinglashga tayyorlanadi (qayta bosish shart emas)', () => {
+  w16.eval("window.__sttResult('" + lastId() + "', ['xyz abc'], [0.9])");
+  eq(w16.eval('PR.st'), 'wait'); eq(w16.eval('PR.tries'), 1); assert(/yana ayting/.test(mtext()));
+  const n = mic.ids.length; w16.eval('var f=PR.waitT; clearTimeout(f); PR.st=\'wait\'; pronListen();'); eq(mic.ids.length, n + 1, 'qayta tinglamadi');
+});
+test('Ovoz eshitilmasa — xato emas, jimgina qayta tinglaydi', () => {
+  w16.eval("window.__sttError('" + lastId() + "', 7)");
+  eq(w16.eval('PR.st'), 'wait'); assert(!w16.document.querySelector('.fail-msg'), 'xato chiqmasligi kerak');
+  w16.eval('clearTimeout(PR.waitT); pronListen();');
+});
+test('Tizim band bo\'lsa (5/8) — qayta ulanadi', () => {
+  w16.eval("window.__sttError('" + lastId() + "', 8)");
+  eq(w16.eval('PR.st'), 'wait'); assert(/qayta ulanmoqda/.test(mtext()));
+  w16.eval('clearTimeout(PR.waitT); pronListen();');
+});
+test('To\'g\'ri aytilsa — keyingisiga o\'zi o\'tadi va yana tinglaydi', () => {
+  w16.eval("window.__sttResult('" + lastId() + "', [PR.item.de], [0.95])");
+  eq(w16.eval('PR.st'), 'wait'); assert(/Keyingisiga/.test(mtext()));
+  const i0 = w16.eval('G.i'); w16.eval('clearTimeout(PR.waitT); pronAdvance();');
+  eq(w16.eval('G.i'), i0 + 1); eq(w16.eval('PR.auto'), true); eq(w16.eval('PR.st'), 'wait');
+  w16.eval('clearTimeout(PR.waitT); pronListen();'); eq(w16.eval('PR.st'), 'listen');
+});
+test('3 marta xato bo\'lsa — to\'xtaydi, «Qayta aytish» va «Keyingi» chiqadi', () => {
+  for (let k = 0; k < 3; k++) {
+    w16.eval("window.__sttResult('" + lastId() + "', ['qwerty'], [0.9])");
+    if (k < 2) w16.eval('clearTimeout(PR.waitT); pronListen();');
+  }
+  eq(w16.eval('PR.st'), 'idle'); eq(w16.eval('PR.auto'), false);
+  assert(w16.document.querySelector('[data-act="pronRetry"]') && w16.document.querySelector('[data-act="pronNext"]'));
+});
+test('«To\'xtatish» mikrofonni o\'chiradi', () => {
+  w16.eval('ACT.pronRetry()'); eq(w16.eval('PR.st'), 'listen');
+  assert(w16.document.querySelector('[data-act="pronStop"]'), 'to\'xtatish tugmasi yo\'q');
+  w16.eval('ACT.pronStop()'); eq(w16.eval('PR.st'), 'idle'); assert(/Mikrofon o'chiq/.test(mtext()));
+});
+test('Mikrofon ruxsati yo\'q bo\'lsa — tushunarli xato', () => {
+  w16.eval('ACT.pronMic()'); w16.eval("window.__sttError('" + lastId() + "', 9)");
+  eq(w16.eval('PR.st'), 'idle'); assert(/ruxsati/.test(mtext()));
+});
+test('Xatosiz ishladi', () => eq(w16.__errors.length, 0, w16.__errors.join(' | ')));
+
 console.log('\n────────────────────────────────────────');
 console.log('Natija: ' + passed + ' ta o\'tdi, ' + failed + ' ta xato');
 if (failed) { console.log('Xato testlar:\n - ' + failures.join('\n - ')); process.exit(1); }

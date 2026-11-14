@@ -443,7 +443,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             runOnUiThread(new Runnable() {
                 @Override public void run() {
                     if (recognizer != null) {
-                        try { recognizer.stopListening(); } catch (Exception ignored) { }
+                        // To'xtatish = bekor qilish: eski natija keyin kelib, yangisiga aralashmasin
+                        try { recognizer.cancel(); } catch (Exception ignored) { }
                     }
                 }
             });
@@ -485,6 +486,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
         if (tts != null) tts.stop();
         if (recognizer != null) {
+            try { recognizer.cancel(); } catch (Exception ignored) { }
             try { recognizer.destroy(); } catch (Exception ignored) { }
             recognizer = null;
         }
@@ -530,6 +532,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         it.putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE, sttTag);
         it.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 5);
         it.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, false);
+        // Gapni oxirigacha aytishga ulgurish uchun: jimlikni biroz uzoqroq kutadi
+        it.putExtra("android.speech.extras.SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS", 1500L);
+        it.putExtra("android.speech.extras.SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS", 1200L);
+        it.putExtra("android.speech.extras.SPEECH_INPUT_MINIMUM_LENGTH_MILLIS", 800L);
         it.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getPackageName());
         try {
             recognizer.startListening(it);

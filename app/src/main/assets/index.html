@@ -1109,6 +1109,27 @@ body.chatting .main{padding-bottom:90px!important}
 .avgrid .bz{pointer-events:none}
 @media (max-width:420px){ .top .theme-btn{display:none} .tb-name{font-size:17px} .tb-st{padding:6px 8px;font-size:13px} .pstats b{font-size:16px} }
 @media (max-width:340px){ .tb-name{display:none} }
+
+/* Talaffuz: mikrofon holati aniq ko'rinsin */
+.mic-wrap{position:relative;width:132px;height:132px;margin:18px auto 6px;display:grid;place-items:center}
+.mic-wrap .mic{margin:0}
+.mic.off{background:var(--cream-3);color:var(--navy);box-shadow:0 8px 0 rgba(20,33,61,.18)}
+.mic.listen{background:#E5484D;color:#fff;box-shadow:0 8px 0 #A8282D,0 0 0 8px rgba(229,72,77,.18)}
+.mic.wait{background:var(--gold);color:var(--navy);box-shadow:0 8px 0 var(--gold-d)}
+.mic-ring{position:absolute;inset:0;border-radius:50%;border:4px solid rgba(229,72,77,.55);animation:micRing 1.3s ease-out infinite;pointer-events:none}
+@keyframes micRing{0%{transform:scale(.72);opacity:1}100%{transform:scale(1.12);opacity:0}}
+.mic-state{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-weight:800;font-size:14px;margin:6px auto 4px}
+.mic-state i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.mic-state.on{background:#FDE4E5;color:#B42328}.mic-state.on i{background:#E5484D;animation:blink 1s infinite}
+.mic-state.off{background:var(--cream-2);color:var(--muted)}.mic-state.off i{background:var(--muted)}
+.mic-state.proc{background:var(--navy-soft);color:var(--navy)}.mic-state.proc i{background:var(--navy-3)}
+.mic-state.wait{background:var(--gold-soft);color:var(--gold-t)}.mic-state.wait i{background:var(--gold)}
+@keyframes blink{50%{opacity:.25}}
+.pr-wait{height:6px;border-radius:4px;background:var(--cream-2);overflow:hidden;max-width:240px;margin:8px auto 0}
+.pr-wait i{display:block;height:100%;width:100%;background:var(--gold);transform-origin:left;animation:prWait linear forwards}
+@keyframes prWait{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+.pr-tries{font-size:12px;font-weight:800;color:var(--muted);margin-top:4px}
+[data-theme="dark"] .mic-state.on{background:#4a1d20;color:#ffb3b5}
 </style>
 </head>
 <body>
@@ -12957,6 +12978,133 @@ function gameXp(id, n){
       if(G.xpReal < G.xpFull) extra = (extra||'')+'<div class="tip n" style="font-size:13px;text-align:left">🔁 Bugun bu o\'yinni '+G.xpPlays+'-marta o\'ynadingiz: '+(G.xpReal?'XP ning yarmi berildi.':'XP berilmaydi.')+' Ertaga yana to\'liq XP. Yangi bosqichlar — doim to\'liq XP!</div>';
     }
     return _go.call(this, title, scoreText, xp, isNew, extra);
+  };
+})();
+
+
+/* =====================================================================
+   TALAFFUZ: aniq mikrofon holati va avtomatik rejim
+   O'yinda mikrofonni bir marta bosasiz — keyin ilova o'zi tinglaydi:
+   to'g'ri bo'lsa keyingisiga o'tadi, xato bo'lsa qayta tinglaydi (3 martagacha).
+   Ovoz eshitilmasa yoki tizim band bo'lsa — jimgina qayta urinadi.
+   ===================================================================== */
+var PR_RETRY = 3;
+function prClear(){ if(PR && PR.waitT){ clearTimeout(PR.waitT); PR.waitT=null; } }
+function prSchedule(fn, ms, msg){
+  if(!PR) return;
+  prClear();
+  var pr=PR; PR.st='wait'; PR.waitMsg=msg||''; PR.waitMs=ms;
+  pronRefresh();
+  PR.waitT=setTimeout(function(){ if(PR!==pr || PR.st!=='wait') return; PR.waitT=null; fn(); }, ms);
+}
+sttErrText = (function(_e){ return function(code){ var t=_e(code); return t.replace('nemis tilini', CM().name.toLowerCase()+'ni'); }; })(sttErrText);
+pronCardHtml = function(){
+  var it=PR.item, r=PR.res, st=PR.st, auto=!!PR.auto;
+  var micCls = 'mic'+(st==='listen'?' listen':(st==='proc'?' proc':(st==='wait'?' wait':' off')));
+  var icon = st==='proc' ? '⏳' : (st==='wait' ? '⏸' : '🎤');
+  var label = st==='listen' ? '<span class="mic-state on"><i></i>Mikrofon YONIQ — gapiring</span>'
+    : st==='proc' ? '<span class="mic-state proc"><i></i>Tekshiryapman…</span>'
+    : st==='wait' ? '<span class="mic-state wait"><i></i>'+esc(PR.waitMsg||'Bir soniya…')+'</span>'
+    : '<span class="mic-state off"><i></i>Mikrofon o\'chiq — bosing</span>';
+  var hint = st==='listen' ? (auto ? "Aytib bo'lgach, jim turing — o'zim tekshiraman" : "Gapiring. Tugatgach, jim turing")
+    : st==='wait' ? "Tugmani bossangiz — darhol tinglayman"
+    : st==='proc' ? '' : (PR.mode==='game' && !auto ? "Bir marta bosing — keyin o'zim tinglab turaman" : "🎤 ni bosing va ayting");
+  var h = '<div class="pron">'+
+    '<div class="ask">Ayting:</div>'+
+    '<div class="pron-de">'+(r ? r.marks.map(function(ok,i){ return '<span class="'+(ok?'pw-ok':'pw-bad')+'">'+esc(it.de.split(/\s+/)[i])+'</span>'; }).join(' ') : esc(it.de))+'</div>'+
+    (it.tr?'<div class="pron-tr">['+esc(it.tr)+']</div>':'')+(it.uz?'<div class="muted">'+esc(it.uz)+'</div>':'')+
+    '<div class="pron-ctrl">'+spk(it.de)+spkSlow(it.de)+'</div>'+
+    (r ? (function(){ var cls=r.score>=85?'ok':(r.score>=60?'mid':'bad'); var msg=r.score>=85?"Ajoyib! Juda yaxshi talaffuz 🎉":(r.score>=60?"Yaxshi! Qizil so'zlarni yana mashq qiling 👍":"Yana urinib ko'ring — avval 🔊 tinglab oling 🙂");
+      return '<div class="pron-res '+cls+'"><div class="pron-score">'+r.score+'</div><div><b>'+msg+'</b><div class="muted" style="font-size:14px">Eshitildi: «'+esc(r.heard||'—')+'»</div></div></div>'; })() : '')+
+    '<div class="mic-wrap">'+(st==='listen'?'<span class="mic-ring"></span>':'')+'<button class="'+micCls+'" data-act="pronMic" aria-label="Mikrofon">'+icon+'</button></div>'+
+    label+(st==='wait' && PR.waitMs ? '<div class="pr-wait"><i style="animation-duration:'+PR.waitMs+'ms"></i></div>' : '')+
+    (hint?'<div class="pron-hint" style="margin-top:6px">'+hint+'</div>':'')+
+    (PR.mode==='game' && PR.tries ? '<div class="pr-tries">Urinish: '+PR.tries+' / '+PR_RETRY+'</div>' : '');
+  if(PR.err && st==='idle'){
+    h += '<div class="fail-msg">'+esc(sttErrText(PR.err))+(PR.err===99&&NATIVE?'<div class="mt"><button class="btn btn-o btn-s" data-act="micSettings">⚙️ Sozlamalarni ochish</button></div>':'')+'</div>';
+  }
+  h += '<div class="pron-note">🔒 Ovozingiz faqat matnga aylantirish uchun telefonning nutqni tanish xizmatiga (Google) yuboriladi. Ilova ovozni saqlamaydi.</div></div>';
+  return h;
+};
+function pronAdvance(){
+  if(!G || !PR) return;
+  prClear(); PRON.stop(true);
+  var auto=PR.auto;
+  G.scores.push(PR.res?PR.res.score:0); G.i++; PR=null;
+  render(); window.scrollTo(0,0);
+  if(auto && G.i<G.list.length && PR){ PR.auto=true; prSchedule(pronListen, 700, "Keyingi ibora — tayyorlaning…"); }
+}
+pronListen = function(){
+  if(!PR) return;
+  if(PR.st==='listen' || PR.st==='proc'){ PRON.stop(true); prClear(); PR.st='idle'; PR.auto=false; pronRefresh(); return; }   // qo'lda o'chirish
+  prClear();
+  if(!PRON.supported()){ PR.err=100; PR.st='idle'; pronRefresh(); return; }
+  if(PR.mode==='game') PR.auto=true;
+  PR.st='listen'; PR.err=null; pronRefresh();
+  var item=PR.item, pr=PR;
+  PRON.start(function(ev){
+    if(PR!==pr) return;
+    if(ev.type==='state'){ if(ev.state==='end' && PR.st==='listen'){ PR.st='proc'; pronRefresh(); } return; }
+    if(ev.type==='cancel'){ if(PR.st!=='wait'){ PR.st='idle'; pronRefresh(); } return; }
+    if(ev.type==='error'){
+      var c=ev.code;
+      if(c===6 || c===7){                                   // eshitilmadi — jimgina qayta tinglaymiz
+        PR.silent=(PR.silent||0)+1;
+        if(PR.silent<=2){ prSchedule(pronListen, 900, "🤔 Eshitilmadi — yana ayting"); return; }
+      } else if(c===5 || c===8 || c===11 || c===10){        // tizim band — qayta ulanamiz
+        PR.tech=(PR.tech||0)+1;
+        if(PR.tech<=3){ prSchedule(pronListen, 600 + PR.tech*300, "Mikrofon qayta ulanmoqda…"); return; }
+      }
+      PR.st='idle'; PR.err=c; PR.auto=false; PR.silent=0; PR.tech=0; SFX.play('bad'); pronRefresh(); return;
+    }
+    PR.silent=0; PR.tech=0;
+    var r=scorePron(item.de, ev.texts, ev.conf);
+    PR.st='idle'; PR.err=null; PR.tries=(PR.tries||0)+1;
+    if(!PR.res || r.score>=PR.res.score || PR.mode==='modal') PR.res=r;
+    PR.last=r;
+    state.pronTries = nz(state.pronTries)+1;
+    if(r.score>=85){ state.pronOk = nz(state.pronOk)+1; }
+    SFX.play(r.score>=60?'ok':'bad');
+    var px = (r.score>=85 && PR.mode==='modal') ? onceXp('pr:'+(PR.item&&PR.item.de), 5) : 0; if(px) gainXp(px, null); else saveState();
+    checkAch();
+    if(PR.mode==='game' && PR.auto){
+      if(r.score>=85){ prSchedule(pronAdvance, 1600, "✅ Zo'r! Keyingisiga o'tamiz…"); return; }
+      if(PR.tries<PR_RETRY){ prSchedule(pronListen, 2600, "🔁 Qizil so'zlarga e'tibor bering — yana ayting…"); return; }
+      PR.auto=false;                                         // 3 urinishdan keyin to'xtaymiz — tanlov sizda
+    }
+    pronRefresh();
+  });
+};
+GAME_VIEW.pron = function(){
+  if(!G.list){ G.list=pronItems(); G.i=0; G.scores=[]; }
+  if(G.i>=G.list.length){
+    var avg = Math.round(G.scores.reduce(function(s,x){ return s+x; },0)/G.list.length);
+    var xp = G.scores.reduce(function(s,x){ return s+(x>=85?10:(x>=60?5:0)); },0);
+    var isNew=setBest('pron', avg);
+    if(!G.xpGiven){ G.xpGiven=1; gainXp(gameXp('pron', xp)); if(avg>=60) confetti(); }
+    return gameOverHtml("Mashq tugadi!", avg+' ball', xp, isNew, '<p class="muted">'+G.list.length+' ta ibora bo\'yicha o\'rtacha talaffuz bali</p>');
+  }
+  if(!PR || PR.mode!=='game' || PR.idx!==G.i){ PR={item:G.list[G.i], st:'idle', res:null, err:null, mode:'game', idx:G.i, tries:0}; }
+  var avg2 = G.scores.length ? Math.round(G.scores.reduce(function(s,x){return s+x;},0)/G.scores.length) : 0;
+  var btns = '';
+  if(PR.auto && (PR.st==='listen' || PR.st==='wait' || PR.st==='proc')) btns += '<button class="btn btn-o btn-s" data-act="pronStop">⏹ To\'xtatish</button>';
+  if(PR.res && PR.st==='idle') btns += '<button class="btn btn-o btn-s" data-act="pronRetry">🔁 Qayta aytish</button><button class="btn btn-n" data-act="pronNext">Keyingi →</button>';
+  else btns += '<button class="btn btn-o btn-s" data-act="pronSkip">O\'tkazib yuborish →</button>';
+  var h = '<div class="qwrap"><div class="qhead"><span>'+(G.i+1)+' / '+G.list.length+'</span><span>O\'rtacha: '+avg2+'</span></div><div class="pbar"><i style="width:'+(G.i/G.list.length*100)+'%"></i></div>'+
+    '<div class="qcard">'+pronCardHtml()+'<div class="toolbar mt" style="justify-content:center;gap:8px;flex-wrap:wrap">'+btns+'</div></div></div>';
+  if(!PRON.supported()) h = '<div class="tip c">🎤 Bu qurilmada yoki brauzerda nutqni tanish xizmati topilmadi. Talaffuz mashqi <b>Android ilovada</b> ishlaydi (telefonda «Google» ilovasi bo\'lishi kerak).</div>'+h;
+  return h;
+};
+ACT.pronNext = function(){ if(!G || !PR) return; var a=PR.auto; prClear(); PRON.stop(true); PR.auto = a || !!PR.res; pronAdvance(); };
+ACT.pronSkip = function(){ if(!G || !PR) return; prClear(); PRON.stop(true); var a=PR.auto; PR.res=null; PR.auto=a; pronAdvance(); };
+ACT.pronRetry = function(){ if(!PR) return; PR.tries=0; PR.auto=(PR.mode==='game'); pronListen(); };
+ACT.pronStop = function(){ if(!PR) return; prClear(); PRON.stop(true); PR.st='idle'; PR.auto=false; pronRefresh(); };
+ACT.pronMic = function(){ if(PR && PR.st==='wait'){ prClear(); PR.st='idle'; } pronListen(); };
+(function(){
+  var _say = ACT.say;
+  ACT.say = function(el){
+    if(PR && (PR.st==='listen' || PR.st==='wait' || PR.st==='proc')){ prClear(); PRON.stop(true); PR.st='idle'; PR.auto=false; pronRefresh(); }
+    return _say.apply(this, arguments);
   };
 })();
 
