@@ -1143,9 +1143,9 @@ body.chatting .main{padding-bottom:90px!important}
   --neo-g1:#FF7A59; --neo-g2:#FF4D8D; --neo-g3:#8B5CF6; --neo-cy:#22D3EE; --neo-mint:#10B981; --neo-amber:#F59E0B;
   --neo-grad:linear-gradient(135deg,var(--neo-g1) 0%,var(--neo-g2) 52%,var(--neo-g3) 100%);
   --neo-glow:0 10px 30px -8px rgba(255,77,141,.55);
-  --neo-sh:0 18px 40px -22px rgba(60,40,140,.45), 0 2px 6px rgba(60,40,140,.06);
+  --neo-sh:0 8px 18px -12px rgba(60,40,140,.40);
   --neo-sh2:0 30px 70px -30px rgba(60,40,140,.55);
-  --neo-blur:saturate(170%) blur(20px);
+  --neo-blur:none; --neo-bar:rgba(255,255,255,.94);
   --neo-r:22px;
   --spring:cubic-bezier(.2,1.25,.35,1); --ease:cubic-bezier(.2,.8,.2,1);
   /* eski o'zgaruvchilarni yangi palitraga bog'lash */
@@ -1162,8 +1162,8 @@ html[data-theme="dark"]{
   --neo-bg:#05071A; --neo-bg2:#0B0F2E;
   --neo-surf:rgba(22,26,64,.62); --neo-surf2:rgba(255,255,255,.05); --neo-solid:#11143A;
   --neo-line:rgba(160,170,255,.14); --neo-line2:rgba(255,255,255,.10);
-  --neo-text:#EEF0FF; --neo-muted:#9AA2D0;
-  --neo-sh:0 20px 44px -24px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.02);
+  --neo-text:#EEF0FF; --neo-muted:#9AA2D0; --neo-bar:rgba(16,19,52,.95);
+  --neo-sh:0 8px 18px -10px rgba(0,0,0,.75);
   --neo-sh2:0 34px 80px -30px rgba(0,0,0,.95);
   --cream:var(--neo-bg); --cream-2:rgba(255,255,255,.06); --cream-3:rgba(160,170,255,.16); --paper:var(--neo-surf);
   --navy:var(--neo-text); --ink:var(--neo-text); --muted:var(--neo-muted); --navy-soft:rgba(139,92,246,.16); --navy-3:#A78BFA;
@@ -1178,7 +1178,7 @@ body{background:var(--neo-bg)!important;color:var(--neo-text);font-family:'Plus 
 h1,h2,h3,.serif,.unit b,.tb-name,.cert h1{font-family:'Space Grotesk','Plus Jakarta Sans',system-ui,sans-serif!important;letter-spacing:-.025em}
 #bgfx{display:none!important}
 #neo-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:radial-gradient(120% 80% at 50% -10%,var(--neo-bg2),var(--neo-bg) 60%);view-transition-name:neobg}
-#neo-bg .au{position:absolute;border-radius:50%;filter:blur(2px);will-change:transform;opacity:.9}
+#neo-bg .au{position:absolute;border-radius:50%;will-change:transform;opacity:.9;transform:translateZ(0)}
 #neo-bg .au.a{width:70vmax;height:70vmax;left:-25vmax;top:-30vmax;background:radial-gradient(circle,rgba(255,77,141,.30),rgba(255,77,141,0) 62%);animation:neoA 26s ease-in-out infinite alternate}
 #neo-bg .au.b{width:75vmax;height:75vmax;right:-35vmax;top:10vh;background:radial-gradient(circle,rgba(139,92,246,.30),rgba(139,92,246,0) 62%);animation:neoB 32s ease-in-out infinite alternate}
 #neo-bg .au.c{width:60vmax;height:60vmax;left:-10vmax;bottom:-35vmax;background:radial-gradient(circle,rgba(34,211,238,.26),rgba(34,211,238,0) 62%);animation:neoC 29s ease-in-out infinite alternate}
@@ -1200,12 +1200,12 @@ html.scrolling #neo-bg *,html.rm #neo-bg *{animation-play-state:paused!important
 
 /* ---------- Suzuvchi yuqori panel va dock ---------- */
 .top{position:sticky!important;top:0;margin:0 auto;max-width:860px;background:transparent!important;border:0!important;box-shadow:none!important;padding:10px 12px 6px!important;view-transition-name:topbar}
-.top::before{content:'';position:absolute;inset:8px 10px 2px;border-radius:22px;background:var(--neo-surf);backdrop-filter:var(--neo-blur);-webkit-backdrop-filter:var(--neo-blur);border:1px solid var(--neo-line);box-shadow:var(--neo-sh);z-index:-1}
+.top::before{content:'';position:absolute;inset:8px 10px 2px;border-radius:22px;background:var(--neo-bar);backdrop-filter:var(--neo-blur);-webkit-backdrop-filter:var(--neo-blur);border:1px solid var(--neo-line);box-shadow:var(--neo-sh);z-index:-1}
 .tbx{padding:2px 6px}
 .tb-course,.tb-st,.top .theme-btn{background:var(--neo-surf2)!important;border:1px solid var(--neo-line)!important;border-radius:14px!important;color:var(--neo-text)!important;backdrop-filter:none}
 .tb-st{font-variant-numeric:tabular-nums}
 .tb-name{background:var(--neo-grad);-webkit-background-clip:text;background-clip:text;color:transparent!important;font-weight:700!important}
-.tabbar{left:12px!important;right:12px!important;bottom:max(12px,env(safe-area-inset-bottom))!important;margin:0 auto;max-width:520px;border-radius:26px;background:var(--neo-surf)!important;backdrop-filter:var(--neo-blur);-webkit-backdrop-filter:var(--neo-blur);border:1px solid var(--neo-line)!important;box-shadow:var(--neo-sh2)!important;padding:6px!important;view-transition-name:tabbar}
+.tabbar{left:12px!important;right:12px!important;bottom:max(12px,env(safe-area-inset-bottom))!important;margin:0 auto;max-width:520px;border-radius:26px;background:var(--neo-bar)!important;border:1px solid var(--neo-line)!important;box-shadow:var(--neo-sh2)!important;padding:6px!important;view-transition-name:tabbar}
 .tb-items{display:flex;flex:1;justify-content:space-around;position:relative;z-index:1}
 .tb-ind{position:absolute;top:6px;bottom:6px;left:0;width:0;border-radius:20px;background:var(--neo-grad);box-shadow:var(--neo-glow);transition:transform .5s var(--spring),width .5s var(--spring);z-index:0;opacity:.95}
 .tabbar .tbi{background:transparent!important;color:var(--neo-muted)!important;transition:color .3s}
@@ -1279,8 +1279,7 @@ html[data-theme="dark"] .btn-n{background:rgba(255,255,255,.10)!important}
 .buddy .bubble::before,.buddy .bubble::after{display:none}
 .buddy .bz{filter:drop-shadow(0 12px 22px rgba(139,92,246,.45))}
 .goalbar .bar{height:12px!important;background:var(--cream-2)!important}
-.goalbar .bar i{background:linear-gradient(90deg,#F59E0B,#FF4D8D,#8B5CF6)!important;background-size:200% 100%!important;animation:flow 3s linear infinite;box-shadow:0 0 14px rgba(255,77,141,.6)}
-@keyframes flow{to{background-position:-200% 0}}
+.goalbar .bar i{background:linear-gradient(90deg,#F59E0B,#FF4D8D,#8B5CF6)!important;box-shadow:0 0 12px rgba(255,77,141,.5)}
 .lvtab{padding:12px 8px 14px!important}
 .lvtab.on{border-color:transparent!important;background:linear-gradient(var(--neo-solid),var(--neo-solid)) padding-box,var(--neo-grad) border-box!important;border:2px solid transparent!important;box-shadow:var(--neo-glow)!important}
 .lvtab i{background:var(--neo-grad)!important}
@@ -1292,7 +1291,7 @@ html[data-theme="dark"] .btn-n{background:rgba(255,255,255,.10)!important}
 .unit::after{content:'';position:absolute;top:0;bottom:0;left:0;width:60%;background:linear-gradient(110deg,transparent,rgba(255,255,255,.16) 50%,transparent);transform:translateX(-120%);animation:sheen 6s ease-in-out infinite;will-change:transform}
 @keyframes sheen{0%,60%{transform:translateX(-120%)}100%{transform:translateX(260%)}}
 .unit>*{position:relative;z-index:1}
-.unit .uprog{background:rgba(255,255,255,.2)!important;backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.25)}
+.unit .uprog{background:rgba(255,255,255,.2)!important;border:1px solid rgba(255,255,255,.25)}
 .pnode{--pn-a:#E4E1F5;--pn-b:#C9C3EA;--pn-glow:rgba(120,110,200,.25);
   background:radial-gradient(120% 120% at 32% 22%,rgba(255,255,255,.95),rgba(255,255,255,0) 38%),linear-gradient(160deg,var(--pn-a),var(--pn-b))!important;
   box-shadow:inset 0 -8px 16px rgba(0,0,0,.12),0 8px 0 color-mix(in srgb,var(--pn-b) 70%,#000),0 16px 28px -10px var(--pn-glow)!important;border:0}
@@ -1308,8 +1307,7 @@ html[data-theme="dark"] .pnode{--pn-a:#2A2F66;--pn-b:#171B45;--pn-glow:rgba(0,0,
 .pnode.gram,html[data-theme] .pnode.gram{--pn-a:#7DD3FC;--pn-b:#4F46E5;--pn-glow:rgba(79,70,229,.5)}
 html[data-theme] .pnode.gram.done{--pn-a:#FFD86B;--pn-b:#F59E0B;--pn-glow:rgba(245,158,11,.55)}
 .pnode.final,html[data-theme] .pnode.final{--pn-a:#C4B5FD;--pn-b:#4C1D95;--pn-glow:rgba(139,92,246,.7);border-radius:30px!important}
-.pnode.final:not(.lock){animation:holo 6s linear infinite}
-@keyframes holo{0%,100%{filter:hue-rotate(0)}50%{filter:hue-rotate(40deg)}}
+
 .pnode .bubble{background:var(--neo-grad)!important;color:#fff!important;border:0!important;box-shadow:var(--neo-glow)!important;letter-spacing:.06em}
 .pnode .bubble::after{border-top-color:#C84FC0!important}
 .pnode .pchk{background:linear-gradient(135deg,#34D399,#059669)!important;border-color:var(--neo-bg)!important;box-shadow:0 4px 10px rgba(16,185,129,.5)}
@@ -1351,20 +1349,20 @@ html[data-theme] .pnode.gram.done{--pn-a:#FFD86B;--pn-b:#F59E0B;--pn-glow:rgba(2
 .soc-me .code{color:#FDE68A!important;text-shadow:0 0 18px rgba(253,230,138,.6)}
 .msg .bb{background:var(--neo-surf)!important;border:1px solid var(--neo-line);box-shadow:var(--neo-sh)!important}
 .msg.me .bb{background:var(--neo-grad)!important;color:#fff!important;border:0}
-.chat-in{background:var(--neo-surf)!important;backdrop-filter:var(--neo-blur);-webkit-backdrop-filter:var(--neo-blur);border-top:1px solid var(--neo-line)!important}
+.chat-in{background:var(--neo-bar)!important;border-top:1px solid var(--neo-line)!important}
 .chat-in button{background:var(--neo-grad)!important;box-shadow:var(--neo-glow)}
 .ub{background:var(--neo-grad)!important}
 
 /* ---------- Oyna (bottom sheet), toast, splash, onboarding ---------- */
-.modal-bg{background:rgba(8,6,30,.42)!important;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:flex-end!important;padding:0!important}
+.modal-bg{background:rgba(8,6,30,.6)!important;align-items:flex-end!important;padding:0!important}
 .modal{background:var(--neo-solid)!important;border:1px solid var(--neo-line);border-radius:30px 30px 0 0!important;max-width:560px!important;padding:30px 22px calc(26px + env(safe-area-inset-bottom))!important;position:relative;box-shadow:0 -20px 60px -20px rgba(40,20,120,.5)!important}
 .modal::before{content:'';position:absolute;top:10px;left:50%;width:44px;height:5px;margin-left:-22px;border-radius:9px;background:var(--cream-3)}
 .modal-bg.show .modal{animation:sheetUp .55s var(--spring) both}
 @keyframes sheetUp{from{transform:translateY(100%);opacity:.4}to{transform:none;opacity:1}}
 @media (min-width:700px){.modal-bg{align-items:center!important;padding:16px!important}.modal{border-radius:30px!important}.modal-bg.show .modal{animation:popIn .45s var(--spring) both}}
 @keyframes popIn{from{transform:scale(.9) translateY(20px);opacity:0}}
-.toast{background:rgba(20,18,60,.82)!important;backdrop-filter:var(--neo-blur);-webkit-backdrop-filter:var(--neo-blur);border:1px solid rgba(255,255,255,.12);border-radius:999px!important;padding:12px 22px!important;bottom:100px!important;transition:opacity .3s,transform .5s var(--spring)!important;box-shadow:0 18px 40px -14px rgba(0,0,0,.6)!important}
-.banner{background:var(--neo-surf)!important;backdrop-filter:var(--neo-blur);-webkit-backdrop-filter:var(--neo-blur);border:1px solid var(--neo-line)!important;border-radius:22px!important;box-shadow:var(--neo-sh2)!important}
+.toast{background:rgba(20,18,60,.95)!important;border:1px solid rgba(255,255,255,.12);border-radius:999px!important;padding:12px 22px!important;bottom:100px!important;transition:opacity .3s,transform .5s var(--spring)!important;box-shadow:0 18px 40px -14px rgba(0,0,0,.6)!important}
+.banner{background:var(--neo-bar)!important;border:1px solid var(--neo-line)!important;border-radius:22px!important;box-shadow:var(--neo-sh2)!important}
 #splash{background:radial-gradient(120% 80% at 50% 0%,#2A1A6E,#05071A 65%)!important}
 #splash::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 80%,rgba(255,77,141,.25),transparent 45%),radial-gradient(circle at 85% 30%,rgba(34,211,238,.2),transparent 40%)}
 #splash>*{position:relative}
@@ -1377,12 +1375,14 @@ html[data-theme] .pnode.gram.done{--pn-a:#FFD86B;--pn-b:#F59E0B;--pn-glow:rgba(2
 #celeb .cbox,#celeb>div{border-radius:30px!important}
 
 /* ---------- O'tishlar (transitions) va animatsiyalar ---------- */
-.main.enter{animation:neoIn .55s var(--ease) both!important}
+.main.enter{animation:neoIn .32s var(--ease) both!important}
 html[data-dir="back"] .main.enter{animation-name:neoInBack!important}
-@keyframes neoIn{from{opacity:0;transform:translate3d(0,18px,0) scale(.985);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
-@keyframes neoInBack{from{opacity:0;transform:translate3d(0,-14px,0) scale(1.01);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
-.rise{animation:neoRise .6s var(--spring) both!important}
-@keyframes neoRise{from{opacity:0;transform:translate3d(0,22px,0) scale(.96)}to{opacity:1;transform:none}}
+@keyframes neoIn{from{opacity:0;transform:translate3d(22px,0,0)}to{opacity:1;transform:none}}
+@keyframes neoInBack{from{opacity:0;transform:translate3d(-22px,0,0)}to{opacity:1;transform:none}}
+html[data-dir="tab"] .main.enter{animation-name:neoInTab!important}
+@keyframes neoInTab{from{opacity:0;transform:translate3d(0,10px,0)}to{opacity:1;transform:none}}
+.rise{animation:neoRise .38s var(--ease) both!important}
+@keyframes neoRise{from{opacity:0;transform:translate3d(0,14px,0)}to{opacity:1;transform:none}}
 ::view-transition-old(root),::view-transition-new(root){animation:none}
 ::view-transition-group(mainv){animation-duration:.42s;animation-timing-function:var(--ease)}
 ::view-transition-old(mainv){animation:vtOut .32s var(--ease) both}
@@ -1403,6 +1403,8 @@ html[data-vt="tab"]::view-transition-new(mainv){animation:vtPop .45s var(--sprin
 .neo-tap{position:fixed;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;pointer-events:none;z-index:300;border:2px solid #FF4D8D;animation:neoTap .5s ease-out forwards}
 @keyframes neoTap{to{transform:scale(6);opacity:0;border-color:#8B5CF6}}
 @media (prefers-reduced-motion: reduce){#neo-bg *,.btn-c::before,.unit::after,.pnode.cur,.pnode.cur::before,.prof-h .avw::before{animation:none!important}}
+html.lite #neo-bg *,html.lite .btn-c::before,html.lite .unit::after,html.lite .pnode.cur,html.lite .pnode.cur::after,html.lite .prof-h .avw::before{animation:none!important}
+html.lite .card::after,html.lite .qcard::after,html.lite .prac .pt::after,html.lite .tile::after,html.lite .crow2::after{display:none}
 html.rm #neo-bg *,html.rm .btn-c::before,html.rm .unit::after,html.rm .pnode.cur::before,html.rm .prof-h .avw::before,html.rm .goalbar .bar i{animation:none!important}
 </style>
 </head>
@@ -13503,9 +13505,9 @@ cloudCardHtml = function(){
   window.addEventListener('resize', function(){ placeInd(true); });
 
   /* Sahifa o'tishlari: View Transitions API (Android WebView 111+), bo'lmasa — CSS animatsiya */
-  function vtOK(){ return !!document.startViewTransition && !REDUCED && !window.__TEST__ && !document.documentElement.classList.contains('rm'); }
+  function vtOK(){ return false; }   /* View Transitions sahifani suratga oladi — telefonda sekinlashtiradi; yengil CSS o'tish ishlatiladi */
   function withVT(kind, fn){
-    document.documentElement.setAttribute('data-dir', kind==='back'?'back':'fwd');
+    window.__navDir = kind;
     if(!vtOK()) return fn();
     document.documentElement.setAttribute('data-vt', kind);
     try{ var t=document.startViewTransition(fn); t.finished.then(function(){ document.documentElement.removeAttribute('data-vt'); }, function(){}); }
@@ -13519,12 +13521,23 @@ cloudCardHtml = function(){
   window.__back = function(){
     var r=false, s=this, a=arguments;
     var modalOpen = document.getElementById('modal').classList.contains('show');
-    if(modalOpen || !vtOK() || (!HIST.length && current.view==='home')) { document.documentElement.setAttribute('data-dir','back'); return _back.apply(s, a); }
+    if(modalOpen || !vtOK() || (!HIST.length && current.view==='home')) { window.__navDir='back'; var rr=_back.apply(s, a); window.__navDir=null; return rr; }
     /* natijani darhol bilish kerak (Android ilovadan chiqish yoki qolishni hal qiladi) */
     if(HIST.length || current.view!=='home'){ withVT('back', function(){ _back.apply(s, a); }); return true; }
     return _back.apply(s, a);
   };
   ACT.chatOpen = (function(o){ return function(el){ var a=arguments, s=this; withVT('fwd', function(){ o.apply(s, a); }); }; })(ACT.chatOpen);
+
+  /* Har bir sahifa o'tishi uchun yo'nalish: oldinga / orqaga / bo'lim almashuvi */
+  var _goN = go;
+  go = function(){ document.documentElement.setAttribute('data-dir', window.__navDir || 'fwd'); window.__navDir=null; return _goN.apply(this, arguments); };
+  /* Ro'yxat elementlari ketma-ket chiqishi: faqat ekrandagi birinchi 14 tasi */
+  staggerIn = function(root){
+    var els = root.querySelectorAll('.tile,.step,.phr,.vw,.let,.nbox,.dcard,.prow,.unit,.snd,.bub,.kpi,.ach,.mode,.potd,.catrow,.pt,.crow2,.lr,.lvtab');
+    for(var i=0;i<els.length && i<14;i++){ els[i].style.animationDelay=(i*24)+'ms'; els[i].classList.add('rise'); }
+  };
+  /* Zaif telefonlarda bezak animatsiyalari o'chadi */
+  try{ if((navigator.deviceMemory && navigator.deviceMemory<=3) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency<=4)) document.documentElement.classList.add('lite'); }catch(e){}
 
   /* Bosilgan joyda neon halqa */
   document.addEventListener('pointerdown', function(e){
