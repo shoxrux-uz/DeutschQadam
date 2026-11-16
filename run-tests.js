@@ -742,6 +742,106 @@ test('Mikrofon ruxsati yo\'q bo\'lsa — tushunarli xato', () => {
 });
 test('Xatosiz ishladi', () => eq(w16.__errors.length, 0, w16.__errors.join(' | ')));
 
+
+/* ---------- 17. Yangi dizayn, tortib yangilash, daraja testi, insho ---------- */
+console.log('\n17) Dizayn, tortib yangilash, daraja testi va insho');
+const srv17 = { essays: 0, mode: 'ok', handle(req) {
+  if (req.action === 'essay_status') return { ok: true, on: true, left: 6 - this.essays, limit: 6 };
+  if (req.action === 'essay_check') {
+    if (this.mode === 'limit') return { ok: false, err: 'essay_limit' };
+    this.essays++; this.last = req;
+    return { ok: true, words: 260, left: 6 - this.essays, r: { band: 6.5, tr: 6.5, cc: 6, lr: 7, gra: 6, cefr: 'B2', on_topic: true, summary_uz: 'Yaxshi', strengths_uz: ['a'], improve_uz: ['b'], errors: [{ wrong: 'people works', right: 'people work', why_uz: 'ko\'plik' }], model_paragraph: 'Better text.' } };
+  }
+  return null;
+} };
+const cloud17 = fakeCloud(); const _h17 = cloud17.handle; cloud17.handle = (req) => srv17.handle(req) || _h17(req);
+const w17 = nativeBoot({ name: 'Ali', onboarded: true, ts: 1, xp: 150, cloud: { uid: 'ali', secret: 's-ali', email: 'ali@gmail.com' } }, cloud17, { v: 'ali' });
+cloud17.db.users.ali = { secret: 's-ali', email: 'ali@gmail.com' };
+test('Bosilganda ovoz chiqmaydi (to\'g\'ri/xato ovozlari qoladi)', () => {
+  let tones = 0; w17.eval('SFX._t = SFX.tone; SFX.ctx = {currentTime:0, state:"running"}'); w17.__tone = () => tones++;
+  w17.eval('SFX.tone = function(){ window.__tone(); }');
+  w17.eval("SFX.play('tap')"); eq(tones, 0, 'tap ovozi');
+  w17.eval("SFX.play('ok')"); assert(tones > 0, 'ok ovozi yo\'q');
+  w17.eval('SFX.tone = SFX._t; SFX.ctx = null');
+});
+test('Pastki panel — rasmli belgilar, emoji yo\'q', () => {
+  w17.eval("go('home')");
+  const tb = w17.document.getElementById('tabbar');
+  eq(tb.querySelectorAll('.tbi svg').length, 4); assert(!/[🏠🎯👥👤]/u.test(tb.textContent), 'emoji qolgan');
+});
+test('Mashq: rangli kartalar rasm bilan, insho faqat ingliz tilida', () => {
+  w17.eval("setCourse('de'); go('practice')");
+  const m = w17.document.getElementById('main');
+  assert(m.querySelectorAll('.cat .ill').length >= 9, 'kartalar kam'); eq(m.querySelectorAll('.pt .e').length, 0);
+  assert(!m.querySelector('[data-v="essay"]'), 'nemis tilida insho chiqmasligi kerak');
+  w17.eval("setCourse('en'); go('practice')");
+  assert(w17.document.querySelector('#main [data-v="essay"]'), 'ingliz tilida insho kartasi yo\'q');
+});
+test('Profil ro\'yxatida rasmli belgilar', () => {
+  w17.eval("go('profile')");
+  const n = w17.document.querySelectorAll('#main .plist > button').length;
+  eq(w17.document.querySelectorAll('#main .plist .pic .ill').length, n);
+});
+test('Tortib yangilash: bulut va do\'stlar yangilanadi', () => {
+  w17.eval("go('home')"); const before = cloud17.calls ? cloud17.calls.length : 0;
+  w17.eval('window.pullRefresh()');
+  assert(w17.document.getElementById('ptr').classList.contains('spin'), 'aylanmayapti');
+});
+test('Tortib yangilash test/darsda ishlamaydi', () => {
+  w17.eval("current.view='quiz'"); const o = w17.eval('typeof window.pullRefresh');
+  eq(o, 'function');
+  w17.eval("go('home')");
+});
+test('Daraja testi: hammasi to\'g\'ri — B1 gacha ochiladi (nemis)', () => {
+  w17.eval("setCourse('de'); ptStart(false)"); eq(w17.eval('current.view'), 'ptest');
+  w17.eval('ACT.ptGo()');
+  w17.eval("for(var k=0;k<12;k++){ if(PT.stage==='lvup') ACT.ptGo(); var q=PT.block[PT.bi]; if(q.g){ document.getElementById('ptIn').value=q.a[0]; ACT.ptSend(); } else ACT.ptPick({dataset:{p:String(q.o.indexOf(q.ans))}}); }");
+  w17.eval("for(var k=0;k<4;k++){ if(PT.stage==='lvup') ACT.ptGo(); ACT.ptPick({dataset:{p:'-1'}}); }");
+  eq(w17.eval('PT.stage'), 'done'); eq(w17.eval('PT_LV[PT.res]'), 'B1');
+  assert(/B1/.test(w17.document.getElementById('main').textContent));
+  w17.eval('ACT.ptDone()');
+  eq(w17.eval("lvDone('A2')"), w17.eval("lvNodes('A2').length") - 1, 'A2 bosqichlari ochilmagan');
+  eq(w17.eval("nodeIsDone('final')"), false, 'sertifikat imtihonsiz berilmasligi kerak');
+  eq(w17.eval("nodeUnlocked(lvNodes('B1')[0].id)"), true, 'B1 qulflangan');
+  assert(/Darajangiz: B1/.test(w17.document.getElementById('main').textContent), 'imtihon taklifi yo\'q');
+});
+test('Daraja testi: «Bilmayman» — noldan boshlanadi (ingliz)', () => {
+  w17.eval("setCourse('en'); ptStart(false); ACT.ptGo(); for(var k=0;k<4;k++) ACT.ptPick({dataset:{p:'-1'}});");
+  eq(w17.eval('PT.res'), -1); eq(w17.eval("state.flags.pt_en.lv"), 'A0'); eq(w17.eval("lvDone('A1')"), 0);
+  w17.eval('ACT.ptDone()');
+});
+test('Daraja testi savollari to\'g\'ri tuzilgan', () => {
+  const bad = w17.eval("(function(){ var b=[]; ['de','ru','en'].forEach(function(c){ PT_LV.forEach(function(L){ var a=PT_BANK[c][L]; if(a.length<8) b.push(c+L+' kam'); if(a.filter(function(x){return x.g;}).length<1) b.push(c+L+' gap'); a.forEach(function(x){ if(!/_{3}/.test(x.q)) b.push(c+L+' bo\\'sh joy: '+x.q); if(!x.g && (x.o.length!==4 || new Set(x.o).size!==4)) b.push(c+L+' variant: '+x.q); }); }); }); return b.join(' | '); })()");
+  eq(bad, '');
+});
+test('Onboardingda yangi daraja testi ochiladi', () => {
+  const w = boot();
+  w.eval("bootStep('splash'); bootStep('data'); ACT.obStorySkip(); document.getElementById('obName').value='lola'; obNext();");
+  w.eval("ACT.obCourse({dataset:{p:'en'}}); obNext(); OB.reason='ish'; OB.goal=50; OB.start='test'; obFinish();");
+  eq(w.eval('current.view'), 'ptest'); assert(/darajangizni aniqlaymiz/.test(w.document.getElementById('main').textContent));
+});
+test('Insho: yozish, taymer va baholash natijasi', () => {
+  w17.eval("setCourse('en'); go('essay')");
+  assert(/Insho/.test(w17.document.getElementById('main').textContent));
+  w17.eval("essBegin('task2', ESS_TOPICS.task2[0])"); eq(w17.eval('current.view'), 'essayWrite');
+  w17.eval("var t=document.getElementById('ewText'); t.value='People works from home and it is good. '.repeat(40); t.dispatchEvent(new Event('input'))");
+  eq(w17.document.getElementById('ewWc').textContent, '320');
+  w17.eval('ACT.essSubmit()');
+  eq(srv17.last.type, 'task2'); assert(srv17.last.text.length > 100 && srv17.last.uid === 'ali', 'so\'rov noto\'g\'ri');
+  eq(w17.eval('current.view'), 'essayRes');
+  const t = w17.document.getElementById('main').textContent;
+  assert(/6\.5/.test(t) && /B2/.test(t) && /people work/.test(t), 'natija chiqmadi');
+  eq(w17.eval('state.essayDraft'), null); eq(w17.eval('state.essays.length'), 1);
+});
+test('Insho: limit tugasa matn yo\'qolmaydi', () => {
+  srv17.mode = 'limit';
+  w17.eval("essBegin('short', ESS_TOPICS.short[0]); var t=document.getElementById('ewText'); t.value='I like my city very much. '.repeat(30); t.dispatchEvent(new Event('input')); ACT.essSubmit(null,null,true)");
+  assert(/limit/.test(w17.document.getElementById('modalBody').textContent), 'xabar yo\'q');
+  assert(w17.eval('state.essayDraft.text.length') > 100, 'matn yo\'qoldi');
+  w17.eval('closeModal()'); srv17.mode = 'ok';
+});
+test('Xatosiz ishladi', () => eq(w17.__errors.length, 0, w17.__errors.join(' | ')));
+
 console.log('\n────────────────────────────────────────');
 console.log('Natija: ' + passed + ' ta o\'tdi, ' + failed + ' ta xato');
 if (failed) { console.log('Xato testlar:\n - ' + failures.join('\n - ')); process.exit(1); }
