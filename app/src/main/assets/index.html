@@ -9950,11 +9950,18 @@ ACT.dicIns = function(el){ kbPress('dicIn', el.dataset.p); };
 /* --- Matnlarni joriy tilga moslash («nemischa» → «ruscha»...) --- */
 function localizeUI(html){
   if(COURSE==='de' || typeof html!=='string') return html;
-  var a=CM().adj, low=a.toLowerCase();
-  html = html.replace(/Nemis/g, a).replace(/nemis/g, low).split('🇩🇪').join(CM().emoji);
-  (PK().UIREP||[]).forEach(function(r){ html = html.split(r[0]).join(r[1]); });
-  return html;
+  var a=CM().adj, low=a.toLowerCase(), rep=PK().UIREP||[];
+  /* <!--nl--> ... <!--/nl--> orasidagi matn o'zgarmaydi (masalan, tillar ro'yxati) */
+  return html.split('<!--nl-->').map(function(part, i){
+    var j = i ? part.indexOf('<!--/nl-->') : -1, keep = '';
+    if(i && j<0) return '<!--nl-->'+part;
+    if(j>=0){ keep = part.slice(0, j+10); part = part.slice(j+10); }
+    part = part.replace(/Nemis/g, a).replace(/nemis/g, low).split('🇩🇪').join(CM().emoji);
+    rep.forEach(function(r){ part = part.split(r[0]).join(r[1]); });
+    return (i ? '<!--nl-->' : '')+keep+part;
+  }).join('');
 }
+function noLoc(h){ return '<!--nl-->'+h+'<!--/nl-->'; }
 function kick(k){ return (PK().KICK||{})[k] || k; }
 
 /* --- Bayroq (uch rangli chiziq) --- */
@@ -12675,15 +12682,16 @@ ACT.tab = function(el){ var v=el.dataset.v; SFX.play('tap'); HIST=[]; go(v, null
 function courseRowHtml(c, act){
   var m=CM(c), p=courseProgress(c), pct = p.total ? Math.round(p.done/p.total*100) : 0;
   var done = (c===COURSE) ? nodeIsDone('final') : !!(((state.courses||{})[c]||{}).path||{}).final;
-  return '<button class="crow2'+(c===COURSE?' on':'')+'" data-act="'+act+'" data-p="'+c+'">'+flagHtml(c,'big')+
+  var h='<button class="crow2'+(c===COURSE?' on':'')+'" data-act="'+act+'" data-p="'+c+'">'+flagHtml(c,'big')+
     '<div class="cm"><b>'+m.name+'</b><small>'+(p.started ? 'A1 · '+p.done+' / '+p.total+' bosqich'+(done?' · 📜 sertifikat':'') : "Hali boshlanmagan")+'</small><div class="pb"><i style="width:'+pct+'%"></i></div></div>'+
     '<span class="ck">'+(c===COURSE ? '✓ Hozirgi' : (p.started ? 'Davom →' : 'Boshlash →'))+'</span></button>';
+  return noLoc(h);
 }
 ACT.courseSheet = function(){
   SFX.play('tap');
   var h='<div class="csheet"><h2 class="serif">🌍 Qaysi tilni o\'rganamiz?</h2><p class="muted" style="margin:0 0 14px">Har bir tilning progressi alohida saqlanadi. XP va seriya — umumiy.</p>'+
     COURSE_ORDER.map(function(c){ return courseRowHtml(c, 'pickCourse'); }).join('')+
-    '<p class="muted" style="font-size:13px;margin:10px 0 0">👽 Musofir: «Har bir til — kemamning bir qismi: nemischa — motor, ruscha — qanotlar, inglizcha — navigatsiya»</p></div>';
+    noLoc('<p class="muted" style="font-size:13px;margin:10px 0 0">👽 Musofir: «Har bir til — kemamning bir qismi: nemischa — motor, ruscha — qanotlar, inglizcha — navigatsiya»</p>')+'</div>';
   sheet(h);
 };
 ACT.pickCourse = function(el){
@@ -12888,7 +12896,7 @@ VIEWS.social = function(){
   lb.forEach(function(p, i){
     var me=p.uid===d.me.uid, med=['🥇','🥈','🥉'][i]||'';
     h += '<div class="lr'+(me?' me':'')+'"><span class="rk">'+(med||(i+1))+'</span>'+avatarHtml(p.avatar, p.pic, 38, p.name)+
-      '<div class="nm"><b>'+esc(p.name)+(me?' (siz)':'')+'</b><small>'+(COURSE_META[p.course]?COURSE_META[p.course].emoji+' ':'')+'🔥 '+(p.streak||0)+' kun'+(me?'':' · '+agoText(p.last))+'</small></div><span class="xp">'+(p.week||0)+' XP</span></div>';
+      '<div class="nm"><b>'+esc(p.name)+(me?' (siz)':'')+'</b><small>'+(COURSE_META[p.course]?noLoc(COURSE_META[p.course].emoji)+' ':'')+'🔥 '+(p.streak||0)+' kun'+(me?'':' · '+agoText(p.last))+'</small></div><span class="xp">'+(p.week||0)+' XP</span></div>';
   });
   h += '</div>';
   if(lb.length===1) h += '<p class="muted" style="font-size:13px;text-align:center;margin:8px 0 0">Do\'stlaringizni qo\'shing — kim bu hafta ko\'proq XP to\'plashini ko\'ramiz!</p>';
@@ -12973,7 +12981,7 @@ function chatInfo(key){
   if(key.indexOf('g:')===0){ var g=(d.groups||[]).filter(function(x){ return 'g:'+x.gid===key; })[0]; return g ? {group:g, name:g.name, sub:g.members.length+" a'zo"} : null; }
   var other=key.slice(2).split('|').filter(function(u){ return u!==d.me.uid; })[0];
   var p=(d.friends||[]).filter(function(x){ return x.uid===other; })[0];
-  return p ? {p:p, name:p.name, sub:(COURSE_META[p.course]?COURSE_META[p.course].emoji+' ':'')+'🔥 '+(p.streak||0)+' · '+agoText(p.last)} : null;
+  return p ? {p:p, name:p.name, sub:(COURSE_META[p.course]?noLoc(COURSE_META[p.course].emoji)+' ':'')+'🔥 '+(p.streak||0)+' · '+agoText(p.last)} : null;
 }
 VIEWS.chat = function(key){
   var inf = chatInfo(key||'');
@@ -12981,7 +12989,7 @@ VIEWS.chat = function(key){
   if(!SOC.chat || SOC.chat.key!==key) SOC.chat = {key:key, msgs:[], since:0, loaded:false};
   var h='<div class="chat-h"><button class="bk" data-act="tab" data-v="social" aria-label="Orqaga">←</button>'+
     (inf.group ? '<span class="gav">👥</span>' : avatarHtml(inf.p.avatar, inf.p.pic, 42, inf.p.name))+
-    '<div class="tt"><b>'+esc(inf.name)+'</b><small>'+esc(inf.sub)+'</small></div><button class="mn" data-act="chatMenu" aria-label="Menyu">⋮</button></div>';
+    '<div class="tt"><b>'+esc(inf.name)+'</b><small>'+inf.sub+'</small></div><button class="mn" data-act="chatMenu" aria-label="Menyu">⋮</button></div>';
   h += '<div class="msgs" id="msgs">'+chatMsgsHtml()+'</div>';
   return h;
 };
@@ -13170,7 +13178,7 @@ STORY.length = 0;
       var el=document.getElementById('onb');
       var body='<div class="ob-mini">'+BZ.html('think', 70, 'bzQ')+'<div class="bubble"><b class="de">Deutsch? Русский? English?</b><small>Kemaning qaysi qismidan boshlaymiz?</small></div></div>'+
         '<h1 class="serif">Qaysi tilni o\'rganamiz?</h1><p class="lead">Keyin istalgan vaqtda tepadagi bayroqni bosib, boshqa tilga o\'tishingiz mumkin.</p><div class="ob-opts">'+
-        COURSE_ORDER.map(function(c){ var m=CM(c); return '<button class="ob-opt '+((OB.course||COURSE)===c?'on':'')+'" data-act="obCourse" data-p="'+c+'"><span class="oi">'+flagHtml(c,'big')+'</span><div><b>'+m.name+'</b><small>'+({de:"Motor 🔧 · Germaniyadagi usta",ru:"Qanotlar 🪽 · Rossiyadagi usta",en:"Navigatsiya 🧭 · Angliyadagi usta"})[c]+'</small></div></button>'; }).join('')+
+        COURSE_ORDER.map(function(c){ var m=CM(c); return noLoc('<button class="ob-opt '+((OB.course||COURSE)===c?'on':'')+'" data-act="obCourse" data-p="'+c+'"><span class="oi">'+flagHtml(c,'big')+'</span><div><b>'+m.name+'</b><small>'+({de:"Motor 🔧 · Germaniyadagi usta",ru:"Qanotlar 🪽 · Rossiyadagi usta",en:"Navigatsiya 🧭 · Angliyadagi usta"})[c]+'</small></div></button>'); }).join('')+
         '</div><div class="ob-foot"><button class="btn btn-c" data-act="obNext">Davom etish →</button></div>';
       el.innerHTML = '<div class="ob-top"><button class="ob-back" data-act="obBack" aria-label="Orqaga">←</button><div class="ob-prog"><i style="width:'+(1.5/5*100)+'%"></i></div></div>'+
         '<div class="ob-body '+(REDUCED?'':(OB.dir||'fwd'))+'">'+body+'</div>';

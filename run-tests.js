@@ -507,6 +507,18 @@ test('Til tanlash oynasi va til almashtirish', () => {
   eq(w13.eval('COURSE'), 'ru'); eq(w13.eval('current.view'), 'home');
   assert(/RU/.test(w13.document.getElementById('tbx').textContent), 'tepada RU yo\'q');
 });
+test('Ruscha tanlanganda tillar ro\'yxatida Nemis tili o\'zgarmaydi', () => {
+  w13.eval("setCourse('ru'); go('profile')");
+  const names = [...w13.document.querySelectorAll('#main [data-act="pickCourse"] .cm b')].map(b => b.textContent);
+  eq(names.join('|'), 'Nemis tili|Rus tili|Ingliz tili');
+  w13.eval("ACT.courseSheet()");
+  const t = w13.document.getElementById('modalBody').textContent;
+  assert(/Nemis tili/.test(t) && /nemischa — motor/.test(t), 'oynada Nemis almashib ketgan');
+  w13.eval("ACT.courseSheet()");
+  assert(/Nemis tili/.test(w13.document.getElementById('modalBody').textContent), 'qayta ochishda buzildi');
+  w13.eval('closeModal()');
+  assert(/Rus/.test(w13.eval("localizeUI('Nemis')")), 'oddiy matn moslashmadi');
+});
 test('Onboardingda til tanlanadi', () => {
   const w = boot();
   w.eval("bootStep('splash'); bootStep('data');");
