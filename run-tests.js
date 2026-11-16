@@ -538,6 +538,7 @@ function socServer(){
     if (req.action === 'inbox') { const now = Date.now(); const it = (st.ib || []).filter((x) => x.ts > (req.since || 0)); return { ok: true, now, items: it }; }
     if (req.action === 'profile_set' && st.failProfile) return { ok: false, err: 'server', detail: 'Lock timeout' };
     if (req.action === 'profile_set' || req.action === 'report' || req.action === 'block') return { ok: true };
+    if (req.action === 'delete_account') { st.deleted = req.uid; return { ok: true, removed: {} }; }
     return null;
   } };
 }
@@ -617,6 +618,27 @@ test('Server xatosi tushunarli ko\'rsatiladi', () => {
   w14.eval("ACT.avPick({dataset:{p:'mf:joke'}})");
   assert(/Lock timeout|saqlanmadi/.test(w14.document.getElementById('toast').textContent), w14.document.getElementById('toast').textContent);
   srv.st.failProfile = false;
+});
+test('Profilda «Maxfiylik siyosati» va «Hisobni o\'chirish» bor', () => {
+  w14.eval("go('profile')");
+  assert(w14.document.querySelector('[data-act="openUrl"][data-p="privacy"]'), 'maxfiylik havolasi yo\'q');
+  assert(w14.document.querySelector('[data-act="accountDelete"]'), 'o\'chirish tugmasi yo\'q');
+});
+test('Hisobni o\'chirish: serverdan o\'chadi, Google\'dan chiqadi, telefondagi progress qoladi', () => {
+  w14.eval('ACT.accountDelete()');
+  assert(/qaytarib bo'lmaydi/.test(w14.document.getElementById('modalBody').textContent));
+  const xp = w14.eval('state.xp');
+  w14.eval('ACT.accountDeleteGo(null)');
+  eq(srv.st.deleted, 'ali'); eq(w14.eval('state.cloud'), null);
+  assert(w14.__calls.some((c) => c[0] === 'signout'), 'Google\'dan chiqmadi');
+  eq(w14.eval('state.xp'), xp, 'progress telefonda qolishi kerak');
+  assert(w14.__calls.some((c) => c[0] === 'chatSetup' && c[2] === ''), 'bildirishnoma kaliti o\'chirilmadi');
+});
+test('Google bilan kirmagan — telefondagi progressni tozalash taklif qilinadi', () => {
+  w8.eval('ACT.accountDelete()');
+  assert(/serverda sizga tegishli hech qanday/.test(w8.document.getElementById('modalBody').textContent));
+  w8.eval('ACT.accountDeleteGo(null)');
+  eq(w8.eval('window.__wiped'), true); eq(w8.localStorage.getItem('deutschQadam_v1'), null);
 });
 test('Xatosiz ishladi', () => eq(w14.__errors.length, 0, w14.__errors.join(' | ')));
 

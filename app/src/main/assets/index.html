@@ -12541,6 +12541,8 @@ VIEWS.profile = function(){
     '<button data-act="openSettings">⚙️ Sozlamalar (ovoz, rejim, hisob)<span class="r">›</span></button>'+
     '<button data-act="storyReplay">👽 Musofir hikoyasi<span class="r">›</span></button>'+
     '<button data-act="toggleTheme">🌓 Tungi / kunduzgi rejim<span class="r">›</span></button>'+
+    '<button data-act="openUrl" data-p="privacy">🔒 Maxfiylik siyosati<span class="r">↗</span></button>'+
+    '<button data-act="accountDelete" style="color:var(--bad)">🗑 Hisobni o\'chirish<span class="r">›</span></button>'+
   '</div><div class="made2">made by <b>shoxrux</b></div>';
   return h;
 };
@@ -13107,6 +13109,63 @@ ACT.pronMic = function(){ if(PR && PR.st==='wait'){ prClear(); PR.st='idle'; } p
     return _say.apply(this, arguments);
   };
 })();
+
+
+/* =====================================================================
+   HISOBNI O'CHIRISH va MAXFIYLIK SIYOSATI (Google Play talabi)
+   ===================================================================== */
+var SITE_URL = 'https://shoxrux-uz.github.io/DeutschQadam/';
+ACT.openUrl = function(el){
+  var u = SITE_URL + (el.dataset.p==='delete' ? 'delete.html' : 'privacy.html');
+  var a=document.createElement('a'); a.href=u; a.target='_blank'; a.rel='noopener';
+  document.body.appendChild(a); try{ a.click(); }catch(e){} a.remove();
+};
+ACT.accountDelete = function(){
+  var on = cloudOn();
+  var h = '<div style="text-align:center">'+BZ.html('sad', 96, 'noop')+'</div><h2 class="serif" style="text-align:center">Hisobni o\'chirish</h2>';
+  if(on){
+    h += '<p>Google hisobingiz (<b>'+esc(state.cloud.email||state.cloud.name||'')+'</b>) bilan bog\'langan <b>barcha ma\'lumotlar serverdan o\'chiriladi</b>:</p>'+
+      '<ul style="margin:0 0 12px;padding-left:20px;color:var(--muted)"><li>bulutdagi progress zaxirasi</li><li>profil, do\'stlik kodi va do\'stlar</li><li>guruhlardagi a\'zolik va yozgan xabarlaringiz</li><li>haftalik reytingdagi o\'rningiz</li></ul>'+
+      '<label style="display:flex;gap:10px;align-items:center;font-weight:800;color:var(--navy);margin:10px 0"><input type="checkbox" id="delLocal" style="width:20px;height:20px;accent-color:var(--bad)"> Telefondagi progressni ham tozalash</label>'+
+      '<div class="tip c" style="font-size:14px">⚠️ Bu amalni <b>qaytarib bo\'lmaydi</b>.</div>';
+  } else {
+    h += '<p>Siz Google bilan kirmagansiz — <b>serverda sizga tegishli hech qanday ma\'lumot yo\'q</b>. Progressingiz faqat shu telefonda saqlanadi.</p>'+
+      '<p>Xohlasangiz, telefondagi barcha progressni (ism, XP, o\'rgangan so\'zlar, natijalar) tozalashingiz mumkin. Bu amalni qaytarib bo\'lmaydi.</p>';
+  }
+  h += '<div class="toolbar mt" style="justify-content:center;gap:8px;flex-wrap:wrap">'+
+    '<button class="btn btn-o" data-act="closeModal">Bekor qilish</button>'+
+    '<button class="btn" style="background:var(--bad);color:#fff" data-act="accountDeleteGo">'+(on?'🗑 Ha, hisobni o\'chirish':'🧹 Telefondagini tozalash')+'</button></div>';
+  sheet(h);
+};
+function wipeLocal(){
+  try{ localStorage.removeItem(LS_KEY); }catch(e){}
+  try{ if(NATIVE && typeof window.AndroidTTS.chatSetup==='function') window.AndroidTTS.chatSetup('','',''); }catch(e){}
+  if(window.__TEST__){ window.__wiped=true; return; }
+  location.reload();
+}
+ACT.accountDeleteGo = function(el){
+  var local = !cloudOn() || !!(document.getElementById('delLocal') && document.getElementById('delLocal').checked);
+  if(!cloudOn()){ document.getElementById('modal').classList.remove('show'); wipeLocal(); return; }
+  if(!cloudCan()){ toast("Hisobni o'chirish telefon ilovasida ishlaydi"); return; }
+  if(el) el.disabled=true;
+  toast("⏳ O'chirilmoqda…");
+  clearTimeout(CLOUD.timer); CLOUD.timer=null;
+  cloudCall({action:'delete_account', uid:state.cloud.uid, secret:state.cloud.secret}, function(r){
+    if(!r || !r.ok){
+      if(el) el.disabled=false;
+      toast(r && r.err==='unknown_action' ? "Server eski — Apps Script'ni yangilang" : (r && r.err==='auth' ? "Hisob allaqachon o'chirilgan yoki kalit eskirgan" : "O'chirib bo'lmadi: "+((r&&(r.detail||r.err))||'internet')));
+      return;
+    }
+    state.cloud=null; SOC.data=null; SOC.chat=null;
+    try{ window.AndroidTTS.googleSignOut(); }catch(e){}
+    try{ if(typeof chatNativeSync==='function') chatNativeSync(); }catch(e){}
+    document.getElementById('modal').classList.remove('show');
+    if(local){ wipeLocal(); return; }
+    saveState(); try{ cloudRefresh(); }catch(e){}
+    toast("✅ Hisobingiz va serverdagi barcha ma'lumotlar o'chirildi. Progress shu telefonda qoldi.");
+    go('profile', null, true);
+  });
+};
 
 /*@@COURSE_END@@*/
 function clearActive(){ document.querySelectorAll('.phr.active,.bub.active').forEach(function(e){ e.classList.remove('active'); }); }
