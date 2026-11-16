@@ -41,22 +41,67 @@ jobs:
         with:
           gradle-version: '8.13'
 
-      - name: APK yig'ish
-        run: gradle assembleDebug --no-daemon --stacktrace
+      - name: Imzo kaliti
+        id: sign
+        env:
+          KEY_PASS: ${{ secrets.MUSOFIR_KEY_PASS }}
+        run: |
+          if [ -z "$KEY_PASS" ]; then
+            echo "MUSOFIR_KEY_PASS yo'q — vaqtincha test kaliti (debug) bilan yig'iladi"
+            echo "mode=debug" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          if [ ${#KEY_PASS} -lt 12 ]; then echo "::error::MUSOFIR_KEY_PASS kamida 12 belgidan iborat bo'lsin"; exit 1; fi
+          mkdir -p signing
+          # eski commit qayta ishga tushirilsa ham — kalit main'da bo'lsa o'shani olamiz (ikkinchi kalit yaratilmasin)
+          if [ ! -f signing/musofir.jks.enc ]; then
+            git fetch --depth 1 origin main && git show origin/main:signing/musofir.jks.enc > signing/musofir.jks.enc 2>/dev/null || rm -f signing/musofir.jks.enc
+          fi
+          if [ ! -f signing/musofir.jks.enc ]; then
+            echo "Yangi imzo kaliti yaratilmoqda (faqat bir marta)..."
+            keytool -genkeypair -keystore "$RUNNER_TEMP/musofir.jks" -storetype PKCS12 -alias musofir -keyalg RSA -keysize 4096 \
+              -validity 36500 -storepass "$KEY_PASS" -keypass "$KEY_PASS" -dname "CN=Shoxrux, O=Musofir, C=UZ"
+            openssl enc -aes-256-cbc -pbkdf2 -iter 200000 -salt -in "$RUNNER_TEMP/musofir.jks" -out signing/musofir.jks.enc -pass env:KEY_PASS
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add signing/musofir.jks.enc
+            git commit -m "Imzo kaliti (shifrlangan) — bu faylni o'chirmang!"
+            git push
+          else
+            openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -in signing/musofir.jks.enc -out "$RUNNER_TEMP/musofir.jks" -pass env:KEY_PASS \
+              || { echo "::error::MUSOFIR_KEY_PASS noto'g'ri — kalitni ochib bo'lmadi"; exit 1; }
+          fi
+          echo "SIGN_STORE=$RUNNER_TEMP/musofir.jks" >> "$GITHUB_ENV"
+          echo "mode=release" >> "$GITHUB_OUTPUT"
+          echo "=============== Google Cloud uchun SHA-1 (maxfiy emas) ==============="
+          keytool -list -v -keystore "$RUNNER_TEMP/musofir.jks" -storepass "$KEY_PASS" -alias musofir | grep -E "SHA1|SHA256"
+          echo "======================================================================"
 
-      - name: Faylga nom berish
-        run: cp app/build/outputs/apk/debug/app-debug.apk DeutschQadam.apk
+      - name: APK va AAB yig'ish
+        env:
+          SIGN_PASS: ${{ secrets.MUSOFIR_KEY_PASS }}
+        run: |
+          if [ "${{ steps.sign.outputs.mode }}" = "release" ]; then
+            gradle assembleRelease bundleRelease --no-daemon --stacktrace
+            cp app/build/outputs/apk/release/app-release.apk DeutschQadam.apk
+            cp app/build/outputs/bundle/release/app-release.aab Musofir-play.aab
+          else
+            gradle assembleDebug --no-daemon --stacktrace
+            cp app/build/outputs/apk/debug/app-debug.apk DeutschQadam.apk
+          fi
 
-      - name: APK ni saqlash
+      - name: Fayllarni saqlash
         uses: actions/upload-artifact@v4
         with:
-          name: DeutschQadam-APK
-          path: DeutschQadam.apk
+          name: Musofir-${{ github.run_number }}
+          path: |
+            DeutschQadam.apk
+            Musofir-play.aab
+          if-no-files-found: ignore
 
       - name: Release sahifasiga joylash
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v1.${{ github.run_number }}
-          name: Deutsch Qadam v1.${{ github.run_number }}
+          name: Musofir v1.${{ github.run_number }}
           body: "Telefonga o'rnatish uchun pastdagi DeutschQadam.apk faylini yuklab oling."
           files: DeutschQadam.apk
