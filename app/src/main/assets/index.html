@@ -1552,8 +1552,10 @@ html[data-theme="dark"] .tip,html[data-theme="dark"] .tip.c,html[data-theme="dar
   display:flex;flex-direction:column;justify-content:flex-start;transition:transform .12s,box-shadow .12s;border:0;-webkit-tap-highlight-color:transparent}
 .cat:active{transform:translateY(5px);box-shadow:0 1px 0 var(--dk)}
 .cat.wide{grid-column:1 / -1;min-height:128px}
-.cat .ct{position:relative;z-index:1;max-width:66%}
-.cat.wide .ct{max-width:68%}
+.cat .ct{position:relative;z-index:1;max-width:100%}
+.cat:not(.wide) small{max-width:64%}
+.cat:not(.wide) b{font-size:clamp(16px,4.9vw,20px)}
+.cat.wide .ct{max-width:70%}
 .cat b{display:block;font-size:20px;line-height:1.15;font-weight:800;letter-spacing:-.02em;text-shadow:0 2px 0 color-mix(in srgb,var(--dk) 55%,transparent)}
 .cat small{text-shadow:0 1px 0 color-mix(in srgb,var(--dk) 45%,transparent)}
 .unit,.unit b,.unit .ut,.unit small,.unit .uprog{color:#fff!important}
@@ -1707,6 +1709,54 @@ html[data-theme="dark"] .er-err b{color:#5BE39A}
 .er-err small{display:block;color:var(--neo-muted);margin-top:4px;font-weight:600;line-height:1.45}
 .er-mine summary{cursor:pointer;list-style:none}
 .er-mine summary::after{content:' ▾';color:var(--neo-muted)}
+
+/* Musofir bilan gaplash */
+.ai-lv{display:flex!important;align-items:center;gap:10px;width:100%;padding:14px 16px!important;margin-bottom:14px;font-weight:700;color:var(--neo-text);text-align:left}
+.ai-lv b{background:#12A8FF;color:#fff;border-radius:10px;padding:2px 10px;box-shadow:0 2px 0 #0A7FCC}
+.ai-lv .r{margin-left:auto;color:var(--neo-muted);font-size:14px}
+.pt-scale button{background:var(--cream-2);color:var(--neo-muted);border:0}
+.pt-scale button.on{background:#12A8FF;color:#fff;box-shadow:0 3px 0 #0A7FCC}
+.ait{max-width:680px;margin:0 auto;display:flex;flex-direction:column;min-height:calc(100vh - 110px)}
+.ait-top{display:flex;align-items:center;gap:10px;position:sticky;top:64px;z-index:5;background:var(--neo-bg);padding:4px 0 10px}
+.ait-av{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(150deg,var(--c1),var(--c2));box-shadow:0 3px 0 var(--dk);flex:0 0 auto}
+.ait-av .ill{width:42px;height:42px}
+.ait-tt{flex:1;min-width:0}
+.ait-tt b{display:block;color:var(--neo-text);font-size:17px}
+.ait-tt small{color:var(--neo-muted);font-weight:700}
+.ait-ic{width:40px;height:40px;border-radius:50%;background:var(--neo-surf);border:2px solid var(--neo-line);box-shadow:0 3px 0 var(--c-edge);font-size:17px;color:var(--neo-text)}
+.ait-ic.on{border-color:#12A8FF}
+.ait-list{flex:1;display:flex;flex-direction:column;gap:10px;padding:6px 0 14px}
+.am{display:flex;flex-direction:column;max-width:86%}
+.am.m{align-self:flex-start}
+.am.u{align-self:flex-end;align-items:flex-end}
+.ab{padding:12px 15px;border-radius:20px;font-size:16.5px;line-height:1.45;font-weight:600;white-space:pre-wrap;word-break:break-word}
+.am.m .ab{background:var(--neo-surf);border:2px solid var(--neo-line);box-shadow:0 3px 0 var(--c-edge);color:var(--neo-text);border-bottom-left-radius:6px}
+.am.u .ab{background:linear-gradient(180deg,#2BB4FF,#0E9BF5);color:#fff;box-shadow:0 3px 0 #0A7FCC;border-bottom-right-radius:6px}
+.ab-tools{display:flex;gap:6px;margin-top:8px}
+.ab-tools button{font-size:12.5px;font-weight:800;padding:4px 10px;border-radius:999px;background:var(--cream-2);color:var(--neo-muted)}
+.ab-uz{margin-top:8px;padding-top:8px;border-top:1px dashed var(--neo-line);color:var(--neo-muted);font-size:14.5px}
+.ab-re{display:block;margin-top:6px;font-size:12.5px;font-weight:800;color:#fff;text-decoration:underline}
+.afix{margin-top:6px;background:#FFF6E0;border:2px solid #FFDF9A;border-radius:14px;padding:8px 12px;font-size:14px;color:#5A3A00;max-width:100%}
+.afix s{color:#D02A48}
+.afix b{color:#139050}
+.afix small{display:block;margin-top:2px;font-weight:600;opacity:.85}
+html[data-theme="dark"] .afix{background:#2B2540;border-color:#3D3560;color:#FFE7B3}
+.ab.typing{display:flex;gap:6px;padding:16px 18px}
+.ab.typing i{width:8px;height:8px;border-radius:50%;background:var(--neo-muted);animation:essDot 1s ease-in-out infinite}
+.ab.typing i:nth-child(2){animation-delay:.15s}.ab.typing i:nth-child(3){animation-delay:.3s}
+.ait-in{position:sticky;bottom:0;background:var(--neo-bg);padding:8px 0 calc(8px + env(safe-area-inset-bottom))}
+.ait-sug{display:flex;gap:8px;overflow-x:auto;padding:2px 0 10px;scrollbar-width:none}
+.ait-sug button{flex:0 0 auto;max-width:80%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:8px 14px;border-radius:999px;background:var(--neo-surf);border:2px solid #BFE6FF;color:#0A7FCC;font-weight:700;font-size:14px;box-shadow:0 2px 0 #BFE6FF}
+html[data-theme="dark"] .ait-sug button{border-color:#244A6E;color:#7FD0FF;box-shadow:0 2px 0 #244A6E}
+.ait-row{display:flex;align-items:flex-end;gap:8px}
+.ait-row textarea{flex:1;resize:none;min-height:50px;max-height:120px;padding:13px 16px;border-radius:24px;border:2px solid var(--neo-line);background:var(--neo-surf);color:var(--neo-text);font:600 16px 'Plus Jakarta Sans',system-ui,sans-serif;box-shadow:0 3px 0 var(--c-edge);outline:none}
+.ait-row textarea:focus{border-color:#12A8FF}
+.ait-mic,.ait-send{width:50px;height:50px;border-radius:50%;flex:0 0 auto;font-size:20px;display:grid;place-items:center}
+.ait-mic{background:var(--neo-surf);border:2px solid var(--neo-line);box-shadow:0 3px 0 var(--c-edge)}
+.ait-mic.listen{background:#F04460;border-color:#F04460;color:#fff;box-shadow:0 3px 0 #B8233F,0 0 0 8px rgba(240,68,96,.18);animation:breathe 1.2s ease-in-out infinite}
+.ait-send{background:linear-gradient(180deg,#2BB4FF,#0E9BF5);color:#fff;box-shadow:0 3px 0 #0A7FCC}
+.ait-send:disabled{opacity:.5}
+.ait-left{text-align:center;font-size:12px;color:var(--neo-muted);font-weight:700;margin-top:6px}
 
 </style>
 </head>
@@ -14044,7 +14094,7 @@ var ILL = (function(){
     profile:'<circle cx="12" cy="7.8" r="4.4"/><path d="M3.6 20a8.4 8.4 0 0 1 16.8 0 1.2 1.2 0 0 1-1.2 1.2H4.8A1.2 1.2 0 0 1 3.6 20Z"/>'
   };
   function tb(name){ return '<svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true">'+(TB[name]||'')+'</svg>'; }
-  return {svg:svg, st:st, tb:tb, defs:defs, names:Object.keys(A)};
+  return {svg:svg, st:st, tb:tb, defs:defs, names:Object.keys(A), add:function(n, body){ A[n]=SH+body; }};
 })();
 
 /* --- Candy: pastki panel, yuqori panel, Mashq kartalari, profil belgilari --- */
@@ -14547,6 +14597,175 @@ VIEWS.essayRes = function(id){
 };
 ACT.essAgain = function(el){ var e=essList().filter(function(x){ return x.id===el.dataset.p; })[0]; if(e){ ESS.force=true; essBegin(e.type, e.topic); ESS.force=false; } };
 ACT.essResume = function(){ closeModal(); go('essayWrite'); };
+
+/* =====================================================================
+   «MUSOFIR BILAN GAPLASH» — ingliz tilida AI suhbat (Gemini, server orqali)
+   ===================================================================== */
+(function(){
+  ILL.add('cup', '<path d="M28 44H84V74A26 26 0 0 1 58 100H54A26 26 0 0 1 28 74Z" class="d" opacity=".45" transform="translate(4 4)"/><path d="M28 44H84V74A26 26 0 0 1 58 100H54A26 26 0 0 1 28 74Z" fill="url(#gW)"/>'+
+    '<path d="M84 52h6a12 12 0 0 1 0 24h-7" fill="none" stroke="#fff" stroke-opacity=".85" stroke-width="7"/><ellipse cx="56" cy="46" rx="26" ry="5" class="acf"/>'+
+    '<path d="M46 34c-4-6 4-10 0-16M58 32c-4-6 4-10 0-16M70 34c-4-6 4-10 0-16" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width="4" stroke-linecap="round"/>');
+  ILL.add('bag', '<path d="M26 42H90L96 100H20Z" class="d" opacity=".45" transform="translate(4 4)"/><path d="M26 42H90L96 100H20Z" fill="url(#gW)"/><path d="M42 50V36a16 16 0 0 1 32 0v14" fill="none" class="acs" stroke-width="7" stroke-linecap="round"/><circle cx="42" cy="52" r="4" class="ln2"/><circle cx="74" cy="52" r="4" class="ln2"/>');
+  ILL.add('medkit', '<rect x="24" y="38" width="72" height="58" rx="12" class="d" opacity=".45" transform="translate(4 4)"/><rect x="24" y="38" width="72" height="58" rx="12" fill="url(#gW)"/><path d="M46 38v-8a6 6 0 0 1 6-6h16a6 6 0 0 1 6 6v8" fill="none" stroke="#fff" stroke-opacity=".85" stroke-width="6"/><rect x="53" y="52" width="14" height="32" rx="3" class="acf"/><rect x="44" y="61" width="32" height="14" rx="3" class="acf"/>');
+  ILL.add('key', '<circle cx="42" cy="50" r="22" class="d" opacity=".45" transform="translate(4 4)"/><circle cx="42" cy="50" r="22" fill="url(#gW)"/><circle cx="42" cy="50" r="8" class="acf"/><rect x="58" y="45" width="42" height="11" rx="5" fill="url(#gW)"/><rect x="84" y="55" width="8" height="16" rx="3" fill="url(#gW2)"/><rect x="72" y="55" width="7" height="11" rx="3" fill="url(#gW2)"/>');
+  ILL.add('case', '<rect x="20" y="40" width="80" height="56" rx="12" class="d" opacity=".45" transform="translate(4 4)"/><rect x="20" y="40" width="80" height="56" rx="12" fill="url(#gW)"/><path d="M46 40v-8a6 6 0 0 1 6-6h16a6 6 0 0 1 6 6v8" fill="none" stroke="#fff" stroke-opacity=".85" stroke-width="6"/><rect x="20" y="60" width="80" height="6" class="ln"/><rect x="52" y="56" width="16" height="14" rx="4" class="acf"/>');
+  ILL.add('plane', '<g transform="rotate(-30 60 60)"><path d="M56 14c4-4 8 0 8 4v30l34 18v10L64 66v20l10 8v8l-14-4-14 4v-8l10-8V66L22 76V66l34-18V18c0-2 0-3 0-4Z" fill="url(#gW)"/><path d="M60 14c2 0 4 2 4 4v30l34 18v10L64 66" class="d" opacity=".25"/><circle cx="60" cy="30" r="4" class="acf"/></g>');
+  ILL.add('alien', '<path d="M50 33Q44 20 33 14M70 33Q78 19 90 11" fill="none" stroke="#fff" stroke-opacity=".9" stroke-width="5" stroke-linecap="round"/><circle cx="90" cy="11" r="6" class="acf"/>'+
+    '<path d="M22 82C22 50 38 30 60 30S98 50 98 82C98 104 82 115 60 115S22 104 22 82Z" fill="url(#gW)"/><ellipse cx="46" cy="70" rx="11" ry="13" class="d" opacity=".85"/><ellipse cx="74" cy="70" rx="11" ry="13" class="d" opacity=".85"/><circle cx="49" cy="66" r="3.5" fill="#fff"/><circle cx="77" cy="66" r="3.5" fill="#fff"/><path d="M50 92Q60 101 70 92" fill="none" class="tx2s" stroke-width="4"/>');
+})();
+
+var AI_SC = [
+  {id:'free', t:"Erkin suhbat", s:"Kuningiz, qiziqishlaringiz", i:'alien', c:'teal', g:"Hi! I'm Musofir 👽 How are you today?", gu:"Salom! Men Musofirman. Bugun qalaysiz?"},
+  {id:'cafe', t:"Kafeda", s:"Buyurtma berish, to'lash", i:'cup', c:'orange', g:"Welcome to Moon Café! ☕ What would you like to drink?", gu:"Moon Café ga xush kelibsiz! Nima ichishni xohlaysiz?"},
+  {id:'shop', t:"Do'konda", s:"O'lcham, rang, narx", i:'bag', c:'pink', g:"Hello! Can I help you? Are you looking for something special?", gu:"Salom! Yordam bera olamanmi? Biror maxsus narsa qidiryapsizmi?"},
+  {id:'doctor', t:"Shifokorda", s:"Nima bezovta qilyapti?", i:'medkit', c:'red', g:"Good morning. Please sit down. What seems to be the problem today?", gu:"Xayrli tong. O'tiring. Bugun sizni nima bezovta qilyapti?"},
+  {id:'hotel', t:"Mehmonxonada", s:"Joylashish, xona, nonushta", i:'key', c:'yellow', g:"Good evening and welcome to the Star Hotel! Do you have a reservation?", gu:"Xayrli kech, Star mehmonxonasiga xush kelibsiz! Oldindan joy band qilganmisiz?"},
+  {id:'travel', t:"Aeroportda", s:"Pasport, yuk, yo'l so'rash", i:'plane', c:'sky', g:"Good morning! Where are you flying today? May I see your passport, please?", gu:"Xayrli tong! Bugun qayerga uchyapsiz? Pasportingizni ko'rsam bo'ladimi?"},
+  {id:'friend', t:"Yangi tanishuv", s:"Ziyofatda tanishish", i:'people', c:'lav', g:"Hey! Nice party, isn't it? I'm Musofir. What's your name?", gu:"Salom! Ziyofat zo'r, to'g'rimi? Men Musofirman. Ismingiz nima?"},
+  {id:'interview', t:"Ish suhbati", s:"Intervyuga tayyorlanish", i:'case', c:'violet', g:"Hello, thank you for coming. Please tell me a little about yourself.", gu:"Salom, kelganingiz uchun rahmat. O'zingiz haqingizda biroz gapirib bering."},
+  {id:'ielts', t:"IELTS Speaking", s:"Imtihon savollari", i:'mic', c:'lime', g:"Good afternoon. My name is Musofir and I'm your examiner today. Can you tell me your full name, please?", gu:"Xayrli kun. Ismim Musofir, bugun men sizning imtihonchingizman. To'liq ismingizni ayta olasizmi?"}
+];
+var AI = {busy:false, left:null, listen:false, err:''};
+function aiAvailable(){ return COURSE==='en'; }
+function aiSc(id){ return AI_SC.filter(function(x){ return x.id===id; })[0] || AI_SC[0]; }
+function aiChats(){ state.aiChats = (state.aiChats && typeof state.aiChats==='object') ? state.aiChats : {}; return state.aiChats; }
+function aiLevel(){
+  if(state.aiLv) return state.aiLv;
+  var p=(state.flags||{}).pt_en; if(p && /^(A1|A2|B1|B2|C1)$/.test(p.lv)) return p.lv;
+  return 'A1';
+}
+function aiMsgs(id){
+  var C=aiChats();
+  if(!Array.isArray(C[id]) || !C[id].length){ var S=aiSc(id); C[id]=[{r:'m', t:S.g, uz:S.gu, sugg:[]}]; }
+  return C[id];
+}
+TAB_OF.ai = TAB_OF.aitalk = 'practice';
+FOCUS_VIEWS.aitalk = 1;
+
+/* Mashq bo'limiga katta karta (faqat ingliz tilida) */
+(function(){
+  var _p = VIEWS.practice;
+  VIEWS.practice = function(){
+    var h = _p.apply(this, arguments);
+    if(!aiAvailable()) return h;
+    var card = '<div class="cats" style="margin-bottom:14px">'+catHtml({act:'go', v:'ai', c:'teal', i:'alien', b:"Musofir bilan gaplash", s:"Ingliz tilida suhbat — ovoz yoki yozish orqali", wide:true, badge:'AI'})+'</div>';
+    return h.replace('<div class="cats">', card+'<div class="cats">');
+  };
+})();
+
+VIEWS.ai = function(){
+  var h = pageHead(CM().name, "Musofir bilan gaplash", "Vaziyatni tanlang va ingliz tilida gaplashing. Musofir darajangizga mos gapiradi, xatolaringizni o'zbekcha tushuntiradi.");
+  if(!aiAvailable()) return h + '<div class="card">Hozircha faqat ingliz tili kursida.</div>';
+  if(!cloudOn()) h += '<div class="card" style="text-align:center"><span class="pic cc-teal" style="width:72px;height:72px;margin:0 auto 10px;border-radius:22px">'+ILL.svg('lock')+'</span><b style="font-size:18px;color:var(--navy)">Google hisobi bilan kiring</b><p class="muted">Suhbat serverda sun\'iy intellekt orqali ishlaydi — buning uchun hisobingizga kirgan bo\'lishingiz kerak.</p>'+(cloudCan()?'<button class="btn btn-c" data-act="gLogin">Google bilan kirish</button>':'')+'</div>';
+  h += '<button class="ai-lv card" data-act="aiLvSheet"><span>Suhbat darajasi</span><b>'+aiLevel()+'</b><span class="r">o\'zgartirish ›</span></button>';
+  var C=aiChats();
+  h += '<div class="cats">'+AI_SC.map(function(S, k){
+    var n = Array.isArray(C[S.id]) ? C[S.id].filter(function(m){ return m.r==='u'; }).length : 0;
+    return catHtml({act:'go', v:'aitalk', p:S.id, c:S.c, i:S.i, b:S.t, s:S.s, wide:k===0, badge: n ? n+' ta xabar' : ''});
+  }).join('')+'</div>';
+  if(AI.left!=null && cloudOn()) h += '<p class="muted" style="text-align:center;margin-top:12px;font-size:14px">Bugun yana <b>'+AI.left+'</b> ta xabar yuborishingiz mumkin.</p>';
+  return h;
+};
+ACT.aiLvSheet = function(){
+  var L=['A1','A2','B1','B2','C1'], cur=aiLevel();
+  sheet('<h2 class="serif">Suhbat darajasi</h2><p class="muted">Musofir shu darajaga mos so\'z va grammatika ishlatadi.</p><div class="pt-scale" style="flex-wrap:wrap">'+
+    L.map(function(x){ return '<button class="'+(x===cur?'on':'')+'" data-act="aiLvSet" data-p="'+x+'" style="padding:10px 16px;border-radius:14px;font-weight:800">'+x+'<br><small style="font-weight:600">'+PT_NAME[x]+'</small></button>'; }).join('')+'</div>');
+};
+ACT.aiLvSet = function(el){ state.aiLv=el.dataset.p; saveState(); closeModal(); render(); };
+
+VIEWS.aitalk = function(id){
+  if(AI.listen && !PRON.cur) AI.listen=false;
+  var S=aiSc(id), M=aiMsgs(S.id), last=M[M.length-1];
+  var h = '<div class="ait">'+
+    '<div class="ait-top"><button class="pt-x" data-act="go" data-v="ai" aria-label="Orqaga">←</button>'+
+      '<span class="ait-av cc-'+S.c+'">'+ILL.svg(S.i)+'</span><div class="ait-tt"><b>'+S.t+'</b><small>Musofir · '+aiLevel()+'</small></div>'+
+      '<button class="ait-ic'+(state.aiVoice!==false?' on':'')+'" data-act="aiVoice" aria-label="Ovoz">'+(state.aiVoice!==false?'🔊':'🔇')+'</button>'+
+      '<button class="ait-ic" data-act="aiReset" aria-label="Yangi suhbat">↺</button></div>'+
+    '<div class="ait-list" id="aitList">';
+  M.forEach(function(m, i){
+    if(m.r==='m'){
+      h += '<div class="am m"><div class="ab">'+esc(m.t)+'<div class="ab-tools"><button data-act="aiSay" data-p="'+i+'">🔊</button><button data-act="aiTr" data-p="'+i+'">'+(m.show?'Yashirish':'Tarjima')+'</button></div>'+
+        (m.show && m.uz ? '<div class="ab-uz">'+esc(m.uz)+'</div>' : '')+'</div></div>';
+    } else {
+      h += '<div class="am u"><div class="ab">'+esc(m.t)+(m.err?'<button class="ab-re" data-act="aiResend" data-p="'+i+'">⚠️ Yuborilmadi — qayta yuborish</button>':'')+'</div>'+
+        (m.fix ? '<div class="afix"><div><s>'+esc(m.fix.wrong)+'</s> → <b>'+esc(m.fix.right)+'</b></div>'+(m.fix.uz?'<small>'+esc(m.fix.uz)+'</small>':'')+'</div>' : '')+'</div>';
+    }
+  });
+  if(AI.busy) h += '<div class="am m"><div class="ab typing"><i></i><i></i><i></i></div></div>';
+  h += '</div>';
+  var sug = (!AI.busy && last && last.r==='m' && last.sugg) ? last.sugg : [];
+  h += '<div class="ait-in">'+
+    (sug.length ? '<div class="ait-sug">'+sug.map(function(s){ return '<button data-act="aiSug" data-p="'+esc(s)+'">'+esc(s)+'</button>'; }).join('')+'</div>' : '')+
+    '<div class="ait-row">'+
+      (PRON.supported() ? '<button class="ait-mic'+(AI.listen?' listen':'')+'" data-act="aiMic" aria-label="Gapirish">'+(AI.listen?'■':'🎤')+'</button>' : '')+
+      '<textarea id="aiIn" rows="1" placeholder="'+(AI.listen?'Tinglayapman…':'Ingliz tilida yozing…')+'" enterkeyhint="send">'+esc(AI.draft||'')+'</textarea>'+
+      '<button class="ait-send" data-act="aiSend" aria-label="Yuborish"'+(AI.busy?' disabled':'')+'>➤</button></div>'+
+    (AI.left!=null ? '<div class="ait-left">Bugun yana '+AI.left+' ta xabar</div>' : '')+
+  '</div></div>';
+  return h;
+};
+AFTER.aitalk = function(){
+  var l=document.getElementById('aitList'); if(l) l.scrollTop=l.scrollHeight;
+  window.scrollTo(0, document.body.scrollHeight);
+  var t=document.getElementById('aiIn'); if(!t) return;
+  var fit=function(){ t.style.height='auto'; t.style.height=Math.min(120, t.scrollHeight)+'px'; };
+  fit();
+  t.addEventListener('input', function(){ AI.draft=t.value; fit(); });
+  t.addEventListener('keydown', function(e){ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); ACT.aiSend(); } });
+};
+ACT.aiVoice = function(){ state.aiVoice = (state.aiVoice===false); saveState(); render(); };
+ACT.aiReset = function(){
+  sheet('<h2 class="serif">Yangi suhbat boshlansinmi?</h2><p class="muted">Bu vaziyatdagi oldingi xabarlar o\'chadi.</p><div class="toolbar mt"><button class="btn btn-o" data-act="closeModal">Yo\'q</button><button class="btn btn-n" data-act="aiResetGo">Ha, yangisini</button></div>');
+};
+ACT.aiResetGo = function(){ delete aiChats()[current.p]; saveState(); closeModal(); render(); };
+ACT.aiSay = function(el){ var m=aiMsgs(current.p)[+el.dataset.p]; if(m) say(m.t); };
+ACT.aiTr = function(el){ var m=aiMsgs(current.p)[+el.dataset.p]; if(m){ m.show=!m.show; render(); } };
+ACT.aiSug = function(el){ AI.draft=el.dataset.p; aiSendText(AI.draft); };
+ACT.aiSend = function(){ var t=document.getElementById('aiIn'); var v=(t?t.value:AI.draft||'').trim(); if(v) aiSendText(v); };
+ACT.aiResend = function(el){
+  var M=aiMsgs(current.p), i=+el.dataset.p, m=M[i]; if(!m) return;
+  M.splice(i, 1); aiSendText(m.t);
+};
+function aiSendText(text){
+  if(AI.busy) return;
+  text=String(text||'').trim().slice(0,500); if(!text) return;
+  if(!cloudOn()){ toast("Avval Google hisobi bilan kiring"); go('ai'); return; }
+  var id=current.p, M=aiMsgs(id), S=aiSc(id);
+  var hist = M.filter(function(m){ return !m.err; }).slice(-16).map(function(m){ return {r:m.r, t:m.t}; });
+  var um={r:'u', t:text}; M.push(um);
+  AI.draft=''; AI.busy=true; render();
+  socCall({action:'ai_chat', sc:S.id, lv:aiLevel(), msg:text, h:hist}, function(r){
+    AI.busy=false;
+    if(r && r.ok && r.reply){
+      um.fix = r.fix || null;
+      M.push({r:'m', t:r.reply, uz:r.uz||'', sugg:r.sugg||[]});
+      if(M.length>60) M.splice(1, M.length-60);
+      AI.left = r.left;
+      saveState();
+      if(current.view==='aitalk' && current.p===id){ render(); if(state.aiVoice!==false) say(r.reply); }
+      var d=dayKey(); state.aiXp = (state.aiXp && state.aiXp.d===d) ? state.aiXp : {d:d, n:0};
+      if(state.aiXp.n < 15){ state.aiXp.n++; gainXp(r.fix ? 2 : 3); }
+      return;
+    }
+    um.err=true; saveState();
+    var m={ai_limit:"Bugungi suhbat limiti tugadi. Ertaga yana gaplashamiz! 👽", ai_busy:"Musofir hozir band — bir daqiqadan keyin qayta yuboring.", essay_off:"Suhbat hali yoqilmagan — administrator Gemini kalitini qo'shishi kerak.",
+      essay_key:"Server sozlamasida xato (Gemini kaliti).", net:"Internetga ulanib bo'lmadi.", login:"Avval Google hisobi bilan kiring."}[r && r.err] || "Javob kelmadi. Qayta yuborib ko'ring.";
+    if(current.view==='aitalk') render();
+    toast(m);
+  });
+}
+ACT.aiMic = function(){
+  if(AI.listen){ PRON.stop(true); AI.listen=false; render(); return; }
+  TTS.stop(); AI.listen=true;
+  PRON.start(function(ev){
+    if(ev.type==='state') return;
+    AI.listen=false;
+    if(ev.type==='result'){ var t=(ev.texts||[])[0]||''; if(t){ aiSendText(t.charAt(0).toUpperCase()+t.slice(1)); return; } }
+    if(ev.type==='error'){ toast(sttErrText(ev.code).replace("nemis tilini", "ingliz tilini")); }
+    if(current.view==='aitalk') render();
+  });
+  if(AI.listen) render();
+};
 
 /*@@COURSE_END@@*/
 function clearActive(){ document.querySelectorAll('.phr.active,.bub.active').forEach(function(e){ e.classList.remove('active'); }); }

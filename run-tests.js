@@ -842,6 +842,67 @@ test('Insho: limit tugasa matn yo\'qolmaydi', () => {
 });
 test('Xatosiz ishladi', () => eq(w17.__errors.length, 0, w17.__errors.join(' | ')));
 
+
+/* ---------- 18. Musofir bilan gaplash (AI suhbat) ---------- */
+console.log('\n18) Musofir bilan gaplash (AI suhbat)');
+const srv18 = { mode: 'ok', reqs: [], handle(req) {
+  if (req.action !== 'ai_chat') return null;
+  this.reqs.push(req);
+  if (this.mode === 'limit') return { ok: false, err: 'ai_limit' };
+  return { ok: true, left: 39 - this.reqs.length, reply: 'Great! Hot or iced?', uz: 'Zo\'r! Issiqmi yoki muzli?', fix: /has/.test(req.msg) ? { wrong: 'I has', right: 'I have', uz: 'I + have' } : null, sugg: ['Hot, please.', 'Iced, please.'] };
+} };
+const cloud18 = fakeCloud(); const _h18 = cloud18.handle; cloud18.handle = (req) => srv18.handle(req) || _h18(req);
+const w18 = nativeBoot({ name: 'Ali', onboarded: true, ts: 1, xp: 150, cloud: { uid: 'ali', secret: 's-ali', email: 'ali@gmail.com' } }, cloud18, { v: 'ali' });
+cloud18.db.users.ali = { secret: 's-ali', email: 'ali@gmail.com' };
+const said18 = []; w18.eval('window.__say = say; say = function(t){ window.__said = (window.__said||[]).concat([t]); }');
+test('Karta faqat ingliz tilida chiqadi', () => {
+  w18.eval("setCourse('de'); go('practice')"); assert(!w18.document.querySelector('#main [data-v="ai"]'), 'nemis tilida chiqmasligi kerak');
+  w18.eval("setCourse('en'); go('practice')"); assert(w18.document.querySelector('#main [data-v="ai"]'), 'ingliz tilida yo\'q');
+});
+test('Vaziyatlar ro\'yxati va daraja', () => {
+  w18.eval("go('ai')");
+  eq(w18.document.querySelectorAll('#main [data-v="aitalk"]').length, 9);
+  w18.eval("state.flags.pt_en={lv:'B1'}"); eq(w18.eval('aiLevel()'), 'B1', 'daraja testi natijasi olinmadi');
+  w18.eval("ACT.aiLvSet({dataset:{p:'A2'}})"); eq(w18.eval('aiLevel()'), 'A2');
+});
+test('Suhbat: salom, xabar, javob, tuzatish va takliflar', () => {
+  w18.eval("go('aitalk','cafe')");
+  assert(/Moon Café/.test(w18.document.getElementById('main').textContent), 'salom yo\'q');
+  w18.eval("document.getElementById('aiIn').value='I has a tea'; ACT.aiSend()");
+  const q = srv18.reqs[srv18.reqs.length - 1];
+  eq(q.sc, 'cafe'); eq(q.lv, 'A2'); eq(q.msg, 'I has a tea'); eq(q.h.length, 1); eq(q.h[0].r, 'm');
+  const t = w18.document.getElementById('main').textContent;
+  assert(/Hot or iced/.test(t) && /I have/.test(t) && /Hot, please/.test(t), 'javob/tuzatish/taklif chiqmadi');
+  eq(w18.eval('window.__said.slice(-1)[0]'), 'Great! Hot or iced?', 'javob ovoz chiqarib o\'qilmadi');
+});
+test('Taklifni bosish — yuboriladi; tarjima ko\'rsatiladi', () => {
+  w18.eval("ACT.aiSug({dataset:{p:'Hot, please.'}})");
+  eq(srv18.reqs[srv18.reqs.length - 1].msg, 'Hot, please.'); eq(srv18.reqs[srv18.reqs.length - 1].h.length, 3);
+  w18.eval("ACT.aiTr({dataset:{p:'2'}})"); assert(/Issiqmi/.test(w18.document.getElementById('main').textContent), 'tarjima yo\'q');
+});
+test('Ovozni o\'chirsa — o\'qimaydi', () => {
+  w18.eval('ACT.aiVoice()'); const n = w18.eval('window.__said.length');
+  w18.eval("ACT.aiSug({dataset:{p:'Thanks'}})"); eq(w18.eval('window.__said.length'), n);
+  w18.eval('ACT.aiVoice()');
+});
+test('Suhbat saqlanadi va «yangi suhbat» tozalaydi', () => {
+  assert(w18.eval("state.aiChats.cafe.length") >= 7);
+  w18.eval('ACT.aiResetGo()'); eq(w18.eval("aiMsgs('cafe').length"), 1);
+});
+test('Limit tugasa — xabar belgilanadi, qayta yuborsa bo\'ladi', () => {
+  srv18.mode = 'limit'; w18.eval("aiSendText('Hello')");
+  assert(w18.document.querySelector('#main [data-act="aiResend"]'), 'qayta yuborish tugmasi yo\'q');
+  srv18.mode = 'ok'; w18.eval("ACT.aiResend({dataset:{p:'1'}})");
+  eq(w18.document.querySelectorAll('#main [data-act="aiResend"]').length, 0); eq(w18.eval("aiMsgs('cafe').length"), 3);
+});
+test('Mikrofon: gapirilgan gap yuboriladi', () => {
+  w18.eval("PRON.nativeOk = function(){ return true; }; window.AndroidTTS.listen = function(id){ window.__lid = id; }; window.AndroidTTS.sttAvailable = function(){ return true; }; render();");
+  w18.eval('ACT.aiMic()'); eq(w18.eval('AI.listen'), true);
+  assert(w18.document.querySelector('.ait-mic.listen'), 'mikrofon yoniq ko\'rinmaydi');
+  w18.eval("window.__sttResult(window.__lid, ['i would like a coffee'], [0.9])");
+  eq(srv18.reqs[srv18.reqs.length - 1].msg, 'I would like a coffee'); eq(w18.eval('AI.listen'), false);
+});
+test('Xatosiz ishladi', () => eq(w18.__errors.length, 0, w18.__errors.join(' | ')));
 console.log('\n────────────────────────────────────────');
 console.log('Natija: ' + passed + ' ta o\'tdi, ' + failed + ' ta xato');
 if (failed) { console.log('Xato testlar:\n - ' + failures.join('\n - ')); process.exit(1); }
