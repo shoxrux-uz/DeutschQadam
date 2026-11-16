@@ -32,7 +32,7 @@ final class CloudHttp {
             c = (HttpURLConnection) new URL(url).openConnection();
             c.setInstanceFollowRedirects(false);
             c.setConnectTimeout(15000);
-            c.setReadTimeout(90000);
+            c.setReadTimeout(150000);
             c.setRequestMethod("POST");
             c.setDoOutput(true);
             c.setRequestProperty("Content-Type", "text/plain;charset=utf-8");
@@ -49,7 +49,7 @@ final class CloudHttp {
                 c = (HttpURLConnection) new URL(new URL(url), next).openConnection();
                 c.setInstanceFollowRedirects(false);
                 c.setConnectTimeout(15000);
-                c.setReadTimeout(90000);
+                c.setReadTimeout(150000);
                 c.setRequestMethod("GET");
                 code = c.getResponseCode();
                 url = c.getURL().toString();

@@ -14561,8 +14561,9 @@ ACT.essSubmit = function(el, ev, force){
     }
     var m={essay_off:"Insho tekshiruvi hali yoqilmagan — administrator serverga Gemini kalitini qo'shishi kerak.", essay_limit:"Bugungi limit tugadi. Ertaga yana tekshirtirishingiz mumkin.",
       essay_busy:"Sun'iy intellekt hozir band — 1 daqiqadan keyin qayta urinib ko'ring.", essay_key:"Server sozlamasida xato (Gemini kaliti). Administratorga xabar bering.",
-      essay_short:"Matn juda qisqa.", net:"Internetga ulanib bo'lmadi. Matningiz saqlangan — keyinroq qayta urinib ko'ring.", login:"Avval Google hisobi bilan kiring."}[r && r.err] ||
+      essay_short:"Matn juda qisqa.", net:"Server javobi kelmadi. Matningiz saqlangan — birozdan keyin qayta urinib ko'ring.", login:"Avval Google hisobi bilan kiring.", unknown_action:"Server kodi eski — Apps Script'da yangi versiyani deploy qiling."}[r && r.err] ||
       ("Baholab bo'lmadi. Matningiz saqlangan — keyinroq qayta urinib ko'ring."+(r && r.detail ? ' ('+String(r.detail).slice(0,60)+')' : ''));
+    if(r && r.detail) m += ' ['+String(r.detail).slice(0,80)+']';
     render();
     sheet('<h2 class="serif">Tekshirib bo\'lmadi</h2><p class="muted">'+esc(m)+'</p><div class="toolbar mt"><button class="btn btn-c" data-act="closeModal">Tushunarli</button></div>');
   });
@@ -14749,7 +14750,8 @@ function aiSendText(text){
     }
     um.err=true; saveState();
     var m={ai_limit:"Bugungi suhbat limiti tugadi. Ertaga yana gaplashamiz! 👽", ai_busy:"Musofir hozir band — bir daqiqadan keyin qayta yuboring.", essay_off:"Suhbat hali yoqilmagan — administrator Gemini kalitini qo'shishi kerak.",
-      essay_key:"Server sozlamasida xato (Gemini kaliti).", net:"Internetga ulanib bo'lmadi.", login:"Avval Google hisobi bilan kiring."}[r && r.err] || "Javob kelmadi. Qayta yuborib ko'ring.";
+      essay_key:"Server sozlamasida xato (Gemini kaliti).", net:"Server javobi kelmadi.", login:"Avval Google hisobi bilan kiring.", unknown_action:"Server kodi eski — Apps Script'da yangi versiyani deploy qiling."}[r && r.err] || "Javob kelmadi. Qayta yuborib ko'ring.";
+    if(r && r.detail && r.err!=='ai_limit') m += ' ['+String(r.detail).slice(0,60)+']';
     if(current.view==='aitalk') render();
     toast(m);
   });
