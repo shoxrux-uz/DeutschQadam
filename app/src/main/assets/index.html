@@ -13167,6 +13167,26 @@ ACT.accountDeleteGo = function(el){
   });
 };
 
+
+/* =====================================================================
+   IMZO KALITI ALMASHISHIDAN OLDIN: hamma Google bilan kirib olsin
+   (keyingi katta yangilanishda ilovani bir marta qayta o'rnatish kerak bo'ladi)
+   ===================================================================== */
+cloudCardHtml = function(){
+  if(!cloudCan() || cloudOn()) return '';
+  return '<div class="cloud-card" style="border-color:var(--coral);background:var(--coral-soft)"><span class="ci">⚠️</span><div><b>Muhim: progressingizni saqlab qo\'ying</b>'+
+    '<small>Tez orada ilova Play Market\'ga chiqadi va uni <b>bir marta qayta o\'rnatish</b> kerak bo\'ladi. Natijalaringiz yo\'qolmasligi uchun hozir Google bilan kiring — 10 soniya.</small></div>'+
+    '<button class="btn g-btn btn-s" data-act="gLogin"><span class="g-ic">G</span> Kirish</button></div>';
+};
+(function(){
+  var _u = updCardHtml;
+  updCardHtml = function(){
+    var h=_u.apply(this, arguments);
+    if(!h) return h;
+    return h + '<div class="tip n" style="font-size:13px;margin:-6px 0 14px">Agar telefon «Ilova o\'rnatilmadi» desa: 1) bu yerda <b>Google bilan kirganingizni</b> tekshiring (Profil → Sozlamalar → Hisob); 2) eski Musofir ilovasini o\'chiring; 3) yangi faylni o\'rnating va yana Google bilan kiring — progress qaytadi.</div>';
+  };
+})();
+
 /*@@COURSE_END@@*/
 function clearActive(){ document.querySelectorAll('.phr.active,.bub.active').forEach(function(e){ e.classList.remove('active'); }); }
 document.addEventListener('click', function(e){

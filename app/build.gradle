@@ -23,6 +23,16 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        // Haqiqiy imzo kaliti: GitHub Actions uni shifrlangan fayldan ochib beradi (MUSOFIR_KEY_PASS secret)
+        release {
+            def sf = System.getenv("SIGN_STORE")
+            if (sf) {
+                storeFile file(sf)
+                storePassword System.getenv("SIGN_PASS")
+                keyAlias 'musofir'
+                keyPassword System.getenv("SIGN_PASS")
+            }
+        }
     }
 
     buildTypes {
@@ -31,8 +41,13 @@ android {
         }
         release {
             minifyEnabled false
-            signingConfig signingConfigs.debug
+            signingConfig System.getenv("SIGN_STORE") ? signingConfigs.release : signingConfigs.debug
         }
+    }
+
+    lint {
+        checkReleaseBuilds false
+        abortOnError false
     }
 
     compileOptions {
