@@ -5,7 +5,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.graphics.Insets;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.WindowInsets;
+import android.view.WindowInsetsController;
+import android.widget.FrameLayout;
+import android.window.OnBackInvokedCallback;
+import android.window.OnBackInvokedDispatcher;
 import android.os.SystemClock;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
@@ -67,7 +74,14 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         super.onCreate(savedInstanceState);
 
         web = new WebView(this);
-        setContentView(web);
+        // Android 15+ ilovani butun ekranga yoyadi: soat qatori va pastki tugmalar uchun joy qoldiramiz,
+        // klaviatura ochilganda esa ilova uning ustiga ko'tariladi
+        FrameLayout root = new FrameLayout(this);
+        root.setBackgroundColor(0xFF14213D);
+        root.addView(web, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
+        setContentView(root);
+        setupInsets(root);
+        setupBack();
 
         WebSettings s = web.getSettings();
         s.setJavaScriptEnabled(true);
@@ -149,6 +163,42 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             @Override public void onStart(String utteranceId) { }
             @Override public void onDone(String utteranceId) { notifyDone(utteranceId); }
             @Override public void onError(String utteranceId) { notifyDone(utteranceId); }
+        });
+    }
+
+    private void setupInsets(final FrameLayout root) {
+        if (Build.VERSION.SDK_INT < 30) return;
+        try {
+            WindowInsetsController c = getWindow().getInsetsController();
+            if (c != null) c.setSystemBarsAppearance(0,
+                    WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS | WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS);
+        } catch (Exception ignored) { }
+        root.setOnApplyWindowInsetsListener((v, insets) -> {
+            Insets bars = insets.getInsets(WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout());
+            Insets ime = insets.getInsets(WindowInsets.Type.ime());
+            v.setPadding(bars.left, bars.top, bars.right, Math.max(bars.bottom, ime.bottom));
+            return WindowInsets.CONSUMED;
+        });
+    }
+
+    /** Android 13+ (16 da majburiy): «Orqaga» tugmasi yangi usulda keladi */
+    private OnBackInvokedCallback backCb = null;
+    private void setupBack() {
+        if (Build.VERSION.SDK_INT < 33) return;
+        backCb = new OnBackInvokedCallback() {
+            @Override public void onBackInvoked() { handleBack(); }
+        };
+        getOnBackInvokedDispatcher().registerOnBackInvokedCallback(OnBackInvokedDispatcher.PRIORITY_DEFAULT, backCb);
+    }
+
+    /** Ilova ichida orqaga qaytadi; bosh sahifada bo'lsa — ilovadan chiqadi */
+    private void handleBack() {
+        if (web == null) { finish(); return; }
+        web.evaluateJavascript("(window.__back && window.__back()) ? 'yes' : 'no'", value -> {
+            if (value == null || !value.contains("yes")) {
+                // Ilovani yopmaymiz, faqat orqa fonga o'tkazamiz — keyin ochilganda tez ishga tushadi
+                if (!moveTaskToBack(true)) finish();
+            }
         });
     }
 
@@ -631,17 +681,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         if (tts != null && ttsStatus == 2) applyLang();
     }
 
+    /** Android 12 va undan eski telefonlar uchun */
     @Override
     public void onBackPressed() {
-        if (web == null) {
-            super.onBackPressed();
-            return;
-        }
-        web.evaluateJavascript("(window.__back && window.__back()) ? 'yes' : 'no'", value -> {
-            if (value == null || !value.contains("yes")) {
-                finish();
-            }
-        });
+        handleBack();
     }
 
     @Override

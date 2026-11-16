@@ -6,12 +6,12 @@ def buildNumber = (System.getenv("GITHUB_RUN_NUMBER") ?: "1").toInteger()
 
 android {
     namespace 'uz.shoxrux.deutschqadam'
-    compileSdk 34
+    compileSdk 36
 
     defaultConfig {
         applicationId "uz.shoxrux.deutschqadam"
         minSdk 26
-        targetSdk 34
+        targetSdk 36
         versionCode buildNumber
         versionName "1.0." + buildNumber
     }
