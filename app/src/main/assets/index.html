@@ -1400,8 +1400,6 @@ html[data-vt="tab"]::view-transition-new(mainv){animation:vtPop .45s var(--sprin
 .main{view-transition-name:mainv}
 .rpl{background:radial-gradient(circle,rgba(255,255,255,.55),rgba(255,255,255,0) 70%)!important}
 /* bosilgan element atrofida neon to'lqin */
-.neo-tap{position:fixed;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;pointer-events:none;z-index:300;border:2px solid #FF4D8D;animation:neoTap .5s ease-out forwards}
-@keyframes neoTap{to{transform:scale(6);opacity:0;border-color:#8B5CF6}}
 @media (prefers-reduced-motion: reduce){#neo-bg *,.btn-c::before,.unit::after,.pnode.cur,.pnode.cur::before,.prof-h .avw::before{animation:none!important}}
 html.lite #neo-bg *,html.lite .btn-c::before,html.lite .unit::after,html.lite .pnode.cur,html.lite .pnode.cur::after,html.lite .prof-h .avw::before{animation:none!important}
 html.lite .card::after,html.lite .qcard::after,html.lite .prac .pt::after,html.lite .tile::after,html.lite .crow2::after{display:none}
@@ -13539,14 +13537,6 @@ cloudCardHtml = function(){
   /* Zaif telefonlarda bezak animatsiyalari o'chadi */
   try{ if((navigator.deviceMemory && navigator.deviceMemory<=3) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency<=4)) document.documentElement.classList.add('lite'); }catch(e){}
 
-  /* Bosilgan joyda neon halqa */
-  document.addEventListener('pointerdown', function(e){
-    if(document.documentElement.classList.contains('rm') || REDUCED) return;
-    var t=e.target.closest && e.target.closest('.btn,.tbi,.pnode,.opt,.pt,.crow2,.chip,.lvtab');
-    if(!t) return;
-    var d=document.createElement('i'); d.className='neo-tap'; d.style.left=e.clientX+'px'; d.style.top=e.clientY+'px';
-    document.body.appendChild(d); setTimeout(function(){ d.remove(); }, 520);
-  }, {passive:true});
 })();
 
 /*@@COURSE_END@@*/
