@@ -845,11 +845,12 @@ test('Xatosiz ishladi', () => eq(w17.__errors.length, 0, w17.__errors.join(' | '
 
 /* ---------- 18. Musofir bilan gaplash (AI suhbat) ---------- */
 console.log('\n18) Musofir bilan gaplash (AI suhbat)');
-const srv18 = { mode: 'ok', reqs: [], handle(req) {
+const srv18 = { mode: 'ok', reqs: [], ttsFail: true, handle(req) {
+  if (req.action === 'ai_tts') { this.tts = (this.tts || []).concat([req]); return this.ttsFail ? { ok: false, err: 'tts_fail' } : { ok: true, mime: 'audio/wav', audio: 'UklGRiQAAABXQVZF' }; }
   if (req.action !== 'ai_chat') return null;
   this.reqs.push(req);
   if (this.mode === 'limit') return { ok: false, err: 'ai_limit' };
-  return { ok: true, left: 39 - this.reqs.length, reply: 'Great! Hot or iced?', uz: 'Zo\'r! Issiqmi yoki muzli?', fix: /has/.test(req.msg) ? { wrong: 'I has', right: 'I have', uz: 'I + have' } : null, sugg: ['Hot, please.', 'Iced, please.'] };
+  return { ok: true, left: 39 - this.reqs.length, speak: 'Great! <chuckle> Hot or iced?', style: 'cheerful', reply: 'Great! Hot or iced?', uz: 'Zo\'r! Issiqmi yoki muzli?', fix: /has/.test(req.msg) ? { wrong: 'I has', right: 'I have', uz: 'I + have' } : null, sugg: ['Hot, please.', 'Iced, please.'] };
 } };
 const cloud18 = fakeCloud(); const _h18 = cloud18.handle; cloud18.handle = (req) => srv18.handle(req) || _h18(req);
 const w18 = nativeBoot({ name: 'Ali', onboarded: true, ts: 1, xp: 150, cloud: { uid: 'ali', secret: 's-ali', email: 'ali@gmail.com' } }, cloud18, { v: 'ali' });
@@ -901,6 +902,20 @@ test('Mikrofon: gapirilgan gap yuboriladi', () => {
   assert(w18.document.querySelector('.ait-mic.listen'), 'mikrofon yoniq ko\'rinmaydi');
   w18.eval("window.__sttResult(window.__lid, ['i would like a coffee'], [0.9])");
   eq(srv18.reqs[srv18.reqs.length - 1].msg, 'I would like a coffee'); eq(w18.eval('AI.listen'), false);
+});
+test('Musofir ovozi: Gemini ovozi (kulgi, uslub) ijro etiladi; xato bo\'lsa telefon ovozi', () => {
+  srv18.ttsFail = false; let plays = 0; w18.HTMLMediaElement.prototype.play = function(){ plays++; return Promise.resolve(); };
+  w18.eval("state.aiVoice=true; AIA.fails=0; go('aitalk','cafe'); aiSendText('Tell me something funny')");
+  const q = srv18.tts[srv18.tts.length - 1];
+  eq(q.text, 'Great! <chuckle> Hot or iced?'); eq(q.style, 'cheerful');
+  eq(plays, 1, 'audio ijro etilmadi');
+  assert(!/chuckle/.test(w18.document.getElementById('main').textContent), 'teg chatda ko\'rinmasligi kerak');
+  const n = srv18.tts.length; w18.eval("ACT.aiSay({dataset:{p:String(aiMsgs('cafe').length-1)}})");
+  w18.eval("ACT.aiSay({dataset:{p:String(aiMsgs('cafe').length-1)}})");
+  eq(srv18.tts.length, n, 'qayta tinglashda server qayta chaqirilmasligi kerak (kesh)');
+  srv18.ttsFail = true; const said = w18.eval('window.__said.length'); w18.eval('AIA.fails=0');
+  w18.eval("aiSendText('Again')");
+  assert(w18.eval('window.__said.length') > said, 'xatoda telefon ovozi ishlamadi');
 });
 test('Xatosiz ishladi', () => eq(w18.__errors.length, 0, w18.__errors.join(' | ')));
 

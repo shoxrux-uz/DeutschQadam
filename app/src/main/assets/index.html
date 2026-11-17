@@ -1734,6 +1734,7 @@ html[data-theme="dark"] .er-err b{color:#5BE39A}
 .am.u .ab{background:linear-gradient(180deg,#2BB4FF,#0E9BF5);color:#fff;box-shadow:0 3px 0 #0A7FCC;border-bottom-right-radius:6px}
 .ab-tools{display:flex;gap:6px;margin-top:8px}
 .ab-tools button{font-size:12.5px;font-weight:800;padding:4px 10px;border-radius:999px;background:var(--cream-2);color:var(--neo-muted)}
+.ab-tools button.on{background:#12A8FF;color:#fff}
 .ab-uz{margin-top:8px;padding-top:8px;border-top:1px dashed var(--neo-line);color:var(--neo-muted);font-size:14.5px}
 .ab-re{display:block;margin-top:6px;font-size:12.5px;font-weight:800;color:#fff;text-decoration:underline}
 .afix{margin-top:6px;background:#FFF6E0;border:2px solid #FFDF9A;border-radius:14px;padding:8px 12px;font-size:14px;color:#5A3A00;max-width:100%}
@@ -14690,7 +14691,7 @@ VIEWS.aitalk = function(id){
     '<div class="ait-list" id="aitList">';
   M.forEach(function(m, i){
     if(m.r==='m'){
-      h += '<div class="am m"><div class="ab">'+esc(m.t)+'<div class="ab-tools"><button data-act="aiSay" data-p="'+i+'">🔊</button><button data-act="aiTr" data-p="'+i+'">'+(m.show?'Yashirish':'Tarjima')+'</button></div>'+
+      h += '<div class="am m"><div class="ab">'+esc(m.t)+'<div class="ab-tools"><button data-act="aiSay" data-p="'+i+'"'+(m.k&&AIA.cur===m.k?' class="on"':'')+'>'+(m.k&&AIA.ld[m.k]?'⏳':(m.k&&AIA.cur===m.k?'⏸':'🔊'))+'</button><button data-act="aiTr" data-p="'+i+'">'+(m.show?'Yashirish':'Tarjima')+'</button></div>'+
         (m.show && m.uz ? '<div class="ab-uz">'+esc(m.uz)+'</div>' : '')+'</div></div>';
     } else {
       h += '<div class="am u"><div class="ab">'+esc(m.t)+(m.err?'<button class="ab-re" data-act="aiResend" data-p="'+i+'">⚠️ Yuborilmadi — qayta yuborish</button>':'')+'</div>'+
@@ -14724,7 +14725,46 @@ ACT.aiReset = function(){
   sheet('<h2 class="serif">Yangi suhbat boshlansinmi?</h2><p class="muted">Bu vaziyatdagi oldingi xabarlar o\'chadi.</p><div class="toolbar mt"><button class="btn btn-o" data-act="closeModal">Yo\'q</button><button class="btn btn-n" data-act="aiResetGo">Ha, yangisini</button></div>');
 };
 ACT.aiResetGo = function(){ delete aiChats()[current.p]; saveState(); closeModal(); render(); };
-ACT.aiSay = function(el){ var m=aiMsgs(current.p)[+el.dataset.p]; if(m) say(m.t); };
+ACT.aiSay = function(el){ var M=aiMsgs(current.p), m=M[+el.dataset.p]; if(!m) return; if(!m.k) m.k='m'+el.dataset.p+'_'+m.t.length; if(AIA.cur===m.k){ aiStopAudio(); render(); return; } aiSpeak(m); };
+/* --- Musofir ovozi: Gemini TTS (intonatsiya, kulgi); bo'lmasa — telefon ovozi --- */
+var AIA = {cache:{}, keys:[], el:null, fails:0, cur:null, ld:{}};
+function aiStopAudio(){ if(AIA.el){ try{ AIA.el.pause(); }catch(e){} } AIA.cur=null; }
+(function(){ var _s=TTS.stop; TTS.stop=function(){ aiStopAudio(); return _s.apply(this, arguments); }; })();
+function aiB64Url(b64, mime){
+  try{ var bin=atob(b64), n=bin.length, u=new Uint8Array(n); for(var i=0;i<n;i++) u[i]=bin.charCodeAt(i); return URL.createObjectURL(new Blob([u], {type:mime||'audio/wav'})); }
+  catch(e){ return 'data:'+(mime||'audio/wav')+';base64,'+b64; }
+}
+function aiRerender(){ if(current.view==='aitalk') render(); }
+function aiPlay(url, m){
+  TTS.stop();
+  var a = AIA.el || (AIA.el = new Audio()), k = m.k;
+  AIA.cur = k;
+  a.onended = a.onerror = function(){ if(AIA.cur===k){ AIA.cur=null; aiRerender(); } };
+  a.src = url;
+  var pr; try{ pr = a.play(); }catch(e){ pr=null; AIA.cur=null; say(m.t); }
+  if(pr && pr.catch) pr.catch(function(){ if(AIA.cur===k){ AIA.cur=null; say(m.t); aiRerender(); } });
+  aiRerender();
+}
+function aiSpeak(m){
+  if(!m) return;
+  var key = m.k || (m.k = 'm'+Date.now().toString(36));
+  if(AIA.ld[key]) return;
+  if(AIA.cache[key]) return aiPlay(AIA.cache[key], m);
+  if(AIA.fails>=2 || !cloudOn() || !cloudCan()){ say(m.t); return; }
+  AIA.ld[key] = 1; aiRerender();
+  var lv = aiLevel();
+  socCall({action:'ai_tts', text:m.sp||m.t, style:m.st||((lv==='A1'||lv==='A2')?'warm and friendly, slowly and very clearly':'warm and friendly'), lv:lv}, function(r){
+    delete AIA.ld[key];
+    if(r && r.ok && r.audio){
+      AIA.fails = 0;
+      var url = aiB64Url(r.audio, r.mime);
+      AIA.cache[key] = url; AIA.keys.push(key);
+      if(AIA.keys.length>12){ var old=AIA.keys.shift(); try{ if(String(AIA.cache[old]).indexOf('blob:')===0) URL.revokeObjectURL(AIA.cache[old]); }catch(e){} delete AIA.cache[old]; }
+      if(current.view==='aitalk') aiPlay(url, m);
+    } else { AIA.fails++; if(current.view==='aitalk') say(m.t); }
+    aiRerender();
+  });
+}
 ACT.aiTr = function(el){ var m=aiMsgs(current.p)[+el.dataset.p]; if(m){ m.show=!m.show; render(); } };
 ACT.aiSug = function(el){ AI.draft=el.dataset.p; aiSendText(AI.draft); };
 ACT.aiSend = function(){ var t=document.getElementById('aiIn'); var v=(t?t.value:AI.draft||'').trim(); if(v) aiSendText(v); };
@@ -14744,11 +14784,12 @@ function aiSendText(text){
     AI.busy=false;
     if(r && r.ok && r.reply){
       um.fix = r.fix || null;
-      M.push({r:'m', t:r.reply, uz:r.uz||'', sugg:r.sugg||[]});
+      var mm = {r:'m', t:String(r.reply).replace(/<[^<>]{1,20}>/g,'').replace(/\s{2,}/g,' ').trim(), uz:r.uz||'', sugg:r.sugg||[], sp:r.speak||'', st:r.style||'', k:'m'+Date.now().toString(36)};
+      M.push(mm);
       if(M.length>60) M.splice(1, M.length-60);
       AI.left = r.left;
       saveState();
-      if(current.view==='aitalk' && current.p===id){ render(); if(state.aiVoice!==false) say(r.reply); }
+      if(current.view==='aitalk' && current.p===id){ render(); if(state.aiVoice!==false) aiSpeak(mm); }
       var d=dayKey(); state.aiXp = (state.aiXp && state.aiXp.d===d) ? state.aiXp : {d:d, n:0};
       if(state.aiXp.n < 15){ state.aiXp.n++; gainXp(r.fix ? 2 : 3); }
       return;
