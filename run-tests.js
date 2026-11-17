@@ -471,7 +471,7 @@ test('Ingliz tili: so\'zlar, darslar, sonlar inglizcha', () => {
   eq(w13.eval('curTts()'), 'en-US');
   eq(w13.eval("LESSONS[1].items[0].de"), 'My name is Aziz.');
   w13.eval("go('tests')"); assert(!w13.document.querySelector('[data-act="tMode"][data-p="art"]'), 'der/die/das rejimi inglizchada bo\'lmasligi kerak');
-  eq(w13.eval('NODES.filter(function(n){ return n.type===\'final\'; }).length'), 1);
+  eq(w13.eval('NODES.filter(function(n){ return n.type===\'final\'; }).length'), 5, 'A1–C1: 5 ta yakuniy imtihon');
 });
 test('Har bir tilning progressi alohida saqlanadi', () => {
   w13.eval("setCourse('en'); state.path.abc=95; state.learned['oila0']=1; saveState();");
@@ -903,6 +903,55 @@ test('Mikrofon: gapirilgan gap yuboriladi', () => {
   eq(srv18.reqs[srv18.reqs.length - 1].msg, 'I would like a coffee'); eq(w18.eval('AI.listen'), false);
 });
 test('Xatosiz ishladi', () => eq(w18.__errors.length, 0, w18.__errors.join(' | ')));
+
+/* ---------- 19. Ingliz va rus tillari: A2 → C1 ---------- */
+console.log('\n19) Ingliz va rus tillari: A2 → C1 darajalari');
+const w19 = boot({ name: 'Ali', onboarded: true, ts: 1, xp: 0 });
+w19.eval("bootStep('splash'); bootStep('data');");
+['en', 'ru'].forEach((c) => {
+  test(c + ': har darajada grammatika, so\'zlar, bosqichlar va yakuniy imtihon', () => {
+    w19.eval("setCourse('" + c + "')");
+    ['A2', 'B1', 'B2', 'C1'].forEach((L) => {
+      assert(w19.eval("lvNodes('" + L + "').length") >= 12, L + ' bosqichlar kam');
+      assert(w19.eval("GRAM.filter(function(g){ return g.lv==='" + L + "'; }).length") >= 6, L + ' grammatika kam');
+      assert(w19.eval("ALLW.filter(function(w){ return w.lv==='" + L + "'; }).length") >= 140, L + ' so\'zlar kam');
+      assert(w19.eval("buildExam(nodeById('" + L.toLowerCase() + "final').spec, 30).length") >= 25, L + ' imtihon savollari kam');
+    });
+    assert(w19.eval('ALLW.length') > 1500, 'jami so\'z kam: ' + w19.eval('ALLW.length'));
+  });
+  test(c + ': yangi darajalarda takroriy so\'zlar yo\'q', () => {
+    const d = w19.eval("(function(){ var s={}, d=[]; ALLW.forEach(function(w){ var k=w.de.toLowerCase(); if(s[k] && w.lv!=='A1') d.push(k); s[k]=1; }); return d.length; })()");
+    eq(d, 0);
+  });
+  test(c + ': grammatika darsi va mashqi ochiladi', () => {
+    w19.eval("setCourse('" + c + "')");
+    const g = w19.eval("GRAM.filter(function(g){ return g.lv==='C1'; })[0].id");
+    w19.eval("ACT.node({dataset:{p:'" + g + "'}})"); w19.eval('closeModal()');
+    w19.eval("go('gram', '" + g + "')");
+    assert(w19.document.getElementById('main').textContent.length > 300, 'dars matni chiqmadi');
+    w19.eval("startNodeTest('" + g + "')"); eq(w19.eval('current.view'), 'quiz'); assert(w19.eval('QZ.qs.length') >= 8, 'mashq kam');
+  });
+});
+test('Yo\'lda 5 ta daraja tabi, nemis B2/C1 — «Tez orada»', () => {
+  w19.eval("setCourse('en'); pathLv=null; go('home')");
+  eq(w19.document.querySelectorAll('#main .lvtab').length, 5);
+  w19.eval("setCourse('de'); pathLv='C1'; go('home')");
+  assert(/Tez orada/.test(w19.document.querySelector('#main .lvtab.on').textContent), 'nemis C1 tez orada emas');
+  w19.eval("pathLv=null");
+});
+test('Daraja testi C1 — barcha darajalar ochiladi, sertifikat imtihonsiz berilmaydi', () => {
+  w19.eval("setCourse('ru'); ptStart(false); ACT.ptGo(); for(var k=0;k<40 && PT.stage!=='done';k++){ if(PT.stage==='lvup') ACT.ptGo(); var q=PT.block[PT.bi]; if(q.g){ document.getElementById('ptIn').value=q.a[0]; ACT.ptSend(); } else ACT.ptPick({dataset:{p:String(q.o.indexOf(q.ans))}}); }");
+  eq(w19.eval('PT_LV[PT.res]'), 'C1'); w19.eval('ACT.ptDone()');
+  eq(w19.eval("lvDone('B2')"), w19.eval("lvNodes('B2').length") - 1);
+  eq(w19.eval("nodeIsDone('c1final')"), false);
+  assert(/Darajangiz: C1/.test(w19.document.getElementById('main').textContent), 'C1 imtihon taklifi yo\'q');
+});
+test('B2/C1 sertifikat sahifasi', () => {
+  w19.eval("setCourse('en'); state.path.c1final=90; go('cert','C1')");
+  const t = w19.document.getElementById('main').textContent;
+  assert(/C1/.test(t) && /ingliz tilidan/.test(t), 'sertifikat matni: ' + t.slice(0, 120));
+});
+test('Xatosiz ishladi', () => eq(w19.__errors.length, 0, w19.__errors.join(' | ')));
 console.log('\n────────────────────────────────────────');
 console.log('Natija: ' + passed + ' ta o\'tdi, ' + failed + ' ta xato');
 if (failed) { console.log('Xato testlar:\n - ' + failures.join('\n - ')); process.exit(1); }
