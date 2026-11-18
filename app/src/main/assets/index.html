@@ -14685,7 +14685,7 @@ VIEWS.aitalk = function(id){
   var S=aiSc(id), M=aiMsgs(S.id), last=M[M.length-1];
   var h = '<div class="ait">'+
     '<div class="ait-top"><button class="pt-x" data-act="go" data-v="ai" aria-label="Orqaga">←</button>'+
-      '<span class="ait-av cc-'+S.c+'">'+ILL.svg(S.i)+'</span><div class="ait-tt"><b>'+S.t+'</b><small>Musofir · '+aiLevel()+'</small></div>'+
+      '<span class="ait-av cc-'+S.c+'">'+ILL.svg(S.i)+'</span><div class="ait-tt"><b>'+S.t+'</b><small>Musofir · '+aiLevel()+(AIA.mode==='gemini'?' · 🎙 Gemini ovozi':(AIA.mode==='phone'?' · <a data-act="aiVoiceWhy" style="text-decoration:underline">📱 telefon ovozi</a>':''))+'</small></div>'+
       '<button class="ait-ic'+(state.aiVoice!==false?' on':'')+'" data-act="aiVoice" aria-label="Ovoz">'+(state.aiVoice!==false?'🔊':'🔇')+'</button>'+
       '<button class="ait-ic" data-act="aiReset" aria-label="Yangi suhbat">↺</button></div>'+
     '<div class="ait-list" id="aitList">';
@@ -14720,6 +14720,10 @@ AFTER.aitalk = function(){
   t.addEventListener('input', function(){ AI.draft=t.value; fit(); });
   t.addEventListener('keydown', function(e){ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); ACT.aiSend(); } });
 };
+ACT.aiVoiceWhy = function(){
+  sheet('<h2 class="serif">Nega telefon ovozi?</h2><p class="muted">Musofirning jonli (Gemini) ovozi ishlamadi, shuning uchun javobni telefon ovozi o\'qiyapti.</p><div class="card" style="font-size:13px;word-break:break-word">'+esc(AIA.err||'noma\'lum')+'</div><p class="muted" style="font-size:13px">Shu matnni skrinshot qilib ishlab chiquvchiga yuboring.</p><div class="toolbar mt"><button class="btn btn-c" data-act="aiVoiceRetry">Qayta urinish</button><button class="btn btn-o" data-act="closeModal">Yopish</button></div>');
+};
+ACT.aiVoiceRetry = function(){ AIA.fails=0; AIA.warned=false; closeModal(); var M=aiMsgs(current.p); for(var i=M.length-1;i>=0;i--) if(M[i].r==='m'){ aiSpeak(M[i]); break; } };
 ACT.aiVoice = function(){ state.aiVoice = (state.aiVoice===false); saveState(); render(); };
 ACT.aiReset = function(){
   sheet('<h2 class="serif">Yangi suhbat boshlansinmi?</h2><p class="muted">Bu vaziyatdagi oldingi xabarlar o\'chadi.</p><div class="toolbar mt"><button class="btn btn-o" data-act="closeModal">Yo\'q</button><button class="btn btn-n" data-act="aiResetGo">Ha, yangisini</button></div>');
@@ -14756,12 +14760,17 @@ function aiSpeak(m){
   socCall({action:'ai_tts', text:m.sp||m.t, style:m.st||((lv==='A1'||lv==='A2')?'warm and friendly, slowly and very clearly':'warm and friendly'), lv:lv}, function(r){
     delete AIA.ld[key];
     if(r && r.ok && r.audio){
-      AIA.fails = 0;
+      AIA.fails = 0; AIA.mode = 'gemini'; AIA.err = '';
       var url = aiB64Url(r.audio, r.mime);
       AIA.cache[key] = url; AIA.keys.push(key);
       if(AIA.keys.length>12){ var old=AIA.keys.shift(); try{ if(String(AIA.cache[old]).indexOf('blob:')===0) URL.revokeObjectURL(AIA.cache[old]); }catch(e){} delete AIA.cache[old]; }
       if(current.view==='aitalk') aiPlay(url, m);
-    } else { AIA.fails++; if(current.view==='aitalk') say(m.t); }
+    } else {
+      AIA.fails++; AIA.mode = 'phone';
+      AIA.err = (r && (r.err || '')) + (r && r.detail ? ' — ' + String(r.detail) : '');
+      if(!AIA.warned){ AIA.warned = true; toast("Gemini ovozi ishlamadi — telefon ovozi o'qiyapti. Sababi: sarlavhadagi 📱 belgisini bosing"); }
+      if(current.view==='aitalk') say(m.t);
+    }
     aiRerender();
   });
 }
