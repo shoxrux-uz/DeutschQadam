@@ -66,6 +66,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     /** Bildirishnoma sozlamalari ochilgan — qaytganda holatni yangilaymiz */
     private boolean notifSettingsOpened = false;
     private long sttSilence = 1500L;   // jimlik — gap tugadi deb hisoblash (ms)
+    private boolean sttQuiet = false;   // AI suhbatda: tinglash «tring» ovozini o'chirish
+    private boolean beepMuted = false;
+    private final android.os.Handler quietHandler = new android.os.Handler(android.os.Looper.getMainLooper());
+    private final Runnable quietSafety = new Runnable() { @Override public void run() { unmuteBeep(); } };
     private SpeechRecognizer recognizer;
     private String pendingListenId = null;
     private long lastLevelAt = 0;
@@ -480,6 +484,14 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             return checkSelfPermission(Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED;
         }
 
+        /** AI suhbatda tinglash boshlanish/tugash «tring» ovozini o'chirish (true) yoki qaytarish (false) */
+        @JavascriptInterface
+        public void setSttQuiet(final boolean on) {
+            runOnUiThread(new Runnable() {
+                @Override public void run() { sttQuiet = on; if (!on) unmuteBeep(); }
+            });
+        }
+
         /** Gap tugadi deb hisoblash uchun jimlik davomiyligi (AI suhbatda uzoqroq) */
         @JavascriptInterface
         public void setSttSilence(int ms) {
@@ -542,6 +554,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             return;
         }
         if (tts != null) tts.stop();
+        if (sttQuiet) muteBeep();
         if (recognizer != null) {
             try { recognizer.cancel(); } catch (Exception ignored) { }
             try { recognizer.destroy(); } catch (Exception ignored) { }
@@ -694,9 +707,37 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         handleBack();
     }
 
+    /** Tizim «tring» ovozini vaqtincha o'chiradi (media va tizim oqimlari). 90 soniyadan keyin o'zi qaytadi. */
+    private void muteBeep() {
+        quietHandler.removeCallbacks(quietSafety);
+        quietHandler.postDelayed(quietSafety, 90000L);
+        if (beepMuted) return;
+        try {
+            android.media.AudioManager am = (android.media.AudioManager) getSystemService(Context.AUDIO_SERVICE);
+            if (am == null) return;
+            try { am.adjustStreamVolume(android.media.AudioManager.STREAM_MUSIC, android.media.AudioManager.ADJUST_MUTE, 0); } catch (Exception ignored) { }
+            try { am.adjustStreamVolume(android.media.AudioManager.STREAM_SYSTEM, android.media.AudioManager.ADJUST_MUTE, 0); } catch (Exception ignored) { }
+            beepMuted = true;
+        } catch (Exception ignored) { }
+    }
+
+    private void unmuteBeep() {
+        quietHandler.removeCallbacks(quietSafety);
+        if (!beepMuted) return;
+        beepMuted = false;
+        try {
+            android.media.AudioManager am = (android.media.AudioManager) getSystemService(Context.AUDIO_SERVICE);
+            if (am == null) return;
+            try { am.adjustStreamVolume(android.media.AudioManager.STREAM_MUSIC, android.media.AudioManager.ADJUST_UNMUTE, 0); } catch (Exception ignored) { }
+            try { am.adjustStreamVolume(android.media.AudioManager.STREAM_SYSTEM, android.media.AudioManager.ADJUST_UNMUTE, 0); } catch (Exception ignored) { }
+        } catch (Exception ignored) { }
+    }
+
     @Override
     protected void onPause() {
         super.onPause();
+        sttQuiet = false;
+        unmuteBeep();
         ChatPoll.foreground = false;
         startBgPoll();
         if (tts != null) tts.stop();
@@ -726,6 +767,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     @Override
     protected void onDestroy() {
         bgPoll = null;
+        unmuteBeep();
         if (recognizer != null) {
             try { recognizer.destroy(); } catch (Exception ignored) { }
             recognizer = null;

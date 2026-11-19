@@ -1789,6 +1789,8 @@ html[data-theme="dark"] .aiv-fix{background:#2B2540;border-color:#3D3560;color:#
 .aiv-mic:active{transform:translateY(4px);box-shadow:0 2px 0 #0A7FCC}
 .aiv-side{width:58px;height:58px;border-radius:50%;background:var(--neo-surf);border:2px solid var(--neo-line);box-shadow:0 3px 0 var(--c-edge);font-size:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
 .aiv-side small{font-size:9.5px;font-weight:800;color:var(--neo-muted);margin-top:3px}
+.aiv-bz .mf-tag{display:none!important}
+.aiv-help{padding:12px 20px;border-radius:999px;background:var(--neo-surf);border:2px solid var(--neo-line);box-shadow:0 3px 0 var(--c-edge);font-weight:800;color:var(--neo-text);font-size:15px}
 </style>
 </head>
 <body>
@@ -14777,7 +14779,7 @@ function aiPlay(url, m){
   a.onended = a.onerror = function(){ if(AIA.cur===k){ AIA.cur=null; aiRerender(); } };
   a.src = url;
   var pr; try{ pr = a.play(); }catch(e){ pr=null; AIA.cur=null; say(m.t); }
-  if(pr && pr.catch) pr.catch(function(){ if(AIA.cur===k){ AIA.cur=null; say(m.t); aiRerender(); } });
+  if(pr && pr.catch) pr.catch(function(){ if(AIA.cur===k){ AIA.cur=null; say(m.t); aiAfterPhoneVoice(m.t); aiRerender(); } });
   aiRerender();
 }
 function aiSpeak(m){
@@ -14785,7 +14787,7 @@ function aiSpeak(m){
   var key = m.k || (m.k = 'm'+Date.now().toString(36));
   if(AIA.ld[key]) return;
   if(AIA.cache[key]) return aiPlay(AIA.cache[key], m);
-  if(AIA.fails>=2 || !cloudOn() || !cloudCan()){ say(m.t); return; }
+  if(AIA.fails>=2 || !cloudOn() || !cloudCan()){ say(m.t); aiAfterPhoneVoice(m.t); return; }
   AIA.ld[key] = 1; aiRerender();
   var lv = aiLevel();
   socCall({action:'ai_tts', text:m.sp||m.t, style:m.st||((lv==='A1'||lv==='A2')?'warm and friendly, slowly and very clearly':'warm and friendly'), lv:lv}, function(r){
@@ -14800,7 +14802,7 @@ function aiSpeak(m){
       AIA.fails++; AIA.mode = 'phone';
       AIA.err = (r && (r.err || '')) + (r && r.detail ? ' — ' + String(r.detail) : '');
       if(!AIA.warned){ AIA.warned = true; toast("Gemini ovozi ishlamadi — telefon ovozi o'qiyapti. Sababi: sarlavhadagi 📱 belgisini bosing"); }
-      if(current.view==='aitalk') say(m.t);
+      if(current.view==='aitalk'){ say(m.t); aiAfterPhoneVoice(m.t); }
     }
     aiRerender();
   });
@@ -17597,14 +17599,15 @@ pathTabsHtml = function(){
 var AIV = {st:'idle', buf:'', gapT:null, sid:0, heard:false};
 function aiGapMs(){ var lv=aiLevel(); return (lv==='A1'||lv==='A2') ? 2600 : 2000; }
 function aiSetSilence(){ try{ if(NATIVE && typeof window.AndroidTTS.setSttSilence==='function') window.AndroidTTS.setSttSilence(aiGapMs()); }catch(e){} }
-function aiResetSilence(){ try{ if(NATIVE && typeof window.AndroidTTS.setSttSilence==='function') window.AndroidTTS.setSttSilence(1500); }catch(e){} }
+function aiResetSilence(){ try{ if(NATIVE && typeof window.AndroidTTS.setSttSilence==='function') window.AndroidTTS.setSttSilence(1500); }catch(e){} aiQuiet(false); }
+function aiQuiet(on){ try{ if(NATIVE && typeof window.AndroidTTS.setSttQuiet==='function') window.AndroidTTS.setSttQuiet(!!on); }catch(e){} }
 function aiSetSt(st){ AIV.st=st; if(current.view==='aitalk') render(); }
 
 /* Tinglash: har bir natijadan keyin yana tinglaymiz; jimlik oynasi tugasa — yuboramiz */
 function aiListenStart(){
   if(AI.busy) return;
   TTS.stop(); clearTimeout(AIV.gapT);
-  AIV.buf=''; AIV.heard=false; AI.listen=true; aiSetSilence();
+  AIV.buf=''; AIV.heard=false; AI.listen=true; AIV.paused=false; aiSetSilence(); aiQuiet(true);
   aiListenOnce();
   if(AI.listen) aiSetSt('listen');
 }
@@ -17612,7 +17615,7 @@ function aiListenOnce(){
   var sid = ++AIV.sid;
   PRON.start(function(ev){
     if(sid!==AIV.sid) return;
-    if(ev.type==='state'){ if(ev.state==='speech'){ AIV.heard=true; clearTimeout(AIV.gapT); } return; }
+    if(ev.type==='state'){ if(ev.state==='speech'){ AIV.heard=true; AIV.idleN=0; clearTimeout(AIV.gapT); } return; }
     if(ev.type==='result'){
       var t=((ev.texts||[])[0]||'').trim();
       if(t) AIV.buf = (AIV.buf ? AIV.buf+' ' : '') + t;
@@ -17623,8 +17626,12 @@ function aiListenOnce(){
     }
     if(ev.type==='error'){
       if((ev.code===6 || ev.code===7) && AIV.buf){ aiFlush(); return; }
-      if(ev.code===6 || ev.code===7){ AI.listen=false; aiResetSilence(); aiSetSt('idle'); return; }
-      AI.listen=false; aiResetSilence(); toast(sttErrText(ev.code).replace("nemis tilini", "ingliz tilini")); aiSetSt('idle'); return;
+      if(ev.code===6 || ev.code===7){
+        AIV.idleN=(AIV.idleN||0)+1;
+        if(AIV.idleN<3 && current.view==='aitalk' && !state.aiText){ aiListenOnce(); return; }   // jim turgan bo'lsa ham bir oz kutamiz
+        AI.listen=false; AIV.paused=true; AIV.idleN=0; aiResetSilence(); aiSetSt('idle'); return;
+      }
+      AI.listen=false; AIV.paused=true; aiResetSilence(); toast(sttErrText(ev.code).replace("nemis tilini", "ingliz tilini")); aiSetSt('idle'); return;
     }
     if(ev.type==='cancel'){ /* to'xtatildi */ }
   });
@@ -17644,10 +17651,18 @@ function aiListenStop(send){
   aiSetSt('idle');
 }
 ACT.aiMic = function(){
-  if(AI.listen){ aiListenStop(true); return; }
-  if(AIV.st==='speak'){ TTS.stop(); }
+  if(AI.listen){ if(AIV.buf.trim()) aiFlush(); else { aiListenStop(false); AIV.paused=true; render(); } return; }
+  if(AIV.st==='speak' || AIA.cur){ TTS.stop(); }
   aiListenStart();
 };
+/* Telefon ovozi bilan o'qilganda tugash vaqtini taxminlab — yana tinglaymiz */
+function aiAfterPhoneVoice(text){
+  if(current.view!=='aitalk' || state.aiText) return;
+  var ms = 900 + String(text||'').length * 65;
+  AIV.st='speak'; render();
+  clearTimeout(AIV.phT);
+  AIV.phT = setTimeout(function(){ if(current.view==='aitalk' && AIV.st==='speak' && !AI.listen && !AI.busy){ AIV.st='idle'; aiListenStart(); } }, ms);
+}
 
 /* Ovoz tezligi va qo'l tegizmasdan suhbat: javob tugagach — yana tinglash */
 (function(){
@@ -17662,7 +17677,7 @@ ACT.aiMic = function(){
         if(prev) prev.apply(this, arguments);
         if(AIA.cur===null && current.view==='aitalk' && AIV.st==='speak'){
           AIV.st='idle';
-          if(state.aiHands!==false && !state.aiText) setTimeout(function(){ if(current.view==='aitalk' && !AI.listen && !AI.busy && AIV.st==='idle') aiListenStart(); else render(); }, 350);
+          if(!state.aiText) setTimeout(function(){ if(current.view==='aitalk' && !AI.listen && !AI.busy && AIV.st==='idle') aiListenStart(); else render(); }, 350);
           else render();
         }
       };
@@ -17704,11 +17719,11 @@ ACT.aiSugClose = function(el){ closeModal(); aiSendText(el.dataset.p); };
     if(AI.listen && !PRON.cur && !AIV.gapT) AI.listen=false;
     var S=aiSc(id), M=aiMsgs(S.id), lastU=null, lastM=null;
     for(var i=M.length-1;i>=0;i--){ if(!lastM && M[i].r==='m') lastM=M[i]; if(!lastU && M[i].r==='u') lastU=M[i]; if(lastM && lastU) break; }
-    var st = AI.busy ? 'think' : (AI.listen ? 'listen' : (AIA.cur ? 'speak' : (AIV.st==='speak'?'idle':AIV.st)));
+    var st = AI.busy ? 'think' : (AI.listen ? 'listen' : ((AIA.cur || AIV.st==='speak') ? 'speak' : AIV.st));
     if(Object.keys(AIA.ld).length && st==='idle') st='think';
     var mood = {idle:'wave', listen:'surprised', think:'think', speak:'happy'}[st] || 'wave';
     if(st==='speak' && lastM && /laugh|chuckle|giggle/.test(lastM.sp||'')) mood='joke';
-    var label = {idle:"Mikrofonni bosing va gapiring", listen:"Tinglayapman… gapirib bo'lgach biroz jim turing", think:"O'ylayapman…", speak:"Gapiryapti…"}[st];
+    var label = {idle:(AIV.paused?"Davom etish uchun Musofirni bosing":"Bir soniya…"), listen:"Tinglayapman… gapiravering", think:"O'ylayapman…", speak:"Gapiryapti…"}[st];
     var fix = (lastU && lastU.fix && st!=='listen') ? '<div class="aiv-fix"><div><s>'+esc(lastU.fix.wrong)+'</s> → <b>'+esc(lastU.fix.right)+'</b></div>'+(lastU.fix.uz?'<small>'+esc(lastU.fix.uz)+'</small>':'')+'</div>' : '';
     var err = (lastU && lastU.err) ? '<button class="aiv-err" data-act="aiResend" data-p="'+M.lastIndexOf(lastU)+'">⚠️ Javob kelmadi — qayta yuborish</button>' : '';
     return '<div class="aiv">'+
@@ -17718,20 +17733,24 @@ ACT.aiSugClose = function(el){ closeModal(); aiSendText(el.dataset.p); };
         '<button class="ait-ic" data-act="aiReset" aria-label="Yangi suhbat">↺</button></div>'+
       '<div class="aiv-stage st-'+st+'"><div class="aiv-ring"></div><div class="aiv-ring r2"></div>'+BZ.html(mood, 210, 'aiMic', 'aiv-bz')+'</div>'+
       '<div class="aiv-label">'+label+'</div>'+fix+err+
-      '<div class="aiv-bar">'+
-        '<button class="aiv-side" data-act="aiHelp" aria-label="Yordam">💡<small>Yordam</small></button>'+
-        '<button class="aiv-mic'+(st==='listen'?' listen':'')+'" data-act="aiMic" aria-label="Gapirish"'+(st==='think'?' disabled':'')+'>'+(st==='listen'?'■':'🎤')+'</button>'+
-        '<button class="aiv-side" data-act="aiHands" aria-label="Avto">'+(state.aiHands!==false?'🔁':'⏸')+'<small>'+(state.aiHands!==false?'Avto':"Qo'lda")+'</small></button>'+
-      '</div>'+
+      '<div class="aiv-bar"><button class="aiv-help" data-act="aiHelp">💡 Musofir nima dedi?</button></div>'+
       (AI.left!=null ? '<div class="ait-left">Bugun yana '+AI.left+' ta xabar</div>' : '')+
     '</div>';
   };
   var _after = AFTER.aitalk;
-  AFTER.aitalk = function(){ if(state.aiText && _after) return _after.apply(this, arguments); };
+  AFTER.aitalk = function(){
+    if(state.aiText){ if(_after) return _after.apply(this, arguments); return; }
+    /* Kirishi bilan: avval Musofir salom beradi, keyin o'zi tinglaydi */
+    if(AI.listen || AI.busy || AIA.cur || AIV.paused || AIV.st!=='idle' || Object.keys(AIA.ld).length) return;
+    var id=current.p, M=aiMsgs(id);
+    AIV.greeted = AIV.greeted || {};
+    if(M.length===1 && !AIV.greeted[id] && state.aiVoice!==false){ AIV.greeted[id]=1; setTimeout(function(){ if(current.view==='aitalk' && current.p===id) aiSpeak(M[0]); }, 250); return; }
+    setTimeout(function(){ if(current.view==='aitalk' && !AI.listen && !AI.busy && !AIA.cur && !AIV.paused && AIV.st==='idle') aiListenStart(); }, 300);
+  };
 })();
 ACT.aiHands = function(){ state.aiHands = (state.aiHands===false); saveState(); toast(state.aiHands!==false ? "🔁 Musofir javobdan keyin o'zi tinglaydi" : "⏸ Gapirish uchun har safar mikrofonni bosasiz"); render(); };
 /* Sahifadan chiqilsa — mikrofon o'chadi */
-(function(){ var _go=go; go=function(v){ if(current.view==='aitalk' && v!=='aitalk' && AI.listen){ aiListenStop(false); } return _go.apply(this, arguments); }; })();
+(function(){ var _go=go; go=function(v){ if(current.view==='aitalk' && v!=='aitalk'){ clearTimeout(AIV.phT); if(AI.listen) aiListenStop(false); aiQuiet(false); } if(v==='aitalk'){ AIV.paused=false; AIV.st='idle'; AIV.idleN=0; } return _go.apply(this, arguments); }; })();
 
 /*@@COURSE_END@@*/
 function clearActive(){ document.querySelectorAll('.phr.active,.bub.active').forEach(function(e){ e.classList.remove('active'); }); }

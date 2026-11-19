@@ -923,7 +923,8 @@ test('Musofir ovozi: Gemini ovozi (kulgi, uslub) ijro etiladi; xato bo\'lsa tele
 test('Ovozli rejim: matnsiz, katta Musofir, tuzatish ko\'rinadi', () => {
   srv18.ttsFail = true; w18.eval("state.aiText = false; AIA.fails=5; go('aitalk','friend')");
   const m = w18.document.getElementById('main');
-  assert(m.querySelector('.aiv-stage .bz') && m.querySelector('.aiv-mic'), 'ovozli ekran chiqmadi');
+  assert(m.querySelector('.aiv-stage .bz'), 'ovozli ekran chiqmadi');
+  assert(!m.querySelector('.aiv-mic'), 'mikrofon tugmasi bo\'lmasligi kerak');
   eq(m.querySelectorAll('.am').length, 0, 'subtitr ko\'rinmasligi kerak');
   w18.eval("aiSendText('I has a dog')");
   assert(/I have/.test(m.textContent) && !/Great! Hot or iced/.test(m.textContent), 'tuzatish chiqishi, javob matni chiqmasligi kerak');
@@ -939,6 +940,17 @@ test('Ovozli rejim: jimlik bo\'lmaguncha yubormaydi', () => {
   eq(srv18.reqs.length, n);
   w18.eval('aiFlush()');
   eq(srv18.reqs[srv18.reqs.length - 1].msg, 'My name is Ali and I live in Tashkent');
+});
+test('Ovozli rejim: kirishi bilan salom beradi va o\'zi tinglaydi, «tring» o\'chiriladi', () => {
+  const quiet = []; w18.__q = quiet;
+  w18.eval("window.AndroidTTS.setSttQuiet = function(on){ window.__q.push(on); }; aiListenStop(false); var _st=window.setTimeout; window.setTimeout=function(f, ms){ if((ms||0) < 10000) f(); return 0; };");
+  try { w18.eval("go('aitalk','hotel')"); } finally { w18.eval('window.setTimeout=_st'); }
+  eq(w18.eval('AI.listen'), true, 'avtomatik tinglash boshlanmadi ' + w18.eval("JSON.stringify({busy:AI.busy, cur:AIA.cur, paused:AIV.paused, st:AIV.st, ld:Object.keys(AIA.ld), n:aiMsgs('hotel').length, g:AIV.greeted, txt:state.aiText, v:current.view, said:(window.__said||[]).slice(-1)})"));
+  assert(w18.eval('window.__said.slice(-1)[0]').indexOf('Star Hotel') >= 0, 'salom aytilmadi');
+  eq(quiet[quiet.length - 1], true, '«tring» ovozi o\'chirilmadi');
+  w18.eval('ACT.aiMic()'); eq(w18.eval('AI.listen'), false); eq(w18.eval('AIV.paused'), true, 'Musofirni bosish — pauza');
+  eq(quiet[quiet.length - 1], false, 'ovoz qaytarilmadi');
+  w18.eval("go('ai')"); eq(w18.eval('AI.listen'), false);
 });
 test('Profil rasmi qayta ochilganda saqlanib qoladi', () => {
   w18.eval("setAvatar('img:data:image/png;base64,iVBORw0KGgo='); closeModal(); saveState()");
