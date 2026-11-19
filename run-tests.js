@@ -952,6 +952,24 @@ test('Ovozli rejim: kirishi bilan salom beradi va o\'zi tinglaydi, «tring» o\'
   eq(quiet[quiet.length - 1], false, 'ovoz qaytarilmadi');
   w18.eval("go('ai')"); eq(w18.eval('AI.listen'), false);
 });
+test('Ovozli rejim: tanish xizmati xatosi (kod 5/11) — jimgina qayta tinglaydi', () => {
+  w18.eval("go('aitalk','cafe'); aiListenStop(false); AIV.paused=false; AIV.st='idle'; aiListenStart(); document.getElementById('toast').textContent='';");
+  eq(w18.eval('AI.listen'), true);
+  const pend = []; w18.__pend = pend;
+  w18.eval("var _st2=window.setTimeout; window.setTimeout=function(f, ms){ if(ms>=400 && ms<=1600) { window.__pend.push(f); return 0; } return _st2(f, ms); };");
+  try {
+    w18.eval("window.__sttError(window.__lid, 5)");
+    eq(w18.eval('AI.listen'), true, 'xatodan keyin tinglash to\'xtamasligi kerak');
+    eq(w18.document.getElementById('toast').textContent, '', 'xato xabari chiqmasligi kerak');
+    const id1 = w18.eval('window.__lid'); pend.shift()(); assert(w18.eval('window.__lid') !== id1, 'qayta tinglash boshlanmadi');
+    w18.eval("window.__sttState(window.__lid, 'speech'); window.__sttError(window.__lid, 11)"); pend.shift()();
+    eq(w18.eval('AIV.errN'), 1, 'tayyor bo\'lgach hisob nolga tushishi kerak');
+    for (let i = 0; i < 4; i++) { w18.eval("window.__sttError(window.__lid, 5)"); if (pend.length) pend.shift()(); }
+    w18.eval("window.__sttError(window.__lid, 5)");
+    eq(w18.eval('AI.listen'), false, 'ko\'p marta xato — pauza');
+    assert(/kod 5/.test(w18.document.getElementById('toast').textContent), 'xato kodi ko\'rsatilmadi: ' + w18.document.getElementById('toast').textContent);
+  } finally { w18.eval('window.setTimeout=_st2'); }
+});
 test('Profil rasmi qayta ochilganda saqlanib qoladi', () => {
   w18.eval("setAvatar('img:data:image/png;base64,iVBORw0KGgo='); closeModal(); saveState()");
   const raw = w18.localStorage.getItem('deutschQadam_v1');

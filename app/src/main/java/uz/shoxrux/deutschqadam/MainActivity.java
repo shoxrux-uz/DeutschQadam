@@ -66,6 +66,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     /** Bildirishnoma sozlamalari ochilgan — qaytganda holatni yangilaymiz */
     private boolean notifSettingsOpened = false;
     private long sttSilence = 1500L;   // jimlik — gap tugadi deb hisoblash (ms)
+    private String listenId = null;   // hozirgi tinglash seansi (eski qayta urinishlar aralashmasin)
     private boolean sttQuiet = false;   // AI suhbatda: tinglash «tring» ovozini o'chirish
     private boolean beepMuted = false;
     private final android.os.Handler quietHandler = new android.os.Handler(android.os.Looper.getMainLooper());
@@ -515,6 +516,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                         // To'xtatish = bekor qilish: eski natija keyin kelib, yangisiga aralashmasin
                         try { recognizer.cancel(); } catch (Exception ignored) { }
                     }
+                    listenId = null;
                 }
             });
         }
@@ -543,7 +545,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
     /* ===================== NUTQNI TANISH ===================== */
 
-    private void startListening(String id) {
+    private void startListening(String id) { startListening(id, 0); }
+
+    private void startListening(String id, final int attempt) {
         if (checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             pendingListenId = id;
             requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, REQ_MIC);
@@ -561,6 +565,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             recognizer = null;
         }
         final String rid = id;
+        final boolean[] ready = {false};
+        listenId = id;
         try {
             recognizer = SpeechRecognizer.createSpeechRecognizer(this);
         } catch (Exception e) {
@@ -568,7 +574,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             return;
         }
         recognizer.setRecognitionListener(new RecognitionListener() {
-            @Override public void onReadyForSpeech(Bundle params) { sendSttState(rid, "ready"); }
+            @Override public void onReadyForSpeech(Bundle params) { ready[0] = true; sendSttState(rid, "ready"); }
             @Override public void onBeginningOfSpeech() { sendSttState(rid, "speech"); }
             @Override public void onRmsChanged(float rmsdB) {
                 long now = SystemClock.uptimeMillis();
@@ -578,7 +584,22 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             }
             @Override public void onBufferReceived(byte[] buffer) { }
             @Override public void onEndOfSpeech() { sendSttState(rid, "end"); }
-            @Override public void onError(int error) { sendSttError(rid, error); }
+            @Override public void onError(int error) {
+                // Tez-tez qayta boshlaganda ba'zi telefonlarda tanish xizmati «band/uzildi» deydi —
+                // bir oz kutib, o'zimiz jimgina qayta urinamiz
+                boolean transientErr = (error == 5 || error == 8 || error == 10 || error == 11);
+                if (transientErr && !ready[0] && attempt < 2) {
+                    if (recognizer != null) {
+                        try { recognizer.destroy(); } catch (Exception ignored) { }
+                        recognizer = null;
+                    }
+                    quietHandler.postDelayed(new Runnable() {
+                        @Override public void run() { if (rid.equals(listenId)) startListening(rid, attempt + 1); }
+                    }, 350L + attempt * 400L);
+                    return;
+                }
+                sendSttError(rid, error);
+            }
             @Override public void onResults(Bundle results) {
                 ArrayList<String> list = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 float[] conf = results.getFloatArray(SpeechRecognizer.CONFIDENCE_SCORES);

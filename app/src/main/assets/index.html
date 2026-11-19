@@ -7978,7 +7978,7 @@ function sttErrText(code){
   if(code===8) return "⏳ Tanish tizimi band. Bir soniyadan keyin qayta urinib ko'ring.";
   if(code===12 || code===13) return "🌐 Telefonda nemis tilini tanish paketi yo'q. Google ilovasini yangilab ko'ring.";
   if(code===100) return "Bu qurilmada nutqni tanish xizmati topilmadi. Android ilovada «Google» ilovasi o'rnatilgan bo'lishi kerak.";
-  return "Nimadir xato ketdi. Yana bir bor urinib ko'ring.";
+  return "Nimadir xato ketdi (kod "+code+"). Yana bir bor urinib ko'ring.";
 }
 
 /* ---------- Bitta ibora uchun talaffuz kartasi ---------- */
@@ -17607,7 +17607,7 @@ function aiSetSt(st){ AIV.st=st; if(current.view==='aitalk') render(); }
 function aiListenStart(){
   if(AI.busy) return;
   TTS.stop(); clearTimeout(AIV.gapT);
-  AIV.buf=''; AIV.heard=false; AI.listen=true; AIV.paused=false; aiSetSilence(); aiQuiet(true);
+  AIV.buf=''; AIV.heard=false; AIV.errN=0; AI.listen=true; AIV.paused=false; aiSetSilence(); aiQuiet(true);
   aiListenOnce();
   if(AI.listen) aiSetSt('listen');
 }
@@ -17615,8 +17615,9 @@ function aiListenOnce(){
   var sid = ++AIV.sid;
   PRON.start(function(ev){
     if(sid!==AIV.sid) return;
-    if(ev.type==='state'){ if(ev.state==='speech'){ AIV.heard=true; AIV.idleN=0; clearTimeout(AIV.gapT); } return; }
+    if(ev.type==='state'){ if(ev.state==='speech'){ AIV.heard=true; AIV.idleN=0; AIV.errN=0; clearTimeout(AIV.gapT); } return; }
     if(ev.type==='result'){
+      AIV.errN=0;
       var t=((ev.texts||[])[0]||'').trim();
       if(t) AIV.buf = (AIV.buf ? AIV.buf+' ' : '') + t;
       clearTimeout(AIV.gapT);
@@ -17631,7 +17632,15 @@ function aiListenOnce(){
         if(AIV.idleN<3 && current.view==='aitalk' && !state.aiText){ aiListenOnce(); return; }   // jim turgan bo'lsa ham bir oz kutamiz
         AI.listen=false; AIV.paused=true; AIV.idleN=0; aiResetSilence(); aiSetSt('idle'); return;
       }
-      AI.listen=false; AIV.paused=true; aiResetSilence(); toast(sttErrText(ev.code).replace("nemis tilini", "ingliz tilini")); aiSetSt('idle'); return;
+      /* Vaqtinchalik xatolar (tanish xizmati band/uzildi, internet uzilishi) — jimgina qayta urinamiz */
+      var hard = [3,9,12,13,99,100].indexOf(ev.code)>=0;
+      if(!hard && AIV.buf){ aiFlush(); return; }
+      if(!hard && AI.listen && current.view==='aitalk'){
+        AIV.errN=(AIV.errN||0)+1;
+        if(AIV.errN<=4){ var rs=AIV.sid; setTimeout(function(){ if(AI.listen && AIV.sid===rs && current.view==='aitalk') aiListenOnce(); }, 400*AIV.errN); return; }
+      }
+      AIV.errN=0;
+      AI.listen=false; AIV.paused=true; aiResetSilence(); toast(sttErrText(ev.code).replace("nemis tilini", "ingliz tilini")+(hard?'':" Davom etish uchun Musofirni bosing.")); aiSetSt('idle'); return;
     }
     if(ev.type==='cancel'){ /* to'xtatildi */ }
   });
