@@ -855,6 +855,7 @@ const srv18 = { mode: 'ok', reqs: [], ttsFail: true, handle(req) {
 const cloud18 = fakeCloud(); const _h18 = cloud18.handle; cloud18.handle = (req) => srv18.handle(req) || _h18(req);
 const w18 = nativeBoot({ name: 'Ali', onboarded: true, ts: 1, xp: 150, cloud: { uid: 'ali', secret: 's-ali', email: 'ali@gmail.com' } }, cloud18, { v: 'ali' });
 cloud18.db.users.ali = { secret: 's-ali', email: 'ali@gmail.com' };
+w18.eval('state.aiText = true');
 const said18 = []; w18.eval('window.__say = say; say = function(t){ window.__said = (window.__said||[]).concat([t]); }');
 test('Karta faqat ingliz tilida chiqadi', () => {
   w18.eval("setCourse('de'); go('practice')"); assert(!w18.document.querySelector('#main [data-v="ai"]'), 'nemis tilida chiqmasligi kerak');
@@ -900,8 +901,10 @@ test('Mikrofon: gapirilgan gap yuboriladi', () => {
   w18.eval("PRON.nativeOk = function(){ return true; }; window.AndroidTTS.listen = function(id){ window.__lid = id; }; window.AndroidTTS.sttAvailable = function(){ return true; }; render();");
   w18.eval('ACT.aiMic()'); eq(w18.eval('AI.listen'), true);
   assert(w18.document.querySelector('.ait-mic.listen'), 'mikrofon yoniq ko\'rinmaydi');
-  w18.eval("window.__sttResult(window.__lid, ['i would like a coffee'], [0.9])");
-  eq(srv18.reqs[srv18.reqs.length - 1].msg, 'I would like a coffee'); eq(w18.eval('AI.listen'), false);
+  w18.eval("window.__sttResult(window.__lid, ['i would like'], [0.9])");
+  eq(w18.eval('AI.listen'), true, 'pauzada to\'xtab qoldi');
+  w18.eval("window.__sttState(window.__lid, 'speech'); window.__sttResult(window.__lid, ['a coffee please'], [0.9]); window.__sttError(window.__lid, 7)");
+  eq(srv18.reqs[srv18.reqs.length - 1].msg, 'I would like a coffee please'); eq(w18.eval('AI.listen'), false);
 });
 test('Musofir ovozi: Gemini ovozi (kulgi, uslub) ijro etiladi; xato bo\'lsa telefon ovozi', () => {
   srv18.ttsFail = false; let plays = 0; w18.HTMLMediaElement.prototype.play = function(){ plays++; return Promise.resolve(); };
@@ -916,6 +919,34 @@ test('Musofir ovozi: Gemini ovozi (kulgi, uslub) ijro etiladi; xato bo\'lsa tele
   srv18.ttsFail = true; const said = w18.eval('window.__said.length'); w18.eval('AIA.fails=0');
   w18.eval("aiSendText('Again')");
   assert(w18.eval('window.__said.length') > said, 'xatoda telefon ovozi ishlamadi');
+});
+test('Ovozli rejim: matnsiz, katta Musofir, tuzatish ko\'rinadi', () => {
+  srv18.ttsFail = true; w18.eval("state.aiText = false; AIA.fails=5; go('aitalk','friend')");
+  const m = w18.document.getElementById('main');
+  assert(m.querySelector('.aiv-stage .bz') && m.querySelector('.aiv-mic'), 'ovozli ekran chiqmadi');
+  eq(m.querySelectorAll('.am').length, 0, 'subtitr ko\'rinmasligi kerak');
+  w18.eval("aiSendText('I has a dog')");
+  assert(/I have/.test(m.textContent) && !/Great! Hot or iced/.test(m.textContent), 'tuzatish chiqishi, javob matni chiqmasligi kerak');
+  w18.eval('ACT.aiHelp()'); assert(/Hot or iced/.test(w18.document.getElementById('modalBody').textContent), 'yordamda javob matni yo\'q'); w18.eval('closeModal()');
+  w18.eval('ACT.aiTextMode()'); assert(w18.document.querySelectorAll('#main .am').length > 0, '💬 bosilganda matn chiqmadi'); w18.eval('ACT.aiTextMode()');
+});
+test('Ovozli rejim: jimlik bo\'lmaguncha yubormaydi', () => {
+  const n = srv18.reqs.length;
+  w18.eval('ACT.aiMic()'); eq(w18.eval('AIV.st'), 'listen');
+  w18.eval("window.__sttResult(window.__lid, ['my name is'], [0.9])");
+  eq(srv18.reqs.length, n, 'pauzada yuborib yubordi');
+  w18.eval("window.__sttState(window.__lid, 'speech'); window.__sttResult(window.__lid, ['Ali and I live in Tashkent'], [0.9])");
+  eq(srv18.reqs.length, n);
+  w18.eval('aiFlush()');
+  eq(srv18.reqs[srv18.reqs.length - 1].msg, 'My name is Ali and I live in Tashkent');
+});
+test('Profil rasmi qayta ochilganda saqlanib qoladi', () => {
+  w18.eval("setAvatar('img:data:image/png;base64,iVBORw0KGgo='); closeModal(); saveState()");
+  const raw = w18.localStorage.getItem('deutschQadam_v1');
+  w18.eval("applyState(JSON.parse(" + JSON.stringify(JSON.stringify(raw)) + "))");
+  eq(w18.eval('state.avatar'), 'img:data:image/png;base64,iVBORw0KGgo=');
+  w18.eval("go('profile')"); assert(w18.document.querySelector('#main .prof-h img'), 'profilda rasm yo\'q');
+  assert(w18.eval("Object.keys(state.aiChats||{}).length") > 0, 'AI suhbatlar ham saqlanishi kerak');
 });
 test('Xatosiz ishladi', () => eq(w18.__errors.length, 0, w18.__errors.join(' | ')));
 

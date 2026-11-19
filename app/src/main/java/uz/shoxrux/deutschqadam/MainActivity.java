@@ -65,6 +65,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final int REQ_NOTIF = 4343;
     /** Bildirishnoma sozlamalari ochilgan — qaytganda holatni yangilaymiz */
     private boolean notifSettingsOpened = false;
+    private long sttSilence = 1500L;   // jimlik — gap tugadi deb hisoblash (ms)
     private SpeechRecognizer recognizer;
     private String pendingListenId = null;
     private long lastLevelAt = 0;
@@ -479,6 +480,12 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             return checkSelfPermission(Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED;
         }
 
+        /** Gap tugadi deb hisoblash uchun jimlik davomiyligi (AI suhbatda uzoqroq) */
+        @JavascriptInterface
+        public void setSttSilence(int ms) {
+            sttSilence = Math.max(800L, Math.min(5000L, (long) ms));
+        }
+
         /** Tinglashni boshlash (natija window.__sttResult ga keladi) */
         @JavascriptInterface
         public void listen(final String id) {
@@ -583,8 +590,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         it.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 5);
         it.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, false);
         // Gapni oxirigacha aytishga ulgurish uchun: jimlikni biroz uzoqroq kutadi
-        it.putExtra("android.speech.extras.SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS", 1500L);
-        it.putExtra("android.speech.extras.SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS", 1200L);
+        it.putExtra("android.speech.extras.SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS", sttSilence);
+        it.putExtra("android.speech.extras.SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS", Math.max(800L, sttSilence - 300L));
         it.putExtra("android.speech.extras.SPEECH_INPUT_MINIMUM_LENGTH_MILLIS", 800L);
         it.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getPackageName());
         try {

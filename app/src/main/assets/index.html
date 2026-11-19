@@ -1763,6 +1763,32 @@ html[data-theme="dark"] .ait-sug button{border-color:#244A6E;color:#7FD0FF;box-s
 .lv5 .lvtab{padding:10px 2px 12px!important}
 .lv5 .lvtab b{font-size:19px}
 .lv5 .lvtab small{font-size:11px}
+/* Musofir — ovozli rejim */
+.aiv{max-width:560px;margin:0 auto;display:flex;flex-direction:column;align-items:center;min-height:calc(100vh - 110px)}
+.aiv .ait-top{width:100%}
+.aiv-stage{position:relative;width:280px;height:280px;margin:26px auto 10px;display:grid;place-items:center}
+.aiv-stage .aiv-bz{position:relative;z-index:2;cursor:pointer;filter:drop-shadow(0 18px 26px rgba(20,120,200,.25))}
+.aiv-ring{position:absolute;inset:18px;border-radius:50%;background:radial-gradient(circle,rgba(43,180,255,.20),rgba(43,180,255,0) 70%);transition:transform .4s}
+.aiv-ring.r2{inset:0;background:none;border:3px solid rgba(43,180,255,.18)}
+.st-listen .aiv-ring{animation:aivPulse 1.3s ease-in-out infinite;background:radial-gradient(circle,rgba(240,68,96,.22),rgba(240,68,96,0) 70%)}
+.st-listen .aiv-ring.r2{border-color:rgba(240,68,96,.35);animation:aivPulse 1.3s ease-in-out .35s infinite}
+.st-speak .aiv-ring{animation:aivPulse .9s ease-in-out infinite}
+.st-speak .aiv-bz{animation:aivTalk .45s ease-in-out infinite alternate}
+.st-think .aiv-ring.r2{border-style:dashed;animation:spin 3s linear infinite}
+@keyframes aivPulse{0%,100%{transform:scale(.92);opacity:.7}50%{transform:scale(1.06);opacity:1}}
+@keyframes aivTalk{from{transform:translateY(0) scale(1)}to{transform:translateY(-4px) scale(1.02)}}
+.aiv-label{font-weight:800;color:var(--neo-muted);font-size:16px;text-align:center;min-height:24px;margin-bottom:10px}
+.aiv-fix{background:#FFF6E0;border:2px solid #FFDF9A;border-radius:16px;padding:10px 14px;font-size:15px;color:#5A3A00;max-width:92%;text-align:center;box-shadow:0 3px 0 #FFDF9A}
+.aiv-fix s{color:#D02A48}.aiv-fix b{color:#139050}.aiv-fix small{display:block;margin-top:3px;font-weight:600;opacity:.85}
+html[data-theme="dark"] .aiv-fix{background:#2B2540;border-color:#3D3560;color:#FFE7B3;box-shadow:0 3px 0 #3D3560}
+.aiv-err{margin-top:8px;font-weight:800;color:#F04460;text-decoration:underline}
+.aiv-bar{margin-top:auto;display:flex;align-items:center;justify-content:center;gap:28px;padding:18px 0 8px}
+.aiv-mic{width:84px;height:84px;border-radius:50%;font-size:32px;color:#fff;background:linear-gradient(180deg,#2BB4FF,#0E9BF5);box-shadow:0 6px 0 #0A7FCC,0 14px 26px -10px rgba(18,168,255,.7)}
+.aiv-mic.listen{background:linear-gradient(180deg,#FF6B85,#F04460);box-shadow:0 6px 0 #B8233F,0 0 0 10px rgba(240,68,96,.16);font-size:28px}
+.aiv-mic:disabled{opacity:.5}
+.aiv-mic:active{transform:translateY(4px);box-shadow:0 2px 0 #0A7FCC}
+.aiv-side{width:58px;height:58px;border-radius:50%;background:var(--neo-surf);border:2px solid var(--neo-line);box-shadow:0 3px 0 var(--c-edge);font-size:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
+.aiv-side small{font-size:9.5px;font-weight:800;color:var(--neo-muted);margin-top:3px}
 </style>
 </head>
 <body>
@@ -6235,6 +6261,11 @@ function applyState(o){
   state.seen = unpackSeen(o.seen);
   if(o.cloud && typeof o.cloud==='object') state.cloud = o.cloud;
   state.ts = +o.ts||0;
+  /* keyin qo'shilgan maydonlar: profil rasmi, insholar, AI suhbat, sozlamalar */
+  ['avatar','aiLv'].forEach(function(k){ if(typeof o[k]==='string') state[k]=o[k]; else delete state[k]; });
+  ['aiVoice','aiText','aiHands'].forEach(function(k){ if(typeof o[k]==='boolean') state[k]=o[k]; else delete state[k]; });
+  state.essays = Array.isArray(o.essays) ? o.essays : [];
+  ['essayDraft','aiChats','soc','aiXp','xpd'].forEach(function(k){ if(o[k] && typeof o[k]==='object') state[k]=o[k]; else delete state[k]; });
 }
 /* O'rganilgan so'zlarni ixcham saqlash (har bo'lim uchun bit-maska, hex) */
 function packLearned(){
@@ -17556,6 +17587,151 @@ pathTabsHtml = function(){
       '<div class="seal">'+lv+'</div><p class="muted" style="margin-top:12px">'+esc(dt)+'</p></div></div>';
   };
 })();
+
+/* =====================================================================
+   «MUSOFIR BILAN GAPLASH» — OVOZLI REJIM (matnsiz, Musofir ekranda)
+   • Gapdagi pauzalarda to'xtamaydi: bir necha soniya jimlik bo'lgandagina yuboradi
+   • Musofir javob berib bo'lgach, o'zi yana tinglaydi (qo'l tegizmasdan suhbat)
+   • Matn (subtitr) faqat xohlasangiz: 💬 tugmasi
+   ===================================================================== */
+var AIV = {st:'idle', buf:'', gapT:null, sid:0, heard:false};
+function aiGapMs(){ var lv=aiLevel(); return (lv==='A1'||lv==='A2') ? 2600 : 2000; }
+function aiSetSilence(){ try{ if(NATIVE && typeof window.AndroidTTS.setSttSilence==='function') window.AndroidTTS.setSttSilence(aiGapMs()); }catch(e){} }
+function aiResetSilence(){ try{ if(NATIVE && typeof window.AndroidTTS.setSttSilence==='function') window.AndroidTTS.setSttSilence(1500); }catch(e){} }
+function aiSetSt(st){ AIV.st=st; if(current.view==='aitalk') render(); }
+
+/* Tinglash: har bir natijadan keyin yana tinglaymiz; jimlik oynasi tugasa — yuboramiz */
+function aiListenStart(){
+  if(AI.busy) return;
+  TTS.stop(); clearTimeout(AIV.gapT);
+  AIV.buf=''; AIV.heard=false; AI.listen=true; aiSetSilence();
+  aiListenOnce();
+  if(AI.listen) aiSetSt('listen');
+}
+function aiListenOnce(){
+  var sid = ++AIV.sid;
+  PRON.start(function(ev){
+    if(sid!==AIV.sid) return;
+    if(ev.type==='state'){ if(ev.state==='speech'){ AIV.heard=true; clearTimeout(AIV.gapT); } return; }
+    if(ev.type==='result'){
+      var t=((ev.texts||[])[0]||'').trim();
+      if(t) AIV.buf = (AIV.buf ? AIV.buf+' ' : '') + t;
+      clearTimeout(AIV.gapT);
+      AIV.gapT = setTimeout(aiFlush, aiGapMs()-800);  // davom etsa — 'speech' kelib, bu bekor bo'ladi
+      if(AI.listen) aiListenOnce();                   // gapning davomini kutamiz
+      return;
+    }
+    if(ev.type==='error'){
+      if((ev.code===6 || ev.code===7) && AIV.buf){ aiFlush(); return; }
+      if(ev.code===6 || ev.code===7){ AI.listen=false; aiResetSilence(); aiSetSt('idle'); return; }
+      AI.listen=false; aiResetSilence(); toast(sttErrText(ev.code).replace("nemis tilini", "ingliz tilini")); aiSetSt('idle'); return;
+    }
+    if(ev.type==='cancel'){ /* to'xtatildi */ }
+  });
+}
+function aiFlush(){
+  clearTimeout(AIV.gapT);
+  if(!AI.listen) return;
+  AI.listen=false; AIV.sid++; PRON.stop(true); aiResetSilence();
+  var t=AIV.buf.trim(); AIV.buf='';
+  if(!t){ aiSetSt('idle'); return; }
+  aiSetSt('think');
+  aiSendText(t.charAt(0).toUpperCase()+t.slice(1));
+}
+function aiListenStop(send){
+  if(send && AIV.buf.trim()){ aiFlush(); return; }
+  clearTimeout(AIV.gapT); AI.listen=false; AIV.sid++; PRON.stop(true); aiResetSilence(); AIV.buf='';
+  aiSetSt('idle');
+}
+ACT.aiMic = function(){
+  if(AI.listen){ aiListenStop(true); return; }
+  if(AIV.st==='speak'){ TTS.stop(); }
+  aiListenStart();
+};
+
+/* Ovoz tezligi va qo'l tegizmasdan suhbat: javob tugagach — yana tinglash */
+(function(){
+  var _play = aiPlay;
+  aiPlay = function(url, m){
+    var r = _play.apply(this, arguments);
+    try{
+      var a = AIA.el; a.playbackRate = 1.1; if('preservesPitch' in a) a.preservesPitch = true;
+      AIV.st='speak'; if(current.view==='aitalk') render();
+      var k = m.k, prev = a.onended;
+      a.onended = function(){
+        if(prev) prev.apply(this, arguments);
+        if(AIA.cur===null && current.view==='aitalk' && AIV.st==='speak'){
+          AIV.st='idle';
+          if(state.aiHands!==false && !state.aiText) setTimeout(function(){ if(current.view==='aitalk' && !AI.listen && !AI.busy && AIV.st==='idle') aiListenStart(); else render(); }, 350);
+          else render();
+        }
+      };
+    }catch(e){}
+    return r;
+  };
+  var _stop = aiStopAudio;
+  aiStopAudio = function(){ var r=_stop.apply(this, arguments); if(AIV.st==='speak') AIV.st='idle'; return r; };
+})();
+
+/* Javob kelganda holatni yangilash */
+(function(){
+  var _send = aiSendText;
+  aiSendText = function(text){
+    AIV.st='think';
+    var r = _send.apply(this, arguments);
+    var t0 = Date.now(), iv = setInterval(function(){
+      if(!AI.busy || Date.now()-t0>95000){ clearInterval(iv); if(AIV.st==='think'){ AIV.st = (AIA.cur ? 'speak' : 'idle'); if(current.view==='aitalk') render(); } }
+    }, 250);
+    return r;
+  };
+})();
+
+ACT.aiTextMode = function(){ state.aiText = !state.aiText; saveState(); render(); };
+ACT.aiHelp = function(){
+  var M=aiMsgs(current.p), last=null; for(var i=M.length-1;i>=0;i--) if(M[i].r==='m'){ last=M[i]; break; }
+  if(!last) return;
+  sheet('<h2 class="serif">Musofir nima dedi?</h2><div class="card" style="font-size:17px;line-height:1.5"><b>'+esc(last.t)+'</b>'+(last.uz?'<div class="muted" style="margin-top:8px">'+esc(last.uz)+'</div>':'')+'</div>'+
+    ((last.sugg||[]).length ? '<p class="muted" style="margin:14px 0 8px">Shunday javob berishingiz mumkin:</p><div class="ait-sug" style="flex-wrap:wrap">'+last.sugg.map(function(s){ return '<button data-act="aiSugClose" data-p="'+esc(s)+'">'+esc(s)+'</button>'; }).join('')+'</div>' : '')+
+    '<div class="toolbar mt"><button class="btn btn-o" data-act="closeModal">Yopish</button></div>');
+};
+ACT.aiSugClose = function(el){ closeModal(); aiSendText(el.dataset.p); };
+
+/* Ovozli ko'rinish: katta Musofir, holat, mikrofon */
+(function(){
+  var _view = VIEWS.aitalk;
+  VIEWS.aitalk = function(id){
+    if(state.aiText) return _view.apply(this, arguments).replace('<button class="ait-ic" data-act="aiReset"', '<button class="ait-ic on" data-act="aiTextMode" aria-label="Matn">💬</button><button class="ait-ic" data-act="aiReset"');
+    if(AI.listen && !PRON.cur && !AIV.gapT) AI.listen=false;
+    var S=aiSc(id), M=aiMsgs(S.id), lastU=null, lastM=null;
+    for(var i=M.length-1;i>=0;i--){ if(!lastM && M[i].r==='m') lastM=M[i]; if(!lastU && M[i].r==='u') lastU=M[i]; if(lastM && lastU) break; }
+    var st = AI.busy ? 'think' : (AI.listen ? 'listen' : (AIA.cur ? 'speak' : (AIV.st==='speak'?'idle':AIV.st)));
+    if(Object.keys(AIA.ld).length && st==='idle') st='think';
+    var mood = {idle:'wave', listen:'surprised', think:'think', speak:'happy'}[st] || 'wave';
+    if(st==='speak' && lastM && /laugh|chuckle|giggle/.test(lastM.sp||'')) mood='joke';
+    var label = {idle:"Mikrofonni bosing va gapiring", listen:"Tinglayapman… gapirib bo'lgach biroz jim turing", think:"O'ylayapman…", speak:"Gapiryapti…"}[st];
+    var fix = (lastU && lastU.fix && st!=='listen') ? '<div class="aiv-fix"><div><s>'+esc(lastU.fix.wrong)+'</s> → <b>'+esc(lastU.fix.right)+'</b></div>'+(lastU.fix.uz?'<small>'+esc(lastU.fix.uz)+'</small>':'')+'</div>' : '';
+    var err = (lastU && lastU.err) ? '<button class="aiv-err" data-act="aiResend" data-p="'+M.lastIndexOf(lastU)+'">⚠️ Javob kelmadi — qayta yuborish</button>' : '';
+    return '<div class="aiv">'+
+      '<div class="ait-top"><button class="pt-x" data-act="go" data-v="ai" aria-label="Orqaga">←</button>'+
+        '<div class="ait-tt"><b>'+S.t+'</b><small>Musofir · '+aiLevel()+(AIA.mode==='gemini'?' · 🎙 Gemini ovozi':(AIA.mode==='phone'?' · <a data-act="aiVoiceWhy" style="text-decoration:underline">📱 telefon ovozi</a>':''))+'</small></div>'+
+        '<button class="ait-ic" data-act="aiTextMode" aria-label="Matnni ko\'rsatish">💬</button>'+
+        '<button class="ait-ic" data-act="aiReset" aria-label="Yangi suhbat">↺</button></div>'+
+      '<div class="aiv-stage st-'+st+'"><div class="aiv-ring"></div><div class="aiv-ring r2"></div>'+BZ.html(mood, 210, 'aiMic', 'aiv-bz')+'</div>'+
+      '<div class="aiv-label">'+label+'</div>'+fix+err+
+      '<div class="aiv-bar">'+
+        '<button class="aiv-side" data-act="aiHelp" aria-label="Yordam">💡<small>Yordam</small></button>'+
+        '<button class="aiv-mic'+(st==='listen'?' listen':'')+'" data-act="aiMic" aria-label="Gapirish"'+(st==='think'?' disabled':'')+'>'+(st==='listen'?'■':'🎤')+'</button>'+
+        '<button class="aiv-side" data-act="aiHands" aria-label="Avto">'+(state.aiHands!==false?'🔁':'⏸')+'<small>'+(state.aiHands!==false?'Avto':"Qo'lda")+'</small></button>'+
+      '</div>'+
+      (AI.left!=null ? '<div class="ait-left">Bugun yana '+AI.left+' ta xabar</div>' : '')+
+    '</div>';
+  };
+  var _after = AFTER.aitalk;
+  AFTER.aitalk = function(){ if(state.aiText && _after) return _after.apply(this, arguments); };
+})();
+ACT.aiHands = function(){ state.aiHands = (state.aiHands===false); saveState(); toast(state.aiHands!==false ? "🔁 Musofir javobdan keyin o'zi tinglaydi" : "⏸ Gapirish uchun har safar mikrofonni bosasiz"); render(); };
+/* Sahifadan chiqilsa — mikrofon o'chadi */
+(function(){ var _go=go; go=function(v){ if(current.view==='aitalk' && v!=='aitalk' && AI.listen){ aiListenStop(false); } return _go.apply(this, arguments); }; })();
 
 /*@@COURSE_END@@*/
 function clearActive(){ document.querySelectorAll('.phr.active,.bub.active').forEach(function(e){ e.classList.remove('active'); }); }
