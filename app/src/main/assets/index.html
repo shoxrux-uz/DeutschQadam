@@ -1791,6 +1791,47 @@ html[data-theme="dark"] .aiv-fix{background:#2B2540;border-color:#3D3560;color:#
 .aiv-side small{font-size:9.5px;font-weight:800;color:var(--neo-muted);margin-top:3px}
 .aiv-bz .mf-tag{display:none!important}
 .aiv-help{padding:12px 20px;border-radius:999px;background:var(--neo-surf);border:2px solid var(--neo-line);box-shadow:0 3px 0 var(--c-edge);font-weight:800;color:var(--neo-text);font-size:15px}
+/* Lug'at jadvali va Kunlik yodlash */
+.vlist{display:block!important}
+.vtab{background:var(--paper);border-radius:18px;box-shadow:0 4px 0 var(--c-edge,rgba(20,33,61,.08)),0 2px 12px rgba(20,33,61,.05);overflow:hidden}
+.vtab .vr{display:flex;align-items:center;gap:10px;padding:6px 10px 6px 8px;min-height:46px;border-bottom:1px solid rgba(127,127,160,.14);border-left:4px solid transparent}
+.vtab .vr:last-child{border-bottom:0}
+.vtab .vr.der{border-left-color:var(--navy-3)}.vtab .vr.die{border-left-color:var(--coral)}.vtab .vr.das{border-left-color:var(--sand)}
+.vtab .vr.vh{min-height:0;padding:9px 10px 9px 8px;background:rgba(127,127,160,.08);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.vtab .vn{flex:0 0 26px;height:26px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--muted);background:rgba(127,127,160,.1)}
+.vtab .vr.vh .vn{background:none;height:auto}
+.vtab .vr.ok .vn{background:var(--ok-soft);color:var(--ok-t)}
+.vtab .vx{flex:1 1 48%;min-width:0}
+.vtab .vd{font-weight:800;color:var(--navy);font-size:15.5px;line-height:1.25;word-break:break-word}
+.vtab .vtr{font-size:11.5px;color:var(--muted);line-height:1.2;margin-top:1px}
+.vtab .vlv{font-size:10px;font-weight:800;padding:1px 6px;border-radius:6px;background:rgba(127,127,160,.15);color:var(--muted);vertical-align:2px}
+.vtab .vu{flex:1 1 42%;min-width:0;font-size:14px;color:var(--ink,inherit);line-height:1.3;word-break:break-word}
+.vtab .vsp{flex:0 0 34px}
+.vtab .spk.sm{flex:0 0 auto}
+.vtab .vu.hid{color:transparent;text-shadow:none;background:rgba(127,127,160,.16);border-radius:8px;cursor:pointer;min-height:22px;position:relative}
+.vtab .vu.hid::after{content:'bosing';position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font-size:11px;font-weight:700;color:var(--muted)}
+.vtab .vr.play{background:rgba(255,200,60,.18)}
+.dly-top{display:flex;gap:10px;align-items:center;justify-content:space-between;background:var(--paper);border-radius:16px;padding:8px 10px;margin-bottom:10px;box-shadow:0 4px 0 var(--c-edge,rgba(20,33,61,.08))}
+.dly-top b{display:block;color:var(--navy);font-size:15px}
+.dly-top small{color:var(--muted);font-size:12.5px}
+.dly-pr{text-align:right;min-width:0}
+.dly-pr b{font-size:13px}
+.dly-pr i{display:block;height:8px;border-radius:6px;background:rgba(127,127,160,.18);margin-top:6px;overflow:hidden}
+.dly-pr s{display:block;height:100%;background:linear-gradient(90deg,#C6FF4D,#25C46A);border-radius:6px}
+.dly-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:4px 0 8px}
+.dly-bar span{font-weight:800;color:var(--navy);margin-right:auto}
+.dly-bar .chip{margin:0}
+.chips.hrow{flex-wrap:nowrap;overflow-x:auto;padding:2px 2px 8px;margin-left:-2px;margin-right:-2px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.chips.hrow::-webkit-scrollbar{display:none}
+.chips.hrow .chip{flex:0 0 auto;white-space:nowrap}
+.dly-h{font-size:30px;margin:6px 0 10px;color:var(--navy)}
+.dly-lv{display:flex;gap:4px;background:rgba(127,127,160,.1);border-radius:12px;padding:3px}
+.dly-lv button{border:0;background:none;font:inherit;font-weight:800;font-size:13px;color:var(--muted);padding:6px 10px;border-radius:9px;cursor:pointer}
+.dly-lv button.on{background:var(--c-pri,#12A8FF);color:#fff}
+.dly-top .dly-pr{flex:1 1 auto}
+.dly-top .dly-pr b{font-size:13px;white-space:nowrap;display:inline}.dly-top .dly-pr small{display:block;font-size:11.5px;white-space:nowrap}
+.dly-act{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.dly-act .btn{width:100%}
 </style>
 </head>
 <body>
@@ -6267,7 +6308,7 @@ function applyState(o){
   ['avatar','aiLv'].forEach(function(k){ if(typeof o[k]==='string') state[k]=o[k]; else delete state[k]; });
   ['aiVoice','aiText','aiHands'].forEach(function(k){ if(typeof o[k]==='boolean') state[k]=o[k]; else delete state[k]; });
   state.essays = Array.isArray(o.essays) ? o.essays : [];
-  ['essayDraft','aiChats','soc','aiXp','xpd'].forEach(function(k){ if(o[k] && typeof o[k]==='object') state[k]=o[k]; else delete state[k]; });
+  ['essayDraft','aiChats','soc','aiXp','xpd','dly'].forEach(function(k){ if(o[k] && typeof o[k]==='object') state[k]=o[k]; else delete state[k]; });
 }
 /* O'rganilgan so'zlarni ixcham saqlash (har bo'lim uchun bit-maska, hex) */
 function packLearned(){
@@ -17760,6 +17801,134 @@ ACT.aiSugClose = function(el){ closeModal(); aiSendText(el.dataset.p); };
 ACT.aiHands = function(){ state.aiHands = (state.aiHands===false); saveState(); toast(state.aiHands!==false ? "🔁 Musofir javobdan keyin o'zi tinglaydi" : "⏸ Gapirish uchun har safar mikrofonni bosasiz"); render(); };
 /* Sahifadan chiqilsa — mikrofon o'chadi */
 (function(){ var _go=go; go=function(v){ if(current.view==='aitalk' && v!=='aitalk'){ clearTimeout(AIV.phT); if(AI.listen) aiListenStop(false); aiQuiet(false); } if(v==='aitalk'){ AIV.paused=false; AIV.st='idle'; AIV.idleN=0; } return _go.apply(this, arguments); }; })();
+
+/* ---------- Lug'at — jadval ko'rinishida (raqamli qatorlar) + Kunlik yodlash ---------- */
+ILL.add('daily', '<rect x="24" y="24" width="66" height="76" rx="12" class="d" opacity=".45" transform="translate(4 4)"/><rect x="24" y="24" width="66" height="76" rx="12" fill="url(#gW)"/>'+
+  '<rect x="24" y="24" width="66" height="18" rx="9" class="acf"/><rect x="24" y="33" width="66" height="9" class="acf"/>'+
+  '<circle cx="37" cy="55" r="4" class="ln2"/><rect x="46" y="52" width="34" height="6" rx="3" class="ln2"/>'+
+  '<circle cx="37" cy="70" r="4" class="ln2"/><rect x="46" y="67" width="28" height="6" rx="3" class="ln2"/>'+
+  '<circle cx="37" cy="85" r="4" class="ln2"/><rect x="46" y="82" width="31" height="6" rx="3" class="ln2"/>');
+
+function wordRowHtml(w, n, o){
+  o = o || {};
+  var a = wordArt(w) || '';
+  var done = !!state.learned[w.id];
+  return '<div class="vr '+a+(done?' ok':'')+'">'+
+    '<span class="vn">'+(done?'✓':n)+'</span>'+
+    '<div class="vx"><div class="vd">'+artHtml(w.de)+(o.lv?' <span class="vlv">'+o.lv+'</span>':'')+'</div>'+(w.tr?'<div class="vtr">'+esc(w.tr)+'</div>':'')+'</div>'+
+    '<div class="vu'+(o.hide?' hid':'')+'"'+(o.hide?' data-act="dlyShow"':'')+'>'+esc(w.uz)+'</div>'+
+    spk(w.de,'sm')+'</div>';
+}
+function wordTableHtml(list, o){
+  o = o || {};
+  return '<div class="vtab'+(o.cls?' '+o.cls:'')+'"><div class="vr vh"><span class="vn">№</span><div class="vx">So\'z</div><div class="vu">Tarjimasi</div><span class="vsp"></span></div>'+
+    list.map(function(w, i){ return wordRowHtml(w, (o.start||0)+i+1, {hide:o.hide, lv:o.lvTag && w.lv!=='A1' ? w.lv : ''}); }).join('')+'</div>';
+}
+
+/* Lug'at sahifasi: kartalar o'rniga ixcham jadval */
+vocabListHtml = function(){
+  var q=norm(vocabQ);
+  var list = ALLW.filter(function(w){ return (q ? true : w.lv===vocabLv) && (vocabCat==='all'||w.cat===vocabCat||q) && (!q || norm(w.de).indexOf(q)>-1 || norm(w.uz).indexOf(q)>-1); });
+  if(!list.length) return '<div class="empty">Hech narsa topilmadi</div>';
+  var total=list.length, more='';
+  if(total>vocabLimit){ list=list.slice(0,vocabLimit); more='<div style="text-align:center;padding:12px"><button class="btn btn-n" data-act="vmore">Yana ko\'rsatish ('+(total-vocabLimit)+' ta qoldi)</button></div>'; }
+  return wordTableHtml(list, {lvTag:!!q})+more;
+};
+TAB_OF.daily = 'practice';
+(function(){
+  var _v = VIEWS.vocab;
+  VIEWS.vocab = function(){
+    var h = _v.apply(this, arguments);
+    return h.replace('<div class="chips" style="margin-bottom:14px">', '<div class="chips hrow" style="margin-bottom:14px">').replace('<button class="btn btn-c" data-act="startFlash">🃏 Kartochkalar</button>',
+      '<button class="btn btn-c" data-act="go" data-v="daily">📅 Kunlik yodlash</button> <button class="btn btn-o" data-act="startFlash">🃏 Kartochkalar</button>');
+  };
+})();
+
+/* ---- Kunlik yodlash: har safar 10 ta so'z, jadvalda; yodlagach — tekshiruv va keyingi 10 ta ---- */
+var DLY_N = 10;
+var DLY = {hide:false};
+function dlyState(){
+  state.dly = (state.dly && typeof state.dly==='object') ? state.dly : {};
+  ['sets','lv','day'].forEach(function(k){ if(!state.dly[k] || typeof state.dly[k]!=='object') state.dly[k]={}; });
+  var d=state.dly.day[COURSE];
+  if(!d || d.d!==todayStr()) state.dly.day[COURSE] = {d:todayStr(), n:0};
+  return state.dly;
+}
+function dlyLevels(){ return LEVELS.map(function(L){ return L[0]; }).filter(function(lv){ return ALLW.some(function(w){ return w.lv===lv; }); }); }
+function dlyLeft(lv){ return ALLW.filter(function(w){ return w.lv===lv && !state.learned[w.id]; }); }
+function dlyLv(){
+  var s=dlyState(), lvs=dlyLevels(), lv=s.lv[COURSE];
+  if(lvs.indexOf(lv)>-1) return lv;
+  var pt=(state.flags||{})['pt_'+COURSE], start=lvs.indexOf(pt && pt.lv); if(start<0) start=0;
+  for(var i=start;i<lvs.length;i++) if(dlyLeft(lvs[i]).length) return lvs[i];
+  return lvs[start] || 'A1';
+}
+function dlySet(){
+  var s=dlyState(), lv=dlyLv(), k=COURSE+':'+lv, ids=s.sets[k];
+  var ok = Array.isArray(ids) && ids.length && ids.every(function(id){ return WMAP[id]; }) && ids.some(function(id){ return !state.learned[id]; });
+  if(!ok){ ids = dlyLeft(lv).slice(0, DLY_N).map(function(w){ return w.id; }); s.sets[k]=ids; }
+  return ids.map(function(id){ return WMAP[id]; });
+}
+function dlyFinish(ws){
+  var s=dlyState(), lv=dlyLv();
+  ws.forEach(function(w){ state.learned[w.id]=1; });
+  s.day[COURSE].n = nz(s.day[COURSE].n) + ws.length;
+  s.sets[COURSE+':'+lv] = null;
+}
+VIEWS.daily = function(){
+  var s=dlyState(), lv=dlyLv(), lvs=dlyLevels(), ws=dlySet();
+  var all=ALLW.filter(function(w){ return w.lv===lv; }), got=all.length-dlyLeft(lv).length, today=nz(s.day[COURSE].n);
+  var h = backBtn('practice','Mashq') + '<h1 class="serif dly-h">Kunlik yodlash</h1>';
+  h += '<div class="dly-top"><div class="dly-lv">'+lvs.map(function(L){ return '<button class="'+(lv===L?'on':'')+'" data-act="dlyLv" data-p="'+L+'">'+L+'</button>'; }).join('')+'</div>'+
+       '<div class="dly-pr"><b>'+(today>=DLY_N?'✅ ':'🎯 ')+'Bugun: '+today+(today>=DLY_N?'':' / '+DLY_N)+'</b><small>'+lv+' — '+got+' / '+all.length+' so\'z</small><i><s style="width:'+(all.length?Math.round(got/all.length*100):0)+'%"></s></i></div></div>';
+  if(!ws.length){
+    var nx=lvs[lvs.indexOf(lv)+1];
+    return h+'<div class="card result" style="text-align:center"><div style="font-size:54px">🎉</div><h2 class="serif" style="color:var(--navy)">'+lv+' so\'zlarining hammasi yodlandi!</h2><p class="muted">Ajoyib natija.</p>'+
+      (nx?'<button class="btn btn-c" data-act="dlyLv" data-p="'+nx+'">'+nx+' darajasiga o\'tish →</button>':'')+'</div>';
+  }
+  var from=got+1;
+  h += '<div class="dly-bar"><span>'+from+'–'+(from+ws.length-1)+'-so\'zlar</span>'+
+       '<button class="chip'+(DLY.hide?' on':'')+'" data-act="dlyHide">'+(DLY.hide?'👁 Ko\'rsatish':'🙈 Yashirish')+'</button>'+
+       '<button class="chip" data-act="dlyAll">🔊 Hammasi</button></div>';
+  h += wordTableHtml(ws, {hide:DLY.hide, cls:'dly'});
+  h += '<div class="dly-act"><button class="btn btn-c" data-act="dlyCheck">✅ Yodladim — tekshirish</button>'+
+       '<button class="btn btn-o" data-act="dlySkip">Bilaman, keyingi '+DLY_N+' ta →</button></div>';
+  return h;
+};
+ACT.dlyLv = function(el){ dlyState().lv[COURSE]=el.dataset.p; saveState(); render(); window.scrollTo(0,0); };
+ACT.dlyHide = function(){ DLY.hide=!DLY.hide; render(); };
+ACT.dlyShow = function(el){ el.classList.toggle('hid'); };
+ACT.dlyAll = function(){
+  var ws=dlySet(), rows=document.querySelectorAll('.vtab.dly .vr:not(.vh)');
+  TTS.sequence(ws.map(function(w){ return {text:w.de}; }), function(i){ rows.forEach(function(r, k){ r.classList.toggle('play', k===i); }); });
+};
+ACT.dlySkip = function(){
+  var ws=dlySet(); if(!ws.length) return;
+  dlyFinish(ws); saveState(); toast("✓ "+ws.length+" ta so'z o'rganilganlar qatoriga qo'shildi"); render(); window.scrollTo(0,0);
+};
+ACT.dlyCheck = function(){
+  var ws=dlySet(); if(!ws.length) return;
+  var lv=dlyLv(), pool=ALLW.filter(function(w){ return w.lv===lv; });
+  if(pool.length<4) pool=ALLW;
+  var build=function(){ return shuffle(ws).map(function(w, k){ return qWord(w, ['de2uz','uz2de','de2uz','audio'][k%4], pool); }); };
+  startQuiz(build(), {title:"Kunlik yodlash", back:['daily',"Kunlik yodlash"], pass:80, retry:build,
+    onDone:function(pct){
+      if(pct>=80){ dlyFinish(ws); QZ.msgOk="🎉 "+ws.length+" ta so'z yodlandi! Keyingi "+DLY_N+" ta so'z tayyor — «Kunlik yodlash» tugmasini bosing."; return 20; }
+      QZ.msgBad="O'tish uchun kamida 80% kerak. Jadvalni yana bir ko'rib chiqing va qayta urinib ko'ring.";
+      return 0;
+    }});
+};
+
+/* Mashq sahifasida — eng tepada katta karta */
+(function(){
+  var _p = VIEWS.practice;
+  VIEWS.practice = function(){
+    var h = _p.apply(this, arguments);
+    var s=dlyState(), n=nz(s.day[COURSE].n);
+    var card = catHtml({act:'go', v:'daily', c:'yellow', i:'daily', b:"Kunlik yodlash", s:(n>=DLY_N?"Bugun "+n+" ta so'z ✓ — davom etish":"Bugun "+DLY_N+" ta yangi so'z · jadvalda"), wide:true, badge:(n>=DLY_N?'✓':(DLY_N-n))});
+    return h.replace('<div class="cats">', '<div class="cats">'+card);
+  };
+})();
 
 /*@@COURSE_END@@*/
 function clearActive(){ document.querySelectorAll('.phr.active,.bub.active').forEach(function(e){ e.classList.remove('active'); }); }

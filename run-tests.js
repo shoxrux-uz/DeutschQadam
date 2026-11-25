@@ -1028,6 +1028,51 @@ test('B2/C1 sertifikat sahifasi', () => {
   assert(/C1/.test(t) && /ingliz tilidan/.test(t), 'sertifikat matni: ' + t.slice(0, 120));
 });
 test('Xatosiz ishladi', () => eq(w19.__errors.length, 0, w19.__errors.join(' | ')));
+/* ---------- 20. Lug'at jadvali va Kunlik yodlash ---------- */
+console.log('\n20) Lug\'at jadvali va Kunlik yodlash');
+const w20 = boot({ name: 'Ali', onboarded: true, ts: 1, xp: 0 });
+w20.eval("bootStep('splash'); bootStep('data');");
+test('Lug\'at — raqamlangan jadval (olmoshlar)', () => {
+  w20.eval("setCourse('de'); go('vocab','olmosh')");
+  const rows = w20.document.querySelectorAll('#main .vtab .vr:not(.vh)');
+  eq(rows.length, w20.eval("ALLW.filter(function(w){ return w.cat==='olmosh'; }).length"));
+  eq(rows[0].querySelector('.vn').textContent, '1'); eq(rows[0].querySelector('.vd').textContent, 'ich'); eq(rows[0].querySelector('.vu').textContent, 'men');
+  assert(w20.document.querySelector('#main .vtab .vr.vh'), 'jadval sarlavhasi yo\'q');
+  assert(w20.document.querySelector('#main [data-v="daily"]'), 'Kunlik yodlash tugmasi yo\'q');
+});
+test('Kunlik yodlash: 10 ta so\'z jadvalda, 1–10 raqamlangan', () => {
+  w20.eval("go('practice')"); assert(w20.document.querySelector('#main [data-v="daily"]'), 'Mashqda karta yo\'q');
+  w20.eval("go('daily')");
+  const rows = w20.document.querySelectorAll('#main .vtab.dly .vr:not(.vh)');
+  eq(rows.length, 10); eq(rows[9].querySelector('.vn').textContent, '10');
+  w20.eval('ACT.dlyHide()'); eq(w20.document.querySelectorAll('#main .vtab.dly .vu.hid').length, 10, 'tarjima yashirilmadi');
+  w20.eval('ACT.dlyHide()');
+});
+test('Tekshiruvdan o\'tsa — keyingi 10 ta so\'z, o\'tmasa — o\'sha so\'zlar', () => {
+  const first = w20.eval("dlySet().map(function(w){ return w.id; }).join(',')");
+  w20.eval("ACT.dlyCheck(); QZ.qs.forEach(function(q){ var i=(q.options.indexOf(q.answer)+1)%q.options.length; quizPick({dataset:{p:String(i)}}); quizNext(); }); go('daily')");
+  eq(w20.eval("dlySet().map(function(w){ return w.id; }).join(',')"), first, 'o\'tmagan bo\'lsa ham almashdi');
+  w20.eval("ACT.dlyCheck(); eq10=QZ.qs.length; QZ.qs.forEach(function(q){ var i=q.options.indexOf(q.answer); quizPick({dataset:{p:String(i)}}); quizNext(); })");
+  eq(w20.eval('eq10'), 10);
+  assert(/Keyingi 10/.test(w20.document.getElementById('main').textContent), 'xabar yo\'q');
+  w20.eval("go('daily')");
+  const next = w20.eval("dlySet().map(function(w){ return w.id; }).join(',')");
+  assert(next !== first, 'keyingi so\'zlar chiqmadi');
+  first.split(',').forEach((id) => assert(w20.eval("!!state.learned['" + id + "']"), id + ' o\'rganilgan deb belgilanmadi'));
+  eq(w20.eval("state.dly.day.de.n"), 10);
+  assert(/11–20/.test(w20.document.getElementById('main').textContent), 'raqamlash davom etmadi');
+  w20.eval('ACT.dlySkip()'); eq(w20.eval("state.dly.day.de.n"), 20);
+  assert(/Bugun: 20/.test(w20.document.getElementById('main').textContent), 'bugungi hisob ko\'rinmaydi');
+});
+test('Kunlik yodlash saqlanadi va har til alohida', () => {
+  const raw = w20.localStorage.getItem('deutschQadam_v1');
+  w20.eval("applyState(JSON.parse(" + JSON.stringify(JSON.stringify(raw)) + "))");
+  eq(w20.eval("state.dly.day.de.n"), 20);
+  w20.eval("setCourse('en'); go('daily')");
+  eq(w20.document.querySelectorAll('#main .vtab.dly .vr:not(.vh)').length, 10);
+  assert(/Bugun: 0/.test(w20.document.getElementById('main').textContent), 'ingliz tilida hisob noldan boshlanmadi');
+});
+test('Xatosiz ishladi', () => eq(w20.__errors.length, 0, w20.__errors.join(' | ')));
 console.log('\n────────────────────────────────────────');
 console.log('Natija: ' + passed + ' ta o\'tdi, ' + failed + ' ta xato');
 if (failed) { console.log('Xato testlar:\n - ' + failures.join('\n - ')); process.exit(1); }
